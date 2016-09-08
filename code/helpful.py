@@ -16,6 +16,8 @@
 #     Intermediate
 #         review_writer : review_writer(review)=reviewer
 #         vote_tensor : T(voter,reviewer,item)=helpful vote
+
+# star rating! 0~5 -> 0~10
 import numpy as np
 import itertools
 from gensim.models import Word2Vec
@@ -25,36 +27,28 @@ def cosine_distance(v1, v2):
     return 1 - np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
 
 class helpful_measure():
-    def __init__(self
-        , fake_flag = True
-        , camo_flag = True
-        , fake_review_numpy_path = './intermediate/fake_review_bandwagon.npy'
-        , camo_review_numpy_path = './intermediate/camo_review_bandwagon.npy'
-        , fake_vote_numpy_path = './intermediate/fake_vote_bandwagon.npy'
-        , user_embedding_path = './intermediate/user2vec.emb'
-        , doubt_weight = 5
-        ):
+    def __init__(self, params):
         # input        
-        self.review_numpy_path = './intermediate/review.npy'
-        self.vote_numpy_path = './intermediate/vote.npy'
-        self.fake_review_numpy_path = fake_review_numpy_path
-        self.camo_review_numpy_path = camo_review_numpy_path
-        self.fake_vote_numpy_path = fake_vote_numpy_path
-        self.user_embedding_path = user_embedding_path
-
+        self.review_numpy_path = params.review_numpy_path
+        self.vote_numpy_path = params.vote_numpy_path
+        self.fake_review_numpy_path = params.fake_review_numpy_path
+        self.camo_review_numpy_path = params.camo_review_numpy_path
+        self.fake_vote_numpy_path = params.fake_vote_numpy_path
+        self.user_embedding_path = params.user_embedding_path
         # output
-        self.helpful_numpy_path='./intermediate/helpful.npy'
-        self.fake_helpful_numpy_path='./intermediate/fake_helpful.npy'
-        self.camo_helpful_numpy_path='./intermediate/camo_helpful.npy'
-        
-        self.helpful_csv_path = './intermediate/check_helpful.csv'
-        self.fake_helpful_csv_path='./intermediate/check_fake_helpful.csv'
-        self.camo_helpful_csv_path='./intermediate/check_camo_helpful.csv'
-
+        self.helpful_numpy_path= params.helpful_numpy_path
+        self.fake_helpful_numpy_path= params.fake_helpful_numpy_path
+        self.camo_helpful_numpy_path= params.camo_helpful_numpy_path
+        # readable
+        self.helpful_csv_path = params.helpful_csv_path
+        self.fake_helpful_csv_path= params.fake_helpful_csv_path
+        self.camo_helpful_csv_path= params.camo_helpful_csv_path
         # experiment condition
-        self.fake_flag = fake_flag
-        self.camo_flag = camo_flag
-        
+        self.fake_flag = params.fake_flag
+        self.camo_flag = params.camo_flag
+        self.doubt_weight = params.doubt_weight
+
+        ####################################################################################
         # intermediate        
         self.user_embedding = Word2Vec.load(self.user_embedding_path)
 
@@ -64,9 +58,9 @@ class helpful_measure():
         self.review_writer = dict()  # dict(review_id) = review_writer_id
         self.helpful_vote_tensor = dict()  # H(reviewer, item) = (cos_distance(reviewer,voter), helpfulness vote)
 
+        # star rating! 0~5 -> 0~10
         self.base_helpful_numerator = 15.0
         self.base_helpful_denominator = 6.0
-        self.doubt_weight = doubt_weight
 
     def fill_review_dict(self):
         overall_review_matrix = np.load(self.review_numpy_path)
@@ -128,6 +122,7 @@ class helpful_measure():
             if user_item_key in self.helpful_vote_tensor:
                 vote_info_list = self.helpful_vote_tensor[user_item_key]
                 for vote_info in vote_info_list:
+                    # star rating! 0~5 -> 0~10
                     if vote_info >=3:
                         # similar user agrees -> diminishing return
                         numerator += vote_info[1] * np.exp(-vote_info[0]*self.doubt_weight)
@@ -142,6 +137,7 @@ class helpful_measure():
         np.save(which_helpful_numpy_path, np.array(helpful_matrix))
         np.savetxt(which_helpful_csv_path, np.array(helpful_matrix))
 
+        
     def whole_process(self):
         self.fill_review_dict()
         self.fill_helpful_vote_tensor()
@@ -151,26 +147,26 @@ class helpful_measure():
         if self.camo_flag:
             self.compute_reveiw_helpful(self.camo_review_numpy_path, self.camo_helpful_numpy_path, self.camo_helpful_csv_path)
     
-if __name__ == "__main__":
-
-    hm = helpful_measure(doubt_weight=5)
-    hm.whole_process()
-
-
+def helpful_test():
     # is helpfulness well assigned???
     a=np.load('./intermediate/helpful.npy')
-    b=np.load('./intermediate/fake_helpful.npy')
-    print np.percentile(a[:, 2], 25)
-    print np.percentile(a[:, 2], 50)
-    print np.percentile(a[:, 2], 75)
-    print np.percentile(a[:, 2], 95)
-    print np.percentile(a[:, 2], 99)
-    print np.percentile(a[:, 2], 99.9)
-    print np.mean(b[:, 2])
+    b=np.load('./intermediate/fake_helpful_bandwagon.npy')
+
+    print ('origin rating #',len(a), 'fake rating #',len(b))
+    print('target helpful mean', np.mean(b[:, 2]))
     print("*********************************")
-    print np.mean(b[:, 2]) - np.percentile(a[:, 2], 25)
-    print np.mean(b[:, 2]) - np.percentile(a[:, 2], 50)
-    print np.mean(b[:, 2]) - np.percentile(a[:, 2], 75)
-    print np.mean(b[:, 2]) - np.percentile(a[:, 2], 90)
+    print ('25',np.percentile(a[:, 2], 25), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 25))))
+    print ('50',np.percentile(a[:, 2], 50), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 50))))
+    print ('75',np.percentile(a[:, 2], 75), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 75))))
+    print ('90',np.percentile(a[:, 2], 90), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 90))))
+
+if __name__ == "__main__":
+
+    # hm = helpful_measure()
+    # hm.whole_process()
+    
+    helpful_test()
+
+
 
 

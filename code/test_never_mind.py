@@ -23,8 +23,8 @@ print np.mean(b[:,2])-np.percentile(a[:,2],90)
 
 
 
-# num_fake_users=100, num_fake_items=10
-# , num_fake_reviews=1000, num_fake_votes=10000
+# num_fake_user=100, num_fake_item=10
+# , num_fake_review=1000, num_fake_vote=10000
 # , fake_rating_value=5, filler_size=0.01
 # alpha = 3
 # 2.67210920324
@@ -41,8 +41,8 @@ print np.mean(b[:,2])-np.percentile(a[:,2],90)
 # -0.508286419213
 
 
-# num_fake_users=100, num_fake_items=10
-# , num_fake_reviews=1000, num_fake_votes=10000
+# num_fake_user=100, num_fake_item=10
+# , num_fake_review=1000, num_fake_vote=10000
 # , fake_rating_value=5, filler_size=0.01
 # alpha = 5
 # 2.61164955457
@@ -60,8 +60,8 @@ print np.mean(b[:,2])-np.percentile(a[:,2],90)
 
 
 
-# num_fake_users=100, num_fake_items=10
-# , num_fake_reviews=1000, num_fake_votes=10000
+# num_fake_user=100, num_fake_item=10
+# , num_fake_review=1000, num_fake_vote=10000
 # , fake_rating_value=5, filler_size=0.01
 # alpha = 10
 # 2.53163304633

@@ -9,7 +9,8 @@
 ============================================================
 
 
-******************************************************************
+************************************************************
+******
 (Done)
 1. preprocess
 	Input
@@ -20,7 +21,7 @@
 		vote 	--> './intermediate/vote.npy'
 
 ******************************************************************
-2. inject fake review/vote
+2. attack_model (inject fake review/vote)
 	Input
 		review 	<-- './intermediate/review.npy'
 		vote 	<-- './intermediate/vote.npy'

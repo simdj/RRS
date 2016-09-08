@@ -9,17 +9,19 @@ import numpy as np
 from time import time
 
 class preprocess():
-	def __init__(self, user_threshold=5, item_threshold=5):
-		self.user_threshold=user_threshold
-		self.item_threshold=item_threshold
+	def __init__(self, params=None):
+		self.user_threshold = params.user_threshold
+		self.item_threshold = params.item_threshold
 
-		self.raw_review_path = '../dataset/CiaoDVD/raw_review.txt'
-		self.raw_vote_path = '../dataset/CiaoDVD/raw_vote.txt'
-		self.review_numpy_path = './intermediate/review.npy'
-		self.vote_numpy_path = './intermediate/vote.npy'
+		self.raw_review_path  = params.raw_review_path 
+		self.raw_vote_path  = params.raw_vote_path 
+		
+		self.review_numpy_path  = params.review_numpy_path 
+		self.vote_numpy_path  = params.vote_numpy_path 
 		# for readability
-		self.review_csv_path = './intermediate/check_review.csv'
-		self.vote_csv_path = './intermediate/check_vote.csv'
+		self.review_csv_path  = params.review_csv_path 
+		self.vote_csv_path  = params.vote_csv_path 
+		
 		# data after preprocess
 		self.review_matrix = []
 		self.vote_matrix = []
@@ -151,7 +153,16 @@ class preprocess():
 		self.save_vote_matrix()
 
 if __name__=="__main__":
-	pp = preprocess(user_threshold=5, item_threshold=5)
+	from parameter_controller import *
+	# exp_title = 'emb_32_rank_50_None'
+	# exp_title = 'emb_32_rank_50_bandwagon_1%_1%_1%'
+	# exp_title = 'emb_32_rank_50_bandwagon_1%_1%_10%'
+	# exp_title = 'emb_32_rank_50_bandwagon_3%_3%_3%'
+	exp_title = 'emb_32_rank_50_bandwagon_10%_10%_10%'
+	# exp_title = 'emb_32_rank_50_average_1%_1%_1%'
+	params = parse_exp_title(exp_title)
+
+	pp = preprocess(params=params)
 	pp.whole_process()
 
 
