@@ -23,8 +23,8 @@ import itertools
 from gensim.models import Word2Vec
 from time import time
 
-def cosine_distance(v1, v2):
-    return 1 - np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
+def cosine_similarity(v1, v2):
+    return np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
 
 class helpful_measure():
     def __init__(self, params):
@@ -59,8 +59,8 @@ class helpful_measure():
         self.helpful_vote_tensor = dict()  # H(reviewer, item) = (cos_distance(reviewer,voter), helpfulness vote)
 
         # star rating! 0~5 -> 0~10
-        self.base_helpful_numerator = 15.0
-        self.base_helpful_denominator = 6.0
+        self.base_helpful_numerator = 150.0
+        self.base_helpful_denominator = 60.0
 
     def fill_review_dict(self):
         overall_review_matrix = np.load(self.review_numpy_path)
@@ -94,12 +94,12 @@ class helpful_measure():
             reviewer, item_id = self.review_writer[str(review_id)]
             # maybe user_id does not exist in embedding vocab....
             # if then, do not consider similarity
-            vote_info = [0.5, helpful_vote]
+            vote_info = [0, helpful_vote]
             if (str(voter) in self.user_embedding) and (str(reviewer) in self.user_embedding):
                 voter_vec = self.user_embedding[str(voter)]
                 reviewer_vec = self.user_embedding[str(reviewer)]
                 # (distance(reviewer,review rater) and vote_rating)
-                vote_info = [cosine_distance(voter_vec, reviewer_vec), helpful_vote]
+                vote_info = [cosine_similarity(voter_vec, reviewer_vec), helpful_vote]
 
             # fill helpful_vote_tensor
             reviewer_and_item = str(reviewer)+','+str(item_id)
@@ -123,14 +123,15 @@ class helpful_measure():
                 vote_info_list = self.helpful_vote_tensor[user_item_key]
                 for vote_info in vote_info_list:
                     # star rating! 0~5 -> 0~10
-                    if vote_info >=3:
+                    # cosine_similarity: {(-1)~(+1)}
+                    if vote_info[1] >=3:
                         # similar user agrees -> diminishing return
                         numerator += vote_info[1] * np.exp(-vote_info[0]*self.doubt_weight)
                         denominator += np.exp(-vote_info[0]*self.doubt_weight)
                     else:
-                        # dissimilar user agrees -> diminishing return
-                        numerator += vote_info[1] * np.exp(-(1 - vote_info[0])*self.doubt_weight)
-                        denominator += np.exp(-(1 - vote_info[0])*self.doubt_weight)
+                        # dissimilar user disagrees -> diminishing return
+                        numerator += vote_info[1] * np.exp( vote_info[0]*self.doubt_weight)
+                        denominator += np.exp( vote_info[0]*self.doubt_weight)
             # update posterior
             helpful_matrix.append([reviewer, item_id, numerator / denominator])
 

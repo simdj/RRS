@@ -140,11 +140,11 @@ class preprocess():
 
 	def save_review_matrix(self):
 		np.save(self.review_numpy_path, np.array(self.review_matrix))
-		np.savetxt(self.review_csv_path, np.array(self.review_matrix))
+		# np.savetxt(self.review_csv_path, np.array(self.review_matrix))
 
 	def save_vote_matrix(self):
 		np.save(self.vote_numpy_path, np.array(self.vote_matrix))
-		np.savetxt(self.vote_csv_path, np.array(self.vote_matrix))
+		# np.savetxt(self.vote_csv_path, np.array(self.vote_matrix))
 
 	def whole_process(self):
 		self.preprocess_review_matrix()

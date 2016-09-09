@@ -5,7 +5,7 @@ class parameter_controller():
 		, num_fake_user=0, num_fake_item=0, num_camo_item=0
 		, embedding_dim=32, word2vec_iter=10
 		, rank=50, lda=1, max_iter=5001
-		, user_threshold=10, item_threshold=10
+		, user_threshold=5, item_threshold=5
 		, doubt_weight=10):
 		############################## 0. General ##############################
 		self.attack_model = attack_model

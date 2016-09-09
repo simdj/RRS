@@ -152,15 +152,15 @@ class attack_model_bandwagon():
 
 	def save_attack_review_matrix(self):
 		np.save(self.fake_review_numpy_path, np.array(self.fake_review_matrix))
-		np.savetxt(self.fake_review_csv_path, np.array(self.fake_review_matrix))
+		# np.savetxt(self.fake_review_csv_path, np.array(self.fake_review_matrix))
 
 		np.save(self.camo_review_numpy_path, np.array(self.camo_review_matrix))
-		np.savetxt(self.camo_review_csv_path, np.array(self.camo_review_matrix))
+		# np.savetxt(self.camo_review_csv_path, np.array(self.camo_review_matrix))
 
 
 	def save_attack_vote_matrix(self):
 		np.save(self.fake_vote_numpy_path, np.array(self.fake_vote_matrix))
-		np.savetxt(self.fake_vote_csv_path, np.array(self.fake_vote_matrix))
+		# np.savetxt(self.fake_vote_csv_path, np.array(self.fake_vote_matrix))
 
 	def whole_process(self):
 		if self.bad_flag ==True:
@@ -172,7 +172,6 @@ class attack_model_bandwagon():
 		self.save_attack_review_matrix()
 		self.generate_fake_votes()
 		self.save_attack_vote_matrix()
-
 
 if __name__=="__main__":
 	# am = attack_model_bandwagon(num_fake_user=100, num_fake_item=10, num_camo_item=0.01, bad_flag=True)
