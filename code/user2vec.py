@@ -20,7 +20,8 @@ import itertools
 from time import time
 from gensim.models import Word2Vec
 
-
+import logging
+logging.basicConfig(filename='./test.log',level=logging.DEBUG)
 def cosine_distance(v1, v2):
 	return 1 - np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
 
@@ -132,10 +133,21 @@ class user2vec():
 		self.item_degree_list = np.zeros((self.num_item, 1)).reshape([-1])
 		self.item_weight_list = np.zeros((self.num_item, 1)).reshape([-1])
 		for item_id, user_set in item_related_user_set.iteritems():
-			self.item_degree_list[item_id] = 1.0 / np.log2(len(user_set) + 5)
-		normalization = 1.0 * np.sum(self.item_degree_list)
-		self.item_weight_list = self.item_degree_list/normalization
-
+			self.item_degree_list[item_id] = len(user_set)
+		# self.item_weight_list = 1.0 / np.log2(self.item_degree_list + 5)
+		self.item_weight_list = 1.0 / (self.item_degree_list + 5)
+		normalization = 1.0 * np.sum(self.item_weight_list)
+		self.item_weight_list = self.item_weight_list/normalization
+		
+		# print np.percentile(self.item_degree_list, 99), np.percentile(self.item_weight_list, 1)
+		# print np.percentile(self.item_degree_list, 95), np.percentile(self.item_weight_list, 5)
+		# print np.percentile(self.item_degree_list, 90), np.percentile(self.item_weight_list, 10)
+		
+		# print np.percentile(self.item_degree_list, 10), np.percentile(self.item_weight_list, 90)
+		# print np.percentile(self.item_degree_list, 5), np.percentile(self.item_weight_list, 95)
+		# print np.percentile(self.item_degree_list, 1), np.percentile(self.item_weight_list, 99)
+		# target = np.argmax(self.item_degree_list>707)
+		# print self.item_degree_list[target], self.item_weight_list[target]
 		# # drawing degree plot
 		# item_degree_list = np.array(item_degree_list)
 		# hist, bins = np.histogram(item_degree_list, bins=max(item_degree_list)+1)
@@ -283,8 +295,8 @@ class user2vec():
 				sample_follower_info = self.follower_tensor[item_id]
 			except Exception, ex:
 				continue
-			# sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5, p=sample_follower_info.reviewer_weight_list)
-			sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5)
+			sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5, p=sample_follower_info.reviewer_weight_list)
+			# sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5)
 			
 			for idx in sample_reviewer_index_list:
 				sample_follower_id_list = np.random.choice(a=sample_follower_info.follower_2dlist[idx],size=1)
@@ -297,15 +309,15 @@ class user2vec():
 	def generate_follower_follower(self, num_sample):
 		ret=[]
 		# follower_tensor
-		# sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5, p=self.item_weight_list)
-		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5)
+		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5, p=self.item_weight_list)
+		# sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5)
 		for item_id in sampled_item_id_list:
 			try:
 				sample_follower_info = self.follower_tensor[item_id]
 			except Exception, ex:
 				continue
-			# sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5, p=sample_follower_info.reviewer_weight_list)
-			sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5)
+			sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5, p=sample_follower_info.reviewer_weight_list)
+			# sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5)
 			
 			for idx in sample_reviewer_index_list:
 				try:
@@ -324,7 +336,8 @@ class user2vec():
 		return train_data
 
 	def build_user_vocab(self):
-		self.user_embedding_model = Word2Vec(size=self.embedding_dim, sample=0, sg=1, hs=0, negative=50, window=2, min_count=0, workers=8, iter=self.word2vec_iter)
+		# self.user_embedding_model = Word2Vec(size=self.embedding_dim, sample=0, sg=1, hs=0, negative=100, window=2, min_count=0, workers=8, iter=self.word2vec_iter)
+		self.user_embedding_model = Word2Vec(size=self.embedding_dim, sample=0, sg=0, hs=1, negative=0, window=2, min_count=0, workers=8, iter=self.word2vec_iter)
 		user_vocab = [[str(int(x)) for x in self.observed_user_list]]
 		self.user_embedding_model.build_vocab(user_vocab)
 
@@ -353,7 +366,7 @@ class user2vec():
 		# Word2Vec init
 		self.build_user_vocab()
 		
-		batch_size=1e+5
+		batch_size=2e+5
 		for it in xrange(iteration):
 			for i in xrange(type0_ratio):
 				self.train_embedding_model(self.generate_reviewer_reviewer(batch_size))
@@ -368,22 +381,25 @@ class user2vec():
 
 		self.save_embedding()
 
-	def similarity_test(self, origin_user_list=list(range(0,2500)), fake_user_list=list(range(2583,2600))):
+	def similarity_test(self, origin_user_list=list(range(0,1000)), fake_user_list=list(range(2583,2600))):
 		print 'fake-fake',
-		x_list = np.random.choice(fake_user_list,3, replace=False)
-		y_list = np.random.choice(fake_user_list,3, replace=False)
-		for i in xrange(3):
-			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])),
+		x_list = np.random.choice(fake_user_list,7, replace=False)
+		y_list = np.random.choice(fake_user_list,7, replace=False)
+		print str(x_list), str(y_list)
+		for i in xrange(7):
+			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i]))
 		print 'fake-origin',
-		x_list = np.random.choice(origin_user_list,3, replace=False)
-		y_list = np.random.choice(fake_user_list,3, replace=False)
-		for i in xrange(3):
-			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])),
+		x_list = np.random.choice(origin_user_list,7, replace=False)
+		y_list = np.random.choice(fake_user_list,7, replace=False)
+		print str(x_list), str(y_list)
+		for i in xrange(7):
+			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i]))
 		print 'origin-origin',
-		x_list = np.random.choice(origin_user_list,3, replace=False)
-		y_list = np.random.choice(origin_user_list,3, replace=False)
-		for i in xrange(3):
-			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])),
+		x_list = np.random.choice(origin_user_list,7, replace=False)
+		y_list = np.random.choice(origin_user_list,7, replace=False)
+		print str(x_list), str(y_list)
+		for i in xrange(7):
+			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i]))
 		print ''
 
 
@@ -391,11 +407,14 @@ class user2vec():
 if __name__ == "__main__":
 	from parameter_controller import *
 
-	# exp_title = 'emb_32_rank_50_bandwagon_5%_1%_5%'
-	# print('Experiment Title', exp_title)
-	# params = parse_exp_title(exp_title)
+	exp_title = 'emb_64_rank_50_bandwagon_1%_1%_1%'
+	print('Experiment Title', exp_title)
+	params = parse_exp_title(exp_title)
 	
-	# u2v = user2vec(params=params)
-	# u2v.new_whole_process()
+	u2v = user2vec(params=params)
+	# u2v.construct_item_weight()
+	u2v.new_whole_process()
+	# u2v.whole_process()
+	# u2v.similarity_test()
 
 

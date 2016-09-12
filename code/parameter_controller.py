@@ -3,7 +3,7 @@ class parameter_controller():
 	def __init__(self
 		, attack_model='None', bad_flag=False, camo_flag=False
 		, num_fake_user=0, num_fake_item=0, num_camo_item=0
-		, embedding_dim=32, word2vec_iter=10
+		, embedding_dim=32, word2vec_iter=5
 		, rank=50, lda=1, max_iter=5001
 		, user_threshold=5, item_threshold=5
 		, doubt_weight=10):
