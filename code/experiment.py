@@ -42,11 +42,13 @@ def whole_process(exp_title):
 	with Timer("3. User2Vec"):
 		u2v = user2vec(params=params)
 		u2v.new_whole_process()
+	
+	with Timer("4. Compute helpfulness"):
+		params.doubt_weight = 10
+		hm = helpful_measure(params=params)
+		hm.whole_process()
+		helpful_test() 
 
-	# with Timer("4. Compute helpfulness"):
-	# 	hm = helpful_measure(params=params)
-	# 	hm.whole_process()
-	# 	helpful_test() 
 
 
 	# with Timer("5. Matrix factorization"):
@@ -59,9 +61,9 @@ import numpy as np
 
 # # whole_process('emb_32_rank_50_bandwagon_1%_1%_3%')
 
-whole_process('emb_64_rank_50_bandwagon_1%_1%_1%')
+# whole_process('emb_64_rank_50_bandwagon_1%_1%_1%')
 # whole_process('emb_64_rank_50_bandwagon_3%_1%_1%')
-# whole_process('emb_64_rank_50_bandwagon_1%_1%_5%')
+whole_process('emb_64_rank_50_bandwagon_1%_1%_5%')
 # whole_process('emb_64_rank_50_bandwagon_3%_1%_5%')
 
 # # exp_title = 'emb_64_rank_50_None'

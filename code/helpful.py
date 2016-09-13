@@ -26,6 +26,10 @@ from time import time
 def cosine_similarity(v1, v2):
     return np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
 
+
+def user_similarity_with_threshold(v1,v2):
+    return (cosine_similarity(v1,v2)-0.9)*10
+
 class helpful_measure():
     def __init__(self, params):
         # input        
@@ -59,8 +63,8 @@ class helpful_measure():
         self.helpful_vote_tensor = dict()  # H(reviewer, item) = (cos_distance(reviewer,voter), helpfulness vote)
 
         # star rating! 0~5 -> 0~10
-        self.base_helpful_numerator = 150.0
-        self.base_helpful_denominator = 60.0
+        self.base_helpful_numerator = 15.0
+        self.base_helpful_denominator = 6.0
 
     def fill_review_dict(self):
         overall_review_matrix = np.load(self.review_numpy_path)
@@ -99,7 +103,7 @@ class helpful_measure():
                 voter_vec = self.user_embedding[str(voter)]
                 reviewer_vec = self.user_embedding[str(reviewer)]
                 # (distance(reviewer,review rater) and vote_rating)
-                vote_info = [cosine_similarity(voter_vec, reviewer_vec), helpful_vote]
+                vote_info = [user_similarity_with_threshold(voter_vec, reviewer_vec), helpful_vote]
 
             # fill helpful_vote_tensor
             reviewer_and_item = str(reviewer)+','+str(item_id)

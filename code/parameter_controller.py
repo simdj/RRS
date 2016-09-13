@@ -6,7 +6,7 @@ class parameter_controller():
 		, embedding_dim=32, word2vec_iter=5
 		, rank=50, lda=1, max_iter=5001
 		, user_threshold=5, item_threshold=5
-		, doubt_weight=10):
+		, doubt_weight=3):
 		############################## 0. General ##############################
 		self.attack_model = attack_model
 		self.fake_flag = True if attack_model!= 'None' else False

@@ -25,6 +25,7 @@ logging.basicConfig(filename='./test.log',level=logging.DEBUG)
 def cosine_distance(v1, v2):
 	return 1 - np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
 
+
 class reviewer_tensor_entry():
 	def __init__(self):
 		self.len_rating_list=0
