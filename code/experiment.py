@@ -49,8 +49,6 @@ def whole_process(exp_title):
 		hm.whole_process()
 		helpful_test() 
 
-
-
 	# with Timer("5. Matrix factorization"):
 	# 	from matrix_factorization import matrix_factorization
 	# 	mf = matrix_factorization(rank=50, lda=1, max_iter=5001)

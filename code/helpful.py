@@ -160,10 +160,13 @@ def helpful_test():
     print ('origin rating #',len(a), 'fake rating #',len(b))
     print('target helpful mean', np.mean(b[:, 2]))
     print("*********************************")
+    print ('1',np.percentile(a[:, 2], 1), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 1))))
+    print ('10',np.percentile(a[:, 2], 10), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 10))))
     print ('25',np.percentile(a[:, 2], 25), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 25))))
     print ('50',np.percentile(a[:, 2], 50), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 50))))
     print ('75',np.percentile(a[:, 2], 75), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 75))))
     print ('90',np.percentile(a[:, 2], 90), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 90))))
+    print ('99',np.percentile(a[:, 2], 99), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 99))))
 
 if __name__ == "__main__":
 
