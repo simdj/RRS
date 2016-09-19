@@ -33,6 +33,7 @@ class reviewer_tensor_entry():
 		self.rating_reviewer_degree_list=[]
 		self.rating_reviewer_weight_list=[]
 		self.reviewer_2dlist=[]
+		
 
 class follower_tensor_entry():
 	def __init__(self):
@@ -43,22 +44,25 @@ class follower_tensor_entry():
 		self.follower_2dlist=[]
 
 class user2vec():
-	def __init__(self, params=None):
+	def __init__(self, params=None, fake_flag=True, camo_flag=True, embedding_output_path=''):
 
 		# input
-		self.review_numpy_path = params.review_numpy_path
-		self.vote_numpy_path = params.vote_numpy_path
-		self.fake_review_numpy_path = params.fake_review_numpy_path
-		self.camo_review_numpy_path = params.camo_review_numpy_path
-		self.fake_vote_numpy_path = params.fake_vote_numpy_path
+		self.review_origin_numpy_path = params.review_origin_numpy_path
+		self.review_fake_numpy_path = params.review_fake_numpy_path
+		self.review_camo_numpy_path = params.review_camo_numpy_path
+		
+		self.vote_origin_numpy_path = params.vote_origin_numpy_path
+		self.vote_fake_numpy_path = params.vote_fake_numpy_path
+		# self.vote_camo_numpy_path = params.vote_camo_numpy_path
 
 		# output
-		self.user_embedding_path = params.user_embedding_path
-		self.user_embedding_csv_path = params.user_embedding_csv_path
-
+		# self.embedding_clean_path = params.embedding_clean_path
+		# self.embedding_attacked_path = params.embedding_attacked_path
+		self.embedding_output_path = embedding_output_path
+		
 		# embedding
-		self.fake_flag = params.fake_flag
-		self.camo_flag = params.camo_flag
+		self.fake_flag = fake_flag
+		self.camo_flag = camo_flag
 		self.embedding_dim = params.embedding_dim
 		self.word2vec_iter = params.word2vec_iter
 
@@ -79,20 +83,20 @@ class user2vec():
 		
 
 	def load_overall_review_matrix(self):
-		overall_review_matrix = np.load(self.review_numpy_path)
+		overall_review_matrix = np.load(self.review_origin_numpy_path)
 		if self.fake_flag:
-			overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.fake_review_numpy_path)))
+			overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.review_fake_numpy_path)))
 			if self.camo_flag:
-				overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.camo_review_numpy_path)))
+				overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.review_camo_numpy_path)))
 		return overall_review_matrix
 
 	def load_overall_vote_matrix(self):
-		overall_vote_matrix = np.load(self.vote_numpy_path)
+		overall_vote_matrix = np.load(self.vote_origin_numpy_path)
 		if self.fake_flag:
-			overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.fake_vote_numpy_path)))
+			overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.vote_fake_numpy_path)))
 		# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		# if self.camo_flag:
-		# 	overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.camo_vote_numpy_path)))
+		# 	overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.vote_camo_numpy_path)))
 		# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		return overall_vote_matrix
 
@@ -166,7 +170,6 @@ class user2vec():
 
 
 	def construct_reviewer_tensor(self):
-
 		# data loading
 		overall_review_matrix = self.load_overall_review_matrix()
 		for row in overall_review_matrix:
@@ -202,7 +205,6 @@ class user2vec():
 			reviewer_info.rating_reviewer_weight_list /= sum(reviewer_info.rating_reviewer_weight_list)*1.0
 
 	def construct_follower_tensor(self):
-
 		overall_vote_matrix = self.load_overall_vote_matrix()
 		for row in overall_vote_matrix:
 			voter = int(row[0])
@@ -241,32 +243,20 @@ class user2vec():
 			follower_info.reviewer_weight_list /= sum(follower_info.reviewer_weight_list)*1.0
 
 	##########################################################################
-	def learn_embedding(self, train_data=None):
-		#  Learn embedding by optimizing the Skipgram objective using negative sampling.
-		train_data = [map(str, x) for x in train_data]
-		print("learning sentence # :", len(train_data))
-		if not self.user_embedding_model:
-			# first train data
-			self.user_embedding_model = Word2Vec(train_data, size=self.embedding_dim
-			                                     , sg=1, negative=20, window=2, min_count=1, workers=8,
-			                                     iter=self.word2vec_iter)
-		else:
-			# new sentences
-			self.user_embedding_model.train(train_data)
-		return
+	# def learn_embedding(self, train_data=None):
+	# 	#  Learn embedding by optimizing the Skipgram objective using negative sampling.
+	# 	train_data = [map(str, x) for x in train_data]
+	# 	print("learning sentence # :", len(train_data))
+	# 	if not self.user_embedding_model:
+	# 		# first train data
+	# 		self.user_embedding_model = Word2Vec(train_data, size=self.embedding_dim
+	# 		                                     , sg=1, negative=20, window=2, min_count=1, workers=8,
+	# 		                                     iter=self.word2vec_iter)
+	# 	else:
+	# 		# new sentences
+	# 		self.user_embedding_model.train(train_data)
+	# 	return
 
-
-	##########################################################################
-	def whole_process(self):
-		self.construct_review_writer_and_similar_reviewer()
-		self.construct_reviewer_follower()
-		self.construct_item_weight()
-
-		self.learn_embedding(self.enumerate_reviewer_follower_pair())
-		self.learn_embedding(self.enumerate_similar_reviewer_pair())
-		self.save_embedding()
-
-	##########################################################################
 
 	def generate_reviewer_reviewer(self, num_sample):
 		ret=[]
@@ -351,36 +341,15 @@ class user2vec():
 
 
 	def save_embedding(self):
-		self.user_embedding_model.save(self.user_embedding_path)
+		self.user_embedding_model.save(self.embedding_output_path)
 		# self.user_embedding_model.save_word2vec_format(self.user_embedding_csv_path)
 
 
 	def load_embedding(self):
-		return Word2Vec.load(self.user_embedding_path)
+		return Word2Vec.load(self.embedding_output_path)
 
 
-	def new_whole_process(self,iteration=10, type0_ratio=1, type1_ratio=1, type2_ratio=1):
-		self.construct_reviewer_tensor()
-		self.construct_follower_tensor()
-		self.construct_item_weight()
-
-		# Word2Vec init
-		self.build_user_vocab()
-		
-		batch_size=2e+5
-		for it in xrange(iteration):
-			for i in xrange(type0_ratio):
-				self.train_embedding_model(self.generate_reviewer_reviewer(batch_size))
-			for i in xrange(type1_ratio):
-				self.train_embedding_model(self.generate_reviewer_follower(batch_size))
-			for i in xrange(type2_ratio):
-				self.train_embedding_model(self.generate_follower_follower(batch_size))
-
-			self.similarity_test()
-		# print 'self.user_embedding_model.sample',self.user_embedding_model.sample
-		# print 'self.user_embedding_model.negative',self.user_embedding_model.negative
-
-		self.save_embedding()
+	
 
 	def similarity_test(self, origin_user_list=list(range(0,1000)), fake_user_list=list(range(2583,2600))):
 		print 'fake-fake',
@@ -403,19 +372,41 @@ class user2vec():
 			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i]))
 		print ''
 
+	
+	def whole_process(self,iteration=10, type0_ratio=1, type1_ratio=1, type2_ratio=1):
+		self.construct_reviewer_tensor()
+		self.construct_follower_tensor()
+		self.construct_item_weight()
 
+		# Word2Vec init
+		self.build_user_vocab()
+		
+		batch_size=2e+5
+		for it in xrange(iteration):
+			for i in xrange(type0_ratio):
+				self.train_embedding_model(self.generate_reviewer_reviewer(batch_size))
+			for i in xrange(type1_ratio):
+				self.train_embedding_model(self.generate_reviewer_follower(batch_size))
+			for i in xrange(type2_ratio):
+				self.train_embedding_model(self.generate_follower_follower(batch_size))
+
+			if self.fake_flag:
+				self.similarity_test()
+
+		self.save_embedding()
 
 if __name__ == "__main__":
 	from parameter_controller import *
 
-	exp_title = 'emb_64_rank_50_bandwagon_1%_1%_1%'
+	exp_title = 'bandwagon_1%_1%_1%_emb_32'
 	print('Experiment Title', exp_title)
 	params = parse_exp_title(exp_title)
 	
-	u2v = user2vec(params=params)
-	# u2v.construct_item_weight()
-	u2v.new_whole_process()
-	# u2v.whole_process()
-	# u2v.similarity_test()
+	u2v_attacked = user2vec(params=params, fake_flag=True, camo_flag=True, embedding_output_path=params.embedding_attacked_path)
+	u2v_attacked.whole_process()
+
+	u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False, embedding_output_path=params.embedding_clean_path)
+	u2v_clean.whole_process()
+	
 
 

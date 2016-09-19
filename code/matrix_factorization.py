@@ -30,13 +30,13 @@ class matrix_factorization():
 		self.lda = lda
 		self.max_iter = max_iter
 
-		self.review_numpy_path = './intermediate/review.npy'
-		self.fake_review_numpy_path = './intermediate/fake_review_bandwagon.npy'
-		self.camo_review_numpy_path = './intermediate/camo_review_bandwagon.npy'
+		self.review_origin_numpy_path = './intermediate/review.npy'
+		self.review_fake_numpy_path = './intermediate/fake_review_bandwagon.npy'
+		self.review_camo_numpy_path = './intermediate/camo_review_bandwagon.npy'
 
-		self.helpful_numpy_path='./intermediate/helpful.npy'
-		self.fake_helpful_numpy_path='./intermediate/fake_helpful.npy'
-		self.camo_helpful_numpy_path='./intermediate/camo_helpful.npy'
+		self.helpful_numpy_path_origin='./intermediate/helpful.npy'
+		self.helpful_numpy_path_fake='./intermediate/fake_helpful.npy'
+		self.helpful_numpy_path_camo='./intermediate/camo_helpful.npy'
 
 	# Given a set of ratings, 2 matrix factors that include one or more
 	# trainable variables, and a regularizer, uses gradient descent to
@@ -182,13 +182,13 @@ class matrix_factorization():
 
 		np.random.seed(1)
 
-		origin_review = np.load(self.review_numpy_path)
-		fake_review = np.load(self.fake_review_numpy_path)
-		camo_review = np.load(self.camo_review_numpy_path)
+		origin_review = np.load(self.review_origin_numpy_path)
+		fake_review = np.load(self.review_fake_numpy_path)
+		camo_review = np.load(self.review_camo_numpy_path)
 
-		origin_helpful = np.load(self.helpful_numpy_path)
-		fake_helpful = np.load(self.fake_helpful_numpy_path)
-		camo_helpful = np.load(self.camo_helpful_numpy_path)
+		origin_helpful = np.load(self.helpful_numpy_path_origin)
+		fake_helpful = np.load(self.helpful_numpy_path_fake)
+		camo_helpful = np.load(self.helpful_numpy_path_camo)
 
 		overall_review = np.concatenate((origin_review, fake_review, camo_review))
 		# overall_helpful = np.concatenate((origin_helpful, fake_helpful, camo_helpful))

@@ -7,7 +7,7 @@
 #         camo review     --> './intermediate/camo_review_[average|bandwagon].npy'
 #         fake vote       --> './intermediate/fake_vote_[average|bandwagon].npy'
         
-#         user_embedding <-- './intermediate/user2vec.emb'
+#         embedding_attacked <-- './intermediate/user2vec.emb'
 #     Output
 #         origin helpful  --> './intermediate/helpful.npy'
 #         fake_helpful    --> './intermediate/fake_helpful.npy'
@@ -33,20 +33,28 @@ def user_similarity_with_threshold(v1,v2):
 class helpful_measure():
     def __init__(self, params):
         # input        
-        self.review_numpy_path = params.review_numpy_path
-        self.vote_numpy_path = params.vote_numpy_path
-        self.fake_review_numpy_path = params.fake_review_numpy_path
-        self.camo_review_numpy_path = params.camo_review_numpy_path
-        self.fake_vote_numpy_path = params.fake_vote_numpy_path
-        self.user_embedding_path = params.user_embedding_path
+        self.review_origin_numpy_path = params.review_origin_numpy_path
+        self.review_fake_numpy_path = params.review_fake_numpy_path
+        self.review_camo_numpy_path = params.review_camo_numpy_path
+        
+        self.vote_origin_numpy_path = params.vote_origin_numpy_path
+        self.vote_fake_numpy_path = params.vote_fake_numpy_path
+        
+        self.embedding_clean_path = params.embedding_clean_path
+        self.embedding_attacked_path = params.embedding_attacked_path
+
         # output
-        self.helpful_numpy_path= params.helpful_numpy_path
-        self.fake_helpful_numpy_path= params.fake_helpful_numpy_path
-        self.camo_helpful_numpy_path= params.camo_helpful_numpy_path
-        # readable
-        self.helpful_csv_path = params.helpful_csv_path
-        self.fake_helpful_csv_path= params.fake_helpful_csv_path
-        self.camo_helpful_csv_path= params.camo_helpful_csv_path
+        self.helpful_origin_clean_naive_path = params.helpful_origin_clean_naive_path
+        self.helpful_origin_clean_robust_path = params.helpful_origin_clean_robust_path
+
+        self.helpful_origin_attacked_naive = params.helpful_origin_attacked_naive
+        self.helpful_fake_attacked_naive = params.helpful_fake_attacked_naive
+        self.helpful_camo_attacked_naive = params.helpful_camo_attacked_naive
+
+        self.helpful_origin_attacked_robust = params.helpful_origin_attacked_robust
+        self.helpful_fake_attacked_robust = params.helpful_fake_attacked_robust
+        self.helpful_camo_attacked_robust = params.helpful_camo_attacked_robust
+        
         # experiment condition
         self.fake_flag = params.fake_flag
         self.camo_flag = params.camo_flag
@@ -54,7 +62,8 @@ class helpful_measure():
 
         ####################################################################################
         # intermediate        
-        self.user_embedding = Word2Vec.load(self.user_embedding_path)
+        self.embedding_clean =  Word2Vec.load(self.embedding_clean_path)
+        self.embedding_attacked = Word2Vec.load(self.embedding_attacked_path)
 
         self.review_dict = dict()  # R(reviewer,item)= rating value
         self.helpful_matrix = []  # H(reviewer, item) = helpfulness score
@@ -67,12 +76,12 @@ class helpful_measure():
         self.base_helpful_denominator = 6.0
 
     def fill_review_dict(self):
-        overall_review_matrix = np.load(self.review_numpy_path)
+        overall_review_matrix = np.load(self.review_origin_numpy_path)
         if self.fake_flag:
-            fake_review_matrix = np.load(self.fake_review_numpy_path)
+            fake_review_matrix = np.load(self.review_fake_numpy_path)
             overall_review_matrix = np.concatenate((overall_review_matrix, fake_review_matrix))
             if self.camo_flag:
-                camo_review_matrix = np.load(self.camo_review_numpy_path)
+                camo_review_matrix = np.load(self.review_camo_numpy_path)
                 overall_review_matrix = np.concatenate((overall_review_matrix, camo_review_matrix))
 
         for row in overall_review_matrix:
@@ -85,9 +94,9 @@ class helpful_measure():
             self.review_writer[str(review_id)] = (reviewer, item_id)
             
     def fill_helpful_vote_tensor(self):
-        overall_vote_matrix = np.load(self.vote_numpy_path)
+        overall_vote_matrix = np.load(self.vote_origin_numpy_path)
         if self.fake_flag:
-            fake_vote_matrix = np.load(self.fake_vote_numpy_path)
+            fake_vote_matrix = np.load(self.vote_fake_numpy_path)
             overall_vote_matrix = np.concatenate((overall_vote_matrix, fake_vote_matrix))
         
         for row in overall_vote_matrix:
@@ -99,9 +108,9 @@ class helpful_measure():
             # maybe user_id does not exist in embedding vocab....
             # if then, do not consider similarity
             vote_info = [0, helpful_vote]
-            if (str(voter) in self.user_embedding) and (str(reviewer) in self.user_embedding):
-                voter_vec = self.user_embedding[str(voter)]
-                reviewer_vec = self.user_embedding[str(reviewer)]
+            if (str(voter) in self.embedding_attacked) and (str(reviewer) in self.embedding_attacked):
+                voter_vec = self.embedding_attacked[str(voter)]
+                reviewer_vec = self.embedding_attacked[str(reviewer)]
                 # (distance(reviewer,review rater) and vote_rating)
                 vote_info = [user_similarity_with_threshold(voter_vec, reviewer_vec), helpful_vote]
 
@@ -111,7 +120,7 @@ class helpful_measure():
                 self.helpful_vote_tensor[reviewer_and_item] = []
             self.helpful_vote_tensor[reviewer_and_item].append(vote_info)
 
-    def compute_reveiw_helpful(self, which_review_numpy_path, which_helpful_numpy_path, which_helpful_csv_path):
+    def compute_review_helpful(self, which_review_numpy_path, which_helpful_numpy_path):
         helpful_matrix = []
         
         review_matrix = np.load(which_review_numpy_path)
@@ -140,17 +149,21 @@ class helpful_measure():
             helpful_matrix.append([reviewer, item_id, numerator / denominator])
 
         np.save(which_helpful_numpy_path, np.array(helpful_matrix))
-        np.savetxt(which_helpful_csv_path, np.array(helpful_matrix))
+        # np.savetxt(which_helpful_csv_path, np.array(helpful_matrix))
 
-        
+    def compute_review_helpful_naive(self, which_review_numpy_path, which_helpful_numpy_path, which_helpful_csv_path=None):
+        helpful_matrix = []
+
+        pass
+    
     def whole_process(self):
         self.fill_review_dict()
         self.fill_helpful_vote_tensor()
-        self.compute_reveiw_helpful(self.review_numpy_path, self.helpful_numpy_path, self.helpful_csv_path)
+        self.compute_review_helpful(self.review_origin_numpy_path, self.helpful_numpy_path_origin)
         if self.fake_flag:
-            self.compute_reveiw_helpful(self.fake_review_numpy_path, self.fake_helpful_numpy_path, self.fake_helpful_csv_path)
+            self.compute_review_helpful(self.review_fake_numpy_path, self.helpful_numpy_path_fake)
         if self.camo_flag:
-            self.compute_reveiw_helpful(self.camo_review_numpy_path, self.camo_helpful_numpy_path, self.camo_helpful_csv_path)
+            self.compute_review_helpful(self.review_camo_numpy_path, self.helpful_numpy_path_camo)
     
 def helpful_test():
     # is helpfulness well assigned???

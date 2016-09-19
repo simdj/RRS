@@ -1,5 +1,5 @@
 import time
-
+import os
 from preprocess import preprocess
 from attack_model_bandwagon import attack_model_bandwagon
 from user2vec import user2vec
@@ -19,7 +19,6 @@ class Timer(object):
 def whole_process(exp_title):
 	#######################################################################################
 	print('#######################################################################################')
-	print('#######################################################################################')
 	print('Experiment Title', exp_title)
 	# 'emb_16_rank_50_bandwagon_3%_3%_3%'
 		# ('learning sentence # :', 774994)
@@ -28,47 +27,47 @@ def whole_process(exp_title):
 
 	#######################################################################################
 
-	# with Timer("1. preprocess"):
-	# 	pp=preprocess(params=params)
-	# 	pp.whole_process()
+	with Timer("1. preprocess"):
+		if not os.path.exists(params.review_origin_numpy_path):
+			pp=preprocess(params=params)
+			pp.whole_process()
+		else:
+			print("Preprocess is already done")
 
 	with Timer("2. attack"):
-		if params.attack_model == 'bandwagon':
-			am = attack_model_bandwagon(params=params)
-			am.whole_process()
+		if not os.path.exists(params.review_fake_numpy_path):
+			if params.attack_model == 'bandwagon':
+				am = attack_model_bandwagon(params=params)
+				am.whole_process()
+			else:
+				print("No bandwagon attack")
 		else:
-			print("No attack")
+			print("Attack is already done")
 
 	with Timer("3. User2Vec"):
-		u2v = user2vec(params=params)
-		u2v.new_whole_process()
+		if not os.path.exists(params.embedding_attacked_path):			
+			u2v_attacked = user2vec(params=params, fake_flag=True, camo_flag=True, embedding_output_path=params.embedding_attacked_path)
+			u2v_attacked.whole_process()
+		else:
+			print("User embedding on the attacked dataset is already done")
+		if not os.path.exists(params.embedding_clean_path):
+			u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False, embedding_output_path=params.embedding_clean_path)
+			u2v_clean.whole_process()
+		else:
+			print("User embedding on the clean dataset is already done")
 	
-	with Timer("4. Compute helpfulness"):
-		params.doubt_weight = 10
-		hm = helpful_measure(params=params)
-		hm.whole_process()
-		helpful_test() 
+	# with Timer("4. Compute helpfulness"):
+	# 	params.doubt_weight = 10
+	# 	hm = helpful_measure(params=params)
+	# 	hm.whole_process()
+	# 	helpful_test() 
 
 	# with Timer("5. Matrix factorization"):
 	# 	from matrix_factorization import matrix_factorization
 	# 	mf = matrix_factorization(rank=50, lda=1, max_iter=5001)
 	# 	mf.whole_process()
 import numpy as np
-# np.random.seed(1)
-# whole_process('emb_32_rank_50_bandwagon_1%_1%_1%')
-
-# # whole_process('emb_32_rank_50_bandwagon_1%_1%_3%')
-
-# whole_process('emb_64_rank_50_bandwagon_1%_1%_1%')
-# whole_process('emb_64_rank_50_bandwagon_3%_1%_1%')
-whole_process('emb_64_rank_50_bandwagon_1%_1%_5%')
-# whole_process('emb_64_rank_50_bandwagon_3%_1%_5%')
-
-# # exp_title = 'emb_64_rank_50_None'
-# # exp_title = 'emb_64_rank_50_bandwagon_3%_3%_3%'
-# # exp_title = 'emb_64_rank_50_bandwagon_1%_1%_10%'
-# # exp_title = 'emb_64_rank_50_average_1%_1%_1%'
-# # exp_title = 'emb_64_rank_50_bandwagon_1%_1%_1%'
+whole_process('bandwagon_1%_1%_1%_emb_32')
 	
 import winsound
 winsound.Beep(300,1000)

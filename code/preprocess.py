@@ -16,11 +16,11 @@ class preprocess():
 		self.raw_review_path  = params.raw_review_path 
 		self.raw_vote_path  = params.raw_vote_path 
 		
-		self.review_numpy_path  = params.review_numpy_path 
-		self.vote_numpy_path  = params.vote_numpy_path 
+		self.review_origin_numpy_path  = params.review_origin_numpy_path 
+		self.vote_origin_numpy_path  = params.vote_origin_numpy_path 
 		# for readability
-		self.review_csv_path  = params.review_csv_path 
-		self.vote_csv_path  = params.vote_csv_path 
+		# self.review_csv_path  = params.review_csv_path 
+		# self.vote_csv_path  = params.vote_csv_path 
 		
 		# data after preprocess
 		self.review_matrix = []
@@ -139,11 +139,11 @@ class preprocess():
 				self.vote_matrix.append([new_voter, new_review_id, helpful])
 
 	def save_review_matrix(self):
-		np.save(self.review_numpy_path, np.array(self.review_matrix))
+		np.save(self.review_origin_numpy_path, np.array(self.review_matrix))
 		# np.savetxt(self.review_csv_path, np.array(self.review_matrix))
 
 	def save_vote_matrix(self):
-		np.save(self.vote_numpy_path, np.array(self.vote_matrix))
+		np.save(self.vote_origin_numpy_path, np.array(self.vote_matrix))
 		# np.savetxt(self.vote_csv_path, np.array(self.vote_matrix))
 
 	def whole_process(self):
@@ -154,12 +154,7 @@ class preprocess():
 
 if __name__=="__main__":
 	from parameter_controller import *
-	# exp_title = 'emb_32_rank_50_None'
-	# exp_title = 'emb_32_rank_50_bandwagon_1%_1%_1%'
-	# exp_title = 'emb_32_rank_50_bandwagon_1%_1%_10%'
-	# exp_title = 'emb_32_rank_50_bandwagon_3%_3%_3%'
-	exp_title = 'emb_32_rank_50_bandwagon_10%_10%_10%'
-	# exp_title = 'emb_32_rank_50_average_1%_1%_1%'
+	exp_title = 'bandwagon_10%_10%_10%_emb_32'
 	params = parse_exp_title(exp_title)
 
 	pp = preprocess(params=params)
