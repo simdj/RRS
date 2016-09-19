@@ -29,9 +29,17 @@ def cosine_similarity(v1, v2):
 
 def user_similarity_with_threshold(v1,v2):
     return (cosine_similarity(v1,v2)-0.9)*10
-
+# clean? attacked?
+# naive? robust?
 class helpful_measure():
-    def __init__(self, params):
+    def __init__(self, params, fake_flag=True, camo_flag=True, robust_flag=True):
+         # experiment condition
+        self.fake_flag = fake_flag
+        self.camo_flag = camo_flag
+        self.robust_flag = robust_flag
+        self.doubt_weight = params.doubt_weight
+
+
         # input        
         self.review_origin_numpy_path = params.review_origin_numpy_path
         self.review_fake_numpy_path = params.review_fake_numpy_path
@@ -40,31 +48,31 @@ class helpful_measure():
         self.vote_origin_numpy_path = params.vote_origin_numpy_path
         self.vote_fake_numpy_path = params.vote_fake_numpy_path
         
-        self.embedding_clean_path = params.embedding_clean_path
-        self.embedding_attacked_path = params.embedding_attacked_path
-
         # output
-        self.helpful_origin_clean_naive_path = params.helpful_origin_clean_naive_path
-        self.helpful_origin_clean_robust_path = params.helpful_origin_clean_robust_path
+        self.helpful_origin_path = ''
+        self.helpful_fake_path = ''
+        self.helpful_camo_path = ''
 
-        self.helpful_origin_attacked_naive = params.helpful_origin_attacked_naive
-        self.helpful_fake_attacked_naive = params.helpful_fake_attacked_naive
-        self.helpful_camo_attacked_naive = params.helpful_camo_attacked_naive
+        if not fake_flag:
+            self.embedding_model = Word2Vec.load(params.embedding_clean_path)
+            if not robust_flag: # clean and naive
+                self.helpful_origin_path = params.helpful_origin_clean_naive_path
+            else:   # clean and robust
+                self.helpful_origin_path = params.helpful_origin_clean_robust_path
+        else:
+            self.embedding_model = Word2Vec.load(params.embedding_attacked_path)
+            if not robust_flag: # attacked and naive
+                self.helpful_origin_path = params.helpful_origin_attacked_naive
+                self.helpful_fake_path = params.helpful_fake_attacked_naive
+                self.helpful_camo_path = params.helpful_camo_attacked_naive
+            else:   # attacked and robust
+                self.helpful_origin_path = params.helpful_origin_attacked_robust
+                self.helpful_fake_path = params.helpful_fake_attacked_robust
+                self.helpful_camo_path = params.helpful_camo_attacked_robust
 
-        self.helpful_origin_attacked_robust = params.helpful_origin_attacked_robust
-        self.helpful_fake_attacked_robust = params.helpful_fake_attacked_robust
-        self.helpful_camo_attacked_robust = params.helpful_camo_attacked_robust
-        
-        # experiment condition
-        self.fake_flag = params.fake_flag
-        self.camo_flag = params.camo_flag
-        self.doubt_weight = params.doubt_weight
 
         ####################################################################################
         # intermediate        
-        self.embedding_clean =  Word2Vec.load(self.embedding_clean_path)
-        self.embedding_attacked = Word2Vec.load(self.embedding_attacked_path)
-
         self.review_dict = dict()  # R(reviewer,item)= rating value
         self.helpful_matrix = []  # H(reviewer, item) = helpfulness score
 
@@ -108,9 +116,9 @@ class helpful_measure():
             # maybe user_id does not exist in embedding vocab....
             # if then, do not consider similarity
             vote_info = [0, helpful_vote]
-            if (str(voter) in self.embedding_attacked) and (str(reviewer) in self.embedding_attacked):
-                voter_vec = self.embedding_attacked[str(voter)]
-                reviewer_vec = self.embedding_attacked[str(reviewer)]
+            if (str(voter) in self.embedding_model) and (str(reviewer) in self.embedding_model):
+                voter_vec = self.embedding_model[str(voter)]
+                reviewer_vec = self.embedding_model[str(reviewer)]
                 # (distance(reviewer,review rater) and vote_rating)
                 vote_info = [user_similarity_with_threshold(voter_vec, reviewer_vec), helpful_vote]
 
@@ -137,56 +145,82 @@ class helpful_measure():
                 for vote_info in vote_info_list:
                     # star rating! 0~5 -> 0~10
                     # cosine_similarity: {(-1)~(+1)}
-                    if vote_info[1] >=3:
-                        # similar user agrees -> diminishing return
-                        numerator += vote_info[1] * np.exp(-vote_info[0]*self.doubt_weight)
-                        denominator += np.exp(-vote_info[0]*self.doubt_weight)
+                    if self.robust_flag:
+                        if vote_info[1] >=3:
+                            # similar user agrees -> diminishing return
+                            numerator += vote_info[1] * np.exp(-vote_info[0]*self.doubt_weight)
+                            denominator += np.exp(-vote_info[0]*self.doubt_weight)
+                        else:
+                            # dissimilar user disagrees -> diminishing return
+                            numerator += vote_info[1] * np.exp( vote_info[0]*self.doubt_weight)
+                            denominator += np.exp( vote_info[0]*self.doubt_weight)
                     else:
-                        # dissimilar user disagrees -> diminishing return
-                        numerator += vote_info[1] * np.exp( vote_info[0]*self.doubt_weight)
-                        denominator += np.exp( vote_info[0]*self.doubt_weight)
+                        numerator += vote_info[1]
+                        denominator += 1
             # update posterior
             helpful_matrix.append([reviewer, item_id, numerator / denominator])
 
         np.save(which_helpful_numpy_path, np.array(helpful_matrix))
         # np.savetxt(which_helpful_csv_path, np.array(helpful_matrix))
 
-    def compute_review_helpful_naive(self, which_review_numpy_path, which_helpful_numpy_path, which_helpful_csv_path=None):
-        helpful_matrix = []
-
-        pass
     
     def whole_process(self):
         self.fill_review_dict()
         self.fill_helpful_vote_tensor()
-        self.compute_review_helpful(self.review_origin_numpy_path, self.helpful_numpy_path_origin)
-        if self.fake_flag:
-            self.compute_review_helpful(self.review_fake_numpy_path, self.helpful_numpy_path_fake)
-        if self.camo_flag:
-            self.compute_review_helpful(self.review_camo_numpy_path, self.helpful_numpy_path_camo)
-    
-def helpful_test():
-    # is helpfulness well assigned???
-    a=np.load('./intermediate/helpful.npy')
-    b=np.load('./intermediate/fake_helpful_bandwagon.npy')
 
-    print ('origin rating #',len(a), 'fake rating #',len(b))
-    print('target helpful mean', np.mean(b[:, 2]))
-    print("*********************************")
-    print ('1',np.percentile(a[:, 2], 1), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 1))))
-    print ('10',np.percentile(a[:, 2], 10), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 10))))
-    print ('25',np.percentile(a[:, 2], 25), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 25))))
-    print ('50',np.percentile(a[:, 2], 50), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 50))))
-    print ('75',np.percentile(a[:, 2], 75), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 75))))
-    print ('90',np.percentile(a[:, 2], 90), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 90))))
-    print ('99',np.percentile(a[:, 2], 99), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 99))))
+        self.compute_review_helpful(self.review_origin_numpy_path, self.helpful_origin_path)
+        if self.helpful_fake_path:
+            self.compute_review_helpful(self.review_fake_numpy_path, self.helpful_fake_path)
+        if self.helpful_camo_path:
+            self.compute_review_helpful(self.review_camo_numpy_path, self.helpful_camo_path)
+        
+    def helpful_test(self):
+        print("************************helpful test************************")
+        a=np.load(self.helpful_origin_path)
+        print('origin helpful mean', np.mean(a[:, 2]))
+        
+        if not self.helpful_fake_path:
+            return
+        # is helpfulness well assigned???
+        b=np.load(self.helpful_fake_path)
+
+        print('target helpful mean', np.mean(b[:, 2]))
+        print ('origin rating #',len(a), 'fake rating #',len(b))
+        # print ('1',np.percentile(a[:, 2], 1), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 1))))
+        print ('10',np.percentile(a[:, 2], 10), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 10))))
+        # print ('25',np.percentile(a[:, 2], 25), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 25))))
+        print ('50',np.percentile(a[:, 2], 50), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 50))))
+        # print ('75',np.percentile(a[:, 2], 75), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 75))))
+        print ('90',np.percentile(a[:, 2], 90), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 90))))
+        # print ('99',np.percentile(a[:, 2], 99), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 99))))
 
 if __name__ == "__main__":
+    from parameter_controller import *
 
-    # hm = helpful_measure()
-    # hm.whole_process()
+    exp_title = 'bandwagon_1%_1%_1%_emb_32'
+    print('Experiment Title', exp_title)
+    params = parse_exp_title(exp_title)
+
+    print("Clean and naive")
+    hm_clean_naive = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=False)
+    hm_clean_naive.whole_process()
+    hm_clean_naive.helpful_test()
+
+    print("Clean and robust")
+    hm_clean_robust = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=True)
+    hm_clean_robust.whole_process()
+    hm_clean_robust.helpful_test()
+
+    print("Attacked and naive")
+    hm_attacked_naive = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=False)
+    hm_attacked_naive.whole_process()
+    hm_attacked_naive.helpful_test()
+
+    print("Attacked and robust")
+    hm_attacked_robust = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=True)
+    hm_attacked_robust.whole_process()
+    hm_attacked_robust.helpful_test()
     
-    helpful_test()
 
 
 
