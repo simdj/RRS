@@ -21,26 +21,21 @@ class Timer(object):
 		print('[%s]' % self.name, "Elapsed: %.2g sec" % (time.time() - self.tstart))
 		print('')
 
+
 def whole_process(exp_title):
-	#######################################################################################
 	print('#######################################################################################')
 	print('Experiment Title', exp_title)
-	# 'emb_16_rank_50_bandwagon_3%_3%_3%'
-	# ('learning sentence # :', 774994)
-	# ('learning sentence # :', 944319)
 	params = parse_exp_title(exp_title)
-
-	#######################################################################################
-
+	refresh_flag = False
 	with Timer("1. preprocess"):
-		if not os.path.exists(params.review_origin_numpy_path):
+		if not os.path.exists(params.review_origin_path):
 			pp = preprocess(params=params)
 			pp.whole_process()
 		else:
 			print("Preprocess is already done")
 
 	with Timer("2. attack"):
-		if not os.path.exists(params.review_fake_numpy_path):
+		if not os.path.exists(params.review_fake_path):
 			if params.attack_model == 'bandwagon':
 				am = attack_model_bandwagon(params=params)
 				am.whole_process()
@@ -64,33 +59,33 @@ def whole_process(exp_title):
 			print("User embedding on the clean dataset is already done")
 
 	with Timer("4. Compute helpfulness"):
-		params.doubt_weight = 10
-		print("Clean and naive")
-		hm_clean_naive = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=False)
-		hm_clean_naive.whole_process()
-		hm_clean_naive.helpful_test()
-		print("Clean and robust")
-		hm_clean_robust = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=True)
-		hm_clean_robust.whole_process()
-		hm_clean_robust.helpful_test()
-		print("Attacked and naive")
-		hm_attacked_naive = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=False)
-		hm_attacked_naive.whole_process()
-		hm_attacked_naive.helpful_test()
-		print("Attacked and robust")
-		hm_attacked_robust = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=True)
-		hm_attacked_robust.whole_process()
-		hm_attacked_robust.helpful_test()
+		if refresh_flag:
+			params.doubt_weight = 100
+			print("Clean and naive")
+			hm_clean_naive = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=False)
+			hm_clean_naive.whole_process()
+			hm_clean_naive.helpful_test()
+			print("Clean and robust")
+			hm_clean_robust = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=True)
+			hm_clean_robust.whole_process()
+			hm_clean_robust.helpful_test()
+			print("Attacked and naive")
+			hm_attacked_naive = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=False)
+			hm_attacked_naive.whole_process()
+			hm_attacked_naive.helpful_test()
+			print("Attacked and robust")
+			hm_attacked_robust = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=True)
+			hm_attacked_robust.whole_process()
+			hm_attacked_robust.helpful_test()
+	with Timer("5. Matrix factorization"):
+		from matrix_factorization import matrix_factorization
+		mf = matrix_factorization(params=params)
+		mf.whole_process()
 
 
-# with Timer("5. Matrix factorization"):
-# 	from matrix_factorization import matrix_factorization
-# 	mf = matrix_factorization(rank=50, lda=1, max_iter=5001)
-# 	mf.whole_process()
-import numpy as np
+if __name__ == "__main__":
+	whole_process('bandwagon_1%_1%_1%_emb_32')
 
-whole_process('bandwagon_1%_1%_1%_emb_32')
+# import winsound
 
-import winsound
-
-winsound.Beep(300, 1000)
+# winsound.Beep(300, 1000)

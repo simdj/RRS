@@ -16,8 +16,8 @@ class preprocess():
 		self.raw_review_path  = params.raw_review_path 
 		self.raw_vote_path  = params.raw_vote_path 
 		
-		self.review_origin_numpy_path  = params.review_origin_numpy_path 
-		self.vote_origin_numpy_path  = params.vote_origin_numpy_path 
+		self.review_origin_path  = params.review_origin_path 
+		self.vote_origin_path  = params.vote_origin_path 
 		# for readability
 		# self.review_csv_path  = params.review_csv_path 
 		# self.vote_csv_path  = params.vote_csv_path 
@@ -139,11 +139,11 @@ class preprocess():
 				self.vote_matrix.append([new_voter, new_review_id, helpful])
 
 	def save_review_matrix(self):
-		np.save(self.review_origin_numpy_path, np.array(self.review_matrix))
+		np.save(self.review_origin_path, np.array(self.review_matrix))
 		# np.savetxt(self.review_csv_path, np.array(self.review_matrix))
 
 	def save_vote_matrix(self):
-		np.save(self.vote_origin_numpy_path, np.array(self.vote_matrix))
+		np.save(self.vote_origin_path, np.array(self.vote_matrix))
 		# np.savetxt(self.vote_csv_path, np.array(self.vote_matrix))
 
 	def whole_process(self):

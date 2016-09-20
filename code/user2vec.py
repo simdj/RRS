@@ -47,13 +47,13 @@ class user2vec():
 	def __init__(self, params=None, fake_flag=True, camo_flag=True, embedding_output_path=''):
 
 		# input
-		self.review_origin_numpy_path = params.review_origin_numpy_path
-		self.review_fake_numpy_path = params.review_fake_numpy_path
-		self.review_camo_numpy_path = params.review_camo_numpy_path
+		self.review_origin_path = params.review_origin_path
+		self.review_fake_path = params.review_fake_path
+		self.review_camo_path = params.review_camo_path
 		
-		self.vote_origin_numpy_path = params.vote_origin_numpy_path
-		self.vote_fake_numpy_path = params.vote_fake_numpy_path
-		# self.vote_camo_numpy_path = params.vote_camo_numpy_path
+		self.vote_origin_path = params.vote_origin_path
+		self.vote_fake_path = params.vote_fake_path
+		# self.vote_camo_path = params.vote_camo_path
 
 		# output
 		# self.embedding_clean_path = params.embedding_clean_path
@@ -83,20 +83,20 @@ class user2vec():
 		
 
 	def load_overall_review_matrix(self):
-		overall_review_matrix = np.load(self.review_origin_numpy_path)
+		overall_review_matrix = np.load(self.review_origin_path)
 		if self.fake_flag:
-			overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.review_fake_numpy_path)))
+			overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.review_fake_path)))
 			if self.camo_flag:
-				overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.review_camo_numpy_path)))
+				overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.review_camo_path)))
 		return overall_review_matrix
 
 	def load_overall_vote_matrix(self):
-		overall_vote_matrix = np.load(self.vote_origin_numpy_path)
+		overall_vote_matrix = np.load(self.vote_origin_path)
 		if self.fake_flag:
-			overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.vote_fake_numpy_path)))
+			overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.vote_fake_path)))
 		# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		# if self.camo_flag:
-		# 	overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.vote_camo_numpy_path)))
+		# 	overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.vote_camo_path)))
 		# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		return overall_vote_matrix
 
@@ -336,7 +336,7 @@ class user2vec():
 		#  Learn embedding by optimizing the Skipgram objective using negative sampling.
 		# train_data = [map(str, int(x)) for x in train_data]
 		train_data = self.get_string_sentence(train_data)
-		print("learning sentence # :", len(train_data))
+		# print("learning sentence # :", len(train_data))
 		self.user_embedding_model.train(train_data)
 
 
@@ -355,21 +355,26 @@ class user2vec():
 		print 'fake-fake',
 		x_list = np.random.choice(fake_user_list,7, replace=False)
 		y_list = np.random.choice(fake_user_list,7, replace=False)
-		print str(x_list), str(y_list)
+		sim_list = []
 		for i in xrange(7):
-			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i]))
+			sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
+		print sim_list
+
 		print 'fake-origin',
 		x_list = np.random.choice(origin_user_list,7, replace=False)
 		y_list = np.random.choice(fake_user_list,7, replace=False)
-		print str(x_list), str(y_list)
+		sim_list = []
 		for i in xrange(7):
-			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i]))
+			sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
+		print sim_list
+
 		print 'origin-origin',
 		x_list = np.random.choice(origin_user_list,7, replace=False)
 		y_list = np.random.choice(origin_user_list,7, replace=False)
-		print str(x_list), str(y_list)
+		sim_list = []
 		for i in xrange(7):
-			print self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i]))
+			sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
+		print sim_list
 		print ''
 
 	
@@ -390,8 +395,8 @@ class user2vec():
 			for i in xrange(type2_ratio):
 				self.train_embedding_model(self.generate_follower_follower(batch_size))
 
-			if self.fake_flag:
-				self.similarity_test()
+		if self.fake_flag:
+			self.similarity_test()
 
 		self.save_embedding()
 

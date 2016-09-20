@@ -28,6 +28,7 @@ def cosine_similarity(v1, v2):
 
 
 def user_similarity_with_threshold(v1,v2):
+    # -1~1 -> -1.9~0.1 -> -19~1
     return (cosine_similarity(v1,v2)-0.9)*10
 # clean? attacked?
 # naive? robust?
@@ -41,12 +42,12 @@ class helpful_measure():
 
 
         # input        
-        self.review_origin_numpy_path = params.review_origin_numpy_path
-        self.review_fake_numpy_path = params.review_fake_numpy_path
-        self.review_camo_numpy_path = params.review_camo_numpy_path
+        self.review_origin_path = params.review_origin_path
+        self.review_fake_path = params.review_fake_path
+        self.review_camo_path = params.review_camo_path
         
-        self.vote_origin_numpy_path = params.vote_origin_numpy_path
-        self.vote_fake_numpy_path = params.vote_fake_numpy_path
+        self.vote_origin_path = params.vote_origin_path
+        self.vote_fake_path = params.vote_fake_path
         
         # output
         self.helpful_origin_path = ''
@@ -84,12 +85,12 @@ class helpful_measure():
         self.base_helpful_denominator = 6.0
 
     def fill_review_dict(self):
-        overall_review_matrix = np.load(self.review_origin_numpy_path)
+        overall_review_matrix = np.load(self.review_origin_path)
         if self.fake_flag:
-            fake_review_matrix = np.load(self.review_fake_numpy_path)
+            fake_review_matrix = np.load(self.review_fake_path)
             overall_review_matrix = np.concatenate((overall_review_matrix, fake_review_matrix))
             if self.camo_flag:
-                camo_review_matrix = np.load(self.review_camo_numpy_path)
+                camo_review_matrix = np.load(self.review_camo_path)
                 overall_review_matrix = np.concatenate((overall_review_matrix, camo_review_matrix))
 
         for row in overall_review_matrix:
@@ -102,9 +103,9 @@ class helpful_measure():
             self.review_writer[str(review_id)] = (reviewer, item_id)
             
     def fill_helpful_vote_tensor(self):
-        overall_vote_matrix = np.load(self.vote_origin_numpy_path)
+        overall_vote_matrix = np.load(self.vote_origin_path)
         if self.fake_flag:
-            fake_vote_matrix = np.load(self.vote_fake_numpy_path)
+            fake_vote_matrix = np.load(self.vote_fake_path)
             overall_vote_matrix = np.concatenate((overall_vote_matrix, fake_vote_matrix))
         
         for row in overall_vote_matrix:
@@ -120,7 +121,7 @@ class helpful_measure():
                 voter_vec = self.embedding_model[str(voter)]
                 reviewer_vec = self.embedding_model[str(reviewer)]
                 # (distance(reviewer,review rater) and vote_rating)
-                vote_info = [user_similarity_with_threshold(voter_vec, reviewer_vec), helpful_vote]
+                vote_info = [cosine_similarity(voter_vec, reviewer_vec), helpful_vote]
 
             # fill helpful_vote_tensor
             reviewer_and_item = str(reviewer)+','+str(item_id)
@@ -128,10 +129,10 @@ class helpful_measure():
                 self.helpful_vote_tensor[reviewer_and_item] = []
             self.helpful_vote_tensor[reviewer_and_item].append(vote_info)
 
-    def compute_review_helpful(self, which_review_numpy_path, which_helpful_numpy_path):
+    def compute_review_helpful(self, which_review_path, which_helpful_path):
         helpful_matrix = []
         
-        review_matrix = np.load(which_review_numpy_path)
+        review_matrix = np.load(which_review_path)
         for row in review_matrix:
             reviewer = int(row[0])
             item_id = int(row[1])
@@ -146,21 +147,30 @@ class helpful_measure():
                     # star rating! 0~5 -> 0~10
                     # cosine_similarity: {(-1)~(+1)}
                     if self.robust_flag:
-                        if vote_info[1] >=3:
+                        # dissimilar (-1) ~ (+1) similar
+                        sim = vote_info[0]
+                        rating = vote_info[1]
+                        if rating >=3:
                             # similar user agrees -> diminishing return
-                            numerator += vote_info[1] * np.exp(-vote_info[0]*self.doubt_weight)
-                            denominator += np.exp(-vote_info[0]*self.doubt_weight)
+                            # sim>=0.9 -> positive value
+                            # sim< 0.9 -> zero
+                            sim_with_threshold = max(0, (sim-0.9)*10)
+                            numerator += rating * np.exp(-sim_with_threshold*self.doubt_weight)
+                            denominator += np.exp(-sim_with_threshold*self.doubt_weight)
                         else:
                             # dissimilar user disagrees -> diminishing return
-                            numerator += vote_info[1] * np.exp( vote_info[0]*self.doubt_weight)
-                            denominator += np.exp( vote_info[0]*self.doubt_weight)
+                            # sim<=-0.9 -> negative value
+                            # sim> 0.9 -> zero
+                            sim_with_threshold = min(0, (sim+0.9)*10)
+                            numerator += rating * np.exp( sim_with_threshold*self.doubt_weight)
+                            denominator += np.exp( sim_with_threshold*self.doubt_weight)
                     else:
                         numerator += vote_info[1]
                         denominator += 1
             # update posterior
             helpful_matrix.append([reviewer, item_id, numerator / denominator])
 
-        np.save(which_helpful_numpy_path, np.array(helpful_matrix))
+        np.save(which_helpful_path, np.array(helpful_matrix))
         # np.savetxt(which_helpful_csv_path, np.array(helpful_matrix))
 
     
@@ -168,11 +178,11 @@ class helpful_measure():
         self.fill_review_dict()
         self.fill_helpful_vote_tensor()
 
-        self.compute_review_helpful(self.review_origin_numpy_path, self.helpful_origin_path)
+        self.compute_review_helpful(self.review_origin_path, self.helpful_origin_path)
         if self.helpful_fake_path:
-            self.compute_review_helpful(self.review_fake_numpy_path, self.helpful_fake_path)
+            self.compute_review_helpful(self.review_fake_path, self.helpful_fake_path)
         if self.helpful_camo_path:
-            self.compute_review_helpful(self.review_camo_numpy_path, self.helpful_camo_path)
+            self.compute_review_helpful(self.review_camo_path, self.helpful_camo_path)
         
     def helpful_test(self):
         print("************************helpful test************************")

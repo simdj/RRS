@@ -71,9 +71,9 @@ class parameter_controller():
 		self.doubt_weight = doubt_weight
 
 		# ############################# 5. matrix factorization ##############################
-		# self.rank = rank
-		# self.lda = lda
-		# self.max_iter = max_iter
+		self.rank = rank
+		self.lda = lda
+		self.max_iter = max_iter
 
 		#######################################################################################
 		########################################################################################\
@@ -84,15 +84,15 @@ class parameter_controller():
 		
 		# review path
 		self.raw_review_path = '../dataset/CiaoDVD/raw_review.txt'
-		self.review_origin_numpy_path = self.intermediate_dir_path+'review_origin.npy'
-		self.review_fake_numpy_path = self.intermediate_dir_path+'review_fake.npy'
-		self.review_camo_numpy_path = self.intermediate_dir_path+'review_camo.npy'
+		self.review_origin_path = self.intermediate_dir_path+'review_origin.npy'
+		self.review_fake_path = self.intermediate_dir_path+'review_fake.npy'
+		self.review_camo_path = self.intermediate_dir_path+'review_camo.npy'
 		
 		# vote path (camo vote not yet...)
 		self.raw_vote_path = '../dataset/CiaoDVD/raw_vote.txt'
-		self.vote_origin_numpy_path = self.intermediate_dir_path+'vote_origin.npy'
-		self.vote_fake_numpy_path = self.intermediate_dir_path+'vote_fake.npy'
-		self.vote_camo_numpy_path = self.intermediate_dir_path+'vote_camo.npy'
+		self.vote_origin_path = self.intermediate_dir_path+'vote_origin.npy'
+		self.vote_fake_path = self.intermediate_dir_path+'vote_fake.npy'
+		self.vote_camo_path = self.intermediate_dir_path+'vote_camo.npy'
 		
 
 		# # clean dataset 
@@ -115,6 +115,26 @@ class parameter_controller():
 		self.helpful_fake_attacked_robust = self.intermediate_dir_path+'helpful_fake_attacked_robust.npy'
 		self.helpful_camo_attacked_robust = self.intermediate_dir_path+'helpful_camo_attacked_robust.npy'
 	
+
+		# output
+		self.base_U_clean_path = self.intermediate_dir_path+'base_U_clean.npy'
+		self.base_V_clean_path = self.intermediate_dir_path+'base_V_clean.npy'
+
+		self.base_U_attacked_path = self.intermediate_dir_path+'base_U_attacked.npy'
+		self.base_V_attacked_path = self.intermediate_dir_path+'base_V_attacked.npy'
+
+		self.naive_U_clean_path = self.intermediate_dir_path+'naive_U_clean.npy'
+		self.naive_V_clean_path = self.intermediate_dir_path+'naive_V_clean.npy'
+
+		self.naive_U_attacked_path = self.intermediate_dir_path+'naive_U_attacked.npy'
+		self.naive_V_attacked_path = self.intermediate_dir_path+'naive_V_attacked.npy'
+
+		self.robust_U_clean_path = self.intermediate_dir_path+'robust_U_clean.npy'
+		self.robust_V_clean_path = self.intermediate_dir_path+'robust_V_clean.npy'
+
+		self.robust_U_attacked_path = self.intermediate_dir_path+'robust_U_attacked.npy'
+		self.robust_V_attacked_path = self.intermediate_dir_path+'robust_V_attacked.npy'
+
 	def readable_path(self, origin_path):
 		if not origin_path:
 			return None
@@ -124,21 +144,6 @@ class parameter_controller():
 		if file_name=='':
 			return None
 		return self.intermediate_dir_path+'ZZZZ_'+file_name+'.csv'
-
-		
-
-	# def injection_path(self, origin_path, injection_type):
-		
-	# 	origin_file_name = origin_path.split(self.intermediate_dir_path).pop()
-		
-	# 	print origin_file_name
-	# 	file_extension = origin_file_name.split('.').pop()
-	# 	file_name=origin_file_name.split('.')[0]
-		
-	# 	print self.intermediate_dir_path+injection_type+'_'+file_name+'_'+'.'+file_extension
-
-
-	# 	return self.intermediate_dir_path+injection_type+'_'+file_name+'_'+'.'+file_extension
 
 
 def parse_exp_title(exp_title):
@@ -164,12 +169,12 @@ def parse_exp_title(exp_title):
 
 if __name__=="__main__":
 
-	exp_title = 'bandwagon_10%_10%_10%_emb_32'
+	exp_title = 'bandwagon_1%_1%_1%_emb_32'
 	params = parse_exp_title(exp_title)
 
 
 	# # parameter_controller(embedding_dim=32, rank=50, attack_model='bandwagon', badly_rated_item_flag=True, camo_flag=True, num_fake_user=0.01, num_fake_item=0.01, num_camo_item=0.01)
-	# # params.readable_path(params.review_origin_numpy_path)
+	# # params.readable_path(params.review_origin_path)
 	
 
 	# a=params.__dict__

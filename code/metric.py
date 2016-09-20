@@ -2,19 +2,19 @@ import numpy as np
 from parameter_controller import *
 class metric():
 	def __init__(self, params):
-		self.review_origin_numpy_path = params.review_origin_numpy_path
-		self.review_fake_numpy_path = params.review_fake_numpy_path
-		self.review_camo_numpy_path = params.review_camo_numpy_path
+		self.review_origin_path = params.review_origin_path
+		self.review_fake_path = params.review_fake_path
+		self.review_camo_path = params.review_camo_path
 
 
 		# origin user
-		self.review_matrix = np.load(self.review_origin_numpy_path)
+		self.review_matrix = np.load(self.review_origin_path)
 		# fake user
 		if params.fake_flag:
-			self.fake_review_matrix = np.load(self.review_fake_numpy_path)
+			self.fake_review_matrix = np.load(self.review_fake_path)
 		# camo user
 		if params.camo_flag:
-			self.camo_review_matrix = np.load(self.review_camo_numpy_path)
+			self.camo_review_matrix = np.load(self.review_camo_path)
 		
 
 

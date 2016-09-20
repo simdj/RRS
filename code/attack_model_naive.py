@@ -12,19 +12,19 @@
 # class attack_model_naive():
 # 	def __init__(self, num_fake_user=10, num_fake_item=10, num_fake_review=100, num_fake_vote=500, fake_rating_value=5, fake_helpful_value=5):
 # 		# input
-# 		self.review_origin_numpy_path = './intermediate/review.npy'
-# 		self.vote_origin_numpy_path = './intermediate/vote.npy'
+# 		self.review_origin_path = './intermediate/review.npy'
+# 		self.vote_origin_path = './intermediate/vote.npy'
 # 		# output
-# 		self.review_fake_numpy_path = './intermediate/fake_review.npy'
-# 		self.vote_fake_numpy_path = './intermediate/fake_vote.npy'
+# 		self.review_fake_path = './intermediate/fake_review.npy'
+# 		self.vote_fake_path = './intermediate/fake_vote.npy'
 # 		# for readability
 # 		self.fake_review_csv_path = './intermediate/check_fake_review.csv'
 # 		self.fake_vote_csv_path = './intermediate/check_fake_vote.csv'
 
 # 		#######################################
 # 		# origin review stats
-# 		origin_review_matrix = np.load(self.review_origin_numpy_path)
-# 		origin_vote_matrix = np.load(self.vote_origin_numpy_path)
+# 		origin_review_matrix = np.load(self.review_origin_path)
+# 		origin_vote_matrix = np.load(self.vote_origin_path)
 
 # 		self.num_origin_user = len(np.unique(np.concatenate((origin_review_matrix[:,0], origin_vote_matrix[:,0]), axis=0)))
 # 		self.num_origin_item = len(np.unique(origin_review_matrix[:,1]))
@@ -84,11 +84,11 @@
 # 			self.fake_vote_matrix.append([fake_u,fake_r, self.fake_helpful_value])
 
 # 	def save_fake_review_matrix(self):
-# 		np.save(self.review_fake_numpy_path, np.array(self.fake_review_matrix))
+# 		np.save(self.review_fake_path, np.array(self.fake_review_matrix))
 # 		np.savetxt(self.fake_review_csv_path, np.array(self.fake_review_matrix))
 
 # 	def save_fake_vote_matrix(self):
-# 		np.save(self.vote_fake_numpy_path, np.array(self.fake_vote_matrix))
+# 		np.save(self.vote_fake_path, np.array(self.fake_vote_matrix))
 # 		np.savetxt(self.fake_vote_csv_path, np.array(self.fake_vote_matrix))
 
 
@@ -111,7 +111,7 @@
 # 	# 		self.fake_vote_matrix.append([fake_u,fake_r,vote_value])
 
 # 	# 	# save fake_vote_matrix numpy
-# 	# 	np.save(self.vote_fake_numpy_path, self.fake_vote_matrix)
+# 	# 	np.save(self.vote_fake_path, self.fake_vote_matrix)
 
 # if __name__=="__main__":
 # 	am = attack_model_naive(num_fake_user=10, num_fake_item=10, num_fake_review=100, num_fake_vote=500, fake_rating_value=5)

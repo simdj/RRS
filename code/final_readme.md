@@ -34,7 +34,6 @@ compare before/after attack
 		helpful_fake_attacked_robust
 		helpful_camo_attacked_robust
 	
-
 ==========================================================================
 
 
@@ -42,24 +41,27 @@ compare before/after attack
 	Input
 		rank
 		algorithm type : base, naive, robust
-	
+		
+		review
+		helpful
+		target item id list
+
 	Output
-		base_U_attacked
-		base_V_attacked
-
-		naive_U_attacked
-		naive_V_attacked
-
-		robust_U_attacked
-		robust_V_attacked
-
 		base_U_clean
 		base_V_clean
 
+		base_U_attacked
+		base_V_attacked
+		------------------------
 		naive_U_clean
 		naive_V_clean
 
+		naive_U_attacked
+		naive_V_attacked
+		------------------------
 		robust_U_clean
 		robust_V_clean
 
+		robust_U_attacked
+		robust_V_attacked
 
