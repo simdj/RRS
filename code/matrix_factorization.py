@@ -1,18 +1,4 @@
-# 5. MF(helpfulness*ratings)
-# 	Input
-# 		origin review 	<-- './intermediate/review.npy'
-# 		fake review 	<-- './intermediate/fake_review_[average|bandwagon].npy'
-# 		camo review 	<-- './intermediate/camo_review_[average|bandwagon].npy'
 
-# 		origin helpful 	<-- './intermediate/helpful.npy'
-# 		fake helpful 	<-- './intermediate/fake_helpful.npy'
-# 		camo helpful 	<-- './intermediate/camo_helpful.npy'
-
-
-# 	Output
-# 		user_latent --> './output/user_latent.npy'
-# 		item_latent --> './output/item_latent.npy'
-from time import time
 import numpy as np
 import tensorflow as tf
 from sklearn.cross_validation import train_test_split
@@ -76,6 +62,10 @@ class matrix_factorization():
 			self.U_path = params.robust_U_attacked_path
 			self.V_path = params.robust_V_attacked_path
 
+		self.train_data_path = params.train_data_path
+		self.test_target_data_path = params.test_target_data_path
+		self.test_overall_data_path = params.test_overall_data_path
+
 	# Extracts user indices, item indices, rating values, helpfulness score and number of ratings from the ratings row
 	def extract_rating_info(self, ratings):
 		user_indices = ratings[:, 0]
@@ -88,13 +78,16 @@ class matrix_factorization():
 	# Given a set of ratings, 2 matrix factors that include one or more
 	# trainable variables, and a regularizer, uses gradient descent to
 	# learn the best values of the trainable variables.
-	def do_mf(self, review_train, review_test, W, H, regularizer, mean_rating, max_iter, lr=0.01, decay_lr=False,
+	def do_mf(self, review_train, review_test, target_item_review_test, W, H, regularizer, mean_rating, max_iter, lr=0.01, decay_lr=False,
 	          log_summaries=False):
 		# Extract info from training and validation data
 		user_indices_train, item_indices_train, rating_values_train, helpful_values_train, num_review_train = self.extract_rating_info(
 			review_train)
 		user_indices_test, item_indices_test, rating_values_test, helpful_values_test, num_review_test = self.extract_rating_info(
 			review_test)
+
+		user_indices_target_test, item_indices_target_test, rating_values_target_test, helpful_values_target_test, num_review_target_test = self.extract_rating_info(
+			target_item_review_test)
 
 		# Multiply the factors to get our result as a dense matrix
 		result = tf.matmul(W, H)
@@ -106,6 +99,10 @@ class matrix_factorization():
 		                             name="extract_training_ratings")
 		result_values_val = tf.gather(tf.reshape(result, [-1]),
 		                              user_indices_test * tf.shape(result)[1] + item_indices_test,
+		                              name="extract_validation_ratings")
+
+		result_values_target_test = tf.gather(tf.reshape(result, [-1]),
+		                              user_indices_target_test * tf.shape(result)[1] + item_indices_target_test,
 		                              name="extract_validation_ratings")
 
 		# Calculate the difference between the predicted ratings and the actual
@@ -122,6 +119,8 @@ class matrix_factorization():
 
 		# diff_op = tf.sub(result_values_tr,rating_values_train, name="weighted_training_error")
 		diff_op_val = tf.sub(result_values_val, rating_values_test, name="raw_validation_error")
+
+		
 
 		with tf.name_scope("training_cost") as scope:
 			base_cost = tf.reduce_sum(tf.square(diff_op, name="squared_difference"), name="sum_squared_error")
@@ -151,6 +150,10 @@ class matrix_factorization():
 		with tf.name_scope("validation_rmse") as scope:
 			# Validation set rmse:
 			rmse_val = tf.sqrt(tf.div(tf.reduce_sum(tf.square(tf.sub(result_values_val, rating_values_test))), num_review_test))
+
+		with tf.name_scope("target_test_rmse") as scope:
+			# Validation set rmse:
+			rmse_target_test = tf.sqrt(tf.div(tf.reduce_sum(tf.square(tf.sub(result_values_target_test, rating_values_target_test))), num_review_target_test))
 
 		with tf.name_scope("mean_rmse") as scope:
 			diff_op_val_mean = tf.sub(mean_rating, rating_values_test, name="raw_validation_error")
@@ -182,11 +185,15 @@ class matrix_factorization():
 				# 	writer.add_summary(summary_str, i)
 				# else:
 				# 	res = sess.run([rmse_tr, rmse_val, cost])
-				res = sess.run([rmse_tr, rmse_val, cost])
+				res = sess.run([rmse_tr, rmse_val, rmse_target_test, cost])
 				acc_tr = res[0]
 				acc_val = res[1]
-				cost_ev = res[2]
-				print("Training RMSE at step %s: %s" % (i, acc_tr), "\tValidation RMSE at step %s: %s" % (i, acc_val))
+				acc_target_test = res[2]
+				cost_ev = res[3]
+				print("Training RMSE at step %s: %s" % (i, acc_tr), "Validation RMSE at step %s: %s" % (i, acc_val), "Target test RMSE at step %s: %s" % (i, acc_target_test))
+				if i>1000 and cost_ev>10:
+					print("may divergence")
+					break
 				diff = abs(cost_ev - last_cost)
 				last_cost = cost_ev
 			else:
@@ -196,8 +203,8 @@ class matrix_factorization():
 		finalVal = rmse_val.eval(session=sess)
 		finalW = W.eval(session=sess)
 		finalH = H.eval(session=sess)
-		print("****")
-		print("\tRMSE of mean rating %s" % sess.run(rmse_val_mean))
+		
+		print("RMSE of mean rating %s" % sess.run(rmse_val_mean))
 		# 1.07341...
 
 		sess.close()
@@ -243,10 +250,12 @@ class matrix_factorization():
 		assert (len(review) == len(helpful))
 		num_review = len(review)
 		for i in xrange(num_review):
-			tmp_review_with_helpful = list(review[i])
+			tmp_review_with_helpful = list(review[i][:-1])
 			tmp_review_with_helpful.append(helpful[i])
 			ret.append(tmp_review_with_helpful)
-		return np.array(ret)
+		ret = np.array(ret)
+		# print('merge result', ret.shape)
+		return ret
 
 	def whole_process(self):
 		np.random.seed(1)
@@ -279,30 +288,58 @@ class matrix_factorization():
 			                                       self.merge_review_helpful(review_fake, helpful_fake),
 			                                       self.merge_review_helpful(review_camo, helpful_camo)))
 
+		np.save(self.train_data_path, overall_review_train)
+		np.save(self.test_overall_data_path, overall_review_test)
+		np.save(self.test_target_data_path, target_item_review_test)
+
 		every_review = np.concatenate((overall_review_train, overall_review_test, target_item_review_test))
 		num_users = len(np.unique(every_review[:, 0]))
 		num_items = len(np.unique(every_review[:, 1]))
 		num_reviews = len(every_review)
 
 		global_review_mean = np.mean(every_review[:, 2])
-		print("=======================================================================")
 		print('rating matrix size', num_users, num_items, '# of reviews', num_reviews)
-		print("=======================================================================")
-		
 		
 		W, H, reg = self.initialize_latent_factor_matrix(num_users=num_users, num_items=num_items, rank=self.rank, lda=self.lda, good_mean=np.sqrt(global_review_mean / self.rank))
-		tr, val, finalw, finalh = self.do_mf(overall_review_train, overall_review_test, W, H, reg, global_review_mean,
+		tr, val, finalw, finalh = self.do_mf(overall_review_train, overall_review_test, target_item_review_test, W, H, reg, global_review_mean,
 		                                     self.max_iter, 1.0, True)
 
 		print("Final training RMSE %s" % (tr), "\tFinal validation RMSE %s" % (val))
-		print("=========================================")
 		np.save(self.U_path, finalw)
 		np.save(self.V_path, finalh)
+		print(self.U_path, "and", self.V_path, "saved")
+
+	def small_test(self, num=10):
+		test_data = np.load(self.test_overall_data_path)
+		for i in xrange(num):
+			user = test_data[i][0]
+			item = test_data[i][1]
+			U=np.load(self.U_path)
+			V=np.load(self.V_path)
+			print 'real value', test_data[i][2], 'prediction', np.dot(U[user,:], V[:,item]), 'diff', test_data[i][2]-np.dot(U[user,:], V[:,item])
 
 
-if __name__ == "__main__":
-	from parameter_controller import *
-	exp_title = 'bandwagon_1%_1%_1%_emb_32'
-	params = parse_exp_title(exp_title)
-	mf = matrix_factorization(params=params)
-	mf.whole_process()
+
+
+from parameter_controller import *
+exp_title = 'bandwagon_1%_1%_1%_emb_32'
+params = parse_exp_title(exp_title)
+
+params.max_iter=101
+print("=========================================")
+print("base / attacked")
+mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=True)
+mf.whole_process()
+# mf.small_test()
+
+print("=========================================")
+print("naive / attacked")
+mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=True)
+mf.whole_process()
+# mf.small_test()
+
+print("=========================================")
+print("robust / attacked")
+mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=True)
+mf.whole_process()
+# mf.small_test()
