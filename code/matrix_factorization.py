@@ -81,13 +81,10 @@ class matrix_factorization():
 	def do_mf(self, review_train, review_test, target_item_review_test, W, H, regularizer, mean_rating, max_iter, lr=0.01, decay_lr=False,
 	          log_summaries=False):
 		# Extract info from training and validation data
-		user_indices_train, item_indices_train, rating_values_train, helpful_values_train, num_review_train = self.extract_rating_info(
-			review_train)
-		user_indices_test, item_indices_test, rating_values_test, helpful_values_test, num_review_test = self.extract_rating_info(
-			review_test)
+		user_indices_train, item_indices_train, rating_values_train, helpful_values_train, num_review_train = self.extract_rating_info(review_train)
+		user_indices_test, item_indices_test, rating_values_test, helpful_values_test, num_review_test = self.extract_rating_info(review_test)
 
-		user_indices_target_test, item_indices_target_test, rating_values_target_test, helpful_values_target_test, num_review_target_test = self.extract_rating_info(
-			target_item_review_test)
+		user_indices_target_test, item_indices_target_test, rating_values_target_test, helpful_values_target_test, num_review_target_test = self.extract_rating_info(target_item_review_test)
 
 		# Multiply the factors to get our result as a dense matrix
 		result = tf.matmul(W, H)
@@ -114,8 +111,7 @@ class matrix_factorization():
 		# diff_op_val = tf.sub(tf.add(result_values_val, mean_rating, name="add_mean_val"), rating_values_test, name="raw_validation_error")
 
 		# using helpful
-		diff_op = tf.mul(tf.sub(result_values_tr, rating_values_train), helpful_values_train,
-		                 name="weighted_training_error")
+		diff_op = tf.mul(tf.sub(result_values_tr, rating_values_train), helpful_values_train, name="weighted_training_error")
 
 		# diff_op = tf.sub(result_values_tr,rating_values_train, name="weighted_training_error")
 		diff_op_val = tf.sub(result_values_val, rating_values_test, name="raw_validation_error")
@@ -190,10 +186,12 @@ class matrix_factorization():
 				acc_val = res[1]
 				acc_target_test = res[2]
 				cost_ev = res[3]
-				print("Training RMSE at step %s: %s" % (i, acc_tr), "Validation RMSE at step %s: %s" % (i, acc_val), "Target test RMSE at step %s: %s" % (i, acc_target_test))
-				if i>1000 and cost_ev>10:
+				# print("Training RMSE at step %s: %s" % (i, acc_tr), "Validation RMSE at step %s: %s" % (i, acc_val), "Target test RMSE at step %s: %s" % (i, acc_target_test))
+				if i % 500 == 0:
+					print("At step %s) Training , Overall test, Target test: (%s, %s, %s) " % (i, acc_tr, acc_val, acc_target_test))
+				if i>1000 and acc_val>10:
 					print("may divergence")
-					break
+					# break
 				diff = abs(cost_ev - last_cost)
 				last_cost = cost_ev
 			else:
@@ -258,7 +256,7 @@ class matrix_factorization():
 		return ret
 
 	def whole_process(self):
-		np.random.seed(1)
+		# np.random.seed(1)
 		# loading original review
 		review_origin = np.load(self.review_origin_path)
 		# loading original helpful
@@ -279,8 +277,7 @@ class matrix_factorization():
 			helpful_camo = np.load(self.helpful_camo_path)[:, 2]
 
 		# each one has a row such that [user, item, rating, helpfulness]
-		overall_review_train, overall_review_test, target_item_review_test = self.split_target_split(review_origin,
-		                                                                                             helpful_origin)
+		overall_review_train, overall_review_test, target_item_review_test = self.split_target_split(review_origin, helpful_origin)
 
 		# append overall_review_train
 		if self.attack_flag:
@@ -297,7 +294,7 @@ class matrix_factorization():
 		num_items = len(np.unique(every_review[:, 1]))
 		num_reviews = len(every_review)
 
-		global_review_mean = np.mean(every_review[:, 2])
+		global_review_mean = np.mean(review_origin[:, 2])
 		print('rating matrix size', num_users, num_items, '# of reviews', num_reviews)
 		
 		W, H, reg = self.initialize_latent_factor_matrix(num_users=num_users, num_items=num_items, rank=self.rank, lda=self.lda, good_mean=np.sqrt(global_review_mean / self.rank))
@@ -309,37 +306,73 @@ class matrix_factorization():
 		np.save(self.V_path, finalh)
 		print(self.U_path, "and", self.V_path, "saved")
 
-	def small_test(self, num=10):
-		test_data = np.load(self.test_overall_data_path)
+	def small_test(self, num=10, which_test='overall'):
+		print("Test : ", which_test)
+		if which_test=='target_test':
+			test_data = np.load(self.test_target_data_path)
+		else:
+			test_data = np.load(self.test_overall_data_path)
+
 		for i in xrange(num):
 			user = test_data[i][0]
 			item = test_data[i][1]
 			U=np.load(self.U_path)
 			V=np.load(self.V_path)
-			print 'real value', test_data[i][2], 'prediction', np.dot(U[user,:], V[:,item]), 'diff', test_data[i][2]-np.dot(U[user,:], V[:,item])
+
+			real_value = test_data[i][2]
+			prediction = np.dot(U[user,:], V[:,item])
+
+			print("real , prediction, diff: (%s, %s, %s) " % (real_value, prediction, real_value-prediction))
+			if np.abs(prediction)>5:
+				print test_data[i]
 
 
 
+if __name__ == "__main__":
+	from parameter_controller import *
+	exp_title = 'bandwagon_1%_1%_1%_emb_32'
+	params = parse_exp_title(exp_title)
 
-from parameter_controller import *
-exp_title = 'bandwagon_1%_1%_1%_emb_32'
-params = parse_exp_title(exp_title)
+	params.max_iter=3001
+	print("=========================================")
+	print("1. base / clean")
+	mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=False)
+	mf.whole_process()
+	mf.small_test(num=10, which_test='target_test')
+	mf.small_test(num=10, which_test='overall')
 
-params.max_iter=101
-print("=========================================")
-print("base / attacked")
-mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=True)
-mf.whole_process()
-# mf.small_test()
+	print("=========================================")
+	print("2. base / attacked")
+	mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=True)
+	mf.whole_process()
+	mf.small_test(num=10, which_test='target_test')
+	mf.small_test(num=10, which_test='overall')
 
-print("=========================================")
-print("naive / attacked")
-mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=True)
-mf.whole_process()
-# mf.small_test()
+	print("=========================================")
+	print("3. naive / clean")
+	mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=False)
+	mf.whole_process()
+	mf.small_test(num=10, which_test='target_test')
+	mf.small_test(num=10, which_test='overall')
 
-print("=========================================")
-print("robust / attacked")
-mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=True)
-mf.whole_process()
-# mf.small_test()
+	print("=========================================")
+	print("4. naive / attacked")
+	mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=True)
+	mf.whole_process()
+	mf.small_test(num=10, which_test='target_test')
+	mf.small_test(num=10, which_test='overall')
+
+	print("=========================================")
+	print("5. robust / clean")
+	mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=False)
+	mf.whole_process()
+	mf.small_test(num=10, which_test='target_test')
+	mf.small_test(num=10, which_test='overall')
+
+
+	print("=========================================")
+	print("6. robust / attacked")
+	mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=True)
+	mf.whole_process()
+	mf.small_test(num=10, which_test='target_test')
+	mf.small_test(num=10, which_test='overall')

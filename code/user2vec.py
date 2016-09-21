@@ -352,30 +352,33 @@ class user2vec():
 	
 
 	def similarity_test(self, origin_user_list=list(range(0,1000)), fake_user_list=list(range(2583,2600))):
-		print 'fake-fake',
-		x_list = np.random.choice(fake_user_list,7, replace=False)
-		y_list = np.random.choice(fake_user_list,7, replace=False)
-		sim_list = []
-		for i in xrange(7):
-			sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
-		print sim_list
+		try:
+			print 'fake-fake',
+			x_list = np.random.choice(fake_user_list,7, replace=False)
+			y_list = np.random.choice(fake_user_list,7, replace=False)
+			sim_list = []
+			for i in xrange(7):
+				sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
+			print sim_list
 
-		print 'fake-origin',
-		x_list = np.random.choice(origin_user_list,7, replace=False)
-		y_list = np.random.choice(fake_user_list,7, replace=False)
-		sim_list = []
-		for i in xrange(7):
-			sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
-		print sim_list
+			print 'fake-origin',
+			x_list = np.random.choice(origin_user_list,7, replace=False)
+			y_list = np.random.choice(fake_user_list,7, replace=False)
+			sim_list = []
+			for i in xrange(7):
+				sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
+			print sim_list
 
-		print 'origin-origin',
-		x_list = np.random.choice(origin_user_list,7, replace=False)
-		y_list = np.random.choice(origin_user_list,7, replace=False)
-		sim_list = []
-		for i in xrange(7):
-			sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
-		print sim_list
-		print ''
+			print 'origin-origin',
+			x_list = np.random.choice(origin_user_list,7, replace=False)
+			y_list = np.random.choice(origin_user_list,7, replace=False)
+			sim_list = []
+			for i in xrange(7):
+				sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
+			print sim_list
+			print ''
+		except:
+			print ("sorry")
 
 	
 	def whole_process(self,iteration=10, type0_ratio=1, type1_ratio=1, type2_ratio=1):

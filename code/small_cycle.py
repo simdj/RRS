@@ -5,6 +5,10 @@ from attack_model_bandwagon import attack_model_bandwagon
 from user2vec import user2vec
 from helpful import helpful_measure
 # WARNING (theano.configdefaults): g++ not detected ! Theano will be unable to execute optimized C-implementations (for both CPU and GPU) and will default to Python implementations. Performance will be severely degraded. To remove this warning, set Theano flags cxx to an empty string.
+try:
+	from matrix_factorization import matrix_factorization
+except:
+	print sys.ec_info()[0]
 
 from parameter_controller import *
 
@@ -26,7 +30,16 @@ def whole_process(exp_title):
 	print('#######################################################################################')
 	print('Experiment Title', exp_title)
 	params = parse_exp_title(exp_title)
-	refresh_flag = True
+
+	params.user_threshold = 10
+	params.item_threshold = 10
+	# fake bad item threshold 10
+	params.max_iter=20001
+	params.lda = 1
+	params.rank = 100
+
+
+	refresh_flag = False
 	with Timer("1. preprocess"):
 		if not os.path.exists(params.review_origin_path):
 			pp = preprocess(params=params)
@@ -78,58 +91,54 @@ def whole_process(exp_title):
 			hm_attacked_robust.whole_process()
 			hm_attacked_robust.helpful_test()
 	with Timer("5. Matrix factorization"):
-		from matrix_factorization import matrix_factorization
-		params.max_iter=3001
+		
+		
+
 		print("=========================================")
 		print("1. base / clean")
 		mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=False)
 		mf.whole_process()
 		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
+		# mf.small_test(num=10, which_test='overall')
 
 		print("=========================================")
 		print("2. base / attacked")
 		mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=True)
 		mf.whole_process()
 		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
+		# mf.small_test(num=10, which_test='overall')
 
-		print("=========================================")
-		print("3. naive / clean")
-		mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=False)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
+		# print("=========================================")
+		# print("3. naive / clean")
+		# mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=False)
+		# mf.whole_process()
+		# mf.small_test(num=10, which_test='target_test')
+		# # mf.small_test(num=10, which_test='overall')
 
-		print("=========================================")
-		print("4. naive / attacked")
-		mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=True)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
+		# print("=========================================")
+		# print("4. naive / attacked")
+		# mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=True)
+		# mf.whole_process()
+		# mf.small_test(num=10, which_test='target_test')
+		# # mf.small_test(num=10, which_test='overall')
 
-		print("=========================================")
-		print("5. robust / clean")
-		mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=False)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
+		# print("=========================================")
+		# print("5. robust / clean")
+		# mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=False)
+		# mf.whole_process()
+		# mf.small_test(num=10, which_test='target_test')
+		# # mf.small_test(num=10, which_test='overall')
 
 
-		print("=========================================")
-		print("6. robust / attacked")
-		mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=True)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
+		# print("=========================================")
+		# print("6. robust / attacked")
+		# mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=True)
+		# mf.whole_process()
+		# mf.small_test(num=10, which_test='target_test')
+		# # mf.small_test(num=10, which_test='overall')
 
 
 
 if __name__ == "__main__":
-	# whole_process('bandwagon_1%_1%_1%_emb_32')
-	whole_process('bandwagon_3%_1%_1%_emb_32')
-	# whole_process('bandwagon_5%_1%_1%_emb_32')
-
-# import winsound
-
-# winsound.Beep(300, 1000)
+	whole_process('bandwagon_3%_1%_3%_emb_32')
+	

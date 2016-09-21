@@ -74,6 +74,7 @@ class attack_model_bandwagon():
 		self.fake_vote_matrix = []
 		self.camo_review_matrix = []
 		self.badly_rated_item_flag=params.badly_rated_item_flag
+		self.bad_item_threshold = params.bad_item_threshold
 
 		print('[Origin] Users x Items :', self.num_origin_user, self.num_origin_item, 'Reviews, Votes : ', self.num_origin_review, self.num_origin_vote)
 		print('[Fake] Users x Items :', self.num_fake_user, self.num_fake_item, 'Reviews, Votes : ',self.num_fake_review, self.num_fake_vote)
@@ -121,7 +122,7 @@ class attack_model_bandwagon():
 
 	def generate_fake_reviews_bad_item(self):
 		# target items are badly rated items
-		bad_item_list = self.get_bad_items(self.num_fake_item, threshold=5)
+		bad_item_list = self.get_bad_items(self.num_fake_item, threshold=self.bad_item_threshold)
 		print bad_item_list
 		self.fake_item_id_list = [x[0] for x in bad_item_list]
 		# print ('bad items', self.fake_item_id_list)

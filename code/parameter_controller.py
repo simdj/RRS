@@ -44,6 +44,7 @@ class parameter_controller():
 		self.fake_flag = True 
 
 		self.badly_rated_item_flag = badly_rated_item_flag
+		self.bad_item_threshold = 10
 		self.camo_flag = camo_flag
 
 		self.exp_title = exp_title
