@@ -298,8 +298,10 @@ class matrix_factorization():
 		print('rating matrix size', num_users, num_items, '# of reviews', num_reviews)
 		
 		W, H, reg = self.initialize_latent_factor_matrix(num_users=num_users, num_items=num_items, rank=self.rank, lda=self.lda, good_mean=np.sqrt(global_review_mean / self.rank))
+
+		# do_mf(self, review_train, review_test, target_item_review_test, W, H, regularizer, mean_rating, max_iter, lr=0.01, decay_lr=False, log_summaries=False):
 		tr, val, finalw, finalh = self.do_mf(overall_review_train, overall_review_test, target_item_review_test, W, H, reg, global_review_mean,
-		                                     self.max_iter, 1.0, True)
+		                                     max_iter = self.max_iter, lr=0.01, decay_lr = True)
 
 		print("Final training RMSE %s" % (tr), "\tFinal validation RMSE %s" % (val))
 		np.save(self.U_path, finalw)

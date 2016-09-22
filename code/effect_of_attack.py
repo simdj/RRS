@@ -34,9 +34,9 @@ def whole_process(exp_title):
 	params.user_threshold = 10
 	params.item_threshold = 10
 	# fake bad item threshold 10
-	params.max_iter=20001
+	params.max_iter=10001
 	params.lda = 1
-	params.rank = 100
+	params.rank = 30
 
 
 	refresh_flag = False
@@ -57,19 +57,19 @@ def whole_process(exp_title):
 		else:
 			print("Attack is already done")
 
-	with Timer("3. User2Vec"):
-		if not os.path.exists(params.embedding_attacked_path):
-			u2v_attacked = user2vec(params=params, fake_flag=True, camo_flag=True,
-			                        embedding_output_path=params.embedding_attacked_path)
-			u2v_attacked.whole_process()
-		else:
-			print("User embedding on the attacked dataset is already done")
-		if not os.path.exists(params.embedding_clean_path):
-			u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False,
-			                     embedding_output_path=params.embedding_clean_path)
-			u2v_clean.whole_process()
-		else:
-			print("User embedding on the clean dataset is already done")
+	# with Timer("3. User2Vec"):
+	# 	if not os.path.exists(params.embedding_attacked_path):
+	# 		u2v_attacked = user2vec(params=params, fake_flag=True, camo_flag=True,
+	# 		                        embedding_output_path=params.embedding_attacked_path)
+	# 		u2v_attacked.whole_process()
+	# 	else:
+	# 		print("User embedding on the attacked dataset is already done")
+	# 	if not os.path.exists(params.embedding_clean_path):
+	# 		u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False,
+	# 		                     embedding_output_path=params.embedding_clean_path)
+	# 		u2v_clean.whole_process()
+	# 	else:
+	# 		print("User embedding on the clean dataset is already done")
 
 	with Timer("4. Compute helpfulness"):
 		if refresh_flag:
@@ -78,18 +78,18 @@ def whole_process(exp_title):
 			hm_clean_naive = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=False)
 			hm_clean_naive.whole_process()
 			hm_clean_naive.helpful_test()
-			print("Clean and robust")
-			hm_clean_robust = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=True)
-			hm_clean_robust.whole_process()
-			hm_clean_robust.helpful_test()
+			# print("Clean and robust")
+			# hm_clean_robust = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=True)
+			# hm_clean_robust.whole_process()
+			# hm_clean_robust.helpful_test()
 			print("Attacked and naive")
 			hm_attacked_naive = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=False)
 			hm_attacked_naive.whole_process()
 			hm_attacked_naive.helpful_test()
-			print("Attacked and robust")
-			hm_attacked_robust = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=True)
-			hm_attacked_robust.whole_process()
-			hm_attacked_robust.helpful_test()
+			# print("Attacked and robust")
+			# hm_attacked_robust = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=True)
+			# hm_attacked_robust.whole_process()
+			# hm_attacked_robust.helpful_test()
 	with Timer("5. Matrix factorization"):
 		
 		
