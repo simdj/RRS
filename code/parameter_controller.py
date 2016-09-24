@@ -61,6 +61,7 @@ class parameter_controller():
 		# (default)
 		self.num_fake_review=1
 		self.num_fake_vote=1
+
 		self.fake_rating_value=5
 		self.fake_helpful_value=5
 
@@ -159,7 +160,7 @@ def parse_exp_title(exp_title):
 	attack_model = param_list[0]
 
 	num_fake_user = float(param_list[1].split('%')[0])
-	num_fake_item = float(param_list[1].split('%')[0])
+	num_fake_item = float(param_list[2].split('%')[0])
 	num_camo_item = float(param_list[3].split('%')[0])
 	
 	if param_list[1].find('%')>-1:

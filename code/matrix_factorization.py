@@ -2,7 +2,7 @@
 import numpy as np
 import tensorflow as tf
 from sklearn.cross_validation import train_test_split
-
+from collections import Counter
 
 class matrix_factorization():
 	def __init__(self, params, algorithm_model='robust', attack_flag=True):
@@ -78,8 +78,7 @@ class matrix_factorization():
 	# Given a set of ratings, 2 matrix factors that include one or more
 	# trainable variables, and a regularizer, uses gradient descent to
 	# learn the best values of the trainable variables.
-	def do_mf(self, review_train, review_test, target_item_review_test, W, H, regularizer, mean_rating, max_iter, lr=0.01, decay_lr=False,
-	          log_summaries=False):
+	def do_mf(self, review_train, review_test, target_item_review_test, W, H, regularizer, mean_rating, max_iter, lr=0.01, decay_lr=False,log_summaries=False):
 		# Extract info from training and validation data
 		user_indices_train, item_indices_train, rating_values_train, helpful_values_train, num_review_train = self.extract_rating_info(review_train)
 		user_indices_test, item_indices_test, rating_values_test, helpful_values_test, num_review_test = self.extract_rating_info(review_test)
@@ -111,9 +110,9 @@ class matrix_factorization():
 		# diff_op_val = tf.sub(tf.add(result_values_val, mean_rating, name="add_mean_val"), rating_values_test, name="raw_validation_error")
 
 		# using helpful
-		diff_op = tf.mul(tf.sub(result_values_tr, rating_values_train), helpful_values_train, name="weighted_training_error")
+		# diff_op = tf.mul(tf.sub(result_values_tr, rating_values_train), helpful_values_train, name="weighted_training_error")
+		diff_op = tf.sub(result_values_tr,rating_values_train, name="weighted_training_error")
 
-		# diff_op = tf.sub(result_values_tr,rating_values_train, name="weighted_training_error")
 		diff_op_val = tf.sub(result_values_val, rating_values_test, name="raw_validation_error")
 
 		
@@ -187,7 +186,7 @@ class matrix_factorization():
 				acc_target_test = res[2]
 				cost_ev = res[3]
 				# print("Training RMSE at step %s: %s" % (i, acc_tr), "Validation RMSE at step %s: %s" % (i, acc_val), "Target test RMSE at step %s: %s" % (i, acc_target_test))
-				if i % 500 == 0:
+				if i % 1000 == 0:
 					print("At step %s) Training , Overall test, Target test: (%s, %s, %s) " % (i, acc_tr, acc_val, acc_target_test))
 				if i>1000 and acc_val>10:
 					print("may divergence")
@@ -199,6 +198,7 @@ class matrix_factorization():
 
 		finalTrain = rmse_tr.eval(session=sess)
 		finalVal = rmse_val.eval(session=sess)
+		final_target_test = rmse_target_test.eval(session=sess)
 		finalW = W.eval(session=sess)
 		finalH = H.eval(session=sess)
 		
@@ -206,7 +206,7 @@ class matrix_factorization():
 		# 1.07341...
 
 		sess.close()
-		return finalTrain, finalVal, finalW, finalH
+		return finalTrain, finalVal, final_target_test, finalW, finalH
 
 	# Learns factors of the given rank with specified regularization parameter.
 	def initialize_latent_factor_matrix(self, num_users, num_items, rank, lda, good_mean=0.28):
@@ -220,6 +220,27 @@ class matrix_factorization():
 
 	def get_target_item_list(self):
 		return np.unique(np.load(self.review_fake_path)[:, 1])
+
+	def get_heavy_user_list(self, review_data, threshold =20):
+		# # [(user_id, occurence)*]
+		# # [(944, 212), (912, 156), (1436, 135), (2277, 126), (2577, 124), (2797, 115)]
+		user_counter = Counter(review_data[:,0])
+		ret = []
+		for user_id, occurence in user_counter.iteritems():
+			if occurence >= threshold:
+				ret.append(user_id)
+		return ret
+	def split_heavy_user_data(self, review_data):
+		heavy_user_list = self.get_heavy_user_list(review_data)
+		print('heavy user number', len(heavy_user_list))
+		heavy_user_data = []
+		etc_user_data = []
+		for row in review_data:
+			if row[0] in heavy_user_list:
+				heavy_user_data.append(row)
+			else:
+				etc_user_data.append(row)
+		return np.array(heavy_user_data), np.array(etc_user_data)
 
 	def split_target_split(self, review_origin, helpful_origin):
 		target_item_review = []
@@ -239,9 +260,20 @@ class matrix_factorization():
 		etc_review = np.array(etc_review)
 
 		target_item_review_train, target_item_review_test = train_test_split(target_item_review, train_size=.9)
-		etc_review_train, etc_review_test = train_test_split(etc_review, train_size=.9)
 
-		return np.concatenate((target_item_review_train, etc_review_train)), etc_review_test, target_item_review_test
+		# etc_review_train, etc_review_test = train_test_split(etc_review, train_size=int(0.9*len(etc_review)))
+		# return np.concatenate((target_item_review_train, etc_review_train)), etc_review_test, target_item_review_test
+
+		heavy_user_data, etc_user_data = self.split_heavy_user_data(etc_review)
+		train_size = int(min(len(heavy_user_data), 0.9*len(etc_review)))
+		heavy_review_train, heavy_review_test = train_test_split(heavy_user_data, train_size=.9)
+		if train_size>=len(heavy_user_data):
+			print(" heavy user data threshold is too high")
+		print('data size')
+		print len(target_item_review_train), len(heavy_review_train), len(etc_user_data), len(heavy_review_test), len(target_item_review_test)
+
+		return np.concatenate((target_item_review_train, heavy_review_train, etc_user_data)), heavy_review_test, target_item_review_test
+
 
 	def merge_review_helpful(self, review, helpful):
 		ret = []
@@ -294,19 +326,19 @@ class matrix_factorization():
 		num_items = len(np.unique(every_review[:, 1]))
 		num_reviews = len(every_review)
 
-		global_review_mean = np.mean(review_origin[:, 2])
+		global_review_mean = np.mean(overall_review_train[:, 2])
 		print('rating matrix size', num_users, num_items, '# of reviews', num_reviews)
 		
 		W, H, reg = self.initialize_latent_factor_matrix(num_users=num_users, num_items=num_items, rank=self.rank, lda=self.lda, good_mean=np.sqrt(global_review_mean / self.rank))
 
 		# do_mf(self, review_train, review_test, target_item_review_test, W, H, regularizer, mean_rating, max_iter, lr=0.01, decay_lr=False, log_summaries=False):
-		tr, val, finalw, finalh = self.do_mf(overall_review_train, overall_review_test, target_item_review_test, W, H, reg, global_review_mean,
-		                                     max_iter = self.max_iter, lr=0.01, decay_lr = True)
+		tr, val,final_target_test, finalw, finalh = self.do_mf(overall_review_train, overall_review_test, target_item_review_test, W, H, reg, global_review_mean, max_iter=self.max_iter, lr=0.01, decay_lr=True)
 
 		print("Final training RMSE %s" % (tr), "\tFinal validation RMSE %s" % (val))
 		np.save(self.U_path, finalw)
 		np.save(self.V_path, finalh)
 		print(self.U_path, "and", self.V_path, "saved")
+		return tr, val,final_target_test
 
 	def small_test(self, num=10, which_test='overall'):
 		print("Test : ", which_test)
@@ -327,6 +359,39 @@ class matrix_factorization():
 			print("real , prediction, diff: (%s, %s, %s) " % (real_value, prediction, real_value-prediction))
 			if np.abs(prediction)>5:
 				print test_data[i]
+
+	def overall_rating_of_target(self):
+		# target_list, U_matrix, V_matrix
+		target_list = self.get_target_item_list()
+
+
+		U_matrix=np.load(self.U_path)
+		V_matrix=np.load(self.V_path)
+
+		# V_matrix.shape = (rank,I)
+		# print('??????',target_list)
+		target_V_matrix = V_matrix[:,map(int, target_list)]
+		# (user,target_item)
+		matmul_result = np.matmul(U_matrix, target_V_matrix)
+		# average
+		each_overall_rating = np.mean(matmul_result, axis=0)
+		total_overall_rating = np.mean(matmul_result)
+		return each_overall_rating, total_overall_rating
+
+	def measure_performance(self, iteration=10):
+		train_err_list = []
+		test_err_list = []
+		target_test_err_list = []
+		overall_rating_list = []
+		for i in xrange(iteration):
+			train_err, test_err, target_test_err = self.whole_process()
+			overall_rating = self.overall_rating_of_target()
+			train_err_list.append(train_err)
+			test_err_list.append(test_err)
+			target_test_err_list.append(target_test_err)
+			overall_rating_list.append(overall_rating)
+		print("overall test error", np.mean([train_err_list, test_err_list,target_test_err_list, overall_rating_list], axis=1))
+		return [train_err_list, test_err_list,target_test_err_list, overall_rating_list]
 
 
 

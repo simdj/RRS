@@ -34,9 +34,12 @@ def whole_process(exp_title):
 	params.user_threshold = 10
 	params.item_threshold = 10
 	# fake bad item threshold 10
-	params.max_iter=10001
+
+	params.fake_rating_value=5
+
+	params.max_iter=20001
 	params.lda = 1
-	params.rank = 30
+	params.rank = 1
 
 
 	refresh_flag = False
@@ -97,15 +100,17 @@ def whole_process(exp_title):
 		print("=========================================")
 		print("1. base / clean")
 		mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=False)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
+		mf.measure_performance(1)
+		# mf.whole_process()
+		# mf.small_test(num=10, which_test='target_test')
 		# mf.small_test(num=10, which_test='overall')
 
 		print("=========================================")
 		print("2. base / attacked")
 		mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=True)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
+		mf.measure_performance(1)
+		# mf.whole_process()
+		# mf.small_test(num=10, which_test='target_test')
 		# mf.small_test(num=10, which_test='overall')
 
 		# print("=========================================")
@@ -139,6 +144,6 @@ def whole_process(exp_title):
 
 
 
-if __name__ == "__main__":
-	whole_process('bandwagon_3%_1%_3%_emb_32')
+# if __name__ == "__main__":
+whole_process('bandwagon_3%_3%_3%_emb_32')
 	

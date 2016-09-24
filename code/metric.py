@@ -2,27 +2,28 @@ import numpy as np
 from parameter_controller import *
 class metric():
 	def __init__(self, params):
-		self.review_origin_path = params.review_origin_path
-		self.review_fake_path = params.review_fake_path
-		self.review_camo_path = params.review_camo_path
+		pass
+		# self.review_origin_path = params.review_origin_path
+		# self.review_fake_path = params.review_fake_path
+		# self.review_camo_path = params.review_camo_path
 
 
-		# origin user
-		self.review_matrix = np.load(self.review_origin_path)
-		# fake user
-		if params.fake_flag:
-			self.fake_review_matrix = np.load(self.review_fake_path)
-		# camo user
-		if params.camo_flag:
-			self.camo_review_matrix = np.load(self.review_camo_path)
+		# # origin user
+		# self.review_matrix = np.load(self.review_origin_path)
+		# # fake user
+		# if params.fake_flag:
+		# 	self.fake_review_matrix = np.load(self.review_fake_path)
+		# # camo user
+		# if params.camo_flag:
+		# 	self.camo_review_matrix = np.load(self.review_camo_path)
 		
 
 
-		self.U_before
-		self.V_before
+		# self.U_before
+		# self.V_before
 
-		self.U_after
-		self.V_after
+		# self.U_after
+		# self.V_after
 
 
 
@@ -70,18 +71,28 @@ class metric():
 		else:
 			return self.MAE(observed, prediction)
 
-	def robustness_result(self):
-		before_rmse
-		after_rmse
-		difference
-		return before_rmse, after_rmse, difference
+	# def robustness_result(self):
+	# 	before_rmse
+	# 	after_rmse
+	# 	difference
+	# 	return before_rmse, after_rmse, difference
 		
+
+	def overall_rating_of_target(self, target_list, U_matrix, V_matrix):
+		# V_matrix.shape = (rank,I)
+		target_V_matrix = V_matrix[:,np.array(target_list)]
+		# (user,target_item)
+		matmul_result = np.matmul(U_matrix, target_V_matrix)
+		# average
+		each_overall_rating = np.mean(matmul_result, axis=0)
+		total_overall_rating = np.mean(matmul_result)
+		return each_overall_rating, total_overall_rating
 
 
 
 
 if __name__=="__main__":
-	exp_title = 'emb_64_rank_50_bandwagon_1%_1%_5%'
+	exp_title = 'bandwagon_3%_3%_3%_emb_32'
 	params = parse_exp_title(exp_title)
 	a=metric(params)
 

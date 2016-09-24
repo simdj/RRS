@@ -78,7 +78,7 @@ class attack_model_bandwagon():
 
 		print('[Origin] Users x Items :', self.num_origin_user, self.num_origin_item, 'Reviews, Votes : ', self.num_origin_review, self.num_origin_vote)
 		print('[Fake] Users x Items :', self.num_fake_user, self.num_fake_item, 'Reviews, Votes : ',self.num_fake_review, self.num_fake_vote)
-		print('[Bandwagon] Target Items :', self.num_camo_item)
+		print('[Bandwagon] Camo Items :', self.num_camo_item)
 
 
 	def get_popular_item(self, topk=10):
