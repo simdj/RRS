@@ -110,8 +110,8 @@ class matrix_factorization():
 		# diff_op_val = tf.sub(tf.add(result_values_val, mean_rating, name="add_mean_val"), rating_values_test, name="raw_validation_error")
 
 		# using helpful
-		# diff_op = tf.mul(tf.sub(result_values_tr, rating_values_train), helpful_values_train, name="weighted_training_error")
-		diff_op = tf.sub(result_values_tr,rating_values_train, name="weighted_training_error")
+		diff_op = tf.mul(tf.sub(result_values_tr, rating_values_train), helpful_values_train, name="weighted_training_error")
+		# diff_op = tf.sub(result_values_tr,rating_values_train, name="weighted_training_error")
 
 		diff_op_val = tf.sub(result_values_val, rating_values_test, name="raw_validation_error")
 
@@ -186,7 +186,7 @@ class matrix_factorization():
 				acc_target_test = res[2]
 				cost_ev = res[3]
 				# print("Training RMSE at step %s: %s" % (i, acc_tr), "Validation RMSE at step %s: %s" % (i, acc_val), "Target test RMSE at step %s: %s" % (i, acc_target_test))
-				if i % 1000 == 0:
+				if i % 5000 == 0:
 					print("At step %s) Training , Overall test, Target test: (%s, %s, %s) " % (i, acc_tr, acc_val, acc_target_test))
 				if i>1000 and acc_val>10:
 					print("may divergence")
@@ -217,6 +217,12 @@ class matrix_factorization():
 		H = tf.Variable(tf.truncated_normal([rank, num_items], stddev=0.02, mean=good_mean), name="items")
 		regularizer = tf.mul(tf.add(tf.reduce_sum(tf.square(W)), tf.reduce_sum(tf.square(H))), lda, name="regularize")
 		return W, H, regularizer
+
+	def get_origin_user_list(self):
+		return np.unique(np.load(self.review_origin_path)[:,0])
+
+	def get_fake_user_list(self):
+		return np.unique(np.load(self.review_fake_path)[:,0])
 
 	def get_target_item_list(self):
 		return np.unique(np.load(self.review_fake_path)[:, 1])
@@ -360,38 +366,88 @@ class matrix_factorization():
 			if np.abs(prediction)>5:
 				print test_data[i]
 
-	def overall_rating_of_target(self):
-		# target_list, U_matrix, V_matrix
-		target_list = self.get_target_item_list()
+	# def overall_rating_of_target(self):
+	# 	# target_list, U_matrix, V_matrix
+	# 	target_list = self.get_target_item_list()
+	# 	origin_user_list = self.get_origin_user_list()
+	# 	fake_user_list = self.get_fake_user_list()
 
+
+	# 	U_matrix=np.load(self.U_path)
+	# 	V_matrix=np.load(self.V_path)
+
+	# 	# V_matrix.shape = (rank,I)
+
+	# 	# print('??????',target_list)
+	# 	target_V_matrix = V_matrix[:,map(int, target_list)]
+
+	# 	origin_U_matirx = U_matrix[map(int, origin_user_list),:]
+	# 	fake_U_matrix = U_matrix[map(int,fake_user_list),:]
+	# 	print("hi origin", len(origin_U_matirx), 'fake', len(fake_U_matrix))
+
+	# 	# (user,target_item)
+	# 	matmul_result = np.matmul(origin_U_matirx, target_V_matrix)
+	# 	matmul_result_of_fake = np.matmul(fake_U_matrix, target_V_matrix)
+	# 	# average
+	# 	each_overall_rating = np.mean(matmul_result_of_fake, axis=0)
+	# 	total_overall_rating = np.mean(matmul_result_of_fake)
+	# 	return total_overall_rating
+
+
+	def predict_rating_of_target(self, honest_flag=True):
+		if honest_flag:
+			selected_user_list = self.get_origin_user_list()
+		else:
+			selected_user_list = self.get_fake_user_list()
+
+		target_list = self.get_target_item_list()
 
 		U_matrix=np.load(self.U_path)
 		V_matrix=np.load(self.V_path)
 
-		# V_matrix.shape = (rank,I)
-		# print('??????',target_list)
-		target_V_matrix = V_matrix[:,map(int, target_list)]
-		# (user,target_item)
-		matmul_result = np.matmul(U_matrix, target_V_matrix)
-		# average
-		each_overall_rating = np.mean(matmul_result, axis=0)
-		total_overall_rating = np.mean(matmul_result)
-		return each_overall_rating, total_overall_rating
+		U_ = U_matrix[map(int,selected_user_list),:]
+		V_ = V_matrix[:,map(int,target_list)]
+
+		return np.matmul(U_,V_)
+
+	def mean_rating_of_target_by_honest(self):
+		prediction = self.predict_rating_of_target(honest_flag=True)
+		print("prediction shape", prediction.shape)
+		return np.mean(prediction)
+
+	def mean_rating_of_target_by_fake(self):
+		prediction = self.predict_rating_of_target(honest_flag=False)
+		print("prediction shape", prediction.shape)
+		return np.mean(prediction)
+
+
 
 	def measure_performance(self, iteration=10):
-		train_err_list = []
-		test_err_list = []
-		target_test_err_list = []
-		overall_rating_list = []
+		# train_err_list = []
+		# test_err_list = []
+		# target_test_err_list = []
+		honest_target_rating_list = []
+		fake_target_rating_list = []
 		for i in xrange(iteration):
-			train_err, test_err, target_test_err = self.whole_process()
-			overall_rating = self.overall_rating_of_target()
-			train_err_list.append(train_err)
-			test_err_list.append(test_err)
-			target_test_err_list.append(target_test_err)
-			overall_rating_list.append(overall_rating)
-		print("overall test error", np.mean([train_err_list, test_err_list,target_test_err_list, overall_rating_list], axis=1))
-		return [train_err_list, test_err_list,target_test_err_list, overall_rating_list]
+			# train_err, test_err, target_test_err = self.whole_process()
+			# train_err_list.append(train_err)
+			# test_err_list.append(test_err)
+			# target_test_err_list.append(target_test_err)
+			honest_rating = self.mean_rating_of_target_by_honest()
+			print('mean_rating_of_target_by_honest', honest_rating)
+			honest_target_rating_list.append(honest_rating)
+			if self.attack_flag==True:
+				fake_rating = self.mean_rating_of_target_by_fake()
+				print('mean_rating_of_target_by_fake', fake_rating)
+				fake_target_rating_list.append(fake_rating)
+
+		print("pleas god")
+		print('honest', np.mean([honest_target_rating_list]))
+		if self.attack_flag==True:
+			print('fake', np.mean([fake_target_rating_list]))
+
+		# print("Please god", np.mean([train_err_list, test_err_list,target_test_err_list, overall_rating_list], axis=1))
+		# return [train_err_list, test_err_list,target_test_err_list, overall_rating_list]
 
 
 

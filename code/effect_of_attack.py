@@ -39,10 +39,9 @@ def whole_process(exp_title):
 
 	params.max_iter=20001
 	params.lda = 1
-	params.rank = 1
+	params.rank = 30
 
 
-	refresh_flag = False
 	with Timer("1. preprocess"):
 		if not os.path.exists(params.review_origin_path):
 			pp = preprocess(params=params)
@@ -60,47 +59,44 @@ def whole_process(exp_title):
 		else:
 			print("Attack is already done")
 
-	# with Timer("3. User2Vec"):
-	# 	if not os.path.exists(params.embedding_attacked_path):
-	# 		u2v_attacked = user2vec(params=params, fake_flag=True, camo_flag=True,
-	# 		                        embedding_output_path=params.embedding_attacked_path)
-	# 		u2v_attacked.whole_process()
-	# 	else:
-	# 		print("User embedding on the attacked dataset is already done")
-	# 	if not os.path.exists(params.embedding_clean_path):
-	# 		u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False,
-	# 		                     embedding_output_path=params.embedding_clean_path)
-	# 		u2v_clean.whole_process()
-	# 	else:
-	# 		print("User embedding on the clean dataset is already done")
+	with Timer("3. User2Vec"):
+		if not os.path.exists(params.embedding_attacked_path):
+			u2v_attacked = user2vec(params=params, fake_flag=True, camo_flag=True,
+			                        embedding_output_path=params.embedding_attacked_path)
+			u2v_attacked.whole_process()
+		else:
+			print("User embedding on the attacked dataset is already done")
+		if not os.path.exists(params.embedding_clean_path):
+			u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False,
+			                     embedding_output_path=params.embedding_clean_path)
+			u2v_clean.whole_process()
+		else:
+			print("User embedding on the clean dataset is already done")
 
 	with Timer("4. Compute helpfulness"):
-		if refresh_flag:
-			params.doubt_weight = 100
-			print("Clean and naive")
-			hm_clean_naive = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=False)
-			hm_clean_naive.whole_process()
-			hm_clean_naive.helpful_test()
-			# print("Clean and robust")
-			# hm_clean_robust = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=True)
-			# hm_clean_robust.whole_process()
-			# hm_clean_robust.helpful_test()
-			print("Attacked and naive")
-			hm_attacked_naive = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=False)
-			hm_attacked_naive.whole_process()
-			hm_attacked_naive.helpful_test()
-			# print("Attacked and robust")
-			# hm_attacked_robust = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=True)
-			# hm_attacked_robust.whole_process()
-			# hm_attacked_robust.helpful_test()
+		params.doubt_weight = 100
+		print("Clean and naive")
+		hm_clean_naive = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=False)
+		hm_clean_naive.whole_process()
+		hm_clean_naive.helpful_test()
+		print("Clean and robust")
+		hm_clean_robust = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=True)
+		hm_clean_robust.whole_process()
+		hm_clean_robust.helpful_test()
+		print("Attacked and naive")
+		hm_attacked_naive = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=False)
+		hm_attacked_naive.whole_process()
+		hm_attacked_naive.helpful_test()
+		print("Attacked and robust")
+		hm_attacked_robust = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=True)
+		hm_attacked_robust.whole_process()
+		hm_attacked_robust.helpful_test()
+	
 	with Timer("5. Matrix factorization"):
-		
-		
-
 		print("=========================================")
 		print("1. base / clean")
 		mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=False)
-		mf.measure_performance(1)
+		mf.measure_performance(3)
 		# mf.whole_process()
 		# mf.small_test(num=10, which_test='target_test')
 		# mf.small_test(num=10, which_test='overall')
@@ -108,7 +104,7 @@ def whole_process(exp_title):
 		print("=========================================")
 		print("2. base / attacked")
 		mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=True)
-		mf.measure_performance(1)
+		mf.measure_performance(3)
 		# mf.whole_process()
 		# mf.small_test(num=10, which_test='target_test')
 		# mf.small_test(num=10, which_test='overall')
@@ -116,34 +112,39 @@ def whole_process(exp_title):
 		# print("=========================================")
 		# print("3. naive / clean")
 		# mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=False)
-		# mf.whole_process()
-		# mf.small_test(num=10, which_test='target_test')
+		# mf.measure_performance(3)
+		# # mf.whole_process()
+		# # mf.small_test(num=10, which_test='target_test')
 		# # mf.small_test(num=10, which_test='overall')
 
-		# print("=========================================")
-		# print("4. naive / attacked")
-		# mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=True)
-		# mf.whole_process()
+		print("=========================================")
+		print("4. naive / attacked")
+		mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=True)
+		mf.measure_performance(3)
 		# mf.small_test(num=10, which_test='target_test')
-		# # mf.small_test(num=10, which_test='overall')
+		# mf.small_test(num=10, which_test='overall')
 
 		# print("=========================================")
 		# print("5. robust / clean")
 		# mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=False)
-		# mf.whole_process()
-		# mf.small_test(num=10, which_test='target_test')
+		# mf.measure_performance(3)
+		# # mf.small_test(num=10, which_test='target_test')
 		# # mf.small_test(num=10, which_test='overall')
 
 
-		# print("=========================================")
-		# print("6. robust / attacked")
-		# mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=True)
-		# mf.whole_process()
+		print("=========================================")
+		print("6. robust / attacked")
+		mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=True)
+		mf.measure_performance(3)
 		# mf.small_test(num=10, which_test='target_test')
-		# # mf.small_test(num=10, which_test='overall')
+		# mf.small_test(num=10, which_test='overall')
 
 
 
 # if __name__ == "__main__":
-whole_process('bandwagon_3%_3%_3%_emb_32')
+# whole_process('bandwagon_3%_3%_3%_emb_32')
+whole_process('bandwagon_1%_1%_1%_emb_32')
+whole_process('bandwagon_3%_1%_3%_emb_32')
+whole_process('bandwagon_5%_1%_5%_emb_32')
+# whole_process('bandwagon_7%_1%_7%_emb_32')
 	
