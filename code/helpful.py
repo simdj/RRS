@@ -185,24 +185,27 @@ class helpful_measure():
             self.compute_review_helpful(self.review_camo_path, self.helpful_camo_path)
         
     def helpful_test(self):
-        print("************************helpful test************************")
-        a=np.load(self.helpful_origin_path)
-        print('origin helpful mean', np.mean(a[:, 2]))
-        
-        if not self.helpful_fake_path:
-            return
-        # is helpfulness well assigned???
-        b=np.load(self.helpful_fake_path)
+        try:
+            print("---Helpful test---")
+            a=np.load(self.helpful_origin_path)
+            print('origin helpful mean', np.mean(a[:, 2]))
+            
+            if not self.helpful_fake_path:
+                return
+            # is helpfulness well assigned???
+            b=np.load(self.helpful_fake_path)
 
-        print('target helpful mean', np.mean(b[:, 2]))
-        print ('origin rating #',len(a), 'fake rating #',len(b))
-        # print ('1',np.percentile(a[:, 2], 1), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 1))))
-        print ('10',np.percentile(a[:, 2], 10), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 10))))
-        # print ('25',np.percentile(a[:, 2], 25), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 25))))
-        print ('50',np.percentile(a[:, 2], 50), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 50))))
-        # print ('75',np.percentile(a[:, 2], 75), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 75))))
-        print ('90',np.percentile(a[:, 2], 90), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 90))))
-        # print ('99',np.percentile(a[:, 2], 99), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 99))))
+            print('target helpful mean', np.mean(b[:, 2]))
+            print ('origin rating #',len(a), 'fake rating #',len(b))
+            # print ('1',np.percentile(a[:, 2], 1), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 1))))
+            print ('10',np.percentile(a[:, 2], 10), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 10))))
+            # print ('25',np.percentile(a[:, 2], 25), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 25))))
+            print ('50',np.percentile(a[:, 2], 50), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 50))))
+            # print ('75',np.percentile(a[:, 2], 75), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 75))))
+            print ('90',np.percentile(a[:, 2], 90), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 90))))
+            # print ('99',np.percentile(a[:, 2], 99), np.sqrt(np.square(np.mean(b[:, 2])/np.percentile(a[:, 2], 99))))
+        except:
+            pass
 
 if __name__ == "__main__":
     from parameter_controller import *

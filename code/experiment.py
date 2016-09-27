@@ -6,6 +6,7 @@ from user2vec import user2vec
 from helpful import helpful_measure
 # WARNING (theano.configdefaults): g++ not detected ! Theano will be unable to execute optimized C-implementations (for both CPU and GPU) and will default to Python implementations. Performance will be severely degraded. To remove this warning, set Theano flags cxx to an empty string.
 
+from WMF import *
 from parameter_controller import *
 
 
@@ -26,14 +27,12 @@ def whole_process(exp_title):
 	print('#######################################################################################')
 	print('Experiment Title', exp_title)
 	params = parse_exp_title(exp_title)
-	refresh_flag = True
 	with Timer("1. preprocess"):
 		if not os.path.exists(params.review_origin_path):
 			pp = preprocess(params=params)
 			pp.whole_process()
 		else:
 			print("Preprocess is already done")
-
 	with Timer("2. attack"):
 		if not os.path.exists(params.review_fake_path):
 			if params.attack_model == 'bandwagon':
@@ -43,93 +42,63 @@ def whole_process(exp_title):
 				print("No bandwagon attack")
 		else:
 			print("Attack is already done")
-
 	with Timer("3. User2Vec"):
+		# attacked embedding
 		if not os.path.exists(params.embedding_attacked_path):
 			u2v_attacked = user2vec(params=params, fake_flag=True, camo_flag=True,
 			                        embedding_output_path=params.embedding_attacked_path)
 			u2v_attacked.whole_process()
 		else:
 			print("User embedding on the attacked dataset is already done")
+		# clean embedding
 		if not os.path.exists(params.embedding_clean_path):
 			u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False,
 			                     embedding_output_path=params.embedding_clean_path)
 			u2v_clean.whole_process()
 		else:
 			print("User embedding on the clean dataset is already done")
-
 	with Timer("4. Compute helpfulness"):
-		if refresh_flag:
-			params.doubt_weight = 100
-			print("Clean and naive")
-			hm_clean_naive = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=False)
-			hm_clean_naive.whole_process()
-			hm_clean_naive.helpful_test()
-			print("Clean and robust")
-			hm_clean_robust = helpful_measure(params=params, fake_flag=False, camo_flag=False, robust_flag=True)
-			hm_clean_robust.whole_process()
-			hm_clean_robust.helpful_test()
-			print("Attacked and naive")
-			hm_attacked_naive = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=False)
-			hm_attacked_naive.whole_process()
-			hm_attacked_naive.helpful_test()
-			print("Attacked and robust")
-			hm_attacked_robust = helpful_measure(params=params, fake_flag=True, camo_flag=True, robust_flag=True)
-			hm_attacked_robust.whole_process()
-			hm_attacked_robust.helpful_test()
+		params.doubt_weight = 100
+
+		attack_flag_list=[False,True]
+		robust_flag_list=[False,True]
+
+		for attack_flag in attack_flag_list:
+			for robust_flag in robust_flag_list:
+				hm_name = ['Clean', 'Naive']
+				if attack_flag:	hm_name[0]='Attacked'
+				if robust_flag:	hm_name[1]='Robust'
+				print (' and '.join(hm_name))
+				# helpful computation start
+				hm = helpful_measure(params=params, fake_flag=attack_flag, camo_flag=attack_flag, robust_flag=robust_flag)
+				hm.whole_process()
+				hm.helpful_test()
 	with Timer("5. Matrix factorization"):
-		from matrix_factorization import matrix_factorization
-		params.max_iter=3001
-		print("=========================================")
-		print("1. base / clean")
-		mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=False)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
 
-		print("=========================================")
-		print("2. base / attacked")
-		mf = matrix_factorization(params=params, algorithm_model='base', attack_flag=True)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
-
-		print("=========================================")
-		print("3. naive / clean")
-		mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=False)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
-
-		print("=========================================")
-		print("4. naive / attacked")
-		mf = matrix_factorization(params=params, algorithm_model='naive', attack_flag=True)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
-
-		print("=========================================")
-		print("5. robust / clean")
-		mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=False)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
-
-
-		print("=========================================")
-		print("6. robust / attacked")
-		mf = matrix_factorization(params=params, algorithm_model='robust', attack_flag=True)
-		mf.whole_process()
-		mf.small_test(num=10, which_test='target_test')
-		mf.small_test(num=10, which_test='overall')
-
-
+		algorithm_model_list = ['base','naive','robust']
+		rank_list = [10,20,30,40,50,60,70,80,100]
+		# params = parse_exp_title(exp_title)
+		for rank in rank_list:
+			for am in algorithm_model_list:
+				print('----------------------', am, rank,'----------------------')
+				wp = WMF_params(params=params, algorithm_model=am, attack_flag=True)
+				wp.rank = rank
+				wp.max_iter=30001
+				wmf_instance = WMF(params=wp)
+				wmf_instance.whole_process()
+				# performance recording
+				performance = metric(params=wp)
+				print('++++++++++ Important value (honest) ', performance.mean_prediction_rating_on_target(honest=True))
+				print('(fake)', performance.mean_prediction_rating_on_target(honest=False))
+				# # helpful test again..
+				# try:
+				# 	origin_help = np.load(wp.helpful_origin_path)[:,-1]
+				# 	fake_help = np.load(wp.helpful_fake_path)[:,-1]
+				# 	print ('Helpful distribution',np.percentile(origin_help,10),np.percentile(origin_help,50),np.percentile(origin_help,90),np.mean(fake_help))
+				# except:
+				# 	pass
 
 if __name__ == "__main__":
-	# whole_process('bandwagon_1%_1%_1%_emb_32')
-	whole_process('bandwagon_3%_1%_1%_emb_32')
-	# whole_process('bandwagon_5%_1%_1%_emb_32')
-
-# import winsound
-
-# winsound.Beep(300, 1000)
+	exp_title_list = ['bandwagon_1%_1%_1%_emb_32','bandwagon_2%_1%_2%_emb_32','bandwagon_3%_1%_3%_emb_32','bandwagon_4%_1%_4%_emb_32','bandwagon_5%_1%_5%_emb_32'   ]
+	for exp_title in exp_title_list:
+		whole_process(exp_title)

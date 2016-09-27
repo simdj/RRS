@@ -55,42 +55,44 @@ class pp():
 				pass
 		return review_data
 
-pp_instance = pp(params, threshold=10)
-# review_data = np.load(params.review_origin_path)
-review_data = pp_instance.get_enough_rating_review()
+from WMF import *
+print WMF
+# pp_instance = pp(params, threshold=10)
+# # review_data = np.load(params.review_origin_path)
+# review_data = pp_instance.get_enough_rating_review()
 
 
-num_users = len(np.unique(review_data[:,0]))
-num_items = len(np.unique(review_data[:,1]))
-num_reviews = len(review_data)
+# num_users = len(np.unique(review_data[:,0]))
+# num_items = len(np.unique(review_data[:,1]))
+# num_reviews = len(review_data)
 
-user_counter = Counter(review_data[:,0])
-user_degree_list = user_counter.values()
+# user_counter = Counter(review_data[:,0])
+# user_degree_list = user_counter.values()
 
-item_counter = Counter(review_data[:,1])
-item_degree_list = item_counter.values()
-
-
-
-print num_users, num_items, num_reviews
-num_users_fake = [0.01, 0.03, 0.05, 0.1]
-num_items_camo = [0.01, 0.03, 0.05, 0.1]
-for i in xrange(len(num_users_fake)):
-	print num_users_fake[i], num_users*num_users_fake[i], num_items*num_items_camo[i]
-
-print '-------------------------------------------------------'
-print 'np.percentile(user_degree_list,10)', np.percentile(user_degree_list,10)
-print 'np.percentile(user_degree_list,50)', np.percentile(user_degree_list,50)
-print 'np.percentile(user_degree_list,90)', np.percentile(user_degree_list,90)
-print 'np.percentile(user_degree_list,99)', np.percentile(user_degree_list,99)
-print 'np.mean(user_degree_list)', np.mean(user_degree_list)
-
-print '-------------------------------------------------------'
+# item_counter = Counter(review_data[:,1])
+# item_degree_list = item_counter.values()
 
 
-print 'np.percentile(item_degree_list,10)', np.percentile(item_degree_list,10)
-print 'np.percentile(item_degree_list,50)', np.percentile(item_degree_list,50)
-print 'np.percentile(item_degree_list,90)', np.percentile(item_degree_list,90)
-print 'np.percentile(item_degree_list,99)', np.percentile(item_degree_list,99)
-print 'np.mean(item_degree_list)', np.mean(item_degree_list)
+
+# print num_users, num_items, num_reviews
+# num_users_fake = [0.01, 0.03, 0.05, 0.1]
+# num_items_camo = [0.01, 0.03, 0.05, 0.1]
+# for i in xrange(len(num_users_fake)):
+# 	print num_users_fake[i], num_users*num_users_fake[i], num_items*num_items_camo[i]
+
+# print '-------------------------------------------------------'
+# print 'np.percentile(user_degree_list,10)', np.percentile(user_degree_list,10)
+# print 'np.percentile(user_degree_list,50)', np.percentile(user_degree_list,50)
+# print 'np.percentile(user_degree_list,90)', np.percentile(user_degree_list,90)
+# print 'np.percentile(user_degree_list,99)', np.percentile(user_degree_list,99)
+# print 'np.mean(user_degree_list)', np.mean(user_degree_list)
+
+# print '-------------------------------------------------------'
+
+
+# print 'np.percentile(item_degree_list,10)', np.percentile(item_degree_list,10)
+# print 'np.percentile(item_degree_list,50)', np.percentile(item_degree_list,50)
+# print 'np.percentile(item_degree_list,90)', np.percentile(item_degree_list,90)
+# print 'np.percentile(item_degree_list,99)', np.percentile(item_degree_list,99)
+# print 'np.mean(item_degree_list)', np.mean(item_degree_list)
 

@@ -21,7 +21,7 @@ class WMF():
 
 		self.train_data = params.train_data
 
-	def do_mf(self, train_data, mean_rating=0, max_iter=20001, lr=0.01, decay_lr=False):
+	def do_mf(self, train_data, mean_rating=0, max_iter=20001, lr=0.01, decay_lr=True):
 		# input : rating data [user, item, rating, helpful]
 		# output : finalTrain, final_U, final_V
 
@@ -61,12 +61,15 @@ class WMF():
 			base_cost = tf.reduce_sum(tf.square(weighted_diff_op), name="sum_squared_error")
 			# (prediction error + regulaization) / num_review????
 			# cost = tf.div(tf.add(base_cost, regularizer), num_review * 2, name="average_error")
-			cost = tf.add(base_cost, regularizer, name="total_cost")
+			
+			# cost = tf.add(base_cost, regularizer, name="total_cost")
+			# bye regularization
+			cost = base_cost
 
 		with tf.name_scope("train") as scope:
 			if decay_lr:
 				global_step = tf.Variable(0, trainable=False)
-				learning_rate = tf.train.exponential_decay(lr, global_step, 10000, 0.96, staircase=True)
+				learning_rate = tf.train.exponential_decay(lr, global_step, 5000, 0.96, staircase=True)
 				optimizer = tf.train.AdamOptimizer(learning_rate)
 				train_step = optimizer.minimize(cost, global_step=global_step)
 			else:
@@ -107,6 +110,8 @@ class WMF():
 		# ==============Session finished==============
 		# ============================================
 
+		print("Final training cost", finalTrain)
+
 		return finalTrain, final_U, final_V
 
 	def whole_process(self):
@@ -140,7 +145,7 @@ class WMF_params():
 		self.helpful_camo_path = ''
 
 		# set review, helpful and output path 
-		self.set_input_output_path(algorithm_model, attack_flag)
+		self.set_input_output_path(params, algorithm_model, attack_flag)
 		# loading and generate rating dataset [user item rating helpful]
 		self.train_data = self.loading_data(algorithm_model)
 	
@@ -149,7 +154,7 @@ class WMF_params():
 		review_data = np.concatenate(review_data)
 		
 		if algorithm_model=='base':
-			self.train_data = np.concatenate((review_data, np.ones((len(review_data),1))), axis=1)
+			self.train_data = np.concatenate((review_data, 3.5*np.ones((len(review_data),1))), axis=1)
 		# else:
 		# 	helpful_data = [np.load(data_path) for data_path in self.input_helpful_path_list]
 		# 	helpful_data = np.concatenate(helpful_data)
@@ -188,7 +193,7 @@ class WMF_params():
 		# print('merge result', ret.shape)
 		return ret
 
-	def set_input_output_path(self, algorithm_model, attack_flag):
+	def set_input_output_path(self, params, algorithm_model, attack_flag):
 		self.review_origin_path = params.review_origin_path
 		
 		if attack_flag == True:
@@ -273,42 +278,51 @@ class metric():
 			focus_user_list = self.get_fake_user_list()
 		target_item_list = self.get_target_item_list()
 
-		target_V_matrix = U_matrix[map(int,focus_user_list),:]
+		target_U_matrix = U_matrix[map(int,focus_user_list),:]
 		target_V_matrix = V_matrix[:,map(int, target_item_list)]
-		matmul_result = np.matmul(U_matrix, target_V_matrix)
+		matmul_result = np.matmul(target_U_matrix, target_V_matrix)
 		# average
 		# each_overall_rating = np.mean(matmul_result, axis=0)
 		total_overall_rating = np.mean(matmul_result)
+		print('[Rating distribution]',np.min(matmul_result), np.percentile(matmul_result,25),np.median(matmul_result),np.percentile(matmul_result,75), np.max(matmul_result))
 		return total_overall_rating
 
+if __name__=="__main__":
+	from parameter_controller import *
+	# exp_title_list = ['bandwagon_1%_1%_1%_emb_32','bandwagon_2%_1%_2%_emb_32','bandwagon_3%_1%_3%_emb_32','bandwagon_4%_1%_4%_emb_32','bandwagon_5%_1%_5%_emb_32'   ]
+	exp_title_list = ['bandwagon_1%_1%_1%_emb_32']
+	algorithm_model_list = ['base','naive','robust']
+	lda_list = [0, 0.0001, 0.001, 0.001, 0.01, 0.1, 1, 10]
+	rank_list = [10,20,30,40,50,60,70,80,100]
 
-exp_title = 'bandwagon_1%_1%_1%_emb_32'
-print('Experiment Title', exp_title)
-from parameter_controller import *
-params = parse_exp_title(exp_title)
 
+	for exp_title in exp_title_list:
+		print('Experiment Title', exp_title)
+		params = parse_exp_title(exp_title)
 
-algorithm_model_list = ['base','naive','robust']
-for i in xrange(1):
-	for am in algorithm_model_list:
-		wp = WMF_params(params=params, algorithm_model=am, attack_flag=True)
-		wp.max_iter=30001
-		wmf_instance = WMF(params=wp)
-		wmf_instance.whole_process()
+		for rank in rank_list:
+			for lda in lda_list:
+				for am in algorithm_model_list:
+					wp = WMF_params(params=params, algorithm_model=am, attack_flag=True)
+					wp.lda = lda
+					wp.rank = rank
+					wp.max_iter=100001
+					wmf_instance = WMF(params=wp)
+					wmf_instance.whole_process()
 
-		performance = metric(params=wp)
-		print(am)
-		print('Important value (honest) ', performance.mean_prediction_rating_on_target(honest=True))
-		print('Important value (fake)', performance.mean_prediction_rating_on_target(honest=False))
+					performance = metric(params=wp)
+					print('-----------------------','algorithm:',am, 'rank',rank, 'lda', lda, '---------------------')
 
-		try:
-			origin_help = np.load(wp.helpful_origin_path)[:,-1]
-			fake_help = np.load(wp.helpful_fake_path)[:,-1]
-			print (np.percentile(origin_help,10),np.percentile(origin_help,50),np.percentile(origin_help,90),np.mean(fake_help))
-		except:
-			pass
-print("++++++++++++++++++++++++++++++++++++++++++++")
-print("++++++++++++++++++++++++++++++++++++++++++++")
-print("end")
-print("++++++++++++++++++++++++++++++++++++++++++++")
-print("++++++++++++++++++++++++++++++++++++++++++++")
+					try:
+						origin_help = np.load(wp.helpful_origin_path)[:,-1]
+						fake_help = np.load(wp.helpful_fake_path)[:,-1]
+						print (np.percentile(origin_help,10),np.percentile(origin_help,50),np.percentile(origin_help,90),np.mean(fake_help))
+					except:
+						pass
+
+					print('(fake)', performance.mean_prediction_rating_on_target(honest=False))
+					print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Important value [honest] ', performance.mean_prediction_rating_on_target(honest=True),'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+					print('')
+	print("++++++++++++++++++++++++++++++++++++++++++++")
+	print("end")
+	print("++++++++++++++++++++++++++++++++++++++++++++")
