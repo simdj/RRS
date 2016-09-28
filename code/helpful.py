@@ -186,7 +186,7 @@ class helpful_measure():
         
     def helpful_test(self):
         try:
-            print("---Helpful test---")
+            print("{Helpful test}")
             a=np.load(self.helpful_origin_path)
             print('origin helpful mean', np.mean(a[:, 2]))
             

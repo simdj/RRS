@@ -13,15 +13,14 @@
 #         reviewer_follower : reviewer_follower(reviewer) = list of followers (allowing duplicated)
 #         // similar_voter : similar_voter(review,vote_value) = set of voters
 
-
 import numpy as np
 import csv
 import itertools
 from time import time
 from gensim.models import Word2Vec
 
-import logging
-logging.basicConfig(filename='./test.log',level=logging.DEBUG)
+# import logging
+# logging.basicConfig(filename='./test.log',level=logging.DEBUG)
 def cosine_distance(v1, v2):
 	return 1 - np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
 
@@ -80,7 +79,6 @@ class user2vec():
 		self.item_weight_list = []
 
 		self.observed_user_list = set()
-		
 
 	def load_overall_review_matrix(self):
 		overall_review_matrix = np.load(self.review_origin_path)
@@ -348,37 +346,35 @@ class user2vec():
 	def load_embedding(self):
 		return Word2Vec.load(self.embedding_output_path)
 
-
-	
-
-	def similarity_test(self, origin_user_list=list(range(0,1000)), fake_user_list=list(range(2583,2600))):
+	def similarity_test(self, origin_user_id_list=list(range(0,1000)), fake_user_id_list=list(range(1823,1830))):
+		our_model = self.load_embedding()
 		try:
 			print 'fake-fake',
-			x_list = np.random.choice(fake_user_list,7, replace=False)
-			y_list = np.random.choice(fake_user_list,7, replace=False)
+			x_list = np.random.choice(fake_user_id_list,7, replace=False)
+			y_list = np.random.choice(fake_user_id_list,7, replace=False)
 			sim_list = []
 			for i in xrange(7):
-				sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
+				sim_list.append( our_model.similarity(str(x_list[i]),str(y_list[i])) )
 			print sim_list
 
 			print 'fake-origin',
-			x_list = np.random.choice(origin_user_list,7, replace=False)
-			y_list = np.random.choice(fake_user_list,7, replace=False)
+			x_list = np.random.choice(origin_user_id_list,7, replace=False)
+			y_list = np.random.choice(fake_user_id_list,7, replace=False)
 			sim_list = []
 			for i in xrange(7):
-				sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
+				sim_list.append( our_model.similarity(str(x_list[i]),str(y_list[i])) )
 			print sim_list
-
-			print 'origin-origin',
-			x_list = np.random.choice(origin_user_list,7, replace=False)
-			y_list = np.random.choice(origin_user_list,7, replace=False)
-			sim_list = []
-			for i in xrange(7):
-				sim_list.append( self.user_embedding_model.similarity(str(x_list[i]),str(y_list[i])) )
-			print sim_list
-			print ''
 		except:
 			print ("sorry")
+		print 'origin-origin',
+		x_list = np.random.choice(origin_user_id_list,7, replace=False)
+		y_list = np.random.choice(origin_user_id_list,7, replace=False)
+		sim_list = []
+		for i in xrange(7):
+			sim_list.append( our_model.similarity(str(x_list[i]),str(y_list[i])) )
+		print sim_list
+		print ''
+
 
 	
 	def whole_process(self,iteration=10, type0_ratio=1, type1_ratio=1, type2_ratio=1):
@@ -398,8 +394,8 @@ class user2vec():
 			for i in xrange(type2_ratio):
 				self.train_embedding_model(self.generate_follower_follower(batch_size))
 
-		if self.fake_flag:
-			self.similarity_test()
+		# if self.fake_flag:
+		# 	self.similarity_test()
 
 		self.save_embedding()
 

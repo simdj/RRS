@@ -366,34 +366,6 @@ class matrix_factorization():
 			if np.abs(prediction)>5:
 				print test_data[i]
 
-	# def overall_rating_of_target(self):
-	# 	# target_list, U_matrix, V_matrix
-	# 	target_list = self.get_target_item_list()
-	# 	origin_user_list = self.get_origin_user_list()
-	# 	fake_user_list = self.get_fake_user_list()
-
-
-	# 	U_matrix=np.load(self.U_path)
-	# 	V_matrix=np.load(self.V_path)
-
-	# 	# V_matrix.shape = (rank,I)
-
-	# 	# print('??????',target_list)
-	# 	target_V_matrix = V_matrix[:,map(int, target_list)]
-
-	# 	origin_U_matirx = U_matrix[map(int, origin_user_list),:]
-	# 	fake_U_matrix = U_matrix[map(int,fake_user_list),:]
-	# 	print("hi origin", len(origin_U_matirx), 'fake', len(fake_U_matrix))
-
-	# 	# (user,target_item)
-	# 	matmul_result = np.matmul(origin_U_matirx, target_V_matrix)
-	# 	matmul_result_of_fake = np.matmul(fake_U_matrix, target_V_matrix)
-	# 	# average
-	# 	each_overall_rating = np.mean(matmul_result_of_fake, axis=0)
-	# 	total_overall_rating = np.mean(matmul_result_of_fake)
-	# 	return total_overall_rating
-
-
 	def predict_rating_of_target(self, honest_flag=True):
 		if honest_flag:
 			selected_user_list = self.get_origin_user_list()

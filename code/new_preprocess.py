@@ -5,8 +5,9 @@
 # 	Output
 # 		review 	--> './intermediate/review.npy'
 # 		vote 	--> './intermediate/vote.npy'
+
 import numpy as np
-from time import time
+from collections import Counter
 
 class preprocess():
 	def __init__(self, params=None):
@@ -18,9 +19,6 @@ class preprocess():
 		
 		self.review_origin_path  = params.review_origin_path 
 		self.vote_origin_path  = params.vote_origin_path 
-		# for readability
-		# self.review_csv_path  = params.review_csv_path 
-		# self.vote_csv_path  = params.vote_csv_path 
 		
 		# data after preprocess
 		self.review_matrix = []
@@ -33,7 +31,7 @@ class preprocess():
 		self.renumbering_user=dict()
 		self.current_num_user=0
 
-		self.current_voter_id = 1000000
+		self.index_for_only_voter = 1000000
 		
 		self.renumbering_item=dict()
 		self.current_num_item=0
@@ -42,46 +40,31 @@ class preprocess():
 		self.current_num_review_id = 0
 
 
-	def get_rating_counter(self, review_data, user_or_item='user', threshold=10):
-		# # [(user_id, occurence)*]
-		# # [(944, 212), (912, 156), (1436, 135), (2277, 126), (2577, 124), (2797, 115)]
-		if user_or_item=='user':
-			obj_counter = Counter(review_data[:,0])
-		else:
-			obj_counter = Counter(review_data[:,1])
-		return obj_counter
-		# ret = []
-		# for obj_id, occurence in obj_counter.iteritems():
-		# 	if occurence >= threshold:
-		# 		ret.append(obj_id)
-		# return ret
-
-	def removing_not_enough_obj(self, review_data, threshold=10):
-		# user_list = self.get_rating_counter(review_data, user_or_item='user',threshold=threshold)
-		# item_list = self.get_rating_counter(review_data, user_or_item='item',threshold=threshold)
+	def removing_not_enough_obj(self, review_data):
+		ret_review_data = []
 		user_counter = Counter(review_data[:,0])
 		item_counter = Counter(review_data[:,1])
 		for review_row in review_data:
 			reviewer = int(review_row[0])
 			item = int(review_row[1])
-			if user_counter[reviewer]>=threshold and item_counter[item]>=threshold:
+			if user_counter[reviewer]>=self.user_threshold and item_counter[item]>=self.item_threshold:
 				ret_review_data.append(review_row)
+		
 		return np.array(ret_review_data)
 
-	def get_enough_rating_review(self, raw_review_data, threshold=10):
+	def get_enough_rating_review(self, raw_review_data):
 		review_data = raw_review_data
 		last_num_data = len(review_data)
 		while True:
-			review_data = removing_not_enough_obj(review_data, threshold=threshold)
+			review_data = self.removing_not_enough_obj(review_data)
 			current_num_data = len(review_data)
+			# print current_num_data
 			if last_num_data==current_num_data:
 				break
 			else:
 				last_num_data = current_num_data
-				pass
-		
 
-
+		return review_data
 
 	def preprocess_review_matrix(self):
 		# raw_review file -> tmp_review_matrix -> self.review_matrix (above threshold)
@@ -105,47 +88,37 @@ class preprocess():
 			item = int(line[1])
 			rating = float(line[4])
 			review_id  = int(line[3])
-
-			# recording user data
-			if reviewer not in self.user_review_count:
-				self.user_review_count[reviewer]=0
-			self.user_review_count[reviewer]+=1
-
-			# recording item data
-			if item not in self.item_review_count:
-				self.item_review_count[item]=0
-			self.item_review_count[item]+=1
-
 			# fill temp review matrix
 			tmp_review_matrix.append([reviewer, item, rating, review_id])
 		f.close()
 
-		# filter(tmp_review_matrix) --> self.review_matrix
-		for tmp_review_row in tmp_review_matrix:
-			tmp_reviewer = tmp_review_row[0]
-			tmp_item = tmp_review_row[1]
+		# leave only review writtern by user who rated enough item which also is rated enough times
+		review_matrix_filtered = self.get_enough_rating_review(np.array(tmp_review_matrix))
+
+		# renumbering for convinence
+		for tmp_review_row in review_matrix_filtered:
+			tmp_reviewer = int(tmp_review_row[0])
+			tmp_item = int(tmp_review_row[1])
 			tmp_rating = tmp_review_row[2]
-			tmp_review_id = tmp_review_row[3]
+			tmp_review_id = int(tmp_review_row[3])
 
-			if self.user_review_count[tmp_reviewer]>=self.user_threshold and self.item_review_count[tmp_item]>=self.item_threshold:
-				# pass this review_row
+			if tmp_reviewer not in self.renumbering_user:
+				self.renumbering_user[tmp_reviewer]=self.current_num_user
+				self.current_num_user+=1
+			if tmp_item not in self.renumbering_item:
+				self.renumbering_item[tmp_item]=self.current_num_item
+				self.current_num_item+=1
+			if tmp_review_id not in self.renumbering_review_id:
+				self.renumbering_review_id[tmp_review_id]=self.current_num_review_id
+				self.current_num_review_id+=1
 
-				# renumber!!
-				if tmp_reviewer not in self.renumbering_user:
-					self.renumbering_user[tmp_reviewer]=self.current_num_user
-					self.current_num_user+=1
-				if tmp_item not in self.renumbering_item:
-					self.renumbering_item[tmp_item]=self.current_num_item
-					self.current_num_item+=1
-				if tmp_review_id not in self.renumbering_review_id:
-					self.renumbering_review_id[tmp_review_id]=self.current_num_review_id
-					self.current_num_review_id+=1
+			new_reviewer = self.renumbering_user[tmp_reviewer]
+			new_item = self.renumbering_item[tmp_item]
+			new_review_id = self.renumbering_review_id[tmp_review_id]
 
-				new_reviewer = self.renumbering_user[tmp_reviewer]
-				new_item = self.renumbering_item[tmp_item]
-				new_review_id = self.renumbering_review_id[tmp_review_id]
-				# append filtered review matrix
-				self.review_matrix.append([new_reviewer, new_item, tmp_rating, new_review_id])
+			# append filtered review matrix
+			self.review_matrix.append([new_reviewer, new_item, tmp_rating, new_review_id])
+
 
 	def preprocess_vote_matrix(self):
 		# filter only the reviews in the preprocessed review_matrix
@@ -168,13 +141,12 @@ class preprocess():
 			# but only review_id, which is in the self.renumbering_review_id, can survive
 
 			if review_id in self.renumbering_review_id:
-				# pass this vote
-
+				# pass this vote only when the review is alive
 				# renumber voter!
 				if voter not in self.renumbering_user:
 					# this voter did not review any item -> so renumbering_user[voter]=1000000+
-					self.renumbering_user[voter]=self.current_voter_id
-					self.current_voter_id+=1
+					self.renumbering_user[voter]=self.index_for_only_voter
+					self.index_for_only_voter+=1
 
 				new_voter = self.renumbering_user[voter]
 				new_review_id = self.renumbering_review_id[review_id]
@@ -196,7 +168,7 @@ class preprocess():
 
 if __name__=="__main__":
 	from parameter_controller import *
-	exp_title = 'bandwagon_10%_10%_10%_emb_32'
+	exp_title = 'bandwagon_1%_1%_1%_emb_32'
 	params = parse_exp_title(exp_title)
 
 	pp = preprocess(params=params)
