@@ -35,36 +35,39 @@ class WMF():
 		W = tf.Variable(tf.truncated_normal([num_users, self.rank], stddev=0.005, mean=good_mean), name="users")
 		H = tf.Variable(tf.truncated_normal([self.rank, num_items], stddev=0.005, mean=good_mean), name="items")
 		regularizer = tf.mul(tf.add(tf.reduce_sum(tf.square(W)), tf.reduce_sum(tf.square(H))), self.lda, name="regularize")
-
-		# user_indices, item_indices, rating_values, helpful_values, num_review = self.extract_rating_info(train_data)
+		
 		user_indices = train_data[:, 0]
 		item_indices = train_data[:, 1]
 		rating_values = train_data[:, 2]
-		helpful_values = train_data[:, 3]
 		num_review = len(item_indices)
 		
+		helpful_values = train_data[:, 3]
+		# HELPFUL = tf.to_float(tf.reshape(tf.constant(helpful_values),[-1]))
+		print("helpful value square!!")
+		HELPFUL = tf.to_float(tf.reshape(tf.constant(np.square(helpful_values)),[-1]))
+		
+		
+		# prediction = W*H	
 		result = tf.matmul(W, H)
-
+		# sparse format
 		result_values_tr = tf.gather(tf.reshape(result, [-1]), user_indices * tf.shape(result)[1] + item_indices)
+
 		# using global_review_mean
 		# diff_op = tf.mul(tf.sub(tf.add(result_values_tr, mean_rating, name="add_mean"), rating_values, name="raw_training_error"), helpful_values, name="weighted_training_error")
 		# diff_op_val = tf.sub(tf.add(result_values_val, mean_rating, name="add_mean_val"), rating_values_test, name="raw_validation_error")
 
 		# using helpful info
-		diff_op = tf.sub(result_values_tr,rating_values, name="training_error")
-		# diff_op = tf.mul(tf.sub(result_values_tr, rating_values), helpful_values, name="weighted_training_error")
-		# no helpful info
-
+		diff_op = tf.square(tf.sub(result_values_tr,rating_values), name="squared_training_error")
 
 		with tf.name_scope("training_cost") as scope:
-			weighted_diff_op = tf.mul(tf.square(diff_op), helpful_values, name='weighted_training_error')
-			base_cost = tf.reduce_sum(tf.square(weighted_diff_op), name="sum_squared_error")
+			weighted_diff_op = tf.mul(diff_op, HELPFUL, name='square_training_error_multiplied_by_helpful')
+			base_cost = tf.reduce_sum(weighted_diff_op, name="sum_squared_error")
 			# (prediction error + regulaization) / num_review????
 			# cost = tf.div(tf.add(base_cost, regularizer), num_review * 2, name="average_error")
 			
-			# cost = tf.add(base_cost, regularizer, name="total_cost")
+			cost = tf.add(base_cost, regularizer, name="total_cost")
 			# bye regularization
-			cost = base_cost
+			# cost = base_cost
 
 		with tf.name_scope("train") as scope:
 			if decay_lr:
@@ -119,6 +122,7 @@ class WMF():
 		final_error, final_U, final_V = self.do_mf(self.train_data, max_iter=self.max_iter, lr=0.01, decay_lr=True)
 		np.save(self.U_path, final_U)
 		np.save(self.V_path, final_V)
+		print("U path: ", self.U_path)
 		return final_U, final_V
 
 
@@ -135,11 +139,8 @@ class WMF_params():
 		self.lda = params.lda
 		self.max_iter = params.max_iter
 
-		
-		self.default_review_origin_path = params.review_origin_path 
-		self.default_review_fake_path = params.review_fake_path
-		self.default_review_camo_path = params.review_camo_path
-
+		self.target_item_list_path = params.target_item_list_path
+		self.fake_user_id_list_path = params.fake_user_id_list_path
 
 		self.review_origin_path = ''
 		self.review_fake_path = ''
@@ -159,7 +160,7 @@ class WMF_params():
 		review_data = np.concatenate(review_data)
 		
 		if algorithm_model=='base':
-			self.train_data = np.concatenate((review_data, 3.5*np.ones((len(review_data),1))), axis=1)
+			self.train_data = np.concatenate((review_data, np.ones((len(review_data),1))), axis=1)
 		# else:
 		# 	helpful_data = [np.load(data_path) for data_path in self.input_helpful_path_list]
 		# 	helpful_data = np.concatenate(helpful_data)
@@ -251,12 +252,15 @@ class WMF_params():
 		self.input_helpful_path_list = [self.helpful_origin_path, self.helpful_fake_path, self.helpful_camo_path]
 		self.input_helpful_path_list = filter(lambda x: x!='', self.input_helpful_path_list)
 
-
 class metric():
 	def __init__(self, params):
-		self.review_origin_path = params.default_review_origin_path
-		self.review_fake_path = params.default_review_fake_path
-		
+		self.review_origin_path = params.review_origin_path
+		# self.review_fake_path = params.default_review_fake_path
+
+		self.target_item_list = np.load(params.target_item_list_path)
+		self.fake_user_id_list = np.load(params.fake_user_id_list_path)
+		# self.get_honest_user_list = np.array(list(range(np.min(self.fake_user_id_list))))
+
 		self.U_path = params.U_path
 		self.V_path = params.V_path
 
@@ -268,13 +272,6 @@ class metric():
 		user_counter = Counter(review_data[:,0])
 		return map(lambda x:x[0],user_counter.most_common(num_user))
 
-	
-	def get_fake_user_list(self):
-		return np.unique(np.load(self.review_fake_path)[:,0])
-
-	def get_target_item_list(self):
-		return np.unique(np.load(self.review_fake_path)[:,1])
-
 	def mean_prediction_rating_on_target(self, honest=True):
 		U_matrix = np.load(self.U_path)
 		V_matrix = np.load(self.V_path)  # V_matrix.shape = (rank,I)
@@ -284,8 +281,8 @@ class metric():
 			focus_user_list = self.get_honest_user_list()
 			# focus_user_list = self.get_honest_high_degree_user_list(100)
 		else:
-			focus_user_list = self.get_fake_user_list()
-		target_item_list = self.get_target_item_list()
+			focus_user_list = self.fake_user_id_list
+		target_item_list = self.target_item_list
 
 		target_U_matrix = U_matrix[map(int,focus_user_list),:]
 		target_V_matrix = V_matrix[:,map(int, target_item_list)]

@@ -54,6 +54,8 @@ class user2vec():
 		self.vote_fake_path = params.vote_fake_path
 		# self.vote_camo_path = params.vote_camo_path
 
+		self.fake_user_id_list_path = params.fake_user_id_list_path
+
 		# output
 		# self.embedding_clean_path = params.embedding_clean_path
 		# self.embedding_attacked_path = params.embedding_attacked_path
@@ -346,7 +348,13 @@ class user2vec():
 	def load_embedding(self):
 		return Word2Vec.load(self.embedding_output_path)
 
-	def similarity_test(self, origin_user_id_list=list(range(0,1000)), fake_user_id_list=list(range(1823,1830))):
+	def similarity_test(self):
+		# self.target_item_list = np.load(params.target_item_list_path)
+		fake_user_id_list = np.load(self.fake_user_id_list_path)
+		origin_user_id_list = np.array(list(range(int(np.min(fake_user_id_list)-1))))
+
+		# print(fake_user_id_list)
+		# print(origin_user_id_list)
 		our_model = self.load_embedding()
 		try:
 			print 'fake-fake',
@@ -366,6 +374,8 @@ class user2vec():
 			print sim_list
 		except:
 			print ("sorry")
+			import sys
+			print (sys.exc_info()[0])
 		print 'origin-origin',
 		x_list = np.random.choice(origin_user_id_list,7, replace=False)
 		y_list = np.random.choice(origin_user_id_list,7, replace=False)
@@ -374,6 +384,11 @@ class user2vec():
 			sim_list.append( our_model.similarity(str(x_list[i]),str(y_list[i])) )
 		print sim_list
 		print ''
+		# try:
+		# 	print(our_model['1830'])
+		# except:
+		# 	import sys
+		# 	print (sys.exc_info()[0])
 
 
 	
@@ -386,6 +401,9 @@ class user2vec():
 		self.build_user_vocab()
 		
 		batch_size=2e+5
+		# print("small test!!!!")
+		# batch_size=2e+3
+
 		for it in xrange(iteration):
 			for i in xrange(type0_ratio):
 				self.train_embedding_model(self.generate_reviewer_reviewer(batch_size))
@@ -393,10 +411,7 @@ class user2vec():
 				self.train_embedding_model(self.generate_reviewer_follower(batch_size))
 			for i in xrange(type2_ratio):
 				self.train_embedding_model(self.generate_follower_follower(batch_size))
-
-		# if self.fake_flag:
-		# 	self.similarity_test()
-
+		
 		self.save_embedding()
 
 if __name__ == "__main__":

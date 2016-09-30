@@ -1,6 +1,7 @@
 import time
 import os
-from preprocess import preprocess
+# from preprocess import preprocess
+from new_preprocess import preprocess
 from attack_model_bandwagon import attack_model_bandwagon
 from user2vec import user2vec
 from helpful import helpful_measure
@@ -29,10 +30,10 @@ def whole_process(exp_title):
 	print('#######################################################################################')
 	print('Experiment Title', exp_title)
 	params = parse_exp_title(exp_title)
-	
+	print(params.__dict__)
 	with Timer("1. preprocess"):
-		params.user_threshold=10
-		params.item_threshold=10
+		params.user_threshold=5
+		params.item_threshold=5
 		pp = preprocess(params=params)
 		# start preprocess if needed
 		if not os.path.exists(params.review_origin_path):
@@ -43,7 +44,6 @@ def whole_process(exp_title):
 	with Timer("2. attack"):
 		if params.attack_model == 'bandwagon':
 			am = attack_model_bandwagon(params=params)
-			fake_user_id_list = am.fake_user_id_list
 		else:
 			print("No bandwagon attack")
 		# start attack if needed	
@@ -59,14 +59,14 @@ def whole_process(exp_title):
 			u2v_attacked.whole_process()
 		else:
 			print("User embedding on the attacked dataset is already done")
-		u2v_attacked.similarity_test(fake_user_id_list=fake_user_id_list)
+		u2v_attacked.similarity_test()
 		# clean embedding
 		u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False, embedding_output_path=params.embedding_clean_path)
 		if not os.path.exists(params.embedding_clean_path):
 			u2v_clean.whole_process()
 		else:
 			print("User embedding on the clean dataset is already done")
-		u2v_clean.similarity_test(fake_user_id_list=fake_user_id_list)
+		u2v_clean.similarity_test()
 
 	with Timer("4. Compute helpfulness"):
 		params.doubt_weight = 100
@@ -92,7 +92,8 @@ def whole_process(exp_title):
 		# rank_list = [10,20,30,40,50,60,70,80,100]
 		rank_list = [30]
 		lda_list = [0.001]
-		algorithm_model_list = ['base','naive','robust']
+		# algorithm_model_list = ['base','naive','robust']
+		algorithm_model_list = ['naive','robust']
 		
 		for rank in rank_list:
 			for lda in lda_list:
@@ -103,6 +104,8 @@ def whole_process(exp_title):
 						wp.rank = rank
 						wp.lda = lda
 						wp.max_iter=10001
+						# print("small test")
+						# wp.max_iter=41
 
 						wmf_instance = WMF(params=wp)
 						wmf_instance.whole_process()
@@ -116,15 +119,17 @@ def whole_process(exp_title):
 							print (np.percentile(origin_help,10),np.percentile(origin_help,50),np.percentile(origin_help,90),np.mean(fake_help))
 						except:
 							pass
+
 						# print('(fake)', performance.mean_prediction_rating_on_target(honest=False))
 						important_value = performance.mean_prediction_rating_on_target(honest=True)
 						important_value_list.append(important_value)
-						# print('Important value [honest] ', important_value ,'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-				print('important_value_list', important_value_list)
+							
+				print('[[[[Important_value_list]]]]', important_value_list)
 				print('')
 
 if __name__ == "__main__":
-	exp_title_list = ['bandwagon_1%_1%_1%_emb_32', 'bandwagon_1%_0.5%_1%_emb_32']
+	# exp_title_list = ['bandwagon_1%_1%_1%_emb_32', 'bandwagon_1%_0.5%_1%_emb_32']
+	exp_title_list = ['bandwagon_1%_1%_1%_emb_32']
 	for exp_title in exp_title_list:
 		whole_process(exp_title)
 

@@ -58,7 +58,7 @@ class preprocess():
 		while True:
 			review_data = self.removing_not_enough_obj(review_data)
 			current_num_data = len(review_data)
-			# print current_num_data
+			print('get_enough_rating_review, current_num_data', current_num_data)
 			if last_num_data==current_num_data:
 				break
 			else:

@@ -21,11 +21,9 @@ class attack_model_bandwagon():
 		self.review_fake_path = params.review_fake_path  #'./intermediate/fake_review_bandwagon.npy'
 		self.review_camo_path = params.review_camo_path  #'./intermediate/camo_review_bandwagon.npy'
 		self.vote_fake_path = params.vote_fake_path  #'./intermediate/fake_vote_bandwagon.npy'
-		# # for readability
-		# self.fake_review_csv_path = params.fake_review_csv_path  #'./intermediate/check_fake_review_bandwagon.csv'
-		# self.camo_review_csv_path = params.camo_review_csv_path  #'./intermediate/check_camo_review_bandwagon.csv'
-		# self.fake_vote_csv_path = params.fake_vote_csv_path  #'./intermediate/check_fake_vote_bandwagon.csv'
-
+		
+		self.target_item_list_path = params.target_item_list_path
+		self.fake_user_id_list_path = params.fake_user_id_list_path
 		#######################################
 		# origin review stats
 		self.origin_review_matrix = np.load(self.review_origin_path)
@@ -155,26 +153,35 @@ class attack_model_bandwagon():
 
 	def save_attack_review_matrix(self):
 		np.save(self.review_fake_path, np.array(self.fake_review_matrix))
-		# np.savetxt(self.fake_review_csv_path, np.array(self.fake_review_matrix))
-
 		np.save(self.review_camo_path, np.array(self.camo_review_matrix))
-		# np.savetxt(self.camo_review_csv_path, np.array(self.camo_review_matrix))
-
 
 	def save_attack_vote_matrix(self):
 		np.save(self.vote_fake_path, np.array(self.fake_vote_matrix))
-		# np.savetxt(self.fake_vote_csv_path, np.array(self.fake_vote_matrix))
+
+	def save_fake_user_id_list(self):
+		fake_review_matrix_ = np.array(self.fake_review_matrix)
+		np.save(self.fake_user_id_list_path, np.unique(fake_review_matrix_[:,0]))
+
+	def save_target_item_list(self):
+		fake_review_matrix_ = np.array(self.fake_review_matrix)
+		np.save(self.target_item_list_path, np.unique(fake_review_matrix_[:,1]))
 
 	def whole_process(self):
+		# review
 		if self.badly_rated_item_flag ==True:
 			self.generate_fake_reviews_bad_item()
 		else:
 			self.generate_fake_reviews_new_item()
-		
 		self.generate_camo_reviews()
 		self.save_attack_review_matrix()
+
+		# vote
 		self.generate_fake_votes()
 		self.save_attack_vote_matrix()
+
+		# attack metadata
+		self.save_fake_user_id_list()
+		self.save_target_item_list()
 
 if __name__=="__main__":
 	# am = attack_model_bandwagon(num_fake_user=100, num_fake_item=10, num_camo_item=0.01, badly_rated_item_flag=True)
@@ -184,7 +191,9 @@ if __name__=="__main__":
 	print('Experiment Title', exp_title)
 	params = parse_exp_title(exp_title)
 	am = attack_model_bandwagon(params=params)
-	candi = am.get_bad_items(5, threshold=5)
-	print candi
+	am.whole_process()
+
+	# candi = am.get_bad_items(5, threshold=5)
+	# print candi
 	# print filter(lambda x: x[2]>=5, candi)
 	# print len(filter(lambda x: x[2]>=5, candi))
