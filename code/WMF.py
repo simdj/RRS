@@ -42,9 +42,9 @@ class WMF():
 		num_review = len(item_indices)
 		
 		helpful_values = train_data[:, 3]
-		# HELPFUL = tf.to_float(tf.reshape(tf.constant(helpful_values),[-1]))
-		print("helpful value square!!")
-		HELPFUL = tf.to_float(tf.reshape(tf.constant(np.square(helpful_values)),[-1]))
+		HELPFUL = tf.to_float(tf.reshape(tf.constant(helpful_values),[-1]))
+		# print("helpful value square!!")
+		# HELPFUL = tf.to_float(tf.reshape(tf.constant(np.square(helpful_values)),[-1]))
 		
 		
 		# prediction = W*H	
@@ -301,50 +301,50 @@ class metric():
 
 		return total_overall_rating
 
-if __name__=="__main__":
-	from parameter_controller import *
-	# exp_title_list = ['bandwagon_1%_1%_1%_emb_32','bandwagon_2%_1%_2%_emb_32','bandwagon_3%_1%_3%_emb_32','bandwagon_4%_1%_4%_emb_32','bandwagon_5%_1%_5%_emb_32'   ]
-	exp_title_list = ['bandwagon_1%_1%_1%_emb_32']
+# if __name__=="__main__":
+# 	from parameter_controller import *
+# 	# exp_title_list = ['bandwagon_1%_1%_1%_emb_32','bandwagon_2%_1%_2%_emb_32','bandwagon_3%_1%_3%_emb_32','bandwagon_4%_1%_4%_emb_32','bandwagon_5%_1%_5%_emb_32'   ]
+# 	exp_title_list = ['bandwagon_1%_1%_1%_emb_32']
 	
-	# algorithm_model_list = ['base','naive','robust']
-	algorithm_model_list = ['robust']
-	# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
-	# rank_list = [10,20,30,40,50,60,70,80,100]
-	lda_list = [0.001]
-	rank_list = [30]
+# 	# algorithm_model_list = ['base','naive','robust']
+# 	algorithm_model_list = ['robust']
+# 	# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
+# 	# rank_list = [10,20,30,40,50,60,70,80,100]
+# 	lda_list = [0.001, 0.01, ]
+# 	rank_list = [30,40]
 
 
-	for exp_title in exp_title_list:
-		print('Experiment Title', exp_title)
-		params = parse_exp_title(exp_title)
+# 	for exp_title in exp_title_list:
+# 		print('Experiment Title', exp_title)
+# 		params = parse_exp_title(exp_title)
 
-		for rank in rank_list:
-			for lda in lda_list:
-				for am in algorithm_model_list:
-					for af in [False,True]:
-						wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
-						# wp = WMF_params(params=params, algorithm_model=am, attack_flag=True)
-						wp.lda = lda
-						wp.rank = rank
-						wp.max_iter=10001
-						wmf_instance = WMF(params=wp)
-						wmf_instance.whole_process()
-						# In wp, U and V path are specified.
-						performance = metric(params=wp)
-						print('-----------------------','algorithm:',am, 'rank',rank, 'lda', lda, '---------------------')
+# 		for rank in rank_list:
+# 			for lda in lda_list:
+# 				for am in algorithm_model_list:
+# 					for af in [False,True]:
+# 						wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
+# 						# wp = WMF_params(params=params, algorithm_model=am, attack_flag=True)
+# 						wp.lda = lda
+# 						wp.rank = rank
+# 						wp.max_iter=10001
+# 						wmf_instance = WMF(params=wp)
+# 						wmf_instance.whole_process()
+# 						# In wp, U and V path are specified.
+# 						performance = metric(params=wp)
+# 						print('-----------------------','algorithm:',am, 'rank',rank, 'lda', lda, '---------------------')
 
-						try:
-							origin_help = np.load(wp.helpful_origin_path)[:,-1]
-							fake_help = np.load(wp.helpful_fake_path)[:,-1]
-							print (np.percentile(origin_help,10),np.percentile(origin_help,50),np.percentile(origin_help,90),np.mean(fake_help))
-						except:
-							pass
+# 						try:
+# 							origin_help = np.load(wp.helpful_origin_path)[:,-1]
+# 							fake_help = np.load(wp.helpful_fake_path)[:,-1]
+# 							print ('[Helpfulness distribution]',np.percentile(origin_help,10),np.percentile(origin_help,50),np.percentile(origin_help,90),np.mean(fake_help))
+# 						except:
+# 							pass
 
-						# print('(fake)', performance.mean_prediction_rating_on_target(honest=False))
-						print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Important value [honest] ', performance.mean_prediction_rating_on_target(honest=True),'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-						print('')
-	print("++++++++++++++++++++++++++++++++++++++++++++")
-	print("++++++++++++++++++++++++++++++++++++++++++++")
-	print("end")
-	print("++++++++++++++++++++++++++++++++++++++++++++")
-	print("++++++++++++++++++++++++++++++++++++++++++++")
+# 						# print('(fake)', performance.mean_prediction_rating_on_target(honest=False))
+# 						print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Important value [honest] ', performance.mean_prediction_rating_on_target(honest=True),'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+# 						print('')
+# 	print("++++++++++++++++++++++++++++++++++++++++++++")
+# 	print("++++++++++++++++++++++++++++++++++++++++++++")
+# 	print("end")
+# 	print("++++++++++++++++++++++++++++++++++++++++++++")
+# 	print("++++++++++++++++++++++++++++++++++++++++++++")

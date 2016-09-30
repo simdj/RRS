@@ -19,11 +19,8 @@ import itertools
 from time import time
 from gensim.models import Word2Vec
 
-# import logging
-# logging.basicConfig(filename='./test.log',level=logging.DEBUG)
 def cosine_distance(v1, v2):
 	return 1 - np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
-
 
 class reviewer_tensor_entry():
 	def __init__(self):
@@ -32,7 +29,6 @@ class reviewer_tensor_entry():
 		self.rating_reviewer_degree_list=[]
 		self.rating_reviewer_weight_list=[]
 		self.reviewer_2dlist=[]
-		
 
 class follower_tensor_entry():
 	def __init__(self):
@@ -242,22 +238,6 @@ class user2vec():
 				follower_info.reviewer_weight_list[i] = 1.0/np.log2(follower_info.follower_num_list[i]+5)
 			follower_info.reviewer_weight_list /= sum(follower_info.reviewer_weight_list)*1.0
 
-	##########################################################################
-	# def learn_embedding(self, train_data=None):
-	# 	#  Learn embedding by optimizing the Skipgram objective using negative sampling.
-	# 	train_data = [map(str, x) for x in train_data]
-	# 	print("learning sentence # :", len(train_data))
-	# 	if not self.user_embedding_model:
-	# 		# first train data
-	# 		self.user_embedding_model = Word2Vec(train_data, size=self.embedding_dim
-	# 		                                     , sg=1, negative=20, window=2, min_count=1, workers=8,
-	# 		                                     iter=self.word2vec_iter)
-	# 	else:
-	# 		# new sentences
-	# 		self.user_embedding_model.train(train_data)
-	# 	return
-
-
 	def generate_reviewer_reviewer(self, num_sample):
 		ret=[]
 		# follower_tensor
@@ -333,8 +313,7 @@ class user2vec():
 		self.user_embedding_model.build_vocab(user_vocab)
 
 	def train_embedding_model(self, train_data=None):
-		#  Learn embedding by optimizing the Skipgram objective using negative sampling.
-		# train_data = [map(str, int(x)) for x in train_data]
+		#  Learn embedding by optimizing the Hierarchical Softmax objective.
 		train_data = self.get_string_sentence(train_data)
 		# print("learning sentence # :", len(train_data))
 		self.user_embedding_model.train(train_data)
@@ -342,16 +321,15 @@ class user2vec():
 
 	def save_embedding(self):
 		self.user_embedding_model.save(self.embedding_output_path)
-		# self.user_embedding_model.save_word2vec_format(self.user_embedding_csv_path)
-
+		
 
 	def load_embedding(self):
 		return Word2Vec.load(self.embedding_output_path)
 
 	def similarity_test(self):
 		# self.target_item_list = np.load(params.target_item_list_path)
-		fake_user_id_list = np.load(self.fake_user_id_list_path)
-		origin_user_id_list = np.array(list(range(int(np.min(fake_user_id_list)-1))))
+		fake_user_id_list = map(int,list(np.load(self.fake_user_id_list_path)))
+		origin_user_id_list = list(range(int(np.min(fake_user_id_list)-1)))
 
 		# print(fake_user_id_list)
 		# print(origin_user_id_list)
@@ -373,9 +351,10 @@ class user2vec():
 				sim_list.append( our_model.similarity(str(x_list[i]),str(y_list[i])) )
 			print sim_list
 		except:
-			print ("sorry")
+			# print ("sorry")
 			import sys
 			print (sys.exc_info()[0])
+			pass
 		print 'origin-origin',
 		x_list = np.random.choice(origin_user_id_list,7, replace=False)
 		y_list = np.random.choice(origin_user_id_list,7, replace=False)
