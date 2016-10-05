@@ -43,19 +43,19 @@ class attack_model_bandwagon():
 		self.fake_item_start = self.num_origin_item
 		self.fake_review_id_start = self.num_origin_review
 
-		self.num_fake_user = int(self.num_origin_user*params.num_fake_user) if params.num_fake_user<=1 else params.num_fake_user
+		self.num_fake_user = int(self.num_origin_user*params.num_fake_user) if params.num_fake_user<=1 else int(params.num_fake_user)
 		self.fake_user_id_list = list(range(self.fake_user_start, self.fake_user_start+self.num_fake_user))
 
-		self.num_fake_item = int(self.num_origin_item*params.num_fake_item) if params.num_fake_item<=1 else params.num_fake_item
+		self.num_fake_item = int(self.num_origin_item*params.num_fake_item) if params.num_fake_item<=1 else int(params.num_fake_item)
 		self.fake_item_id_list = list(range(self.fake_item_start, self.fake_item_start+self.num_fake_item))
 		
 		# #(fake reviews) cannot be larger than #(fake_user)*#(fake_item)
-		self.num_fake_review = int(self.num_fake_user*self.num_fake_item*params.num_fake_review) if params.num_fake_review<=1 else params.num_fake_review
+		self.num_fake_review = int(self.num_fake_user*self.num_fake_item*params.num_fake_review) if params.num_fake_review<=1 else int(params.num_fake_review)
 		self.num_fake_review = min(self.num_fake_review, self.num_fake_user*self.num_fake_item)
 		self.fake_review_id_list = list(range(self.fake_review_id_start,self.fake_review_id_start+self.num_fake_review))
 
 		# #(fake votes) cannot be larger than #(fake users)*#(fake reviews)
-		self.num_fake_vote = int(self.num_fake_review*self.num_fake_user*params.num_fake_vote) if params.num_fake_vote<=1 else params.num_fake_vote
+		self.num_fake_vote = int(self.num_fake_review*self.num_fake_user*params.num_fake_vote) if params.num_fake_vote<=1 else int(params.num_fake_vote)
 		self.num_fake_vote = min(self.num_fake_vote, self.num_fake_review*self.num_fake_user)
 		
 		# fake_rating value is usually extream value

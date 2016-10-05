@@ -105,6 +105,64 @@ for p in rating_percent_list:
 	print 'top', p, '% user rates', np.percentile(user_degree_list,100-p)
 print 'np.mean(user degree)', np.mean(user_degree_list)
 
+
+
+
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# real threshold (5,5)!!!!
+# 	[1822 x 2069] : 28374 ratings, 
+# 	14972 user including voter, 661040 voting
+# 	target item requirement: (number of ratings >= ? && mean(rating)<3.0)
+# 	attacker
+# 		0.5% attacker(9 users) --> 9(+?) ~> top 50%(?%) item
+# 		1% attacker(18 users) --> 18(+?) ~> top 20%(?%) item
+# 		2% attacker(36 users) --> 36(+?) ~> top 5%(?%) item
+# 		3% attacker(54 users) --> 54(+?) ~> top 2%(?%) item
+# 	filler
+# 		0.5% filler (10)~> top 40% user
+# 		1% filler (20)~> top 15% user
+# 		2% filler (41) ~> top 6% user
+# 		3% filler (62) ~> top 3% user
+# 	mean
+# 		user rate 15.5 item / item get 13.69 reviews
+# 	top rank
+# 		10 user deg 188 item deg 99
+# 		50 user deg 65 item deg 50
+# 		100 user deg 43 item deg 38
+# 		500 user deg 13 item deg 16
+# 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# 	tradeoff - 1% attacker(inject 18 fake profiles), 1% filler (20 popular item)
+# 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+# real threshold (10, 10)
+# 	[468 x 560] : 10358 ratings
+# 	target item requirement: (number of ratings >= ? && mean(rating)<3.0)
+# 	attacker
+# 		0.5% attacker(2 users) --> 2(+?) ~> top 100%(?%) item
+# 		1% attacker(4 users) --> 4(+?) ~> top 100%(?%) item
+# 		2% attacker(9 users) --> 9(+?) ~> top 100%(?%) item
+# 		3% attacker(14 users) --> 14(+?) ~> top 60%(?%) item
+# 	filler
+# 		0.5% filler (2)~> top 100% user
+# 		1% filler (5)~> top 100% user
+# 		2% filler (11) ~> top 80% user
+# 		3% filler (16) ~> top 50% user
+# 	mean
+# 		user rate ? item / item get ? reviews
+# 	top rank
+# 		10 user deg 188 item deg 99
+# 		50 user deg 65 item deg 50
+# 		100 user deg 43 item deg 38
+# 		500 user deg 13 item deg 16
+# 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# 	tradeoff - ?% attacker(inject ? fake profiles), ?% filler (? popular item)
+# 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
 # threshold (10,10)
 # 	info:	[1100 x 1500], 20K ratings
 # 	target item requirement: 	(number of ratings >= 10 && mean(rating)<3.0)
@@ -185,56 +243,3 @@ print 'np.mean(user degree)', np.mean(user_degree_list)
 
 
 
-
-
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# real threshold (5,5)!!!!
-# 	[1822 x 2069] : 28374 ratings, 
-# 	14972 user including voter, 661040 voting
-# 	target item requirement: (number of ratings >= ? && mean(rating)<3.0)
-# 	attacker
-# 		0.5% attacker(9 users) --> 9(+?) ~> top 50%(?%) item
-# 		1% attacker(18 users) --> 18(+?) ~> top 20%(?%) item
-# 		2% attacker(36 users) --> 36(+?) ~> top 5%(?%) item
-# 		3% attacker(54 users) --> 54(+?) ~> top 2%(?%) item
-# 	filler
-# 		0.5% filler (10)~> top 40% user
-# 		1% filler (20)~> top 15% user
-# 		2% filler (41) ~> top 6% user
-# 		3% filler (62) ~> top 3% user
-# 	mean
-# 		user rate 15.5 item / item get 13.69 reviews
-# 	top rank
-# 		10 user deg 188 item deg 99
-# 		50 user deg 65 item deg 50
-# 		100 user deg 43 item deg 38
-# 		500 user deg 13 item deg 16
-# 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# 	tradeoff - 1% attacker(inject 18 fake profiles), 1% filler (20 popular item)
-# 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-# real threshold (10, 10)
-# 	[468 x 560] : 10358 ratings
-# 	target item requirement: (number of ratings >= ? && mean(rating)<3.0)
-# 	attacker
-# 		0.5% attacker(2 users) --> 2(+?) ~> top 100%(?%) item
-# 		1% attacker(4 users) --> 4(+?) ~> top 100%(?%) item
-# 		2% attacker(9 users) --> 9(+?) ~> top 100%(?%) item
-# 		3% attacker(14 users) --> 14(+?) ~> top 60%(?%) item
-# 	filler
-# 		0.5% filler (2)~> top 100% user
-# 		1% filler (5)~> top 100% user
-# 		2% filler (11) ~> top 80% user
-# 		3% filler (16) ~> top 50% user
-# 	mean
-# 		user rate ? item / item get ? reviews
-# 	top rank
-# 		10 user deg 188 item deg 99
-# 		50 user deg 65 item deg 50
-# 		100 user deg 43 item deg 38
-# 		500 user deg 13 item deg 16
-# 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# 	tradeoff - ?% attacker(inject ? fake profiles), ?% filler (? popular item)
-# 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
