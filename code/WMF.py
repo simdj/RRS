@@ -124,7 +124,7 @@ class WMF():
 
 				# writer.add_summary(summary_str,i)
 				if i % 10000 == 0:
-					print("At step %s) Training RMSE %s / Cost " % (i, rmse_tr_ev, cost_ev))
+					print("At step %s) Cost %s / RMSE %s " % (i, cost_ev, rmse_tr_ev))
 				
 				if diff < 0.00001:
 					print("Converged at iteration %s" % (i))
@@ -137,7 +137,7 @@ class WMF():
 		# ==============Session finished==============
 		# ============================================
 
-		print("Final) cost %s / RMSE %s" % (final_cost, final_rmse_tr))
+		print("Final) Cost %s / RMSE %s" % (final_cost, final_rmse_tr))
 
 		return final_rmse_tr, final_U, final_V
 
