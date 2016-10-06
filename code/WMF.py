@@ -12,6 +12,11 @@ except:
 
 class WMF():
 	def __init__(self, params):
+		self.params = params
+		# self.log_path = params.intermediate_dir_path+'_'.join(map(str,[params.algorithm_model,params.attack_flag,params.rank,params.lda,params.max_iter]))
+		self.log_path = '/tmp/recommender_log'
+		# print(self.log_path)
+
 		self.rank = params.rank
 		self.lda = params.lda
 		self.max_iter = params.max_iter
@@ -23,7 +28,9 @@ class WMF():
 
 	def do_mf(self, train_data, mean_rating=0, max_iter=20001, lr=0.01, decay_lr=True):
 		# input : rating data [user, item, rating, helpful]
-		# output : finalTrain, final_U, final_V
+		# output : final_cost, final_rmse_tr, final_U, final_V
+
+		# tf.reset_default_graph()
 
 		# get stats of train data
 		num_users = len(np.unique(train_data[:,0]))
@@ -32,8 +39,8 @@ class WMF():
 		good_mean=np.sqrt(global_review_mean / self.rank)
 
 		# initialize latent factor matrix
-		W = tf.Variable(tf.truncated_normal([num_users, self.rank], stddev=0.005, mean=good_mean, seed=1), name="users")
-		H = tf.Variable(tf.truncated_normal([self.rank, num_items], stddev=0.005, mean=good_mean, seed=1), name="items")
+		W = tf.Variable(tf.truncated_normal([num_users, self.rank], stddev=0.005, mean=good_mean, seed=7), name="users")
+		H = tf.Variable(tf.truncated_normal([self.rank, num_items], stddev=0.005, mean=good_mean, seed=7), name="items")
 		regularizer = tf.mul(tf.add(tf.reduce_sum(tf.square(W)), tf.reduce_sum(tf.square(H))), self.lda, name="regularize")
 		
 		user_indices = train_data[:, 0]
@@ -60,7 +67,7 @@ class WMF():
 		diff_op = tf.square(tf.sub(rating_prediction,rating_observed), name="squared_training_error")
 
 		with tf.name_scope("training_cost") as scope:
-			print("yes helpful")
+			# print("yes helpful")
 			weighted_diff_op = tf.mul(diff_op, HELPFUL, name='square_training_error_multiplied_by_helpful')
 			base_cost = tf.reduce_sum(weighted_diff_op, name="sum_squared_error")
 			# print("no helpful")
@@ -68,10 +75,11 @@ class WMF():
 
 
 			# (prediction error + regulaization) / num_review????
-			cost = tf.div(tf.add(base_cost, regularizer), num_review * 2, name="average_error")
+			# cost = tf.div(tf.add(base_cost, regularizer), num_review * 2, name="average_error")
 			
-			# cost = tf.add(base_cost, regularizer, name="total_cost")
-			
+			cost = tf.add(base_cost, regularizer, name="total_cost")
+			# cost_summ = tf.scalar_summary("cost_summary", cost)
+
 		with tf.name_scope("train") as scope:
 			if decay_lr:
 				global_step = tf.Variable(0, trainable=False)
@@ -81,7 +89,6 @@ class WMF():
 				# optimizer = tf.train.RMSPropOptimizer(learning_rate)
 				# optimizer = tf.train.GradientDescentOptimizer(learning_rate)
 				train_step = optimizer.minimize(cost, global_step=global_step)
-
 			else:
 				optimizer = tf.train.AdamOptimizer(lr)
 				# optimizer = tf.train.FtrlOptimizer(lr)
@@ -92,44 +99,51 @@ class WMF():
 		with tf.name_scope("training_rmse") as scope:
 			rmse_tr = tf.sqrt(tf.div(tf.reduce_sum(tf.square(diff_op)), num_review))
 		
+		# # Make sure summaries get written to the logs.
+		# summary_op = tf.merge_all_summaries()
+
 		# ===========================================
 		# ==============Session started==============
 		sess = tf.Session()
 		sess.run(tf.initialize_all_variables())
 
+		# writer = tf.train.SummaryWriter(self.log_path, sess.graph)
+
 		last_cost = 0
 		diff = 1
+
 		for i in range(max_iter):
+			sess.run(train_step)
 			if i > 0 and i % 1000 == 0:
-				res = sess.run([rmse_tr, cost])
-				acc_tr = res[0]
-				cost_ev = res[1]
+				res = sess.run([cost, rmse_tr])
+				cost_ev = res[0]
+				rmse_tr_ev = res[1]
+				# summary_str = res[2]
 				diff = abs(cost_ev - last_cost)
 				last_cost = cost_ev
 
+				# writer.add_summary(summary_str,i)
 				if i % 10000 == 0:
-					print("At step %s) Training RMSE %s " % (i, acc_tr))
+					print("At step %s) Training RMSE %s / Cost " % (i, rmse_tr_ev, cost_ev))
 				
-				if diff < 0.000001:
+				if diff < 0.00001:
 					print("Converged at iteration %s" % (i))
 					break
-			else:
-				sess.run(train_step)
-
-		finalTrain = rmse_tr.eval(session=sess)
+		final_cost = cost.eval(session=sess)
+		final_rmse_tr = rmse_tr.eval(session=sess)
 		final_U = W.eval(session=sess)
 		final_V = H.eval(session=sess)
 		sess.close()
 		# ==============Session finished==============
 		# ============================================
 
-		print("Final training cost", finalTrain)
+		print("Final) cost %s / RMSE %s" % (final_cost, final_rmse_tr))
 
-		return finalTrain, final_U, final_V
+		return final_rmse_tr, final_U, final_V
 
 	def whole_process(self):
 		# do WMF
-		final_error, final_U, final_V = self.do_mf(self.train_data, max_iter=self.max_iter, lr=1.0, decay_lr=True)
+		final_error, final_U, final_V = self.do_mf(self.train_data, max_iter=self.max_iter, lr=0.01, decay_lr=True)
 		np.save(self.U_path, final_U)
 		np.save(self.V_path, final_V)
 		print("U path: ", self.U_path)
@@ -152,6 +166,8 @@ class WMF_params():
 
 		self.target_item_list_path = params.target_item_list_path
 		self.fake_user_id_list_path = params.fake_user_id_list_path
+
+		self.intermediate_dir_path = params.intermediate_dir_path
 
 		self.review_origin_path = ''
 		self.review_fake_path = ''
@@ -238,7 +254,7 @@ class WMF_params():
 			ret.append(tmp_review_with_helpful)
 
 		ret = np.array(ret)
-		print('merge result', ret.shape)
+		# print('merge result', ret.shape)
 		return ret
 
 	def set_input_output_path(self, params, algorithm_model, attack_flag):
@@ -296,7 +312,15 @@ class WMF_params():
 class metric():
 	def __init__(self, params):
 		self.review_origin_path = params.review_origin_path
+		self.review_origin = np.load(self.review_origin_path)
+		try:
+			self.review_fake_path = params.review_fake_path
+			self.review_fake = np.load(self.review_fake_path)
+		except:
+			# print("no attack")
+			pass
 		# self.review_fake_path = params.default_review_fake_path
+
 
 		self.target_item_list = np.load(params.target_item_list_path)
 		self.fake_user_id_list = np.load(params.fake_user_id_list_path)
@@ -306,12 +330,42 @@ class metric():
 		self.V_path = params.V_path
 
 	def get_honest_user_list(self):
-		return np.unique(np.load(self.review_origin_path)[:,0])
+		return np.unique(self.review_origin[:,0])
 
 	def get_honest_high_degree_user_list(self, num_user=100):
 		review_data = np.load(self.review_origin_path)
 		user_counter = Counter(review_data[:,0])
 		return map(lambda x:x[0],user_counter.most_common(num_user))
+
+	def rmse_rating_on_target(self, honest=True):
+		selected_review = self.review_origin
+		if not honest:
+			try:
+				selected_review = self.review_fake
+			except:
+				return -1.0
+
+		rating_on_target = []
+		for target_item in self.target_item_list:
+			tmp=selected_review[selected_review[:,1]==target_item,:]
+			rating_on_target.append(tmp)
+		rating_on_target = np.concatenate(rating_on_target)
+
+		U_matrix = np.load(self.U_path)
+		V_matrix = np.load(self.V_path)  # V_matrix.shape = (rank,I)
+
+		rmse = 0.0
+		for rating_row in rating_on_target:
+			user_id = int(rating_row[0])
+			target_item = int(rating_row[1])
+
+			rating_observed = rating_row[2]
+			rating_prediction = np.matmul(U_matrix[user_id,:], V_matrix[:,target_item])
+
+			rmse+=np.square(rating_observed-rating_prediction)
+		rmse=np.sqrt(rmse/float(len(rating_on_target)))
+		return rmse
+
 
 	def mean_prediction_rating_on_target(self, honest=True):
 		U_matrix = np.load(self.U_path)
@@ -331,14 +385,14 @@ class metric():
 		# average
 		# each_overall_rating = np.mean(matmul_result, axis=0)
 		total_overall_rating = np.mean(matmul_result)
-		print('[RAW Rating distribution]',np.min(matmul_result), np.percentile(matmul_result,25),np.median(matmul_result),np.percentile(matmul_result,75), np.max(matmul_result), total_overall_rating)
+		print('[RAW Rating Distribution]',np.min(matmul_result), np.percentile(matmul_result,25),np.median(matmul_result),np.percentile(matmul_result,75), np.max(matmul_result), total_overall_rating)
 
 		# limit
 		matmul_result[matmul_result<1]=1
 		matmul_result[matmul_result>5]=5
 
 		total_overall_rating = np.mean(matmul_result)
-		print('[Limit!!! Rating distribution]',np.min(matmul_result), np.percentile(matmul_result,25),np.median(matmul_result),np.percentile(matmul_result,75), np.max(matmul_result), total_overall_rating)
+		print('[Limit Rating Distribution]',np.min(matmul_result), np.percentile(matmul_result,25),np.median(matmul_result),np.percentile(matmul_result,75), np.max(matmul_result), total_overall_rating)
 
 		return total_overall_rating
 

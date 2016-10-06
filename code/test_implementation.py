@@ -1,5 +1,6 @@
 import time
 import os
+import numpy as np
 # from preprocess import preprocess
 from new_preprocess import preprocess
 from attack_model_bandwagon import attack_model_bandwagon
@@ -90,8 +91,8 @@ def whole_process(exp_title):
 	with Timer("5. Matrix factorization"):
 		# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
 		# rank_list = [10,20,30,40,50,60,70,80,100]
-		rank_list = [10,15,20, 25]
-		lda_list = [0.01, 0.1, 1]
+		rank_list = [15,20,25,30]
+		lda_list = [0.005, 0.01, 0.05, 0.1]
 
 		# algorithm_model_list = ['base','base','naive','robust']
 		# attack_flag_list = [False, True, True, True]
@@ -109,9 +110,8 @@ def whole_process(exp_title):
 					wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
 					wp.rank = rank
 					wp.lda = lda
-					# wp.max_iter=50001
-					print("small test")
-					wp.max_iter=100001
+					# print("small test")
+					wp.max_iter=50001
 
 					wmf_instance = WMF(params=wp)
 					wmf_instance.whole_process()
@@ -125,17 +125,26 @@ def whole_process(exp_title):
 					except:
 						pass
 
-					important_value = performance.mean_prediction_rating_on_target(honest=True)
+					important_value = []
+					important_value.append(performance.mean_prediction_rating_on_target(honest=True))
+					important_value.append(performance.rmse_rating_on_target(honest=True))
+					important_value.append(performance.rmse_rating_on_target(honest=False))
+
 					important_value_list.append(important_value)
 					print('')
-							
+
+				np.set_printoptions(precision=4)
+				print('')
+				print('')
 				print(exp_title, am, af, rank, lda)
-				print('[[[[Important_value_list]]]]', important_value_list)
+				print('[[[[Important_value_list]]]]')
+				print('(expected rating on target, RMSE(honest rating on target), RMSE(fake rating on target)')
+				print(np.array(important_value_list))
 				print('')
 				print('')
 
 if __name__ == "__main__":
-	exp_title_list = ['bandwagon_1%_1%_1%_emb_32']
+	exp_title_list = ['bandwagon_1%_1%_1%_emb_32', 'bandwagon_1%_0.25%_1%_emb_32', 'bandwagon_1%_0.5%_1%_emb_32']
 	for exp_title in exp_title_list:
 		whole_process(exp_title)
 
