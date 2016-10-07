@@ -41,7 +41,10 @@ class WMF():
 		# initialize latent factor matrix
 		W = tf.Variable(tf.truncated_normal([num_users, self.rank], stddev=0.005, mean=good_mean, seed=7), name="users")
 		H = tf.Variable(tf.truncated_normal([self.rank, num_items], stddev=0.005, mean=good_mean, seed=7), name="items")
-		regularizer = tf.mul(tf.add(tf.reduce_sum(tf.square(W)), tf.reduce_sum(tf.square(H))), self.lda, name="regularize")
+		baseW = tf.to_float(tf.constant(good_mean*np.ones((num_users,self.rank))))
+		baseH = tf.to_float(tf.constant(good_mean*np.ones((self.rank, num_items))))
+
+		regularizer = tf.mul(tf.add(tf.reduce_sum(tf.square(tf.sub(W,baseW))), tf.reduce_sum(tf.square(tf.sub(H,baseH)))), self.lda, name="regularize")
 		
 		user_indices = train_data[:, 0]
 		item_indices = train_data[:, 1]
@@ -74,26 +77,27 @@ class WMF():
 			# base_cost = tf.reduce_sum(diff_op)
 
 
-			# (prediction error + regulaization) / num_review????
-			# cost = tf.div(tf.add(base_cost, regularizer), num_review * 2, name="average_error")
 			
-			cost = tf.add(base_cost, regularizer, name="total_cost")
+			# cost = tf.add(base_cost, regularizer, name="total_cost")
+			# (prediction error + regulaization) / num_review????
+			cost = tf.div(tf.add(base_cost, regularizer), num_review * 2, name="average_error")
+			
 			# cost_summ = tf.scalar_summary("cost_summary", cost)
 
 		with tf.name_scope("train") as scope:
 			if decay_lr:
 				global_step = tf.Variable(0, trainable=False)
 				learning_rate = tf.train.exponential_decay(lr, global_step, 5000, 0.96, staircase=True)
-				optimizer = tf.train.AdamOptimizer(learning_rate)
+				# optimizer = tf.train.AdamOptimizer(learning_rate)
 				# optimizer = tf.train.FtrlOptimizer(learning_rate)
 				# optimizer = tf.train.RMSPropOptimizer(learning_rate)
-				# optimizer = tf.train.GradientDescentOptimizer(learning_rate)
+				optimizer = tf.train.GradientDescentOptimizer(learning_rate)
 				train_step = optimizer.minimize(cost, global_step=global_step)
 			else:
-				optimizer = tf.train.AdamOptimizer(lr)
+				# optimizer = tf.train.AdamOptimizer(lr)
 				# optimizer = tf.train.FtrlOptimizer(lr)
 				# optimizer = tf.train.RMSPropOptimizer(lr)
-				# optimizer = tf.train.GradientDescentOptimizer(lr)
+				optimizer = tf.train.GradientDescentOptimizer(lr)
 				train_step = optimizer.minimize(cost)
 
 		with tf.name_scope("training_rmse") as scope:
@@ -114,7 +118,7 @@ class WMF():
 
 		for i in range(max_iter):
 			sess.run(train_step)
-			if i > 0 and i % 1000 == 0:
+			if i > 0 and i % 500 == 0:
 				res = sess.run([cost, rmse_tr])
 				cost_ev = res[0]
 				rmse_tr_ev = res[1]
@@ -123,7 +127,7 @@ class WMF():
 				last_cost = cost_ev
 
 				# writer.add_summary(summary_str,i)
-				if i % 10000 == 0:
+				if i % 1000 == 0:
 					print("At step %s) Cost %s / RMSE %s " % (i, cost_ev, rmse_tr_ev))
 				
 				if diff < 0.00001:
@@ -143,7 +147,7 @@ class WMF():
 
 	def whole_process(self):
 		# do WMF
-		final_error, final_U, final_V = self.do_mf(self.train_data, max_iter=self.max_iter, lr=0.01, decay_lr=True)
+		final_error, final_U, final_V = self.do_mf(self.train_data, max_iter=self.max_iter, lr=1.0, decay_lr=True)
 		np.save(self.U_path, final_U)
 		np.save(self.V_path, final_V)
 		print("U path: ", self.U_path)
