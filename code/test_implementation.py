@@ -7,10 +7,15 @@ from attack_model_bandwagon import attack_model_bandwagon
 from user2vec import user2vec
 from helpful import helpful_measure
 # WARNING (theano.configdefaults): g++ not detected ! Theano will be unable to execute optimized C-implementations (for both CPU and GPU) and will default to Python implementations. Performance will be severely degraded. To remove this warning, set Theano flags cxx to an empty string.
+# try:
+# 	from WMF import *
+# except:
+# 	pass
 try:
-	from WMF import *
+	from WMF_validation import *
 except:
 	pass
+
 from parameter_controller import *
 
 
@@ -92,18 +97,23 @@ def whole_process(exp_title):
 		# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
 		# rank_list = [10,20,30,40,50,60,70,80,100]
 		# rank_list = [15,20,25,30]
-		rank_list = [20,25,30]
+		# rank_list = [20,25,30]
 		# lda_list = [0.001, 0.01, 0.1]
-		lda_list=[0.01, 0.1]
-		max_iter_list = [5001, 50001]
+		# lda_list=[0.01, 0.1]
+		# max_iter_list = [5001, 50001]
+		rank_list = [20,30]
+		lda_list = [0.01, 0.1]
+		max_iter_list = [40001]
 
 		# algorithm_model_list = ['base','base','naive','robust']
 		# attack_flag_list = [False, True, True, True]
 		# algorithm_model_list = ['naive','robust']
 		# algorithm_model_list=['base']
 		# attack_flag_list=[False]
-		algorithm_model_list = ['base', 'base','naive','robust']
-		attack_flag_list = [False, True, True, True]
+		algorithm_model_list = ['base', 'base','naive','naive','robust','robust']
+		attack_flag_list = [False, True, False, True, False, True]
+
+		
 		for rank in rank_list:
 			for lda in lda_list:
 				for max_iter in max_iter_list:
@@ -128,21 +138,21 @@ def whole_process(exp_title):
 						except:
 							pass
 
-						important_value = []
-						important_value.append(performance.mean_prediction_rating_on_target(honest=True))
-						important_value.append(performance.rmse_rating_on_target(honest=True))
-						important_value.append(performance.rmse_rating_on_target(honest=False))
+					# 	important_value = []
+					# 	important_value.append(performance.mean_prediction_rating_on_target(honest=True))
+					# 	important_value.append(performance.rmse_rating_on_target(honest=True))
+					# 	important_value.append(performance.rmse_rating_on_target(honest=False))
 
-						important_value_list.append(important_value)
-						print('')
+					# 	important_value_list.append(important_value)
+					# 	print('')
 
-					np.set_printoptions(precision=4)
-					print('')
-					print('')
-					print(exp_title, am, af, rank, lda)
-					print('[[[[Important_value_list]]]]')
-					print('(expected rating on target, RMSE(honest rating on target), RMSE(fake rating on target)')
-					print(np.array(important_value_list))
+					# np.set_printoptions(precision=4)
+					# print('')
+					# print('')
+					# print(exp_title, am, af, rank, lda)
+					# print('[[[[Important_value_list]]]]')
+					# print('(expected rating on target, RMSE(honest rating on target), RMSE(fake rating on target)')
+					# print(np.array(important_value_list))
 					print('')
 					print('')
 
