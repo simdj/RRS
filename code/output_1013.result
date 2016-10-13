@@ -1,0 +1,221 @@
+Script started on 2016년 10월 13일 (목) 오후 02시 21분 54초
+]0;djsim@djsim-desktop: ~/RRS/codedjsim@djsim-desktop:~/RRS/code$ python test_implementation.py; exit;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Crm -rf *pyc[Ksource activate tensorflow
+(tensorflow) ]0;djsim@djsim-desktop: ~/RRS/codedjsim@djsim-desktop:~/RRS/code$ source activate tensorflowpython test_implementation.py; exit;rm -rf *pyc[K
+(tensorflow) ]0;djsim@djsim-desktop: ~/RRS/codedjsim@djsim-desktop:~/RRS/code$ rm -rf *pycsource activate tensorflowpython test_implementation.py; exit;
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcurand.so locally
+WMF validation!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_1%_1%_emb_32')
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 4.2e-05 sec')
+
+('[2. attack]', 'Started')
+('[Origin] Users x Items :', 1822, 2069, 'Reviews, Votes : ', 28374, 661040)
+('[Fake] Users x Items :', 18, 20, 'Reviews, Votes : ', 360, 6480)
+('[Bandwagon] Camo Items :', 20)
+Attack is already done
+('[2. attack]', 'Elapsed: 0.0068 sec')
+
+('[3. User2Vec]', 'Started')
+User embedding on the attacked dataset is already done
+fake-fake [0.98913178469919594, 0.9909537728679636, 0.98811117967099449, 0.98685588348465914, 0.98988602010939197, 0.98324980359338832, 0.98627837428079079]
+fake-origin [-0.15282305192124471, -0.082442812608511218, -0.046583947451547432, 0.11478832984649823, 0.19321122094448467, 0.0390822889289488, 0.079750819477665644]
+origin-origin [0.82507375838290031, 0.64192465123338227, 0.47228042706300222, -0.11823383853116889, 0.97351862028449576, 0.75250829263515717, 0.54387174492587775]
+
+User embedding on the clean dataset is already done
+fake-fake <type 'exceptions.KeyError'>
+origin-origin [0.66720266671792294, 0.48709757337338982, 0.64306286749745767, 0.66127835420702752, 0.8192416127297012, 0.64461038455913089, 0.83290119699996901]
+
+('[3. User2Vec]', 'Elapsed: 0.22 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+Helpfulness computing is already done
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+Clean and Robust
+Helpfulness computing is already done
+{Helpful test}
+('origin helpful mean', 3.2214545744959611)
+Attacked and Naive
+Helpfulness computing is already done
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+('target helpful mean', 4.375)
+('origin rating #', 28374, 'fake rating #', 360)
+('10', 2.5, 1.75)
+('50', 3.4375, 1.2727272727272727)
+('90', 3.8672289156626514, 1.1313010156396035)
+Attacked and Robust
+Helpfulness computing is already done
+{Helpful test}
+('origin helpful mean', 3.2266213413167617)
+('target helpful mean', 2.5)
+('origin rating #', 28374, 'fake rating #', 360)
+('10', 2.5, 1.0)
+('50', 3.3446979755958943, 0.74745164383776619)
+('90', 3.8177376799360556, 0.65483807678527384)
+('[4. Compute helpfulness]', 'Elapsed: 0.44 sec')
+
+('[5. Matrix factorization]', 'Started')
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:925] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 1080
+major: 6 minor: 1 memoryClockRate (GHz) 1.7335
+pciBusID 0000:01:00.0
+Total memory: 7.92GiB
+Free memory: 7.81GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+/home/djsim/RRS/code/WMF_validation.py:146: RuntimeWarning: divide by zero encountered in double_scalars
+  if (diff/last_cost) <= 0.0001:
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140924 2.07946 0.0491148 1.16202 0.906067
+Converged at iteration 14000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.014072 2.04194 0.0491211 1.17812 0.92311 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137282 3.06117 0.0484357 1.16248 0.905819
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138148 2.8701 0.0487003 1.18672 0.929991
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136708 2.77557 0.0484351 1.19751 0.941172 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137537 3.097 0.0484638 1.19684 0.934945
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136813 3.04909 0.0484437 1.21746 0.959474
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136632 2.99403 0.0484455 1.22846 0.97246
+Converged at iteration 33000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136584 2.97727 0.0484432 1.23006 0.974289 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134186 2.51171 0.0484462 1.16251 0.915788
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0133811 2.46521 0.0484625 1.19501 0.948907
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0133588 2.45185 0.0484433 1.21282 0.965828 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.3446979755958943, 3.6896551724137936, 3.2266213413167617, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160497 2.04222 0.0491135 1.18407 0.92841
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159957 1.97033 0.0491139 1.21752 0.956786
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159805 1.94097 0.0491153 1.22682 0.964983 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0156505 2.91344 0.0484354 1.17836 0.922615
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155934 2.71914 0.0484367 1.2019 0.946681
+Converged at iteration 24000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155856 2.67945 0.0484423 1.20415 0.950077 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0161209 3.07526 0.0492482 1.21155 0.951247
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155896 2.97392 0.048467 1.23122 0.973693
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155633 2.87965 0.0484659 1.23568 0.980146
+Converged at iteration 32000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01556 2.86512 0.0484651 1.23562 0.980557 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153403 2.49021 0.0484714 1.18449 0.93834
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152781 2.4522 0.0484679 1.22013 0.972824
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152556 2.43294 0.0484669 1.23419 0.985678
+Converged at iteration 31000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.015254 2.43134 0.0484668 1.23508 0.986372 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.3446979755958943, 3.6896551724137936, 3.2266213413167617, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140576 1.99702 0.0491168 1.10678 0.8666
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01402 1.95028 0.0491132 1.13526 0.897005
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140098 1.93658 0.0491132 1.14592 0.907383 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136895 3.02291 0.0484354 1.1136 0.873711
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136581 2.78685 0.0484467 1.14228 0.904553
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136469 2.65432 0.0484542 1.15823 0.92009
+Converged at iteration 32000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136362 2.64089 0.0484351 1.15806 0.919984 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136902 3.04343 0.0484441 1.12035 0.880495
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136471 2.98363 0.0484423 1.1391 0.898965
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136332 2.94521 0.0484417 1.14944 0.907477 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.013395 2.54404 0.0484888 1.1042 0.866917
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0133403 2.48251 0.0484422 1.12977 0.889076
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0133307 2.45744 0.0484418 1.13994 0.897927 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.3446979755958943, 3.6896551724137936, 3.2266213413167617, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159879 1.97537 0.0491135 1.1258 0.887376
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159403 1.93642 0.0491134 1.15197 0.912198
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159268 1.92107 0.0491135 1.1602 0.918995 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155843 2.86616 0.0484366 1.1313 0.893101
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155339 2.63405 0.0484356 1.15981 0.920831
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155177 2.5562 0.0484353 1.16726 0.927941 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0156052 3.00867 0.0485069 1.13188 0.891341
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155291 2.91974 0.0484604 1.15258 0.908525
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155074 2.8173 0.0484589 1.16317 0.918535
+Converged at iteration 31000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155059 2.80814 0.0484588 1.16405 0.919365 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152683 2.51193 0.0484645 1.12116 0.880576
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152175 2.43623 0.0484605 1.1489 0.905071
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152021 2.40435 0.0484594 1.16035 0.914411 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.3446979755958943, 3.6896551724137936, 3.2266213413167617, 'Fake', 2.5)
+
+
+('[5. Matrix factorization]', 'Elapsed: 3.6e+03 sec')
+
+exit
+
+Script done on 2016년 10월 13일 (목) 오후 03시 22분 35초

@@ -32,6 +32,34 @@ class Timer(object):
 		print('')
 
 
+def prediction_result(U,V, test_data):
+	ret = []
+	for review_row in test_data:
+		user = int(review_row[0])
+		item = int(review_row[1])
+		rating = int(review_row[2])
+		ret.append(np.dot(U[user,:],V[:,item]))
+	return ret
+
+def prediction_shift_from_attack(params):
+	# test_data is sparse format np.array([user, item, rating, helpful])
+	test_data = np.load(params.test_data_path)
+
+	UV_list = []
+	UV_list.append([params.base_U_clean_path, params.base_V_clean_path])
+	UV_list.append([params.base_U_attacked_path, params.base_V_attacked_path])
+	UV_list.append([params.naive_U_clean_path, params.naive_V_clean_path])
+	UV_list.append([params.naive_U_attacked_path, params.naive_V_attacked_path])
+	UV_list.append([params.robust_U_clean_path, params.robust_V_clean_path])
+	UV_list.append([params.robust_U_attacked_path, params.robust_V_attacked_path])
+	
+	# base_clean_prediction = prediction_result()
+	prediction_list = [prediction_result(U,V, test_data) for (U,V) in UV_list]
+
+	prediction_shift_list = []
+	# prediction_shift_base = 
+
+
 def whole_process(exp_title):
 	print('#######################################################################################')
 	print('Experiment Title', exp_title)
@@ -93,6 +121,7 @@ def whole_process(exp_title):
 				else:
 					print("Helpfulness computing is already done")
 				hm.helpful_test()
+	
 	with Timer("5. Matrix factorization"):
 		# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
 		# rank_list = [10,20,30,40,50,60,70,80,100]
@@ -102,16 +131,16 @@ def whole_process(exp_title):
 		# lda_list=[0.01, 0.1]
 		# max_iter_list = [5001, 50001]
 		rank_list = [20,30]
-		lda_list = [0.01, 0.1]
+		lda_list = [0.005,0.01]
 		max_iter_list = [40001]
 
-		# algorithm_model_list = ['base','base','naive','robust']
-		# attack_flag_list = [False, True, True, True]
+		algorithm_model_list = ['base','base','naive','robust']
+		attack_flag_list = [False, True, True, True]
 		# algorithm_model_list = ['naive','robust']
 		# algorithm_model_list=['base']
 		# attack_flag_list=[False]
-		algorithm_model_list = ['base', 'base','naive','naive','robust','robust']
-		attack_flag_list = [False, True, False, True, False, True]
+		# algorithm_model_list = ['base', 'base','naive','naive','robust','robust']
+		# attack_flag_list = [False, True, False, True, False, True]
 
 		
 		for rank in rank_list:
@@ -123,28 +152,27 @@ def whole_process(exp_title):
 						wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
 						wp.rank = rank
 						wp.lda = lda
-						# print("small test")
 						wp.max_iter=max_iter
 
 						wmf_instance = WMF(params=wp)
 						wmf_instance.whole_process()
 
-						performance = metric(params=wp)
-
 						try:
 							origin_help = np.load(wp.helpful_origin_path)[:,-1]
 							fake_help = np.load(wp.helpful_fake_path)[:,-1]
-							print (np.percentile(origin_help,25),np.percentile(origin_help,50),np.percentile(origin_help,75),np.mean(fake_help))
+							print ("Helpfulness distribution")
+							print ('Honest', np.percentile(origin_help,25),np.percentile(origin_help,50),np.percentile(origin_help,75), np.mean(origin_help), 'Fake', np.mean(fake_help))
 						except:
 							pass
 
-					# 	important_value = []
-					# 	important_value.append(performance.mean_prediction_rating_on_target(honest=True))
-					# 	important_value.append(performance.rmse_rating_on_target(honest=True))
-					# 	important_value.append(performance.rmse_rating_on_target(honest=False))
+						# performance = metric(params=wp)
+						# important_value = []
+						# important_value.append(performance.mean_prediction_rating_on_target(honest=True))
+						# important_value.append(performance.rmse_rating_on_target(honest=True))
+						# important_value.append(performance.rmse_rating_on_target(honest=False))
 
-					# 	important_value_list.append(important_value)
-					# 	print('')
+						# important_value_list.append(important_value)
+						# print('')
 
 					# np.set_printoptions(precision=4)
 					# print('')

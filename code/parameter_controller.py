@@ -137,13 +137,17 @@ class parameter_controller():
 		self.robust_U_attacked_path = self.intermediate_dir_path+'robust_U_attacked.npy'
 		self.robust_V_attacked_path = self.intermediate_dir_path+'robust_V_attacked.npy'
 
+
+
 		# for metric
 		self.target_item_list_path = self.intermediate_dir_path+'target_item_list_path.npy'
 		self.fake_user_id_list_path = self.intermediate_dir_path+'fake_user_id_list_path.npy'
 		# 
 		self.train_data_path = self.intermediate_dir_path+'train_data.npy'
-		self.test_target_data_path = self.intermediate_dir_path+'test_target_data.npy'
-		self.test_overall_data_path = self.intermediate_dir_path+'test_overall_data.npy'
+		self.test_data_path = self.intermediate_dir_path+'test_data.npy'
+
+		# self.test_target_data_path = self.intermediate_dir_path+'test_target_data.npy'
+		# self.test_overall_data_path = self.intermediate_dir_path+'test_overall_data.npy'
 
 	def readable_path(self, origin_path):
 		if not origin_path:
