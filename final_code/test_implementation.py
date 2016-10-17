@@ -3,8 +3,8 @@ import os
 import numpy as np
 # from preprocess import preprocess
 from new_preprocess import preprocess
-from attack_model_bandwagon import attack_model_bandwagon
-from user2vec import user2vec
+from new_attack_model_bandwagon import attack_model_bandwagon
+from new_user2vec import user2vec
 from helpful import helpful_measure
 # WARNING (theano.configdefaults): g++ not detected ! Theano will be unable to execute optimized C-implementations (for both CPU and GPU) and will default to Python implementations. Performance will be severely degraded. To remove this warning, set Theano flags cxx to an empty string.
 # try:
@@ -60,11 +60,9 @@ def prediction_shift_from_attack(params):
 	# prediction_shift_base = 
 
 
-def whole_process(exp_title):
-	print('#######################################################################################')
-	print('Experiment Title', exp_title)
-	params = parse_exp_title(exp_title)
-	
+def whole_process(params):
+		
+	refresh_flag = True
 	with Timer("1. preprocess"):
 		params.user_threshold=5
 		params.item_threshold=5
@@ -81,7 +79,7 @@ def whole_process(exp_title):
 		else:
 			print("No bandwagon attack")
 		# start attack if needed	
-		if not os.path.exists(params.review_fake_path):
+		if not os.path.exists(params.review_fake_path) or refresh_flag:
 				am.whole_process()
 		else:
 			print("Attack is already done")
@@ -89,14 +87,14 @@ def whole_process(exp_title):
 	with Timer("3. User2Vec"):
 		# attacked embedding
 		u2v_attacked = user2vec(params=params, fake_flag=True, camo_flag=True, embedding_output_path=params.embedding_attacked_path)
-		if not os.path.exists(params.embedding_attacked_path):
+		if not os.path.exists(params.embedding_attacked_path) or refresh_flag:
 			u2v_attacked.whole_process()
 		else:
 			print("User embedding on the attacked dataset is already done")
 		u2v_attacked.similarity_test()
 		# clean embedding
 		u2v_clean = user2vec(params=params, fake_flag=False, camo_flag=False, embedding_output_path=params.embedding_clean_path)
-		if not os.path.exists(params.embedding_clean_path):
+		if not os.path.exists(params.embedding_clean_path) or refresh_flag:
 			u2v_clean.whole_process()
 		else:
 			print("User embedding on the clean dataset is already done")
@@ -122,73 +120,83 @@ def whole_process(exp_title):
 					print("Helpfulness computing is already done")
 				hm.helpful_test()
 	
-	# with Timer("5. Matrix factorization"):
-	# 	# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
-	# 	# rank_list = [10,20,30,40,50,60,70,80,100]
-	# 	# rank_list = [15,20,25,30]
-	# 	# rank_list = [20,25,30]
-	# 	# lda_list = [0.001, 0.01, 0.1]
-	# 	# lda_list=[0.01, 0.1]
-	# 	# max_iter_list = [5001, 50001]
-	# 	rank_list = [20,30]
-	# 	lda_list = [0.005,0.01]
-	# 	max_iter_list = [40001]
+	with Timer("5. Matrix factorization"):
+		# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
+		# rank_list = [10,20,30,40,50,60,70,80,100]
+		# rank_list = [15,20,25,30]
+		# rank_list = [20,25,30]
+		# lda_list = [0.001, 0.01, 0.1]
+		# lda_list=[0.01, 0.1]
+		# max_iter_list = [5001, 50001]
+		rank_list = [20,30]
+		lda_list = [0.005,0.01]
+		max_iter_list = [40001]
 
-	# 	algorithm_model_list = ['base','base','naive','robust']
-	# 	attack_flag_list = [False, True, True, True]
-	# 	# algorithm_model_list = ['naive','robust']
-	# 	# algorithm_model_list=['base']
-	# 	# attack_flag_list=[False]
-	# 	# algorithm_model_list = ['base', 'base','naive','naive','robust','robust']
-	# 	# attack_flag_list = [False, True, False, True, False, True]
+		algorithm_model_list = ['base','base','naive','robust']
+		attack_flag_list = [False, True, True, True]
+		# algorithm_model_list = ['naive','robust']
+		# algorithm_model_list=['base']
+		# attack_flag_list=[False]
+		# algorithm_model_list = ['base', 'base','naive','naive','robust','robust']
+		# attack_flag_list = [False, True, False, True, False, True]
 
 		
-	# 	for rank in rank_list:
-	# 		for lda in lda_list:
-	# 			for max_iter in max_iter_list:
-	# 				important_value_list = []
-	# 				for am, af in zip(algorithm_model_list, attack_flag_list):
-	# 					print('-----------------------',am,'attack',af, 'rank',rank, 'lda', lda, '---------------------')
-	# 					wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
-	# 					wp.rank = rank
-	# 					wp.lda = lda
-	# 					wp.max_iter=max_iter
+		for rank in rank_list:
+			for lda in lda_list:
+				for max_iter in max_iter_list:
+					important_value_list = []
+					for am, af in zip(algorithm_model_list, attack_flag_list):
+						print('-----------------------',am,'attack',af, 'rank',rank, 'lda', lda, '---------------------')
+						wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
+						wp.rank = rank
+						wp.lda = lda
+						wp.max_iter=max_iter
 
-	# 					wmf_instance = WMF(params=wp)
-	# 					wmf_instance.whole_process()
+						wmf_instance = WMF(params=wp)
+						wmf_instance.whole_process()
 
-	# 					try:
-	# 						origin_help = np.load(wp.helpful_origin_path)[:,-1]
-	# 						fake_help = np.load(wp.helpful_fake_path)[:,-1]
-	# 						print ("Helpfulness distribution")
-	# 						print ('Honest', np.percentile(origin_help,25),np.percentile(origin_help,50),np.percentile(origin_help,75), np.mean(origin_help), 'Fake', np.mean(fake_help))
-	# 					except:
-	# 						pass
+						try:
+							origin_help = np.load(wp.helpful_origin_path)[:,-1]
+							fake_help = np.load(wp.helpful_fake_path)[:,-1]
+							print ("Helpfulness distribution")
+							print ('Honest', np.percentile(origin_help,25),np.percentile(origin_help,50),np.percentile(origin_help,75), np.mean(origin_help), 'Fake', np.mean(fake_help))
+						except:
+							pass
 
-	# 					# performance = metric(params=wp)
-	# 					# important_value = []
-	# 					# important_value.append(performance.mean_prediction_rating_on_target(honest=True))
-	# 					# important_value.append(performance.rmse_rating_on_target(honest=True))
-	# 					# important_value.append(performance.rmse_rating_on_target(honest=False))
+						# performance = metric(params=wp)
+						# important_value = []
+						# important_value.append(performance.mean_prediction_rating_on_target(honest=True))
+						# important_value.append(performance.rmse_rating_on_target(honest=True))
+						# important_value.append(performance.rmse_rating_on_target(honest=False))
 
-	# 					# important_value_list.append(important_value)
-	# 					# print('')
+						# important_value_list.append(important_value)
+						# print('')
 
-	# 				# np.set_printoptions(precision=4)
-	# 				# print('')
-	# 				# print('')
-	# 				# print(exp_title, am, af, rank, lda)
-	# 				# print('[[[[Important_value_list]]]]')
-	# 				# print('(expected rating on target, RMSE(honest rating on target), RMSE(fake rating on target)')
-	# 				# print(np.array(important_value_list))
-	# 				print('')
-	# 				print('')
+					# np.set_printoptions(precision=4)
+					# print('')
+					# print('')
+					# print(exp_title, am, af, rank, lda)
+					# print('[[[[Important_value_list]]]]')
+					# print('(expected rating on target, RMSE(honest rating on target), RMSE(fake rating on target)')
+					# print(np.array(important_value_list))
+					print('')
+					print('')
 
 if __name__ == "__main__":
 	# exp_title_list = ['bandwagon_0.25%_0.25%_0.25%_emb_32', 'bandwagon_0.5%_0.5%_0.5%_emb_32', 'bandwagon_1%_1%_1%_emb_32']
-	# exp_title_list = ['bandwagon_1%_1%_1%_emb_32']
+	# exp_title_list = ['bandwagon_1%_1%_1%_emb_16', 'bandwagon_1%_0.5%_0.5%_emb_16']
+	# exp_title_list = ['bandwagon_1%_1%_1%_emb_16', 'bandwagon_5%_0.5%_0.5%_emb_16']
 	exp_title_list = []
-	exp_title_list += ['bandwagon_1%_0.25%_0.25%_emb_32', 'bandwagon_1%_0.25%_0.5%_emb_32', 'bandwagon_1%_0.25%_1%_emb_32',]
-	exp_title_list += ['bandwagon_1%_0.5%_0.25%_emb_32', 'bandwagon_1%_0.5%_0.5%_emb_32', 'bandwagon_1%_0.5%_1%_emb_32',]
+	# exp_title_list += ['bandwagon_1%_0.25%_0.25%_emb_32', 'bandwagon_1%_0.25%_0.5%_emb_32', 'bandwagon_1%_0.25%_1%_emb_32',]
+	# exp_title_list += ['bandwagon_1%_0.5%_0.25%_emb_32', 'bandwagon_1%_0.5%_0.5%_emb_32', 'bandwagon_1%_0.5%_1%_emb_32',]
+	exp_title_list += ['bandwagon_1%_1%_0%_emb_32', 'bandwagon_1%_3%_0%_emb_32']
+	exp_title_list += ['bandwagon_1%_1%_1.1_emb_32', 'bandwagon_1%_3%_1.1_emb_32']
+	exp_title_list += ['bandwagon_1%_1%_1%_emb_32', 'bandwagon_1%_3%_1%_emb_32']
 	for exp_title in exp_title_list:
-		whole_process(exp_title)
+		params = parse_exp_title(exp_title)
+		for uu in [1]:
+			print('#######################################################################################')
+			print('Experiment Title', exp_title)
+			# print("$$$$$$$$$$$$FAKE NUM ITEM", uu)
+			params.num_fake_item = uu
+			whole_process(params)

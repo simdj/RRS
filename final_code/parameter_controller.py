@@ -56,6 +56,7 @@ class parameter_controller():
 
 		############################## 2. attack ##############################
 		self.num_fake_user = num_fake_user
+		self.num_fake_item = 1
 		self.filler_size = filler_size
 		self.selected_size = selected_size
 		# (default)

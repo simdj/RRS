@@ -2,7 +2,6 @@
 import numpy as np
 # from sklearn.cross_validation import train_test_split
 from collections import Counter
-from sklearn.cross_validation import train_test_split
 try:
 	import tensorflow as tf
 except:
@@ -10,10 +9,13 @@ except:
 
 # input: review data R(user,item,rating,helpful)
 # output: U,V
-print("WMF validation!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 class WMF():
 	def __init__(self, params):
 		self.params = params
+		# self.log_path = params.intermediate_dir_path+'_'.join(map(str,[params.algorithm_model,params.attack_flag,params.rank,params.lda,params.max_iter]))
+		self.log_path = '/tmp/recommender_log'
+		# print(self.log_path)
 
 		self.rank = params.rank
 		self.lda = params.lda
@@ -23,29 +25,29 @@ class WMF():
 		self.V_path = params.V_path
 
 		self.train_data = params.train_data
-		self.test_data = params.test_data
 
 		self.target_item_list = map(int,np.load(params.target_item_list_path))
 		self.fake_user_id_list = map(int,np.load(params.fake_user_id_list_path))
 		self.fake_user_start = max(len(np.unique(self.train_data[:,0])), min(self.fake_user_id_list))
 
-	def do_mf(self, train_data, test_data, mean_rating=0, max_iter=20001, lr=0.01, decay_lr=True):
+	def do_mf(self, train_data, mean_rating=0, max_iter=20001, lr=0.01, decay_lr=True, solver='adam'):
 		# input : rating data [user, item, rating, helpful]
 		# output : final_cost, final_rmse_tr, final_U, final_V
 
-		# total data stats
-		total_data = np.concatenate((train_data,test_data))
-		num_users = len(np.unique(total_data[:,0]))
-		num_items = len(np.unique(total_data[:,1]))
+		# tf.reset_default_graph()
 
-		# train data stats
+		# get stats of train data
+		num_users = len(np.unique(train_data[:,0]))
+		num_items = len(np.unique(train_data[:,1]))
 		global_review_mean = np.mean(train_data[:,2])
 		good_mean=np.sqrt(global_review_mean / self.rank)
 
 		# initialize latent factor matrix
 		W = tf.Variable(tf.truncated_normal([num_users, self.rank], stddev=0.005, mean=good_mean, seed=1), name="users")
 		H = tf.Variable(tf.truncated_normal([self.rank, num_items], stddev=0.005, mean=good_mean, seed=1), name="items")
-		
+		baseW = tf.to_float(tf.constant(good_mean*np.ones((num_users,self.rank))))
+		baseH = tf.to_float(tf.constant(good_mean*np.ones((self.rank, num_items))))
+
 		# regularizer = tf.mul(tf.add(tf.reduce_sum(tf.square(tf.sub(W,baseW))), tf.reduce_sum(tf.square(tf.sub(H,baseH)))), self.lda, name="regularize")
 		regularizer = tf.mul(tf.add(tf.reduce_sum(tf.square(W)), tf.reduce_sum(tf.square(H))), self.lda, name="regularize")
 		
@@ -54,54 +56,43 @@ class WMF():
 		rating_observed = train_data[:, 2]
 		num_review = len(item_indices)
 		
-		# Helpfulness score
 		helpful_values = train_data[:, 3]
 		HELPFUL = tf.to_float(tf.reshape(tf.constant(helpful_values),[-1]))
+		# print("helpful value square!!")
+		# HELPFUL = tf.to_float(tf.reshape(tf.constant(np.square(helpful_values)),[-1]))
+		
 		
 		# prediction = W*H	
 		result = tf.matmul(W, H)
+		# sparse format
+		rating_prediction = tf.gather(tf.reshape(result, [-1]), user_indices * tf.shape(result)[1] + item_indices)
+
+		# using global_review_mean
+		# diff_op = tf.mul(tf.sub(tf.add(rating_prediction, mean_rating, name="add_mean"), rating_observed, name="raw_training_error"), helpful_values, name="weighted_training_error")
+		# diff_op_val = tf.sub(tf.add(result_values_val, mean_rating, name="add_mean_val"), rating_observed_test, name="raw_validation_error")
+
+		# using helpful info
+		diff_op = tf.square(tf.sub(rating_prediction,rating_observed), name="squared_training_error")
 
 		with tf.name_scope("training_cost") as scope:
-			# sparse format
-			rating_prediction = tf.gather(tf.reshape(result, [-1]), user_indices * tf.shape(result)[1] + item_indices)
-			diff_op = tf.sub(rating_prediction,rating_observed)
-			
-			# # without helpful
+			# print("yes helpful")
+			weighted_diff_op = tf.mul(diff_op, HELPFUL, name='square_training_error_multiplied_by_helpful')
+			base_cost = tf.reduce_sum(weighted_diff_op, name="sum_squared_error")
+			# print("no helpful")
 			# base_cost = tf.reduce_sum(diff_op)
 
-			# multiply helpful
-			weighted_square_diff_op = tf.mul(tf.square(diff_op), HELPFUL)
-			base_cost = tf.reduce_sum(weighted_square_diff_op, name="sum_squared_error")
+
 			
-			#######################################################################			
 			# cost = tf.add(base_cost, regularizer, name="total_cost")
 			# (prediction error + regulaization) / num_review????
 			cost = tf.div(tf.add(base_cost, regularizer), num_review * 2, name="average_error")
 			
-		with tf.name_scope("training_rmse") as scope:
-			rmse_tr = tf.sqrt(tf.reduce_mean(tf.square(diff_op)))
+			# cost_summ = tf.scalar_summary("cost_summary", cost)
 
 		with tf.name_scope("prediction_on_target_items") as scope:
 			target_item_prediction_matrix = tf.transpose(tf.gather(tf.transpose(result), self.target_item_list))
 			target_item_prediction_matrix_by_honest = target_item_prediction_matrix[:self.fake_user_start, :]
 			prediction_on_target_items = tf.reduce_mean(target_item_prediction_matrix_by_honest)
-
-
-		with tf.name_scope("test_RMSE_and_MAE") as scope:
-			user_indices_test = test_data[:, 0]
-			item_indices_test = test_data[:, 1]
-			rating_observed_test = test_data[:, 2]
-			num_review_test = len(item_indices_test)
-			
-			helpful_values_test = test_data[:, 3]
-			HELPFUL_test = tf.to_float(tf.reshape(tf.constant(helpful_values_test),[-1]))
-			rating_prediction_test = tf.gather(tf.reshape(result, [-1]), user_indices_test * tf.shape(result)[1] + item_indices_test)
-			diff_op_test = tf.sub(rating_prediction_test, rating_observed_test)
-			# RMSE of test data
-			rmse_test = tf.sqrt(tf.reduce_mean(tf.square(diff_op_test)))
-			# MAE of test data
-			mae_test = tf.reduce_mean(tf.abs(diff_op_test))
-		
 
 		with tf.name_scope("train") as scope:
 			if decay_lr:
@@ -119,54 +110,56 @@ class WMF():
 				# optimizer = tf.train.GradientDescentOptimizer(lr)
 				train_step = optimizer.minimize(cost)
 
+		with tf.name_scope("training_rmse") as scope:
+			rmse_tr = tf.sqrt(tf.div(tf.reduce_sum(tf.square(diff_op)), num_review))
+		
+		# # Make sure summaries get written to the logs.
+		# summary_op = tf.merge_all_summaries()
+
 		# ===========================================
 		# ==============Session started==============
 		sess = tf.Session()
 		sess.run(tf.initialize_all_variables())
+
+		# writer = tf.train.SummaryWriter(self.log_path, sess.graph)
 
 		last_cost = 0
 		diff = 1
 
 		for i in range(max_iter):
 			sess.run(train_step)
-			if i > 0 and i % 1000 == 0:
-				res = sess.run([cost, prediction_on_target_items, rmse_tr, rmse_test, mae_test])
+			if i > 0 and i % 500 == 0:
+				res = sess.run([cost, rmse_tr, prediction_on_target_items])
 				cost_ev = res[0]
-				prediction_on_target_items_ev = res[1]
-				rmse_tr_ev = res[2]
-				rmse_test_ev = res[3]
-				mae_test_ev = res[4]
-				
+				rmse_tr_ev = res[1]
+				prediction_on_target_items_ev = res[2]
+				# summary_str = res[2]
 				diff = abs(cost_ev - last_cost)
-
-				if i % 10000 == 0:
-					print("Step %s) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): %s %s %s %s %s" % (i, cost_ev, prediction_on_target_items_ev, rmse_tr_ev, rmse_test_ev, mae_test_ev))
-				
-				# if diff < 0.00001:
-				if last_cost>0 and (diff/last_cost) <= 0.0001:
-					print("Converged at iteration %s" % (i))
-					break
-				# update the last cost 
 				last_cost = cost_ev
 
+				# writer.add_summary(summary_str,i)
+				if i % 1000 == 0:
+					print("At step %s) Cost / RMSE / Target prediction: %s %s %s" % (i, cost_ev, rmse_tr_ev, prediction_on_target_items_ev))
+				
+				# if diff < 0.00001:
+				# 	print("Converged at iteration %s" % (i))
+				# 	break
 		final_cost = cost.eval(session=sess)
-		final_prediction_on_target_items = prediction_on_target_items.eval(session=sess)
 		final_rmse_tr = rmse_tr.eval(session=sess)
-		final_rmse_test = rmse_test.eval(session=sess)
-		final_mae_test = mae_test.eval(session=sess)
+		final_prediction_on_target_items = prediction_on_target_items.eval(session=sess)
 		final_U = W.eval(session=sess)
 		final_V = H.eval(session=sess)
 		sess.close()
 		# ==============Session finished==============
 		# ============================================
 
-		print("Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): %s %s %s %s %s " % (final_cost, final_prediction_on_target_items, final_rmse_tr, final_rmse_test, final_mae_test))
+		print("Final) Cost %s / RMSE %s / Target prediction %s" % (final_cost, final_rmse_tr, final_prediction_on_target_items))
 
 		return final_rmse_tr, final_U, final_V
 
 	def whole_process(self):
 		# do WMF
-		final_error, final_U, final_V = self.do_mf(self.train_data, self.test_data, max_iter=self.max_iter, lr=0.01, decay_lr=True)
+		final_error, final_U, final_V = self.do_mf(self.train_data, max_iter=self.max_iter, lr=0.05, decay_lr=True)
 		np.save(self.U_path, final_U)
 		np.save(self.V_path, final_V)
 		print("U path: ", self.U_path)
@@ -204,35 +197,31 @@ class WMF_params():
 		self.set_input_output_path(params, algorithm_model, attack_flag)
 		# loading and generate rating dataset [user item rating helpful]
 		
-		self.train_data, self.test_data = self.loading_data(algorithm_model, attack_flag)
+		self.train_data = self.loading_data(algorithm_model)
 		# self.train_data = self.loading_data_test(algorithm_model)
+	def get_robust_weight(self, robust_scale=2):
+		naive_list = [self.params.helpful_origin_attacked_naive, self.params.helpful_fake_attacked_naive, self.params.helpful_camo_attacked_naive]
+		robust_list = [self.params.helpful_origin_attacked_robust, self.params.helpful_fake_attacked_robust, self.params.helpful_camo_attacked_robust]
 
-		np.save(params.train_data_path, self.train_data)
-		np.save(params.test_data_path, self.test_data)
+		naive_helpful_vector = np.concatenate([np.load(data_path) for data_path in naive_list])[:,-1]
+		robust_helpful_vector = np.concatenate([np.load(data_path) for data_path in robust_list])[:,-1]
+		# user,item,helpful
+		# print("naive_helpful_vector and robust_helpful_vector shape", naive_helpful_vector.shape, robust_helpful_vector.shape)
 
-	# def get_robust_weight(self, robust_scale=2):
-	# 	naive_list = [self.params.helpful_origin_attacked_naive, self.params.helpful_fake_attacked_naive, self.params.helpful_camo_attacked_naive]
-	# 	robust_list = [self.params.helpful_origin_attacked_robust, self.params.helpful_fake_attacked_robust, self.params.helpful_camo_attacked_robust]
+		# helpful vector
+		diff_helpful = robust_helpful_vector-naive_helpful_vector
+		# if robust helpful< naive helpful -> penalty!!: *exp(-a)
+		robust_weight = naive_helpful_vector*np.exp(diff_helpful*robust_scale)
+		return robust_weight
 
-	# 	naive_helpful_vector = np.concatenate([np.load(data_path) for data_path in naive_list])[:,-1]
-	# 	robust_helpful_vector = np.concatenate([np.load(data_path) for data_path in robust_list])[:,-1]
-	# 	# user,item,helpful
-	# 	# print("naive_helpful_vector and robust_helpful_vector shape", naive_helpful_vector.shape, robust_helpful_vector.shape)
 
-	# 	# helpful vector
-	# 	diff_helpful = robust_helpful_vector-naive_helpful_vector
-	# 	# if robust helpful< naive helpful -> penalty!!: *exp(-a)
-	# 	robust_weight = naive_helpful_vector*np.exp(diff_helpful*robust_scale)
-	# 	return robust_weight
-
-	
-	def loading_data(self, algorithm_model='base', attack_flag=False):
+	def loading_data(self, algorithm_model='base'):
 		review_data = [np.load(data_path) for data_path in self.input_review_path_list]
-		origin_review_num = len(review_data[0])
+		fake_start = len(review_data[0])
 		review_data = np.concatenate(review_data)
 		
 		if algorithm_model=='base':
-			train_data = self.merge_review_helpful(review_data, 1)
+			self.train_data = self.merge_review_helpful(review_data, 1)
 		elif algorithm_model=='naive':
 			helpful_matrix = [np.load(data_path) for data_path in self.input_helpful_path_list]
 			# honest_num = len(helpful_matrix[0])
@@ -245,41 +234,34 @@ class WMF_params():
 
 			# 0~1
 			# helpful_vector /= 5
-			train_data = self.merge_review_helpful(review_data, helpful_vector)
+			self.train_data = self.merge_review_helpful(review_data, helpful_vector)
 			
 		elif algorithm_model=='robust':
-			helpful_matrix = [np.load(data_path) for data_path in self.input_helpful_path_list]
+			# helpful_vector = [np.load(data_path) for data_path in self.input_helpful_path_list]
 			# # honest_num = len(helpful_vector[0])
 			# # fake_num = len(helpful_vector[1])
 			# # print '!!!! Best in robust'
 			# # helpful_vector[1]*=0.1
 			# # # # helpful_vector[1]*=0
 			# # print self.input_helpful_path_list[1], ' np.mean(helpful_vector[1][:,-1])', np.mean(helpful_vector[1][:,-1])
-			helpful_vector = np.concatenate(helpful_matrix)[:,-1]
+			# helpful_vector = np.concatenate(helpful_vector)[:,-1]
 			# # 0~1
 			# # helpful_vector /= 5
 
-			# helpful_vector = self.get_robust_weight()
-			# print np.mean(helpful_vector[:origin_review_num-10]), np.percentile(helpful_vector[:origin_review_num-10],25), np.percentile(helpful_vector[:origin_review_num-10],50), np.percentile(helpful_vector[:origin_review_num-10], 75)
-			# print np.mean(helpful_vector[origin_review_num:origin_review_num+50]), np.percentile(helpful_vector[origin_review_num:origin_review_num+50],25), np.percentile(helpful_vector[origin_review_num:origin_review_num+50],50), np.percentile(helpful_vector[origin_review_num:origin_review_num+50], 75)
-			train_data = self.merge_review_helpful(review_data, helpful_vector)
+			helpful_vector = self.get_robust_weight()
+			# print np.mean(helpful_vector[:fake_start-10]), np.percentile(helpful_vector[:fake_start-10],25), np.percentile(helpful_vector[:fake_start-10],50), np.percentile(helpful_vector[:fake_start-10], 75)
+			# print np.mean(helpful_vector[fake_start:fake_start+50]), np.percentile(helpful_vector[fake_start:fake_start+50],25), np.percentile(helpful_vector[fake_start:fake_start+50],50), np.percentile(helpful_vector[fake_start:fake_start+50], 75)
+			self.train_data = self.merge_review_helpful(review_data, helpful_vector)
 		
-
-		# extract test data from origin review
-		origin_review_data = train_data[:origin_review_num,:]
-		# all injected review data goes to training data
-		injected_review_data = train_data[origin_review_num:,:]
-		
-		origin_train_data, origin_test_data = train_test_split(origin_review_data, train_size=.9, random_state=1)
-		return np.concatenate((origin_train_data, injected_review_data)), origin_test_data
+		return self.train_data
 
 
-	def merge_review_helpful(self, review, helpful, amplify_flag=True):
+	def merge_review_helpful(self, review, helpful):
 		# review : user,item,rating,reveiw_id), 
 		# helpful : scalar -> np.ones() / vector([helpfulness values])
 		ret = []
 		if type(helpful)==type(1):
-			helpful = np.ones((len(review),1))*(3.5)
+			helpful = np.ones((len(review),1))
 		assert (len(review) == len(helpful))
 		num_review = len(review)
 		for i in xrange(num_review):
@@ -288,9 +270,7 @@ class WMF_params():
 			ret.append(tmp_review_with_helpful)
 
 		ret = np.array(ret)
-		# helpful 0~5 scale is weak to impact RS -> helpfulness +1: 10 times effect
-		if amplify_flag:
-			ret[:,-1]=np.power(10, ret[:,-1]-2.5)
+		# print('merge result', ret.shape)
 		return ret
 
 	def set_input_output_path(self, params, algorithm_model, attack_flag):
@@ -431,8 +411,6 @@ class metric():
 		# print('[Limit Rating Distribution]',np.min(matmul_result), np.percentile(matmul_result,25),np.median(matmul_result),np.percentile(matmul_result,75), np.max(matmul_result), total_overall_rating)
 
 		return total_overall_rating
-
-
 
 # if __name__=="__main__":
 # 	from parameter_controller import *
