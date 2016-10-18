@@ -120,67 +120,67 @@ def whole_process(params):
 					print("Helpfulness computing is already done")
 				hm.helpful_test()
 	
-	with Timer("5. Matrix factorization"):
-		# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
-		# rank_list = [10,20,30,40,50,60,70,80,100]
-		# rank_list = [15,20,25,30]
-		# rank_list = [20,25,30]
-		# lda_list = [0.001, 0.01, 0.1]
-		# lda_list=[0.01, 0.1]
-		# max_iter_list = [5001, 50001]
-		rank_list = [20,30]
-		lda_list = [0.005,0.01]
-		max_iter_list = [40001]
+	# with Timer("5. Matrix factorization"):
+	# 	# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
+	# 	# rank_list = [10,20,30,40,50,60,70,80,100]
+	# 	# rank_list = [15,20,25,30]
+	# 	# rank_list = [20,25,30]
+	# 	# lda_list = [0.001, 0.01, 0.1]
+	# 	# lda_list=[0.01, 0.1]
+	# 	# max_iter_list = [5001, 50001]
+	# 	rank_list = [20,30]
+	# 	lda_list = [0.005,0.01]
+	# 	max_iter_list = [40001]
 
-		algorithm_model_list = ['base','base','naive','robust']
-		attack_flag_list = [False, True, True, True]
-		# algorithm_model_list = ['naive','robust']
-		# algorithm_model_list=['base']
-		# attack_flag_list=[False]
-		# algorithm_model_list = ['base', 'base','naive','naive','robust','robust']
-		# attack_flag_list = [False, True, False, True, False, True]
+	# 	algorithm_model_list = ['base','base','naive','robust']
+	# 	attack_flag_list = [False, True, True, True]
+	# 	# algorithm_model_list = ['naive','robust']
+	# 	# algorithm_model_list=['base']
+	# 	# attack_flag_list=[False]
+	# 	# algorithm_model_list = ['base', 'base','naive','naive','robust','robust']
+	# 	# attack_flag_list = [False, True, False, True, False, True]
 
 		
-		for rank in rank_list:
-			for lda in lda_list:
-				for max_iter in max_iter_list:
-					important_value_list = []
-					for am, af in zip(algorithm_model_list, attack_flag_list):
-						print('-----------------------',am,'attack',af, 'rank',rank, 'lda', lda, '---------------------')
-						wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
-						wp.rank = rank
-						wp.lda = lda
-						wp.max_iter=max_iter
+	# 	for rank in rank_list:
+	# 		for lda in lda_list:
+	# 			for max_iter in max_iter_list:
+	# 				important_value_list = []
+	# 				for am, af in zip(algorithm_model_list, attack_flag_list):
+	# 					print('-----------------------',am,'attack',af, 'rank',rank, 'lda', lda, '---------------------')
+	# 					wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
+	# 					wp.rank = rank
+	# 					wp.lda = lda
+	# 					wp.max_iter=max_iter
 
-						wmf_instance = WMF(params=wp)
-						wmf_instance.whole_process()
+	# 					wmf_instance = WMF(params=wp)
+	# 					wmf_instance.whole_process()
 
-						try:
-							origin_help = np.load(wp.helpful_origin_path)[:,-1]
-							fake_help = np.load(wp.helpful_fake_path)[:,-1]
-							print ("Helpfulness distribution")
-							print ('Honest', np.percentile(origin_help,25),np.percentile(origin_help,50),np.percentile(origin_help,75), np.mean(origin_help), 'Fake', np.mean(fake_help))
-						except:
-							pass
+	# 					try:
+	# 						origin_help = np.load(wp.helpful_origin_path)[:,-1]
+	# 						fake_help = np.load(wp.helpful_fake_path)[:,-1]
+	# 						print ("Helpfulness distribution")
+	# 						print ('Honest', np.percentile(origin_help,25),np.percentile(origin_help,50),np.percentile(origin_help,75), np.mean(origin_help), 'Fake', np.mean(fake_help))
+	# 					except:
+	# 						pass
 
-						# performance = metric(params=wp)
-						# important_value = []
-						# important_value.append(performance.mean_prediction_rating_on_target(honest=True))
-						# important_value.append(performance.rmse_rating_on_target(honest=True))
-						# important_value.append(performance.rmse_rating_on_target(honest=False))
+	# 					# performance = metric(params=wp)
+	# 					# important_value = []
+	# 					# important_value.append(performance.mean_prediction_rating_on_target(honest=True))
+	# 					# important_value.append(performance.rmse_rating_on_target(honest=True))
+	# 					# important_value.append(performance.rmse_rating_on_target(honest=False))
 
-						# important_value_list.append(important_value)
-						# print('')
+	# 					# important_value_list.append(important_value)
+	# 					# print('')
 
-					# np.set_printoptions(precision=4)
-					# print('')
-					# print('')
-					# print(exp_title, am, af, rank, lda)
-					# print('[[[[Important_value_list]]]]')
-					# print('(expected rating on target, RMSE(honest rating on target), RMSE(fake rating on target)')
-					# print(np.array(important_value_list))
-					print('')
-					print('')
+	# 				# np.set_printoptions(precision=4)
+	# 				# print('')
+	# 				# print('')
+	# 				# print(exp_title, am, af, rank, lda)
+	# 				# print('[[[[Important_value_list]]]]')
+	# 				# print('(expected rating on target, RMSE(honest rating on target), RMSE(fake rating on target)')
+	# 				# print(np.array(important_value_list))
+	# 				print('')
+	# 				print('')
 
 if __name__ == "__main__":
 	# exp_title_list = ['bandwagon_0.25%_0.25%_0.25%_emb_32', 'bandwagon_0.5%_0.5%_0.5%_emb_32', 'bandwagon_1%_1%_1%_emb_32']
@@ -189,9 +189,11 @@ if __name__ == "__main__":
 	exp_title_list = []
 	# exp_title_list += ['bandwagon_1%_0.25%_0.25%_emb_32', 'bandwagon_1%_0.25%_0.5%_emb_32', 'bandwagon_1%_0.25%_1%_emb_32',]
 	# exp_title_list += ['bandwagon_1%_0.5%_0.25%_emb_32', 'bandwagon_1%_0.5%_0.5%_emb_32', 'bandwagon_1%_0.5%_1%_emb_32',]
-	exp_title_list += ['bandwagon_1%_1%_0%_emb_32', 'bandwagon_1%_3%_0%_emb_32']
-	exp_title_list += ['bandwagon_1%_1%_1.1_emb_32', 'bandwagon_1%_3%_1.1_emb_32']
-	exp_title_list += ['bandwagon_1%_1%_1%_emb_32', 'bandwagon_1%_3%_1%_emb_32']
+	
+	# exp_title_list += ['bandwagon_1%_1%_0%_emb_32', 'bandwagon_1%_3%_0%_emb_32']
+	# exp_title_list += ['bandwagon_1%_1%_1.1_emb_32', 'bandwagon_1%_3%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_1%_1%_1%_emb_32', 'bandwagon_1%_3%_1%_emb_32']
+	exp_title_list += ['bandwagon_1%_1%_0%_emb_16']
 	for exp_title in exp_title_list:
 		params = parse_exp_title(exp_title)
 		for uu in [1]:

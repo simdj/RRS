@@ -68,8 +68,9 @@ class user2vec():
 
 
 		# generate sentence
+		self.review_id_info = dict() # review_id_info[review_id]=(reviewer, item)
+
 		self.reviewer_tensor = dict()
-		self.review_id_info = dict()
 		self.follower_tensor = dict()
 		
 		self.num_item = 0
@@ -80,12 +81,20 @@ class user2vec():
 
 		self.test_vote_matrix =[]
 
+		self.item_rating_data = None
+		self.helpfulness_rating_data = None
+		self.maximum_item_rating_data = None # maximum_item_rating_data is subset of review matrix
+		self.maximum_helpfulness_rating_data = None #maximum_helpfulness_rating_data is subset of vote matrix
+
 	def load_overall_review_matrix(self):
 		overall_review_matrix = np.load(self.review_origin_path)
 		if self.fake_flag:
 			overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.review_fake_path)))
 			if self.camo_flag:
 				overall_review_matrix = np.concatenate((overall_review_matrix, np.load(self.review_camo_path)))
+
+		self.item_rating_data = overall_review_matrix
+		self.maximum_item_rating_data = overall_review_matrix[overall_review_matrix[:,2]==5,:]
 		return overall_review_matrix
 
 	def load_overall_vote_matrix(self):
@@ -96,6 +105,8 @@ class user2vec():
 		# if self.camo_flag:
 		# 	overall_vote_matrix = np.concatenate((overall_vote_matrix, np.load(self.vote_camo_path)))
 		# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		self.helpfulness_rating_data = overall_vote_matrix
+		self.maximum_helpfulness_rating_data = overall_vote_matrix[overall_vote_matrix[:,2]==5,:]
 		return overall_vote_matrix
 
 	def construct_item_weight(self):
@@ -142,13 +153,15 @@ class user2vec():
 		normalization = 1.0 * np.sum(self.item_weight_list)
 		self.item_weight_list = self.item_weight_list/normalization
 		
-		# print np.percentile(self.item_degree_list, 99), np.percentile(self.item_weight_list, 1)
-		# print np.percentile(self.item_degree_list, 95), np.percentile(self.item_weight_list, 5)
-		# print np.percentile(self.item_degree_list, 90), np.percentile(self.item_weight_list, 10)
-		
-		# print np.percentile(self.item_degree_list, 10), np.percentile(self.item_weight_list, 90)
-		# print np.percentile(self.item_degree_list, 5), np.percentile(self.item_weight_list, 95)
-		# print np.percentile(self.item_degree_list, 1), np.percentile(self.item_weight_list, 99)
+
+
+		print 'degree min', np.min(self.item_degree_list), np.max(self.item_weight_list)
+		percentile_value = [1,5,10,25,50,75,90,95,99]
+		for pv in percentile_value:
+			print pv, '%%', np.percentile(self.item_degree_list, pv), np.percentile(self.item_weight_list, 100-pv)
+		print 'degree max', np.max(self.item_degree_list), np.min(self.item_weight_list)
+
+		print 'TARGET ITEM', self.item_degree_list[616], self.item_weight_list[616]
 		# target = np.argmax(self.item_degree_list>707)
 		# print self.item_degree_list[target], self.item_weight_list[target]
 		# # drawing degree plot
@@ -247,9 +260,17 @@ class user2vec():
 		min_fake = min(map(int,list(np.load(self.fake_user_id_list_path))))
 		max_fake = max(map(int,list(np.load(self.fake_user_id_list_path))))
 		
-		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample, p=self.reviewer_tensor_weight)
+		# sample probability is propotional to the inverse of popularity
+		# sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample, p=self.reviewer_tensor_weight)
+
+		# uniform sample probability
+		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample)
+		
 		for item_id in sampled_item_id_list:
-			sample_reviewer_id_list = np.random.choice(a=self.reviewer_tensor[item_id], size=2)
+			try:
+				sample_reviewer_id_list = np.random.choice(a=self.reviewer_tensor[item_id], size=2)
+			except Exception, ex:
+				continue
 			ret.append(sample_reviewer_id_list)
 
 			is_follower_fake = (int(sample_reviewer_id_list[0])>=min_fake and int(sample_reviewer_id_list[0])<=max_fake)
@@ -291,7 +312,7 @@ class user2vec():
 		# 		except Exception, ex:
 		# 			pass
 		total_evidence = len(ret)*1.0
-		print('generate_reviewer_reviewer', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100, etc_cnt/total_evidence*100, (total_evidence-good_cnt-bad_cnt-etc_cnt)/total_evidence*100)
+		print('generate_Reviewer pair', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100, etc_cnt/total_evidence*100, (total_evidence-good_cnt-bad_cnt-etc_cnt)/total_evidence*100)
 		# print('generate_reviewer_follower', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100,  (total_evidence-good_cnt-bad_cnt)/total_evidence*100)
 		
 		return ret
@@ -303,16 +324,22 @@ class user2vec():
 		etc_cnt =0
 		min_fake = min(map(int,list(np.load(self.fake_user_id_list_path))))
 		max_fake = max(map(int,list(np.load(self.fake_user_id_list_path))))
-		# follower_tensor
-		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5, p=self.item_weight_list)
-		# sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5)
+		
+		# # follower_tensor
+		# # sample probability is propotional to the inverse of popularity
+		# sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample, p=self.item_weight_list)
+		
+		# uniform sample probability
+		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample)
+
 		for item_id in sampled_item_id_list:
 			try:
 				sample_follower_info = self.follower_tensor[item_id]
 			except Exception, ex:
 				continue
-			sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5, p=sample_follower_info.reviewer_weight_list)
-			# sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5)
+			# sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=1, p=sample_follower_info.reviewer_weight_list)
+			# uniform sample probability
+			sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=1)
 			
 			for idx in sample_reviewer_index_list:
 				sample_follower_id_list = np.random.choice(a=sample_follower_info.follower_2dlist[idx],size=1)
@@ -335,7 +362,7 @@ class user2vec():
 						etc_cnt+=1
 						# ret.pop()
 		total_evidence = len(ret)*1.0
-		print('generate_reviewer_follower', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100, etc_cnt/total_evidence*100, (total_evidence-good_cnt-bad_cnt-etc_cnt)/total_evidence*100)
+		print('generate_Reviewer_Follower', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100, etc_cnt/total_evidence*100, (total_evidence-good_cnt-bad_cnt-etc_cnt)/total_evidence*100)
 		# print('generate_reviewer_follower', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100,  (total_evidence-good_cnt-bad_cnt)/total_evidence*100)
 		return ret
 
@@ -347,16 +374,21 @@ class user2vec():
 		min_fake = min(map(int,list(np.load(self.fake_user_id_list_path))))
 		max_fake = max(map(int,list(np.load(self.fake_user_id_list_path))))
 
-		# follower_tensor
-		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5, p=self.item_weight_list)
-		# sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5)
+		# # follower_tensor
+		# # sample probability is propotional to the inverse of popularity
+		# sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample/5, p=self.item_weight_list)
+		
+		# uniform sample probability
+		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample)
+		
 		for item_id in sampled_item_id_list:
 			try:
 				sample_follower_info = self.follower_tensor[item_id]
 			except Exception, ex:
 				continue
-			sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5, p=sample_follower_info.reviewer_weight_list)
-			# sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=5)
+			# sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=1, p=sample_follower_info.reviewer_weight_list)
+			# uniform sample probability
+			sample_reviewer_index_list = np.random.choice(a=sample_follower_info.len_reviewer_list, size=1)
 			
 			for idx in sample_reviewer_index_list:
 				try:
@@ -378,9 +410,100 @@ class user2vec():
 				except Exception, ex:
 					pass
 		total_evidence = len(ret)*1.0
-		print('generate_reviewer_follower', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100, etc_cnt/total_evidence*100, (total_evidence-good_cnt-bad_cnt-etc_cnt)/total_evidence*100)
+		print('generate_Follower pair', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100, etc_cnt/total_evidence*100, (total_evidence-good_cnt-bad_cnt-etc_cnt)/total_evidence*100)
 		# print('generate_reviewer_follower', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100,  (total_evidence-good_cnt-bad_cnt)/total_evidence*100)
 		return ret
+
+	##################################################
+	############## enumerating all pair ##############
+	##################################################
+	def new_generate_reviewer_reviewer(self, num_sample):
+		ret=[]
+		good_cnt = 0
+		bad_cnt = 0
+		etc_cnt =0
+		min_fake = min(map(int,list(np.load(self.fake_user_id_list_path))))
+		max_fake = max(map(int,list(np.load(self.fake_user_id_list_path))))
+		
+		# sample probability is propotional to the inverse of popularity
+		sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample, p=self.reviewer_tensor_weight)
+
+		# # uniform sample probability
+		# sampled_item_id_list = np.random.choice(a=self.num_item, size=num_sample)
+		
+		for item_id in sampled_item_id_list:
+			try:
+				sample_reviewer_id_list = np.random.choice(a=self.reviewer_tensor[item_id], size=2)
+			except Exception, ex:
+				continue
+			ret.append(sample_reviewer_id_list)
+
+			is_follower_fake = (int(sample_reviewer_id_list[0])>=min_fake and int(sample_reviewer_id_list[0])<=max_fake)
+			is_reviewer_fake = (int(sample_reviewer_id_list[1])>=min_fake and int(sample_reviewer_id_list[1])<=max_fake)
+
+			if is_follower_fake and is_reviewer_fake:
+				good_cnt+=1
+			elif is_follower_fake and not is_reviewer_fake:
+				bad_cnt+=1
+			elif not is_follower_fake and is_reviewer_fake:
+				bad_cnt+=1
+			elif int(sample_reviewer_id_list[0])>max_fake or int(sample_reviewer_id_list[1])>max_fake:
+				etc_cnt+=1
+				# ret.pop()
+				
+		total_evidence = len(ret)*1.0
+		print('generate_Reviewer pair', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100, etc_cnt/total_evidence*100, (total_evidence-good_cnt-bad_cnt-etc_cnt)/total_evidence*100)
+		# print('generate_reviewer_follower', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100,  (total_evidence-good_cnt-bad_cnt)/total_evidence*100)
+		
+		return ret
+
+	def enumerate_reviewer_pair(self):
+		ret = []
+		return ret
+	def enumerate_follower_pair(self):
+		ret = []
+		return ret
+
+	def enumerate_reviewer_follower(self):
+		ret = []
+		# for stats
+		good_cnt = 0
+		bad_cnt = 0
+		etc_cnt =0
+		min_fake = min(map(int,list(np.load(self.fake_user_id_list_path))))
+		max_fake = max(map(int,list(np.load(self.fake_user_id_list_path))))
+
+		for row in self.maximum_helpfulness_rating_data:
+			follower_id = int(row[0])
+			review_id = int(row[1])
+			# helpful_vote = row[2]
+
+			reviewer_id, item_id = self.review_id_info[review_id]
+			ret.append([follower_id,reviewer_id])
+			ret.append([reviewer_id,follower_id])
+
+			is_follower_fake = (int(follower_id)>=min_fake and int(follower_id)<=max_fake)
+			is_reviewer_fake = (int(reviewer_id)>=min_fake and int(reviewer_id)<=max_fake)
+
+			if is_follower_fake and is_reviewer_fake:
+				good_cnt+=1
+			elif is_follower_fake and not is_reviewer_fake:
+				bad_cnt+=1
+			elif not is_follower_fake and is_reviewer_fake:
+				bad_cnt+=1
+			elif int(reviewer_id)>max_fake or int(follower_id)>max_fake:
+				etc_cnt+=1
+		total_evidence = len(ret)*1.0
+		print('generate_Reviewer_Follower', total_evidence, good_cnt/total_evidence*100, bad_cnt/total_evidence*100, etc_cnt/total_evidence*100, (total_evidence-good_cnt-bad_cnt-etc_cnt)/total_evidence*100)
+		# result
+		# 	('generate_Reviewer_Follower', 59212.0, good 0.5471863811389583, bad 0.0, only voter 31.128825238127405, normal voter 68.32398838073364)
+		# 	after 20~ actual word2vec iteration is 100
+		# 	fake-fake 0.998925349849 0.999381386031 0.999535296844 0.999648611035 0.99978642086
+		# 	fake-origin -0.625554980127 -0.25086028799 -0.124479815067 0.0644907673583 0.286812664282
+		# 	real vote (origin-helper) -0.703560157279 0.274187644612 0.461382565885 0.619609605674 0.774940525212
+		return ret
+
+
 
 	def get_string_sentence(self,train_data):
 		num_iter = len(train_data)
@@ -449,6 +572,7 @@ class user2vec():
 			pass
 		
 		self.similarity_test_on_real_vote(our_model, 5000)
+		self.new_similarity_test_on_real_vote(our_model,5000)
 
 	def similarity_test_on_real_vote(self, our_model, num_sample):
 		# for test, uniform !!!
@@ -477,6 +601,27 @@ class user2vec():
 		print 'real vote (origin-helper)',
 		print np.min(sim_list), np.percentile(sim_list, 25), np.median(sim_list), np.percentile(sim_list,75), np.percentile(sim_list, 95)
 		print ''
+
+	def new_similarity_test_on_real_vote(self, our_model, num_sample):
+		sim_list=[]
+		min_fake = min(map(int,list(np.load(self.fake_user_id_list_path))))
+		max_fake = max(map(int,list(np.load(self.fake_user_id_list_path))))
+		sample_index_list = np.random.choice(a=len(self.maximum_item_rating_data), size=num_sample)
+		for idx in sample_index_list:
+			row = self.maximum_helpfulness_rating_data[idx]
+			follower_id = int(row[0])
+			review_id = int(row[1])
+			# helpful_vote = row[2]
+
+			reviewer_id, item_id = self.review_id_info[review_id]
+			if follower_id<=max_fake and follower_id>=min_fake:
+				continue
+			sim_list.append(our_model.similarity(str(reviewer_id),str(follower_id)))
+		print 'real vote (origin-helper)',
+		print np.min(sim_list), np.percentile(sim_list, 25), np.median(sim_list), np.percentile(sim_list,75), np.percentile(sim_list, 95)
+		print ''
+
+
 	
 	def whole_process(self,iteration=10, type0_ratio=1, type1_ratio=1, type2_ratio=2):
 		self.construct_item_weight()
@@ -493,14 +638,18 @@ class user2vec():
 		# print("small test!!!!")
 		# batch_size=2e+3
 
-		for it in xrange(iteration):
-			for i in xrange(type0_ratio):
-				self.train_embedding_model(self.generate_reviewer_reviewer(batch_size))
-			for i in xrange(type1_ratio):
-				self.train_embedding_model(self.generate_reviewer_follower(batch_size))
-			for i in xrange(type2_ratio):
-				self.train_embedding_model(self.generate_follower_follower(batch_size))
-			self.similarity_test(self.user_embedding_model)	
+		# for it in xrange(iteration):
+		# 	for i in xrange(type0_ratio):
+		# 		self.train_embedding_model(self.generate_reviewer_reviewer(batch_size))
+		# 	for i in xrange(type1_ratio):
+		# 		self.train_embedding_model(self.generate_reviewer_follower(batch_size))
+		# 	for i in xrange(type2_ratio):
+		# 		self.train_embedding_model(self.generate_follower_follower(batch_size))
+		# 	self.similarity_test(self.user_embedding_model)	
+		for it in xrange(50):
+			self.train_embedding_model(self.enumerate_reviewer_follower())
+			if it>0 and it%10==0:
+				self.similarity_test(self.user_embedding_model)	
 		
 		self.save_embedding()
 

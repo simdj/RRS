@@ -1,0 +1,2084 @@
+Script started on 2016년 10월 17일 (월) 오후 10시 41분 15초
+]0;djsim@djsim-desktop: ~/RRS/final_codedjsim@djsim-desktop:~/RRS/final_code$ source activate tensorflow
+(tensorflow) ]0;djsim@djsim-desktop: ~/RRS/final_codedjsim@djsim-desktop:~/RRS/final_code$ python test_implementation.py ; exit;
+this is attack model bandwagon new!!!!!!!!!!!!!!!!!!
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcurand.so locally
+WMF validation!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_1%_0%_emb_32')
+('[1. preprocess]', 'Started')
+('get_enough_rating_review, current_num_data', 33911)
+('get_enough_rating_review, current_num_data', 30073)
+('get_enough_rating_review, current_num_data', 28933)
+('get_enough_rating_review, current_num_data', 28568)
+('get_enough_rating_review, current_num_data', 28462)
+('get_enough_rating_review, current_num_data', 28410)
+('get_enough_rating_review, current_num_data', 28386)
+('get_enough_rating_review, current_num_data', 28378)
+('get_enough_rating_review, current_num_data', 28374)
+('get_enough_rating_review, current_num_data', 28374)
+('[1. preprocess]', 'Elapsed: 5.4 sec')
+
+('[2. attack]', 'Started')
+num fake item is one!!!!!!!!!!!!!!
+('[Origin] Users x Items :', 1822, 2069, 'Reviews, Votes : ', 28374, 661040)
+('[Fake] Users x Items :', 18, 1, 'Reviews, Votes : ', 18, 324)
+('[Bandwagon] Filler size :', 20, 'Selected size : ', 0)
+('[2. attack]', 'Elapsed: 0.072 sec')
+
+('[3. User2Vec]', 'Started')
+('generate_reviewer_reviewer', 1000000.0, 0.24550000000000002, 1.1399, 0.0, 98.6146)
+('generate_reviewer_follower', 769365.0, 0.05731999766040826, 0.0, 62.86379026859813, 37.07888973374146)
+('generate_reviewer_follower', 439743.0, 0.07686307684261035, 0.0, 83.60428704948117, 16.318849873676218)
+('generate_reviewer_follower', 441429.0, 0.0953720756905414, 0.0, 83.62001590289718, 16.284612021412276)
+fake-fake 0.127406286061 0.452207115809 0.591095367096 0.716563270966 0.863454787582
+fake-origin -0.327420637347 0.233360672838 0.444745541358 0.621061841837 0.832375133559
+real vote (origin-helper) -0.527221721355 0.601908392958 0.782858913983 0.897470917855 0.956528562524
+
+('generate_reviewer_reviewer', 1000000.0, 0.2562, 1.1515, 0.0, 98.5923)
+('generate_reviewer_follower', 768720.0, 0.062051201998126755, 0.0, 63.26399729420336, 36.67395150379853)
+('generate_reviewer_follower', 440121.0, 0.09860924609368787, 0.0, 83.4879499046853, 16.413440849221008)
+('generate_reviewer_follower', 439741.0, 0.11324848035548198, 0.0, 83.60830579818574, 16.278445721458766)
+fake-fake 0.507976165269 0.743066743399 0.821178758317 0.87570988173 0.924130175612
+fake-origin -0.131953142942 0.521851017585 0.667807501927 0.752412882149 0.857736683363
+real vote (origin-helper) -0.422465959294 0.577008854068 0.719940148826 0.822330448498 0.906591353809
+
+('generate_reviewer_reviewer', 1000000.0, 0.2523, 1.1516, 0.0, 98.59609999999999)
+('generate_reviewer_follower', 768640.0, 0.059845961698584506, 0.0, 62.98657368859284, 36.953580349708574)
+('generate_reviewer_follower', 439404.0, 0.10741823014810972, 0.0, 83.55203867056285, 16.340543099289036)
+('generate_reviewer_follower', 439805.0, 0.10390968724775752, 0.0, 83.69777515035072, 16.19831516240152)
+fake-fake 0.627593421842 0.795513830337 0.833985179761 0.873793538855 0.908131004315
+fake-origin -0.09008443829 0.544769833228 0.654967781681 0.734504426039 0.82184532985
+real vote (origin-helper) -0.218253772296 0.548993051204 0.674344878152 0.781738689477 0.883171273904
+
+('generate_reviewer_reviewer', 1000000.0, 0.2605, 1.1442, 0.0, 98.5953)
+('generate_reviewer_follower', 769865.0, 0.07274002584868776, 0.0, 63.067810590168406, 36.859449383982906)
+('generate_reviewer_follower', 440080.0, 0.09111979640065443, 0.0, 83.61638792946738, 16.292492274131977)
+('generate_reviewer_follower', 438649.0, 0.111934599189785, 0.0, 83.53056772043251, 16.357497680377705)
+fake-fake 0.634298154921 0.786102199563 0.837278591041 0.871286664838 0.900714858341
+fake-origin -0.0838397948976 0.51853077984 0.6121173403 0.701080655562 0.77917056621
+real vote (origin-helper) -0.0476619774041 0.546877822194 0.670924565269 0.761253185747 0.882943466058
+
+('generate_reviewer_reviewer', 1000000.0, 0.2589, 1.1485, 0.0, 98.59259999999999)
+('generate_reviewer_follower', 767870.0, 0.05847343951450115, 0.0, 63.14206831885606, 36.79945824162944)
+('generate_reviewer_follower', 438722.0, 0.09504880083515302, 0.0, 83.43575202520047, 16.469199173964377)
+('generate_reviewer_follower', 439419.0, 0.10809728300323837, 0.0, 83.68277202396801, 16.20913069302875)
+fake-fake 0.647703357731 0.800823256812 0.843730615713 0.873061704877 0.8998264797
+fake-origin -0.136463612723 0.509872966598 0.593655821254 0.674778880226 0.754220087935
+real vote (origin-helper) -0.0730460480873 0.56204030397 0.670803730665 0.770507096244 0.884024642316
+
+('generate_reviewer_reviewer', 1000000.0, 0.2556, 1.1481, 0.0, 98.5963)
+('generate_reviewer_follower', 767765.0, 0.05444374255143175, 0.0, 63.09899513523018, 36.84656112221838)
+('generate_reviewer_follower', 439169.0, 0.10360476263124219, 0.0, 83.75841646382145, 16.137978773547314)
+('generate_reviewer_follower', 438019.0, 0.08629762635867394, 0.0, 83.67764868647251, 16.236053687168823)
+fake-fake 0.622423221428 0.793077190075 0.839868311169 0.870751737268 0.903425085277
+fake-origin -0.185192639027 0.483788728856 0.583050447434 0.650972866637 0.750800225164
+real vote (origin-helper) -0.0624058702732 0.562709721803 0.660302768459 0.75888495274 0.861515938102
+
+('generate_reviewer_reviewer', 1000000.0, 0.2589, 1.1507, 0.0, 98.5904)
+('generate_reviewer_follower', 767020.0, 0.05619149435477563, 0.0, 63.02351959531695, 36.92028891032829)
+('generate_reviewer_follower', 440878.0, 0.11409051937270628, 0.0, 83.52469390625072, 16.361215574376583)
+('generate_reviewer_follower', 439343.0, 0.10197044222850937, 0.0, 83.66515456033213, 16.23287499743936)
+fake-fake 0.606382050893 0.782736649779 0.826036459642 0.861682496343 0.896690817518
+fake-origin -0.12877327826 0.447973976429 0.565944207013 0.645764485582 0.729019263012
+real vote (origin-helper) -0.0365688429982 0.557248813962 0.658536810231 0.750843106248 0.867413165083
+
+('generate_reviewer_reviewer', 1000000.0, 0.2502, 1.1383, 0.0, 98.61149999999999)
+('generate_reviewer_follower', 767450.0, 0.049514626360023455, 0.0, 63.04879796729429, 36.90168740634569)
+('generate_reviewer_follower', 439801.0, 0.13460633331893287, 0.0, 83.54028299162576, 16.32511067505531)
+('generate_reviewer_follower', 440730.0, 0.09597712885440066, 0.0, 83.59335647675448, 16.310666394391124)
+fake-fake 0.61888864804 0.779947042607 0.818182516748 0.853262125903 0.888228055812
+fake-origin -0.268525449343 0.431340802124 0.523688978139 0.608532250769 0.695406736515
+real vote (origin-helper) -0.0545943215796 0.548132439849 0.662133626594 0.751909365431 0.867382955664
+
+('generate_reviewer_reviewer', 1000000.0, 0.251, 1.1627999999999998, 0.0, 98.5862)
+('generate_reviewer_follower', 766360.0, 0.05597891330445221, 0.0, 62.92734485098387, 37.01667623571168)
+('generate_reviewer_follower', 440713.0, 0.09824988144211766, 0.0, 83.49107015223059, 16.410679966327294)
+('generate_reviewer_follower', 440024.0, 0.09749468210824863, 0.0, 83.67566314564661, 16.226842172245153)
+fake-fake 0.597241650772 0.777140064725 0.823114404687 0.853582711636 0.896537788925
+fake-origin -0.268335695019 0.43904640632 0.524488764429 0.594355992274 0.688908422497
+real vote (origin-helper) 0.0257911933279 0.548001458408 0.655716254464 0.749826394399 0.857965706253
+
+('generate_reviewer_reviewer', 1000000.0, 0.24689999999999998, 1.1440000000000001, 0.0, 98.60910000000001)
+('generate_reviewer_follower', 767605.0, 0.04937435269441966, 0.0, 63.26222471192866, 36.68840093537692)
+('generate_reviewer_follower', 440567.0, 0.0937428359364183, 0.0, 83.54733786234557, 16.358919301718014)
+('generate_reviewer_follower', 440377.0, 0.1001414696952838, 0.0, 83.65718463952477, 16.242673890779947)
+fake-fake 0.561354823602 0.769674559759 0.811433667318 0.84182446295 0.8868428212
+fake-origin -0.0982287418263 0.407546513801 0.499446401994 0.587036796875 0.685089737496
+real vote (origin-helper) -0.084114783751 0.541402884903 0.643183199073 0.738507917434 0.862298729068
+
+fake-fake 0.561354823602 0.769674559759 0.811433667318 0.84182446295 0.8868428212
+fake-origin -0.338377854132 0.403058476688 0.495097122081 0.590313260867 0.682609355178
+real vote (origin-helper) 0.0260932016088 0.538378640577 0.648019010632 0.741175303605 0.854614134418
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768820.0, 0.0, 0.0, 63.04206446242293, 36.957935537577065)
+('generate_reviewer_follower', 439013.0, 0.0, 0.0, 83.7043549963213, 16.295645003678707)
+('generate_reviewer_follower', 439621.0, 0.0, 0.0, 83.73644571119215, 16.26355428880786)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6228262d8>)
+real vote (origin-helper) -0.699052347119 0.626912360412 0.800107252444 0.897363426881 0.953421235565
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767180.0, 0.0, 0.0, 62.97974399749733, 37.02025600250267)
+('generate_reviewer_follower', 439150.0, 0.0, 0.0, 83.61266082204259, 16.38733917795742)
+('generate_reviewer_follower', 436813.0, 0.0, 0.0, 83.66028483584509, 16.339715164154914)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe626e2d1b8>)
+real vote (origin-helper) -0.297358215202 0.591252972037 0.721096198493 0.820458431971 0.90816092614
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 766900.0, 0.0, 0.0, 62.96779241100534, 37.03220758899465)
+('generate_reviewer_follower', 440728.0, 0.0, 0.0, 83.63026628668929, 16.369733713310705)
+('generate_reviewer_follower', 439491.0, 0.0, 0.0, 83.70683358703592, 16.293166412964087)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe627597560>)
+real vote (origin-helper) -0.20741097057 0.562715912593 0.681979401241 0.776533575712 0.8804405689
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767655.0, 0.0, 0.0, 63.3026554897708, 36.69734451022921)
+('generate_reviewer_follower', 439280.0, 0.0, 0.0, 83.6088599526498, 16.39114004735021)
+('generate_reviewer_follower', 438575.0, 0.0, 0.0, 83.67394402325714, 16.326055976742857)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62753b680>)
+real vote (origin-helper) -0.100482592512 0.555443115994 0.678861608817 0.77332962598 0.878039089238
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767320.0, 0.0, 0.0, 63.10848146796643, 36.89151853203357)
+('generate_reviewer_follower', 440420.0, 0.0, 0.0, 83.53594296353481, 16.464057036465192)
+('generate_reviewer_follower', 440329.0, 0.0, 0.0, 83.53458436759786, 16.465415632402134)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62283e7e8>)
+real vote (origin-helper) -0.157429996704 0.558955080918 0.665374240143 0.763061175687 0.881432692197
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768875.0, 0.0, 0.0, 62.94794342383352, 37.05205657616648)
+('generate_reviewer_follower', 438804.0, 0.0, 0.0, 83.6252632154675, 16.3747367845325)
+('generate_reviewer_follower', 438053.0, 0.0, 0.0, 83.7170388058066, 16.282961194193398)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe61f771170>)
+real vote (origin-helper) -0.0373862665442 0.565076810923 0.678723173234 0.76875577829 0.867042585893
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767895.0, 0.0, 0.0, 63.012651469276406, 36.9873485307236)
+('generate_reviewer_follower', 438593.0, 0.0, 0.0, 83.60507349638503, 16.39492650361497)
+('generate_reviewer_follower', 441092.0, 0.0, 0.0, 83.77572025790539, 16.22427974209462)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe624acf3b0>)
+real vote (origin-helper) -0.154236670096 0.542742239851 0.663774370582 0.757562208386 0.876885417131
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769915.0, 0.0, 0.0, 63.265555288570816, 36.734444711429184)
+('generate_reviewer_follower', 439907.0, 0.0, 0.0, 83.81453352640445, 16.185466473595554)
+('generate_reviewer_follower', 439284.0, 0.0, 0.0, 83.70052175813369, 16.29947824186631)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6274c2ea8>)
+real vote (origin-helper) -0.0585332816168 0.554506654691 0.657188149619 0.750105887116 0.866576093722
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767100.0, 0.0, 0.0, 63.110285490809545, 36.889714509190455)
+('generate_reviewer_follower', 439810.0, 0.0, 0.0, 83.70114367567814, 16.298856324321868)
+('generate_reviewer_follower', 439666.0, 0.0, 0.0, 83.62006614111621, 16.37993385888379)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe626c7e128>)
+real vote (origin-helper) -0.175336656948 0.547170945369 0.656813818384 0.747664777285 0.862769610547
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 770990.0, 0.0, 0.0, 63.24427035370108, 36.75572964629891)
+('generate_reviewer_follower', 438666.0, 0.0, 0.0, 83.60096291939654, 16.399037080603467)
+('generate_reviewer_follower', 440858.0, 0.0, 0.0, 83.51963670841859, 16.480363291581416)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe61f75f5a8>)
+real vote (origin-helper) -0.169263908408 0.536805972568 0.648895096135 0.741053798219 0.857319963618
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6274bb050>)
+real vote (origin-helper) -0.123119200892 0.537066619231 0.64378818189 0.737699383653 0.853336986828
+
+('[3. User2Vec]', 'Elapsed: 2.5e+03 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+Clean and Robust
+{Helpful test}
+('origin helpful mean', 3.2738682150486218)
+Attacked and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+('target helpful mean', 4.375)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.75)
+('50', 3.4375, 1.2727272727272727)
+('90', 3.8672289156626514, 1.1313010156396035)
+Attacked and Robust
+{Helpful test}
+('origin helpful mean', 3.2737353715713344)
+('target helpful mean', 4.3416310084256038)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.7366524033702415)
+('50', 3.4375, 1.2630199297238121)
+('90', 3.8648648648648649, 1.1233590721101212)
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:925] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 1080
+major: 6 minor: 1 memoryClockRate (GHz) 1.7335
+pciBusID 0000:01:00.0
+Total memory: 7.92GiB
+Free memory: 7.81GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140924 1.54818 0.0491148 1.16202 0.906067
+Converged at iteration 14000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.014072 1.49454 0.0491211 1.17812 0.92311 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0139001 3.21389 0.0487545 1.16543 0.906665
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138584 3.20567 0.0487537 1.19563 0.937146
+Converged at iteration 24000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138518 3.20999 0.0487548 1.20361 0.943956 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138972 3.68437 0.0487659 1.16896 0.911948
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138543 3.51201 0.0487682 1.19206 0.93785
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138361 3.41013 0.0487624 1.20279 0.948289 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.013941 3.68281 0.0488549 1.17239 0.913785
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138678 3.49495 0.0488173 1.19722 0.941332
+Converged at iteration 25000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138355 3.43273 0.0487697 1.20438 0.948705 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737353715713344, 'Fake', 4.3416310084256038)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160497 1.48006 0.0491135 1.18407 0.92841
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159957 1.38415 0.0491139 1.21752 0.956786
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159805 1.33452 0.0491153 1.22682 0.964983 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0158432 3.23395 0.048754 1.18548 0.926885
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157893 3.24221 0.048754 1.21514 0.951449
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157713 3.23109 0.048754 1.2249 0.960541 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0158449 3.57127 0.0487939 1.18437 0.930312
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.015782 3.36874 0.0487875 1.20675 0.951642
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157597 3.25511 0.0487852 1.21631 0.958895
+Converged at iteration 31000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157588 3.24568 0.0487881 1.21701 0.959444 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160567 3.56299 0.0491632 1.1894 0.932915
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157721 3.34094 0.0487886 1.21282 0.956003
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157501 3.22726 0.0487861 1.22211 0.961843
+Converged at iteration 39000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157388 3.1551 0.0487846 1.22662 0.96457 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737353715713344, 'Fake', 4.3416310084256038)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140576 1.33037 0.0491168 1.10678 0.8666
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01402 1.2624 0.0491132 1.13526 0.897005
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140098 1.24775 0.0491132 1.14592 0.907383 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138657 2.78775 0.0487579 1.10731 0.866126
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138287 2.755 0.0487537 1.13502 0.8956
+Converged at iteration 25000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138212 2.75019 0.0487543 1.14415 0.904662 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138593 3.5918 0.048764 1.10811 0.868485
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0145627 3.42949 0.0501435 1.13469 0.895301
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138105 3.35113 0.048768 1.14275 0.902623 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138499 3.59671 0.0487624 1.10723 0.866605
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.013811 3.44116 0.0487611 1.1309 0.890618
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.013801 3.3659 0.0487605 1.14018 0.899405 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737353715713344, 'Fake', 4.3416310084256038)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159879 1.27194 0.0491135 1.1258 0.887376
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159403 1.24711 0.0491134 1.15197 0.912198
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159268 1.25118 0.0491135 1.1602 0.918995 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157811 2.79184 0.048754 1.12582 0.886211
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.015734 2.78208 0.0487539 1.15053 0.90998
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157206 2.78402 0.0487539 1.15781 0.916081 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157772 3.49906 0.0487846 1.12186 0.881962
+Converged at iteration 13000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157708 3.42181 0.0488233 1.13254 0.892168 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157677 3.50043 0.0487848 1.12159 0.881166
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0157148 3.28449 0.0487797 1.14575 0.904157
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0156987 3.18089 0.0487777 1.15399 0.911944 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737353715713344, 'Fake', 4.3416310084256038)
+
+
+('[5. Matrix factorization]', 'Elapsed: 3.4e+03 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_3%_0%_emb_32')
+('[1. preprocess]', 'Started')
+('get_enough_rating_review, current_num_data', 33911)
+('get_enough_rating_review, current_num_data', 30073)
+('get_enough_rating_review, current_num_data', 28933)
+('get_enough_rating_review, current_num_data', 28568)
+('get_enough_rating_review, current_num_data', 28462)
+('get_enough_rating_review, current_num_data', 28410)
+('get_enough_rating_review, current_num_data', 28386)
+('get_enough_rating_review, current_num_data', 28378)
+('get_enough_rating_review, current_num_data', 28374)
+('get_enough_rating_review, current_num_data', 28374)
+('[1. preprocess]', 'Elapsed: 5.4 sec')
+
+('[2. attack]', 'Started')
+num fake item is one!!!!!!!!!!!!!!
+('[Origin] Users x Items :', 1822, 2069, 'Reviews, Votes : ', 28374, 661040)
+('[Fake] Users x Items :', 18, 1, 'Reviews, Votes : ', 18, 324)
+('[Bandwagon] Filler size :', 62, 'Selected size : ', 0)
+('[2. attack]', 'Elapsed: 0.074 sec')
+
+('[3. User2Vec]', 'Started')
+('generate_reviewer_reviewer', 1000000.0, 0.5065, 3.216, 0.0, 96.2775)
+('generate_reviewer_follower', 767960.0, 0.06497734256992552, 0.0, 63.12646492004792, 36.80855773738215)
+('generate_reviewer_follower', 439452.0, 0.09307046048260105, 0.0, 83.63712077769586, 16.26980876182154)
+('generate_reviewer_follower', 438427.0, 0.1113070134822901, 0.0, 83.47501408444279, 16.413678902074917)
+fake-fake 0.642256928551 0.834523886586 0.898945888544 0.933446064143 0.95871620236
+fake-origin -0.41312739221 0.338506781116 0.588344696171 0.786865044803 0.893385372912
+real vote (origin-helper) -0.531547503022 0.631298730994 0.789825529583 0.898290009295 0.954697318122
+
+('generate_reviewer_reviewer', 1000000.0, 0.512, 3.2193, 0.0, 96.2687)
+('generate_reviewer_follower', 766555.0, 0.04722426962187971, 0.0, 63.145632081194435, 36.807143649183686)
+('generate_reviewer_follower', 439844.0, 0.10321841380125682, 0.0, 83.67944089268013, 16.21734069351861)
+('generate_reviewer_follower', 440004.0, 0.09295370042090526, 0.0, 83.78469286642849, 16.122353433150607)
+fake-fake 0.828856178907 0.903500962501 0.924774741404 0.938636867347 0.959456019526
+fake-origin -0.113187677676 0.66961633106 0.768248020972 0.82540861832 0.893902168759
+real vote (origin-helper) -0.276251998176 0.585921616259 0.73185748498 0.825702319619 0.902033223772
+
+('generate_reviewer_reviewer', 1000000.0, 0.5152, 3.2104, 0.0, 96.2744)
+('generate_reviewer_follower', 769545.0, 0.047430624589855044, 0.0, 63.055181958170095, 36.897387417240054)
+('generate_reviewer_follower', 440199.0, 0.10745140266106919, 0.0, 83.68056265461757, 16.21198594272136)
+('generate_reviewer_follower', 438620.0, 0.1137659021476449, 0.0, 83.49322876293832, 16.393005334914047)
+fake-fake 0.825332088664 0.883761857695 0.912006613115 0.929538756227 0.949726094373
+fake-origin -0.146813208946 0.585974230653 0.723330861044 0.789265673888 0.853350344077
+real vote (origin-helper) -0.155621671827 0.568069896256 0.683155081079 0.784047185923 0.876894608207
+
+('generate_reviewer_reviewer', 1000000.0, 0.507, 3.2197999999999998, 0.0, 96.2732)
+('generate_reviewer_follower', 767490.0, 0.06293241605753822, 0.0, 62.922643943243564, 37.0144236406989)
+('generate_reviewer_follower', 439362.0, 0.07920575743919592, 0.0, 83.51678115085055, 16.404013091710254)
+('generate_reviewer_follower', 440903.0, 0.10070242207469669, 0.0, 83.66534135626203, 16.233956221663266)
+fake-fake 0.795233240927 0.872007100139 0.893305468806 0.914099392455 0.932439775462
+fake-origin -0.122996945225 0.598375227111 0.715156751995 0.781588359311 0.851877382156
+real vote (origin-helper) -0.168495199902 0.554758904091 0.665790446488 0.765592605337 0.87511279478
+
+('generate_reviewer_reviewer', 1000000.0, 0.5203, 3.2098, 0.0, 96.26989999999999)
+('generate_reviewer_follower', 769095.0, 0.05916044181798087, 0.0, 63.17164979618902, 36.76918976199299)
+('generate_reviewer_follower', 438572.0, 0.11560245524110066, 0.0, 83.52083580347126, 16.363561741287633)
+('generate_reviewer_follower', 439923.0, 0.08637875264534929, 0.0, 83.53757362083819, 16.376047626516456)
+fake-fake 0.812511519661 0.86260464686 0.884792393548 0.90277885859 0.925618259169
+fake-origin -0.0700638260505 0.540980471367 0.643840174227 0.731645990004 0.81475472308
+real vote (origin-helper) -0.184016914832 0.558893860131 0.668596549771 0.771237549579 0.864500801637
+
+('generate_reviewer_reviewer', 1000000.0, 0.5034000000000001, 3.2342999999999997, 0.0, 96.2623)
+('generate_reviewer_follower', 768210.0, 0.06339412400255139, 0.0, 63.172570000390515, 36.76403587560693)
+('generate_reviewer_follower', 439815.0, 0.10868205950229073, 0.0, 83.5817332287439, 16.309584711753804)
+('generate_reviewer_follower', 439058.0, 0.0993035088758205, 0.0, 83.59146172031942, 16.309234770804768)
+fake-fake 0.81085255078 0.850265341066 0.874783819184 0.897079740571 0.921809171063
+fake-origin -0.0981203437183 0.532643114558 0.6371037828 0.72656276767 0.813164151043
+real vote (origin-helper) -0.194375429445 0.556109475499 0.661174899686 0.756267447118 0.860972470457
+
+('generate_reviewer_reviewer', 1000000.0, 0.5114, 3.2526, 0.0, 96.236)
+('generate_reviewer_follower', 767645.0, 0.054843058966058525, 0.0, 63.08163278598832, 36.863524155045624)
+('generate_reviewer_follower', 439518.0, 0.10807293444182035, 0.0, 83.45460254187542, 16.43732452368276)
+('generate_reviewer_follower', 439411.0, 0.10491316785424123, 0.0, 83.7122875849717, 16.182799247174056)
+fake-fake 0.800469129693 0.85075662684 0.87210443576 0.888492458633 0.919475036085
+fake-origin -0.512449806864 0.521132893739 0.630543558504 0.724340001222 0.798863251104
+real vote (origin-helper) -0.0625902135057 0.553239252842 0.660229714061 0.751965268822 0.865740387936
+
+('generate_reviewer_reviewer', 1000000.0, 0.49379999999999996, 3.2287000000000003, 0.0, 96.2775)
+('generate_reviewer_follower', 768040.0, 0.054684651841049946, 0.0, 63.147882922764445, 36.79743242539451)
+('generate_reviewer_follower', 440161.0, 0.09405649296507415, 0.0, 83.7250460626907, 16.18089744434423)
+('generate_reviewer_follower', 438288.0, 0.06890446464425218, 0.0, 83.64956375716423, 16.281531778191507)
+fake-fake 0.751384899167 0.827174769615 0.855287976626 0.879170446162 0.914186683033
+fake-origin -0.219729208378 0.485960228612 0.604732179088 0.701148783831 0.796360553648
+real vote (origin-helper) -0.248536196635 0.552452472446 0.655238850917 0.742925822204 0.870497781636
+
+('generate_reviewer_reviewer', 1000000.0, 0.49950000000000006, 3.2195, 0.0, 96.281)
+('generate_reviewer_follower', 768710.0, 0.06192192114061219, 0.0, 62.86688087835465, 37.07119720050474)
+('generate_reviewer_follower', 439406.0, 0.10741774122337883, 0.0, 83.46722620992885, 16.425356048847764)
+('generate_reviewer_follower', 438842.0, 0.0856800397409546, 0.0, 83.54760939016776, 16.366710570091286)
+fake-fake 0.755986079042 0.820530816919 0.846881310251 0.877163333736 0.905730027712
+fake-origin -0.353191917122 0.486170879418 0.614444909792 0.697527480033 0.772340039264
+real vote (origin-helper) -0.0870723230093 0.531202662029 0.641234311974 0.73514142822 0.862343881045
+
+('generate_reviewer_reviewer', 1000000.0, 0.5129, 3.2165, 0.0, 96.2706)
+('generate_reviewer_follower', 768690.0, 0.046182466273790475, 0.0, 63.10814502595324, 36.84567250777297)
+('generate_reviewer_follower', 439517.0, 0.09624201111674861, 0.0, 83.56332064516275, 16.34043734372049)
+('generate_reviewer_follower', 440504.0, 0.0896700143472023, 0.0, 83.42444109474602, 16.48588889090678)
+fake-fake 0.73704274908 0.818349610566 0.840470716503 0.87473171537 0.904875865493
+fake-origin -0.491575569616 0.452331203075 0.598789611036 0.694733114205 0.783433279111
+real vote (origin-helper) -0.05910093878 0.534877338818 0.635928217006 0.735161638885 0.846976169618
+
+fake-fake 0.73704274908 0.818349610566 0.840470716503 0.87473171537 0.904875865493
+fake-origin -0.298547180836 0.4835490172 0.598479641807 0.683215660771 0.778799279988
+real vote (origin-helper) 0.0101927463062 0.533776240429 0.642112955863 0.739930389728 0.869535799289
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768450.0, 0.0, 0.0, 63.07098705185764, 36.929012948142365)
+('generate_reviewer_follower', 439677.0, 0.0, 0.0, 83.63821623600963, 16.361783763990385)
+('generate_reviewer_follower', 438988.0, 0.0, 0.0, 83.75377003471621, 16.24622996528379)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe628750b90>)
+real vote (origin-helper) -0.555400178617 0.586047753869 0.793443557809 0.891954657488 0.953560080077
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767040.0, 0.0, 0.0, 63.10518356278681, 36.89481643721319)
+('generate_reviewer_follower', 437142.0, 0.0, 0.0, 83.72542560540968, 16.274574394590317)
+('generate_reviewer_follower', 439058.0, 0.0, 0.0, 83.6433910781719, 16.356608921828094)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe626374b90>)
+real vote (origin-helper) -0.270708089982 0.592487163417 0.71973237464 0.829241745753 0.916324691553
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767580.0, 0.0, 0.0, 63.181166783918286, 36.81883321608171)
+('generate_reviewer_follower', 440526.0, 0.0, 0.0, 83.69653550528233, 16.30346449471768)
+('generate_reviewer_follower', 440076.0, 0.0, 0.0, 83.56465701378852, 16.435342986211474)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe628ee2680>)
+real vote (origin-helper) -0.293537391155 0.555997400509 0.679367810726 0.781648986364 0.886464421683
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768770.0, 0.0, 0.0, 63.018978368042454, 36.981021631957546)
+('generate_reviewer_follower', 438195.0, 0.0, 0.0, 83.73075913691393, 16.26924086308607)
+('generate_reviewer_follower', 438393.0, 0.0, 0.0, 83.67400939339817, 16.325990606601838)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6232a5998>)
+real vote (origin-helper) -0.278736159169 0.548651078232 0.661815160365 0.76182884734 0.867049394878
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768275.0, 0.0, 0.0, 63.03823500699619, 36.96176499300381)
+('generate_reviewer_follower', 438272.0, 0.0, 0.0, 83.77012448890187, 16.22987551109813)
+('generate_reviewer_follower', 440160.0, 0.0, 0.0, 83.69274809160305, 16.307251908396946)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe623291f80>)
+real vote (origin-helper) -0.0368445283181 0.552521509353 0.665466267917 0.754306837099 0.871025833427
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768245.0, 0.0, 0.0, 63.10617055756953, 36.89382944243047)
+('generate_reviewer_follower', 438782.0, 0.0, 0.0, 83.57453131623448, 16.425468683765516)
+('generate_reviewer_follower', 438912.0, 0.0, 0.0, 83.65412656751239, 16.345873432487608)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6288037a0>)
+real vote (origin-helper) -0.171502697531 0.54488216484 0.664740852701 0.748003045853 0.868800230937
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769020.0, 0.0, 0.0, 63.20992952068867, 36.79007047931133)
+('generate_reviewer_follower', 438929.0, 0.0, 0.0, 83.84112236831014, 16.158877631689865)
+('generate_reviewer_follower', 440694.0, 0.0, 0.0, 83.6421644043259, 16.357835595674093)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62874b320>)
+real vote (origin-helper) -0.18623311885 0.553280744754 0.66157097219 0.756553213396 0.876275550894
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768270.0, 0.0, 0.0, 63.08120842932823, 36.91879157067177)
+('generate_reviewer_follower', 440058.0, 0.0, 0.0, 83.6957855555404, 16.304214444459593)
+('generate_reviewer_follower', 439574.0, 0.0, 0.0, 83.72719951589494, 16.272800484105066)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe626376bd8>)
+real vote (origin-helper) -0.173742954364 0.538477006047 0.650645808205 0.738660703872 0.86467253695
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768575.0, 0.0, 0.0, 63.01206778778909, 36.987932212210914)
+('generate_reviewer_follower', 439237.0, 0.0, 0.0, 83.77208659561923, 16.22791340438078)
+('generate_reviewer_follower', 438871.0, 0.0, 0.0, 83.69224669663751, 16.30775330336249)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6232c2950>)
+real vote (origin-helper) -0.157509647924 0.538719899582 0.644750453604 0.74335796644 0.844899048843
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768855.0, 0.0, 0.0, 63.13882331518948, 36.86117668481053)
+('generate_reviewer_follower', 439559.0, 0.0, 0.0, 83.72641670401471, 16.273583295985294)
+('generate_reviewer_follower', 439346.0, 0.0, 0.0, 83.77360895512876, 16.226391044871242)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe628eb5ab8>)
+real vote (origin-helper) -0.0185479489142 0.529284212703 0.637129326924 0.734409713744 0.847057437353
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6287cb4d0>)
+real vote (origin-helper) -0.0668023804321 0.542359996322 0.642387574641 0.734419650615 0.84308939763
+
+('[3. User2Vec]', 'Elapsed: 2.6e+03 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+Clean and Robust
+{Helpful test}
+('origin helpful mean', 3.2740955398868938)
+Attacked and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+('target helpful mean', 4.375)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.75)
+('50', 3.4375, 1.2727272727272727)
+('90', 3.8672289156626514, 1.1313010156396035)
+Attacked and Robust
+{Helpful test}
+('origin helpful mean', 3.2736985481743086)
+('target helpful mean', 4.308757861612146)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.7235031446448583)
+('50', 3.4375, 1.2534568324689879)
+('90', 3.8650774369875496, 1.1147921178444491)
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140924 1.54818 0.0491148 1.16202 0.906067
+Converged at iteration 14000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.014072 1.49454 0.0491211 1.17812 0.92311 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.013513 3.25683 0.0480577 1.16297 0.90591
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134725 3.02709 0.0480577 1.19447 0.938645
+Converged at iteration 21000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134713 3.01152 0.0480598 1.19709 0.941088 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159668 3.72898 0.0525143 1.16314 0.90711
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134652 3.44195 0.0480665 1.18859 0.936965
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134496 3.28341 0.0480659 1.19923 0.947912 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0138332 3.67246 0.0487567 1.16566 0.912463
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134461 3.41192 0.0480666 1.18502 0.933686
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134305 3.25483 0.0480659 1.19645 0.945387 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2736985481743086, 'Fake', 4.308757861612146)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160497 1.48006 0.0491135 1.18407 0.92841
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159957 1.38415 0.0491139 1.21752 0.956786
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159805 1.33452 0.0491153 1.22682 0.964983 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0154082 3.09295 0.0480581 1.18409 0.928245
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153593 2.8578 0.0480665 1.21366 0.954438
+Converged at iteration 20000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153593 2.8578 0.0480665 1.21366 0.954438 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0154078 3.52975 0.0480953 1.18214 0.92985
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153588 3.20271 0.0481041 1.20446 0.952502
+Converged at iteration 22000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153461 3.15913 0.0480945 1.20708 0.95478 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153881 3.49874 0.0480952 1.17827 0.926878
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153272 3.177 0.0480933 1.20149 0.949589
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153051 2.97695 0.048087 1.21317 0.959284
+Converged at iteration 34000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152987 2.91264 0.0480871 1.2161 0.961579 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2736985481743086, 'Fake', 4.308757861612146)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140576 1.33037 0.0491168 1.10678 0.8666
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01402 1.2624 0.0491132 1.13526 0.897005
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140098 1.24775 0.0491132 1.14592 0.907383 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134765 2.82864 0.0480578 1.10221 0.862206
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134416 2.59487 0.0480577 1.1277 0.890076
+Converged at iteration 25000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134339 2.52831 0.0480578 1.13552 0.89831 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134704 3.45086 0.0480667 1.10379 0.863525
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134324 3.17061 0.0480648 1.12965 0.889392
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134249 3.06438 0.0480675 1.13644 0.896127 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134741 3.40218 0.0481174 1.10344 0.8639
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134134 3.13489 0.048065 1.12664 0.887244
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134035 3.02355 0.0480643 1.13559 0.895627 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2736985481743086, 'Fake', 4.308757861612146)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159879 1.27194 0.0491135 1.1258 0.887376
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159403 1.24711 0.0491134 1.15197 0.912198
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159268 1.25118 0.0491135 1.1602 0.918995 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153437 2.65057 0.0480584 1.11824 0.880317
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152967 2.44688 0.048058 1.14297 0.905346
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152835 2.38489 0.0480589 1.14993 0.911557 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0168875 3.26495 0.0508628 1.11635 0.875348
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152855 2.93875 0.0480832 1.14206 0.901101
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152695 2.77909 0.0480812 1.14859 0.907786 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153454 3.20796 0.0481528 1.11904 0.879131
+Converged at iteration 19000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152738 2.92119 0.0480975 1.13945 0.898399 
+('U path: ', 'bandwagon_1%_3%_0%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2736985481743086, 'Fake', 4.308757861612146)
+
+
+('[5. Matrix factorization]', 'Elapsed: 3.3e+03 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_1%_1.1_emb_32')
+('[1. preprocess]', 'Started')
+('get_enough_rating_review, current_num_data', 33911)
+('get_enough_rating_review, current_num_data', 30073)
+('get_enough_rating_review, current_num_data', 28933)
+('get_enough_rating_review, current_num_data', 28568)
+('get_enough_rating_review, current_num_data', 28462)
+('get_enough_rating_review, current_num_data', 28410)
+('get_enough_rating_review, current_num_data', 28386)
+('get_enough_rating_review, current_num_data', 28378)
+('get_enough_rating_review, current_num_data', 28374)
+('get_enough_rating_review, current_num_data', 28374)
+('[1. preprocess]', 'Elapsed: 5.5 sec')
+
+('[2. attack]', 'Started')
+num fake item is one!!!!!!!!!!!!!!
+('[Origin] Users x Items :', 1822, 2069, 'Reviews, Votes : ', 28374, 661040)
+('[Fake] Users x Items :', 18, 1, 'Reviews, Votes : ', 18, 324)
+('[Bandwagon] Filler size :', 20, 'Selected size : ', 1)
+('[2. attack]', 'Elapsed: 0.072 sec')
+
+('[3. User2Vec]', 'Started')
+('generate_reviewer_reviewer', 1000000.0, 0.24689999999999998, 1.3390000000000002, 0.0, 98.4141)
+('generate_reviewer_follower', 769180.0, 0.04823318339010375, 0.0, 63.15205803583036, 36.79970878077953)
+('generate_reviewer_follower', 439272.0, 0.10016572875120654, 0.0, 83.56599100329636, 16.33384326795243)
+('generate_reviewer_follower', 438006.0, 0.1057063145253718, 0.0, 83.49794295055318, 16.396350734921437)
+fake-fake -0.13257309391 0.371358155581 0.622746912993 0.766508290543 0.855348394365
+fake-origin -0.317214475827 0.194895456225 0.401925861319 0.643337688676 0.821155948697
+real vote (origin-helper) -0.602856773751 0.626491478928 0.785039446223 0.883785299628 0.947804213192
+
+('generate_reviewer_reviewer', 1000000.0, 0.2486, 1.3368, 0.0, 98.4146)
+('generate_reviewer_follower', 768940.0, 0.04408666475927901, 0.0, 63.09959164564205, 36.85632168959867)
+('generate_reviewer_follower', 438916.0, 0.09227278112440648, 0.0, 83.70918353397917, 16.19854368489643)
+('generate_reviewer_follower', 440965.0, 0.08685496581361334, 0.0, 83.54722030093092, 16.365924733255476)
+fake-fake 0.640899665191 0.788916479103 0.8357582939 0.884413877614 0.917126191407
+fake-origin -0.192563057977 0.545991465258 0.664886392121 0.763176802735 0.855002553535
+real vote (origin-helper) -0.338759766312 0.584376656545 0.724170952864 0.817770563661 0.899435515316
+
+('generate_reviewer_reviewer', 1000000.0, 0.254, 1.3346, 0.0, 98.4114)
+('generate_reviewer_follower', 767855.0, 0.05886528055427131, 0.0, 63.14395295986872, 36.797181759577)
+('generate_reviewer_follower', 441428.0, 0.1003561169658472, 0.0, 83.48088476489937, 16.418759118134783)
+('generate_reviewer_follower', 439948.0, 0.10955840235664216, 0.0, 83.47713820724267, 16.41330339040068)
+fake-fake 0.76353186692 0.843203569368 0.870713624099 0.901813370594 0.929262292257
+fake-origin -0.215689587188 0.529632325994 0.672705627297 0.736910180975 0.815632358962
+real vote (origin-helper) -0.217604094504 0.554646371927 0.683070061385 0.779311530836 0.877099510384
+
+('generate_reviewer_reviewer', 1000000.0, 0.2476, 1.3176999999999999, 0.0, 98.43469999999999)
+('generate_reviewer_follower', 769020.0, 0.046942862344282334, 0.0, 63.0549270500117, 36.89813008764401)
+('generate_reviewer_follower', 439820.0, 0.09572097676322132, 0.0, 83.72038561229594, 16.18389341094084)
+('generate_reviewer_follower', 441126.0, 0.1022383627353636, 0.0, 83.50539301696114, 16.392368620303497)
+fake-fake 0.765400981239 0.846842970486 0.869760165409 0.895501043046 0.919100229581
+fake-origin -0.166468958656 0.546858018579 0.645236710291 0.736303900467 0.808261487974
+real vote (origin-helper) -0.253357634582 0.551414632944 0.678150671333 0.766264078278 0.872364107885
+
+('generate_reviewer_reviewer', 1000000.0, 0.2593, 1.3328, 0.0, 98.4079)
+('generate_reviewer_follower', 768105.0, 0.06392355211852546, 0.0, 62.9886538949753, 36.947422552906175)
+('generate_reviewer_follower', 440872.0, 0.10252408862436262, 0.0, 83.56779291948683, 16.329682991888802)
+('generate_reviewer_follower', 439660.0, 0.08233635081654005, 0.0, 83.50634581267343, 16.41131783651003)
+fake-fake 0.761860044192 0.845098690832 0.871537752468 0.895411252873 0.920924502279
+fake-origin -0.392463075532 0.536728062931 0.636341707645 0.727802166085 0.808204107842
+real vote (origin-helper) -0.0820800533191 0.561512374524 0.673001674757 0.765751883951 0.882488632639
+
+('generate_reviewer_reviewer', 1000000.0, 0.251, 1.3428, 0.0, 98.4062)
+('generate_reviewer_follower', 769535.0, 0.05392867121053623, 0.0, 63.17009622694224, 36.775975101847216)
+('generate_reviewer_follower', 440974.0, 0.0984185008639965, 0.0, 83.61263929392663, 16.288942205209377)
+('generate_reviewer_follower', 439759.0, 0.10073699458112285, 0.0, 83.52825070095211, 16.371012304466763)
+fake-fake 0.780800667448 0.851986685407 0.882122266019 0.9027873621 0.925295054322
+fake-origin -0.607257619854 0.508076555256 0.641362880769 0.716107033966 0.799031963859
+real vote (origin-helper) -0.0131055552928 0.551248287355 0.662129302765 0.759785472852 0.865755499177
+
+('generate_reviewer_reviewer', 1000000.0, 0.251, 1.34, 0.0, 98.409)
+('generate_reviewer_follower', 766785.0, 0.054252495810429256, 0.0, 63.154339221554935, 36.791408282634634)
+('generate_reviewer_follower', 438557.0, 0.10694162902427735, 0.0, 83.50089042017343, 16.392167950802293)
+('generate_reviewer_follower', 439247.0, 0.10062675442291012, 0.0, 83.54547669079129, 16.353896554785806)
+fake-fake 0.774568079967 0.84501436163 0.880183647792 0.904411088284 0.928600611787
+fake-origin 0.0289516493306 0.448006430085 0.594215067665 0.67705642753 0.770282706496
+real vote (origin-helper) -0.0584917027484 0.544928608826 0.653942023834 0.754086067683 0.872958358761
+
+('generate_reviewer_reviewer', 1000000.0, 0.24719999999999998, 1.3357, 0.0, 98.4171)
+('generate_reviewer_follower', 768795.0, 0.0617850012031816, 0.0, 63.07988475471355, 36.85833024408327)
+('generate_reviewer_follower', 439312.0, 0.12382998870961869, 0.0, 83.44251921185855, 16.433650799431838)
+('generate_reviewer_follower', 438435.0, 0.10674330288412194, 0.0, 83.69860982813873, 16.19464686897716)
+fake-fake 0.764292974842 0.846490254578 0.873572772621 0.897733029875 0.927449865493
+fake-origin -0.310277530997 0.466064096486 0.590213334176 0.689498400592 0.766989615783
+real vote (origin-helper) 0.00947532689641 0.540304752588 0.64728769863 0.741597851569 0.85691983109
+
+('generate_reviewer_reviewer', 1000000.0, 0.24009999999999998, 1.3457999999999999, 0.0, 98.4141)
+('generate_reviewer_follower', 767985.0, 0.06080847933227862, 0.0, 62.99680332298156, 36.94238819768616)
+('generate_reviewer_follower', 441109.0, 0.10042869222799808, 0.0, 83.65664722324867, 16.242924084523327)
+('generate_reviewer_follower', 438065.0, 0.09724584251195599, 0.0, 83.40086516841107, 16.501888989076964)
+fake-fake 0.725819082907 0.835306913156 0.870558958812 0.895445220077 0.922879228914
+fake-origin -0.288995624516 0.405528183486 0.543578248094 0.653164576279 0.753653810403
+real vote (origin-helper) -0.00658555452373 0.539171083008 0.647605450389 0.741304819258 0.854860996124
+
+('generate_reviewer_reviewer', 1000000.0, 0.24979999999999997, 1.3138, 0.0, 98.4364)
+('generate_reviewer_follower', 766395.0, 0.05206192629127278, 0.0, 63.17577750376764, 36.772160569941086)
+('generate_reviewer_follower', 437481.0, 0.11474784047764361, 0.0, 83.36842057140768, 16.516831588114684)
+('generate_reviewer_follower', 438991.0, 0.10774708365319562, 0.0, 83.56344435307331, 16.328808563273505)
+fake-fake 0.7623844562 0.845041647211 0.870501900562 0.896664584028 0.918977964641
+fake-origin -0.391252131831 0.412424620431 0.566541997949 0.666798104168 0.751820357228
+real vote (origin-helper) -0.193261825933 0.537592204428 0.641115786906 0.735896223742 0.857828436231
+
+fake-fake 0.7623844562 0.845041647211 0.870501900562 0.896664584028 0.918977964641
+fake-origin -0.167349127148 0.389318850386 0.562067455473 0.670365185247 0.742760388058
+real vote (origin-helper) -0.193261825933 0.547173212009 0.643831500842 0.73960032938 0.859136247408
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767940.0, 0.0, 0.0, 63.21965257702424, 36.78034742297575)
+('generate_reviewer_follower', 440988.0, 0.0, 0.0, 83.68277594855189, 16.31722405144811)
+('generate_reviewer_follower', 439334.0, 0.0, 0.0, 83.67483509129728, 16.325164908702718)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe622f76b00>)
+real vote (origin-helper) -0.569990844987 0.598989814121 0.779145701798 0.885805699591 0.948830030765
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768915.0, 0.0, 0.0, 63.21166838987404, 36.78833161012596)
+('generate_reviewer_follower', 440080.0, 0.0, 0.0, 83.65865297218687, 16.341347027813125)
+('generate_reviewer_follower', 438824.0, 0.0, 0.0, 83.55901226915574, 16.440987730844256)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62956ea28>)
+real vote (origin-helper) -0.322342529269 0.574672332674 0.717148559515 0.821059259184 0.904959124441
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767940.0, 0.0, 0.0, 63.10232570252884, 36.897674297471156)
+('generate_reviewer_follower', 438619.0, 0.0, 0.0, 83.66395436586195, 16.336045634138056)
+('generate_reviewer_follower', 438772.0, 0.0, 0.0, 83.60788746775091, 16.392112532249094)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62952ff80>)
+real vote (origin-helper) -0.214582446412 0.556549877714 0.690057659926 0.782488797083 0.888431148621
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769295.0, 0.0, 0.0, 63.06059444036423, 36.939405559635766)
+('generate_reviewer_follower', 440268.0, 0.0, 0.0, 83.6565455586143, 16.343454441385703)
+('generate_reviewer_follower', 437434.0, 0.0, 0.0, 83.65421983659249, 16.345780163407508)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe622f5dc20>)
+real vote (origin-helper) -0.325146568117 0.556599728065 0.67136733643 0.766680313608 0.872956733555
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767315.0, 0.0, 0.0, 63.13417566449242, 36.86582433550758)
+('generate_reviewer_follower', 438770.0, 0.0, 0.0, 83.62832463477449, 16.371675365225517)
+('generate_reviewer_follower', 441010.0, 0.0, 0.0, 83.82304256139317, 16.176957438606834)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe622f4cb90>)
+real vote (origin-helper) -0.323798593006 0.550991615093 0.674898277485 0.766079678031 0.874203119992
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767725.0, 0.0, 0.0, 62.96746882021558, 37.03253117978443)
+('generate_reviewer_follower', 439100.0, 0.0, 0.0, 83.78660897289912, 16.213391027100887)
+('generate_reviewer_follower', 439019.0, 0.0, 0.0, 83.53510895883777, 16.46489104116223)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6294e1cb0>)
+real vote (origin-helper) -0.0667562338441 0.555104206554 0.667747406475 0.758938602712 0.865937013326
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768040.0, 0.0, 0.0, 63.18316754335712, 36.816832456642885)
+('generate_reviewer_follower', 440382.0, 0.0, 0.0, 83.58198109822835, 16.418018901771646)
+('generate_reviewer_follower', 440268.0, 0.0, 0.0, 83.75057919267356, 16.249420807326448)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62980b368>)
+real vote (origin-helper) -0.0805504391589 0.548441790896 0.659339835097 0.755632483249 0.863571566722
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769000.0, 0.0, 0.0, 63.15721716514955, 36.84278283485046)
+('generate_reviewer_follower', 437761.0, 0.0, 0.0, 83.67122699372489, 16.328773006275114)
+('generate_reviewer_follower', 438367.0, 0.0, 0.0, 83.56901865332016, 16.430981346679836)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6298971b8>)
+real vote (origin-helper) -0.0956952392283 0.542398799951 0.656741671533 0.748111288153 0.860234586269
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768830.0, 0.0, 0.0, 63.17027171156172, 36.829728288438275)
+('generate_reviewer_follower', 438326.0, 0.0, 0.0, 83.68269279029764, 16.317307209702367)
+('generate_reviewer_follower', 439186.0, 0.0, 0.0, 83.73445419480583, 16.265545805194154)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe629584a28>)
+real vote (origin-helper) -0.263310957199 0.543686217823 0.656820527325 0.749753034199 0.859845114258
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769520.0, 0.0, 0.0, 63.015776068198356, 36.984223931801644)
+('generate_reviewer_follower', 440174.0, 0.0, 0.0, 83.68667844988573, 16.313321550114274)
+('generate_reviewer_follower', 438666.0, 0.0, 0.0, 83.78834922241523, 16.21165077758477)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe624c2d200>)
+real vote (origin-helper) -0.252191927871 0.539391488565 0.640979579031 0.740947296812 0.848897938664
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe629b34320>)
+real vote (origin-helper) -0.252191927871 0.522950920198 0.641066645014 0.739576576109 0.855816327955
+
+('[3. User2Vec]', 'Elapsed: 2.5e+03 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+Clean and Robust
+{Helpful test}
+('origin helpful mean', 3.2741775497528609)
+Attacked and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+('target helpful mean', 4.375)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.75)
+('50', 3.4375, 1.2727272727272727)
+('90', 3.8672289156626514, 1.1313010156396035)
+Attacked and Robust
+{Helpful test}
+('origin helpful mean', 3.2737047493090756)
+('target helpful mean', 4.1948638363666362)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.6779455345466545)
+('50', 3.4375, 1.2203240251248395)
+('90', 3.8656716417910446, 1.0851578263960024)
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140924 1.54818 0.0491148 1.16202 0.906067
+Converged at iteration 14000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.014072 1.49454 0.0491211 1.17812 0.923111 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0154324 3.24706 0.0518051 1.16421 0.90647
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.015391 3.19382 0.0518051 1.19668 0.939308
+Converged at iteration 25000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153824 3.1744 0.0518051 1.20633 0.947633 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.025455 3.57391 0.051817 1.16918 0.911967
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0254094 3.43717 0.0518142 1.19225 0.936345
+Converged at iteration 21000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0254074 3.42669 0.0518155 1.19361 0.937789 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0225576 3.50988 0.0518169 1.16789 0.911783
+Converged at iteration 18000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0225226 3.40215 0.0518264 1.18887 0.934039 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737047493090756, 'Fake', 4.1948638363666362)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160497 1.48006 0.0491135 1.18407 0.92841
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159957 1.38415 0.0491139 1.21752 0.956786
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159805 1.33452 0.0491153 1.22682 0.964983 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0173743 3.23706 0.0518055 1.18595 0.92872
+Converged at iteration 19000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0173275 3.15584 0.0518114 1.21625 0.95471 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0274008 3.49234 0.0518438 1.18508 0.929146
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.027338 3.35788 0.0518375 1.20808 0.951487
+Converged at iteration 22000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0273654 3.3476 0.051901 1.2117 0.954759 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0245038 3.43376 0.0518474 1.18621 0.931154
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0244406 3.2861 0.0518382 1.21131 0.95435
+Converged at iteration 21000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0244396 3.27709 0.0518379 1.21299 0.955707 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737047493090756, 'Fake', 4.1948638363666362)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140576 1.33037 0.0491168 1.10678 0.8666
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01402 1.2624 0.0491132 1.13526 0.897005
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140098 1.24775 0.0491132 1.14592 0.907383 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153999 2.85813 0.0518101 1.10529 0.865267
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153628 2.80082 0.0518069 1.1343 0.896
+Converged at iteration 20000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153628 2.80082 0.0518069 1.1343 0.896 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0254163 3.5951 0.0518136 1.10718 0.868365
+Converged at iteration 12000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0254118 3.56413 0.051829 1.1146 0.875806 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0225194 3.50621 0.0518137 1.10606 0.866843
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0224811 3.38315 0.0518123 1.13143 0.891303
+Converged at iteration 20000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0224811 3.38315 0.0518123 1.13143 0.891303 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737047493090756, 'Fake', 4.1948638363666362)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159879 1.27194 0.0491135 1.1258 0.887376
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159403 1.24711 0.0491134 1.15197 0.912198
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159268 1.25118 0.0491135 1.1602 0.918995 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0173203 2.86526 0.0518181 1.12441 0.885694
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0172657 2.81819 0.0518055 1.15095 0.911045
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.017252 2.81188 0.0518053 1.15794 0.916458 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.027333 3.52355 0.0518341 1.12233 0.882791
+Converged at iteration 18000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0273127 3.36578 0.0518885 1.14598 0.904821 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0244412 3.43259 0.0518376 1.12296 0.882806
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0243826 3.22394 0.0518298 1.14733 0.90494
+Converged at iteration 23000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0243752 3.17223 0.0518293 1.15082 0.907926 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737047493090756, 'Fake', 4.1948638363666362)
+
+
+('[5. Matrix factorization]', 'Elapsed: 2.8e+03 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_3%_1.1_emb_32')
+('[1. preprocess]', 'Started')
+('get_enough_rating_review, current_num_data', 33911)
+('get_enough_rating_review, current_num_data', 30073)
+('get_enough_rating_review, current_num_data', 28933)
+('get_enough_rating_review, current_num_data', 28568)
+('get_enough_rating_review, current_num_data', 28462)
+('get_enough_rating_review, current_num_data', 28410)
+('get_enough_rating_review, current_num_data', 28386)
+('get_enough_rating_review, current_num_data', 28378)
+('get_enough_rating_review, current_num_data', 28374)
+('get_enough_rating_review, current_num_data', 28374)
+('[1. preprocess]', 'Elapsed: 5.2 sec')
+
+('[2. attack]', 'Started')
+num fake item is one!!!!!!!!!!!!!!
+('[Origin] Users x Items :', 1822, 2069, 'Reviews, Votes : ', 28374, 661040)
+('[Fake] Users x Items :', 18, 1, 'Reviews, Votes : ', 18, 324)
+('[Bandwagon] Filler size :', 62, 'Selected size : ', 1)
+('[2. attack]', 'Elapsed: 0.075 sec')
+
+('[3. User2Vec]', 'Started')
+('generate_reviewer_reviewer', 1000000.0, 0.4897, 3.3045, 0.0, 96.2058)
+('generate_reviewer_follower', 767785.0, 0.06421068398054143, 0.0, 63.12144675918388, 36.81434255683557)
+('generate_reviewer_follower', 439206.0, 0.10678360495985939, 0.0, 83.55600788695965, 16.337208508080494)
+('generate_reviewer_follower', 439991.0, 0.08909273144223405, 0.0, 83.44761597396311, 16.46329129459466)
+fake-fake 0.170765220644 0.702263945051 0.841619079587 0.910879971373 0.948469664064
+fake-origin -0.30858783295 0.358941616658 0.556019074189 0.751891034677 0.891696344588
+real vote (origin-helper) -0.698402898436 0.603730898346 0.79288626786 0.895317135401 0.959565311297
+
+('generate_reviewer_reviewer', 1000000.0, 0.49950000000000006, 3.3318, 0.0, 96.1687)
+('generate_reviewer_follower', 769240.0, 0.060059279288648536, 0.0, 63.079273048723415, 36.86066767198793)
+('generate_reviewer_follower', 438936.0, 0.10297628811489602, 0.0, 83.68053657025169, 16.216487141633404)
+('generate_reviewer_follower', 440548.0, 0.10214550968339431, 0.0, 83.59792803508358, 16.299926455233027)
+fake-fake 0.830879804828 0.912495382766 0.93213601437 0.946824358141 0.960780004007
+fake-origin -0.414406862729 0.621626091142 0.738283616537 0.820078977231 0.894839704001
+real vote (origin-helper) -0.365835336132 0.575247468113 0.720710520073 0.824863544903 0.906901395871
+
+('generate_reviewer_reviewer', 1000000.0, 0.48919999999999997, 3.2931000000000004, 0.0, 96.2177)
+('generate_reviewer_follower', 768170.0, 0.05584701303096971, 0.0, 63.15372899228036, 36.79042399468867)
+('generate_reviewer_follower', 439723.0, 0.10506614391332725, 0.0, 83.57738849230083, 16.317545363785836)
+('generate_reviewer_follower', 439332.0, 0.09969681243342166, 0.0, 83.6931978549252, 16.207105332641376)
+fake-fake 0.858624663207 0.907698326121 0.920194302103 0.936384795713 0.954146803051
+fake-origin -0.397897943517 0.634491542356 0.730946230366 0.806268850424 0.871280155757
+real vote (origin-helper) -0.224692000164 0.578279286569 0.693851381074 0.787013656585 0.88403481639
+
+('generate_reviewer_reviewer', 1000000.0, 0.48360000000000003, 3.3078000000000003, 0.0, 96.2086)
+('generate_reviewer_follower', 769140.0, 0.05421639753490912, 0.0, 62.88842083365837, 37.05736276880672)
+('generate_reviewer_follower', 440466.0, 0.10874846185630672, 0.0, 83.52426748035036, 16.36698405779334)
+('generate_reviewer_follower', 439090.0, 0.10498986540344805, 0.0, 83.49153931995718, 16.403470814639366)
+fake-fake 0.818707701473 0.882292872015 0.905189212048 0.921209234626 0.943467964243
+fake-origin -0.37100578489 0.61372760197 0.719295706123 0.782982044152 0.853917376865
+real vote (origin-helper) -0.101146513338 0.55653566263 0.668881852345 0.772154552699 0.885108550163
+
+('generate_reviewer_reviewer', 1000000.0, 0.4861, 3.3116, 0.0, 96.2023)
+('generate_reviewer_follower', 767570.0, 0.07022160845264927, 0.0, 63.14238440793674, 36.78739398361061)
+('generate_reviewer_follower', 440482.0, 0.06992340209134539, 0.0, 83.57912468613927, 16.35095191176938)
+('generate_reviewer_follower', 441167.0, 0.10086883198425992, 0.0, 83.54886018219858, 16.35027098581716)
+fake-fake 0.801216991969 0.87657302559 0.898142987154 0.916317490938 0.93383905857
+fake-origin -0.0680439898702 0.572239416195 0.70221361219 0.768605556654 0.836265848035
+real vote (origin-helper) -0.115702790502 0.562667799849 0.667898120546 0.769167629303 0.876695174802
+
+('generate_reviewer_reviewer', 1000000.0, 0.4972, 3.2862, 0.0, 96.2166)
+('generate_reviewer_follower', 769460.0, 0.06017206872352039, 0.0, 62.923348842045066, 37.01647908923141)
+('generate_reviewer_follower', 440964.0, 0.09592619805698424, 0.0, 83.51815567710743, 16.385918124835587)
+('generate_reviewer_follower', 438938.0, 0.10365928673297822, 0.0, 83.57490123889934, 16.321439474367676)
+fake-fake 0.794103782909 0.870973918621 0.890982372597 0.91495800751 0.937266620096
+fake-origin -0.288155704665 0.547866897143 0.662812977745 0.754269583903 0.821583312414
+real vote (origin-helper) -0.0896339345902 0.557583508527 0.664284799834 0.764365761144 0.876665621563
+
+('generate_reviewer_reviewer', 1000000.0, 0.5026, 3.2936, 0.0, 96.2038)
+('generate_reviewer_follower', 769100.0, 0.06670133922766872, 0.0, 63.14744506566117, 36.78585359511117)
+('generate_reviewer_follower', 438578.0, 0.10260432579837567, 0.0, 83.73630232250592, 16.16109335169571)
+('generate_reviewer_follower', 439640.0, 0.09803475570921663, 0.0, 83.48284960422163, 16.419115640069148)
+fake-fake 0.78940601262 0.861434352205 0.885952655916 0.908760899044 0.928459318901
+fake-origin -0.265619316724 0.521245532286 0.647435146935 0.737270507611 0.811583379426
+real vote (origin-helper) -0.140011128044 0.542250952933 0.656333509918 0.751164578741 0.867161021814
+
+('generate_reviewer_reviewer', 1000000.0, 0.503, 3.2936, 0.0, 96.20339999999999)
+('generate_reviewer_follower', 768795.0, 0.05814293797436247, 0.0, 63.0889899127856, 36.85286714924004)
+('generate_reviewer_follower', 439375.0, 0.10788051209103841, 0.0, 83.60307254623044, 16.28904694167852)
+('generate_reviewer_follower', 438261.0, 0.10678568250426115, 0.0, 83.65540168986061, 16.237812627635133)
+fake-fake 0.796756866032 0.860104901779 0.886495034804 0.912164466747 0.932542770785
+fake-origin -0.234816891026 0.498082736533 0.640923121376 0.734238844033 0.81683099475
+real vote (origin-helper) -0.150197528712 0.54584588466 0.648361369619 0.74576185934 0.864105915028
+
+('generate_reviewer_reviewer', 1000000.0, 0.4903, 3.3146, 0.0, 96.1951)
+('generate_reviewer_follower', 768565.0, 0.05360639633602883, 0.0, 63.11944988387449, 36.826943719789476)
+('generate_reviewer_follower', 439832.0, 0.0893522981502028, 0.0, 83.6155623056076, 16.2950853962422)
+('generate_reviewer_follower', 439286.0, 0.09424384114221715, 0.0, 83.69991304070696, 16.205843118150817)
+fake-fake 0.763737245955 0.854729415565 0.884336405716 0.909974374548 0.927980706394
+fake-origin -0.225307610501 0.499037315077 0.639506383036 0.714741301674 0.782904343486
+real vote (origin-helper) -0.145365128818 0.546596006535 0.651284206082 0.7458765517 0.86530159839
+
+('generate_reviewer_reviewer', 1000000.0, 0.49760000000000004, 3.2994000000000003, 0.0, 96.203)
+('generate_reviewer_follower', 768670.0, 0.051647651137679364, 0.0, 63.000507369872636, 36.947844978989686)
+('generate_reviewer_follower', 440714.0, 0.10074560826295512, 0.0, 83.59003798381717, 16.309216407919873)
+('generate_reviewer_follower', 440552.0, 0.10872723310755598, 0.0, 83.58150683687737, 16.30976593001507)
+fake-fake 0.776260244098 0.844686267188 0.879474097671 0.903894403051 0.921543221979
+fake-origin -0.349979392356 0.465566820175 0.59750065349 0.702244647596 0.794345396191
+real vote (origin-helper) -0.0332157999447 0.544842425932 0.641803103635 0.740682753161 0.846113664709
+
+fake-fake 0.776260244098 0.844686267188 0.879474097671 0.903894403051 0.921543221979
+fake-origin -0.141750269945 0.441189877246 0.614659193464 0.706355694632 0.784639973781
+real vote (origin-helper) -0.128741853472 0.529766785555 0.63817506398 0.736562135805 0.850262929232
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769005.0, 0.0, 0.0, 63.046534157775305, 36.953465842224695)
+('generate_reviewer_follower', 439351.0, 0.0, 0.0, 83.66545199623991, 16.33454800376009)
+('generate_reviewer_follower', 439931.0, 0.0, 0.0, 83.74836053835715, 16.251639461642846)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62a75a518>)
+real vote (origin-helper) -0.77092694105 0.617875234143 0.787957809142 0.886600040302 0.952651940922
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769120.0, 0.0, 0.0, 63.17037653422093, 36.82962346577907)
+('generate_reviewer_follower', 439380.0, 0.0, 0.0, 83.6028039510219, 16.397196048978106)
+('generate_reviewer_follower', 438431.0, 0.0, 0.0, 83.69868918940494, 16.301310810595055)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6249ec440>)
+real vote (origin-helper) -0.294451891747 0.590098109711 0.719695350772 0.819820745822 0.909597916767
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767385.0, 0.0, 0.0, 63.17624139121823, 36.82375860878177)
+('generate_reviewer_follower', 440923.0, 0.0, 0.0, 83.50959237780746, 16.49040762219254)
+('generate_reviewer_follower', 439737.0, 0.0, 0.0, 83.60701965038193, 16.392980349618067)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe622bfea70>)
+real vote (origin-helper) -0.190651972876 0.561064737949 0.683984531833 0.786889188614 0.882451289121
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768080.0, 0.0, 0.0, 63.091995625455674, 36.90800437454432)
+('generate_reviewer_follower', 439664.0, 0.0, 0.0, 83.62636012955348, 16.373639870446524)
+('generate_reviewer_follower', 440626.0, 0.0, 0.0, 83.64327116420729, 16.356728835792715)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe622b44248>)
+real vote (origin-helper) -0.108276808588 0.565259559179 0.678166105657 0.783448437985 0.877534212833
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769360.0, 0.0, 0.0, 63.11102734740564, 36.88897265259436)
+('generate_reviewer_follower', 441871.0, 0.0, 0.0, 83.66989460724963, 16.330105392750376)
+('generate_reviewer_follower', 439183.0, 0.0, 0.0, 83.67468686174101, 16.325313138258995)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62491c200>)
+real vote (origin-helper) -0.115011291239 0.557914241872 0.66575660755 0.768948030493 0.870097402999
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769465.0, 0.0, 0.0, 63.204564210198, 36.795435789802006)
+('generate_reviewer_follower', 439641.0, 0.0, 0.0, 83.81201935215323, 16.187980647846768)
+('generate_reviewer_follower', 440140.0, 0.0, 0.0, 83.69268868996228, 16.307311310037715)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62a988d40>)
+real vote (origin-helper) -0.0573950673686 0.555280969262 0.655034520301 0.756647322751 0.876173762677
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768395.0, 0.0, 0.0, 63.232582200560906, 36.76741779943909)
+('generate_reviewer_follower', 439853.0, 0.0, 0.0, 83.5672372360766, 16.4327627639234)
+('generate_reviewer_follower', 440155.0, 0.0, 0.0, 83.61463575331418, 16.38536424668583)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe622b1a710>)
+real vote (origin-helper) -0.0669841683723 0.559490335347 0.672259144486 0.766646933509 0.869687569623
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768565.0, 0.0, 0.0, 63.148595109066896, 36.851404890933104)
+('generate_reviewer_follower', 441058.0, 0.0, 0.0, 83.66405325376708, 16.33594674623292)
+('generate_reviewer_follower', 439131.0, 0.0, 0.0, 83.62834780509688, 16.371652194903117)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62a406050>)
+real vote (origin-helper) -0.0506199653273 0.552614777651 0.659753543874 0.754739534811 0.862369694872
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 766420.0, 0.0, 0.0, 62.98061115315362, 37.01938884684638)
+('generate_reviewer_follower', 438737.0, 0.0, 0.0, 83.6526210463216, 16.347378953678398)
+('generate_reviewer_follower', 439995.0, 0.0, 0.0, 83.59481357742702, 16.405186422572985)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe624f61368>)
+real vote (origin-helper) -0.127546958949 0.533860770288 0.645248570892 0.741977050749 0.85368422262
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768375.0, 0.0, 0.0, 63.007906295754026, 36.992093704245974)
+('generate_reviewer_follower', 440485.0, 0.0, 0.0, 83.73747119652202, 16.262528803477984)
+('generate_reviewer_follower', 440289.0, 0.0, 0.0, 83.74703887673778, 16.25296112326222)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62a947290>)
+real vote (origin-helper) 0.0894729027786 0.546260004742 0.640149869383 0.738079216757 0.848470522567
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62a9296c8>)
+real vote (origin-helper) -0.0444718101316 0.537593461781 0.641963928544 0.742971356181 0.853716085249
+
+('[3. User2Vec]', 'Elapsed: 2.5e+03 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+Clean and Robust
+{Helpful test}
+('origin helpful mean', 3.2743895906311069)
+Attacked and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+('target helpful mean', 4.375)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.75)
+('50', 3.4375, 1.2727272727272727)
+('90', 3.8672289156626514, 1.1313010156396035)
+Attacked and Robust
+{Helpful test}
+('origin helpful mean', 3.2737666065713649)
+('target helpful mean', 4.1377335085650051)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.6550934034260021)
+('50', 3.4375, 1.2037042934007287)
+('90', 3.8648650013003594, 1.0706023385481349)
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140924 1.54818 0.0491148 1.16202 0.906067
+Converged at iteration 14000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.014072 1.49454 0.0491211 1.17812 0.923111 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0135338 3.33889 0.0481044 1.1675 0.908105
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134632 3.09206 0.0480415 1.20065 0.938948
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134533 3.00411 0.0480417 1.21215 0.949275 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0135006 3.6298 0.0480535 1.17046 0.913259
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134555 3.3347 0.0480504 1.19618 0.94222
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134397 3.1642 0.0480498 1.20854 0.954565 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134913 3.61835 0.0480534 1.17001 0.913838
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134465 3.31718 0.0480505 1.19556 0.940973
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134309 3.14908 0.04805 1.20754 0.953646 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737666065713649, 'Fake', 4.1377335085650051)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160497 1.48006 0.0491135 1.18407 0.92841
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159957 1.38415 0.0491139 1.21752 0.956786
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159805 1.33452 0.0491153 1.22682 0.964983 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153974 3.16898 0.0480419 1.18934 0.928826
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153438 2.92204 0.0480418 1.22068 0.95671
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153278 2.82147 0.0480436 1.22914 0.964298 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0165142 3.4128 0.0502429 1.19057 0.936741
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153339 3.08032 0.0480736 1.21263 0.958404
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155155 2.88539 0.0484947 1.22379 0.968317
+Converged at iteration 39000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153009 2.77017 0.0480712 1.22584 0.968303 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01539 3.40923 0.0480909 1.18824 0.933962
+Converged at iteration 19000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.015333 3.08696 0.0480775 1.21207 0.958533 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737666065713649, 'Fake', 4.1377335085650051)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140576 1.33037 0.0491168 1.10678 0.8666
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01402 1.2624 0.0491132 1.13526 0.897005
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140098 1.24775 0.0491132 1.14592 0.907383 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134676 2.98582 0.0480416 1.10298 0.863112
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134327 2.72904 0.0480415 1.13125 0.891955
+Converged at iteration 25000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134249 2.6518 0.0480415 1.14015 0.900605 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0135736 3.52064 0.048252 1.10681 0.865499
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134231 3.23736 0.0480488 1.13259 0.892201
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134132 3.10835 0.048048 1.14162 0.900934 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134519 3.32223 0.0480504 1.10514 0.86496
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.013414 3.00152 0.0480489 1.12962 0.88963
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0134007 2.78771 0.048048 1.14265 0.902062 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737666065713649, 'Fake', 4.1377335085650051)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159879 1.27194 0.0491135 1.1258 0.887376
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159403 1.24711 0.0491134 1.15197 0.912198
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159268 1.25118 0.0491135 1.1602 0.918995 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153337 2.79818 0.0480417 1.12112 0.8822
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152861 2.55941 0.0480417 1.14804 0.906907
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152744 2.48966 0.0480425 1.15559 0.913319 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0154051 3.33944 0.0481967 1.12315 0.882219
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152746 2.96479 0.0480678 1.14644 0.904898
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152566 2.73018 0.0480678 1.15456 0.912329 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0153181 3.12031 0.0480727 1.11997 0.87991
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152655 2.70029 0.0480679 1.14482 0.903058
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152484 2.52165 0.0480703 1.15444 0.91186 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2737666065713649, 'Fake', 4.1377335085650051)
+
+
+('[5. Matrix factorization]', 'Elapsed: 3.5e+03 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_1%_1%_emb_32')
+('[1. preprocess]', 'Started')
+('get_enough_rating_review, current_num_data', 33911)
+('get_enough_rating_review, current_num_data', 30073)
+('get_enough_rating_review, current_num_data', 28933)
+('get_enough_rating_review, current_num_data', 28568)
+('get_enough_rating_review, current_num_data', 28462)
+('get_enough_rating_review, current_num_data', 28410)
+('get_enough_rating_review, current_num_data', 28386)
+('get_enough_rating_review, current_num_data', 28378)
+('get_enough_rating_review, current_num_data', 28374)
+('get_enough_rating_review, current_num_data', 28374)
+('[1. preprocess]', 'Elapsed: 5.5 sec')
+
+('[2. attack]', 'Started')
+num fake item is one!!!!!!!!!!!!!!
+('[Origin] Users x Items :', 1822, 2069, 'Reviews, Votes : ', 28374, 661040)
+('[Fake] Users x Items :', 18, 1, 'Reviews, Votes : ', 18, 324)
+('[Bandwagon] Filler size :', 20, 'Selected size : ', 20)
+('[2. attack]', 'Elapsed: 0.41 sec')
+
+('[3. User2Vec]', 'Started')
+('generate_reviewer_reviewer', 1000000.0, 1.0463, 5.3595, 0.0, 93.5942)
+('generate_reviewer_follower', 765995.0, 0.06148865201469983, 0.0, 63.19101299616838, 36.747498351816915)
+('generate_reviewer_follower', 440212.0, 0.09154680017809601, 0.0, 83.49954113018273, 16.40891206963917)
+('generate_reviewer_follower', 440626.0, 0.10530472554955903, 0.0, 83.50029276529301, 16.394402509157427)
+fake-fake 0.81886204289 0.919716579217 0.94520568111 0.957422588683 0.975059622731
+fake-origin -0.516412284079 0.461914649531 0.690923127026 0.820017841003 0.90553837598
+real vote (origin-helper) -0.606689832741 0.595915779369 0.782911558733 0.893561931616 0.954479187041
+
+('generate_reviewer_reviewer', 1000000.0, 1.0413999999999999, 5.3335, 0.0, 93.6251)
+('generate_reviewer_follower', 768645.0, 0.05490180772658379, 0.0, 63.12419907759759, 36.820899114675825)
+('generate_reviewer_follower', 439879.0, 0.0866147281411479, 0.0, 83.49114188219943, 16.422243389659428)
+('generate_reviewer_follower', 440735.0, 0.10074080796850715, 0.0, 83.54907143748511, 16.350187754546383)
+fake-fake 0.937731330899 0.963619738341 0.971634271319 0.978135581588 0.983834386911
+fake-origin -0.313242170719 0.654178079216 0.756414800888 0.823540208979 0.884712714281
+real vote (origin-helper) -0.320303107802 0.587832835079 0.727456985958 0.830851845951 0.913375117886
+
+('generate_reviewer_reviewer', 1000000.0, 1.042, 5.3414, 0.0, 93.6166)
+('generate_reviewer_follower', 769450.0, 0.06719085060757685, 0.0, 63.114952238612, 36.81785691078043)
+('generate_reviewer_follower', 439257.0, 0.09698194906398759, 0.0, 83.56474683385808, 16.338271217077928)
+('generate_reviewer_follower', 440048.0, 0.09839835654292259, 0.0, 83.65087445006, 16.250727193397083)
+fake-fake 0.954868829205 0.972707771316 0.978896201051 0.982745055231 0.987170968192
+fake-origin -0.19603784085 0.598473682581 0.707550336833 0.819373739177 0.888338152473
+real vote (origin-helper) -0.114660552111 0.554858159826 0.681083146009 0.788316790459 0.884104580435
+
+('generate_reviewer_reviewer', 1000000.0, 1.0375, 5.3753, 0.0, 93.58720000000001)
+('generate_reviewer_follower', 767875.0, 0.058342829236529385, 0.0, 63.12225297086115, 36.81940419990233)
+('generate_reviewer_follower', 439517.0, 0.1019300732394879, 0.0, 83.6500067119133, 16.248063214847207)
+('generate_reviewer_follower', 439993.0, 0.10227435436472854, 0.0, 83.51973781401068, 16.377987831624594)
+fake-fake 0.959786540189 0.976227087666 0.980914297824 0.98511750484 0.990103493517
+fake-origin -0.423899360157 0.487269052255 0.636563071032 0.768325533706 0.893377455607
+real vote (origin-helper) -0.234362959707 0.56422217573 0.67176292451 0.771624764791 0.881477241204
+
+('generate_reviewer_reviewer', 1000000.0, 1.0604, 5.3869, 0.0, 93.5527)
+('generate_reviewer_follower', 768550.0, 0.055429054713421376, 0.0, 63.020493136425735, 36.924077808860844)
+('generate_reviewer_follower', 439834.0, 0.10413019457340723, 0.0, 83.55152171046349, 16.3443480949631)
+('generate_reviewer_follower', 439284.0, 0.09014669325538832, 0.0, 83.68390380710429, 16.225949499640326)
+fake-fake 0.954605977328 0.977212791585 0.982557602738 0.986216695688 0.991446805357
+fake-origin -0.445957298206 0.425519126793 0.579755442348 0.778695145204 0.89571304748
+real vote (origin-helper) -0.0830359455318 0.570870345705 0.676934266631 0.773816313654 0.877511123342
+
+('generate_reviewer_reviewer', 1000000.0, 1.0277, 5.3944, 0.0, 93.5779)
+('generate_reviewer_follower', 769660.0, 0.0657433152301016, 0.0, 63.05823350570382, 36.87602317906608)
+('generate_reviewer_follower', 440672.0, 0.10937840389223731, 0.0, 83.5201691961368, 16.370452399970954)
+('generate_reviewer_follower', 440135.0, 0.09179001897145195, 0.0, 83.64206436661479, 16.26614561441376)
+fake-fake 0.960680008926 0.976176599559 0.98225094903 0.985747547492 0.990696397355
+fake-origin -0.40345943672 0.390752349836 0.573799858601 0.784890234167 0.899762859928
+real vote (origin-helper) -0.194506659631 0.554006492158 0.661499798025 0.760369646515 0.874794568561
+
+('generate_reviewer_reviewer', 1000000.0, 1.0379, 5.3955, 0.0, 93.5666)
+('generate_reviewer_follower', 770480.0, 0.06787976326445852, 0.0, 63.092228221368494, 36.83989201536704)
+('generate_reviewer_follower', 439522.0, 0.09237307802567335, 0.0, 83.49820941841364, 16.409417503560686)
+('generate_reviewer_follower', 439032.0, 0.09680387762167678, 0.0, 83.60575083365221, 16.297445288726106)
+fake-fake 0.959407652476 0.977314240283 0.982628332061 0.987298721055 0.990919576852
+fake-origin -0.130461851304 0.361463516991 0.579657749309 0.779581620083 0.905231326502
+real vote (origin-helper) -0.0564563136867 0.557963574571 0.655602285605 0.752860223415 0.866693546488
+
+('generate_reviewer_reviewer', 1000000.0, 1.0424, 5.401199999999999, 0.0, 93.5564)
+('generate_reviewer_follower', 766660.0, 0.056087444238645555, 0.0, 63.0595048652597, 36.88440769050166)
+('generate_reviewer_follower', 439466.0, 0.09397769110693432, 0.0, 83.53661034073171, 16.36941196816136)
+('generate_reviewer_follower', 441467.0, 0.09377824390045009, 0.0, 83.57453671508856, 16.331685041010992)
+fake-fake 0.963687634763 0.976229624675 0.98099311284 0.985030536741 0.990052703964
+fake-origin -0.167392322839 0.362037488575 0.602031736454 0.81455038198 0.913250435334
+real vote (origin-helper) -0.12478885808 0.538029253465 0.650371874208 0.742967447297 0.87248574976
+
+('generate_reviewer_reviewer', 1000000.0, 1.0329, 5.3898, 0.0, 93.5773)
+('generate_reviewer_follower', 767315.0, 0.06320741807471508, 0.0, 63.199989574034134, 36.736803007891154)
+('generate_reviewer_follower', 439074.0, 0.09633911368015415, 0.0, 83.6225784264156, 16.281082459904255)
+('generate_reviewer_follower', 438735.0, 0.10575860143366723, 0.0, 83.67966996022656, 16.21457143833977)
+fake-fake 0.963633090405 0.97576512174 0.980211244352 0.984286319092 0.989576664283
+fake-origin -0.41091586947 0.37569254332 0.589910294631 0.812998809066 0.907965639013
+real vote (origin-helper) -0.169696583393 0.543934368559 0.652071005192 0.746640273227 0.863158666136
+
+('generate_reviewer_reviewer', 1000000.0, 1.0388, 5.4094999999999995, 0.0, 93.55170000000001)
+('generate_reviewer_follower', 769465.0, 0.05471333978803454, 0.0, 63.05030118328969, 36.89498547692228)
+('generate_reviewer_follower', 439973.0, 0.08795994299650206, 0.0, 83.54262647935215, 16.369413577651358)
+('generate_reviewer_follower', 440882.0, 0.10025358259126026, 0.0, 83.53074065169365, 16.369005765715087)
+fake-fake 0.957642382263 0.976516069106 0.981572695369 0.986204391154 0.991551288057
+fake-origin -0.216137349325 0.377004489791 0.591628195796 0.80351005988 0.89912016996
+real vote (origin-helper) -0.16632170729 0.532453338771 0.642321847078 0.737939740485 0.855576997474
+
+fake-fake 0.957642382263 0.976516069106 0.981572695369 0.986204391154 0.991551288057
+fake-origin -0.376889250043 0.354102175087 0.570343037277 0.810779171104 0.920286400997
+real vote (origin-helper) -0.0271846449525 0.544236246641 0.649666480398 0.752563285532 0.869870627465
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769685.0, 0.0, 0.0, 62.82842981219589, 37.17157018780411)
+('generate_reviewer_follower', 437807.0, 0.0, 0.0, 83.55828024677541, 16.441719753224596)
+('generate_reviewer_follower', 439729.0, 0.0, 0.0, 83.70177995992987, 16.298220040070134)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62ac99a28>)
+real vote (origin-helper) -0.606872799862 0.634447859858 0.786635913266 0.891219011397 0.95159463117
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768070.0, 0.0, 0.0, 63.19983855638158, 36.80016144361842)
+('generate_reviewer_follower', 439270.0, 0.0, 0.0, 83.74507705966717, 16.254922940332825)
+('generate_reviewer_follower', 440202.0, 0.0, 0.0, 83.59571287726997, 16.404287122730018)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62481f200>)
+real vote (origin-helper) -0.318477872856 0.578302130995 0.710687030112 0.819457362867 0.913408705167
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767610.0, 0.0, 0.0, 63.129453759070365, 36.87054624092964)
+('generate_reviewer_follower', 439936.0, 0.0, 0.0, 83.64580302589466, 16.354196974105324)
+('generate_reviewer_follower', 439859.0, 0.0, 0.0, 83.63339160958398, 16.366608390416022)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6247fd200>)
+real vote (origin-helper) -0.257248029272 0.559019796149 0.679665396574 0.780855599887 0.880770653327
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768610.0, 0.0, 0.0, 63.161681476951905, 36.8383185230481)
+('generate_reviewer_follower', 439207.0, 0.0, 0.0, 83.67990491954819, 16.320095080451814)
+('generate_reviewer_follower', 438224.0, 0.0, 0.0, 83.77473620796671, 16.2252637920333)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe624ec2d40>)
+real vote (origin-helper) -0.376180650452 0.555193822246 0.675191672805 0.770407132925 0.878232365662
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768810.0, 0.0, 0.0, 63.088279288770956, 36.91172071122904)
+('generate_reviewer_follower', 439865.0, 0.0, 0.0, 83.60178691189341, 16.398213088106576)
+('generate_reviewer_follower', 439526.0, 0.0, 0.0, 83.66990803729473, 16.33009196270528)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe61e92de60>)
+real vote (origin-helper) -0.159202814317 0.546690793177 0.653270478789 0.749684925243 0.861363173775
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767810.0, 0.0, 0.0, 63.152733098032066, 36.847266901967934)
+('generate_reviewer_follower', 439617.0, 0.0, 0.0, 83.57570339636547, 16.424296603634527)
+('generate_reviewer_follower', 438475.0, 0.0, 0.0, 83.58538115057871, 16.414618849421288)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62b0bfc20>)
+real vote (origin-helper) -0.13596299126 0.566106056691 0.677873634077 0.76737421968 0.877014307204
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768215.0, 0.0, 0.0, 63.03105250483263, 36.96894749516737)
+('generate_reviewer_follower', 440171.0, 0.0, 0.0, 83.59592067628263, 16.404079323717376)
+('generate_reviewer_follower', 440912.0, 0.0, 0.0, 83.50895416772508, 16.49104583227492)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62b090e18>)
+real vote (origin-helper) -0.342599362702 0.559761219996 0.655085324127 0.750442301151 0.869414174021
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767045.0, 0.0, 0.0, 63.06383588968053, 36.936164110319474)
+('generate_reviewer_follower', 441371.0, 0.0, 0.0, 83.8453364629756, 16.15466353702441)
+('generate_reviewer_follower', 441925.0, 0.0, 0.0, 83.72257736041183, 16.277422639588167)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe622a524d0>)
+real vote (origin-helper) -0.102188413481 0.542693312745 0.65232846229 0.750856032882 0.861450859462
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767740.0, 0.0, 0.0, 63.17815927267043, 36.821840727329565)
+('generate_reviewer_follower', 440265.0, 0.0, 0.0, 83.73661317615527, 16.26338682384473)
+('generate_reviewer_follower', 439926.0, 0.0, 0.0, 83.58974009265194, 16.410259907348053)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe61e0e53f8>)
+real vote (origin-helper) -0.254335568523 0.537872797068 0.648164902295 0.743288670533 0.860993929146
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767430.0, 0.0, 0.0, 63.06242914663227, 36.93757085336774)
+('generate_reviewer_follower', 440089.0, 0.0, 0.0, 83.7001152039701, 16.299884796029893)
+('generate_reviewer_follower', 439094.0, 0.0, 0.0, 83.61740310730733, 16.382596892692682)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62ae6f518>)
+real vote (origin-helper) -0.263660010286 0.537112335884 0.640570942279 0.730079015795 0.862847789201
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62749f320>)
+real vote (origin-helper) -0.0635128949666 0.531162316974 0.643556026227 0.733326798767 0.858450090724
+
+('[3. User2Vec]', 'Elapsed: 2.5e+03 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+Clean and Robust
+{Helpful test}
+('origin helpful mean', 3.274268310375605)
+Attacked and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+('target helpful mean', 4.375)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.75)
+('50', 3.4375, 1.2727272727272727)
+('90', 3.8672289156626514, 1.1313010156396035)
+Attacked and Robust
+{Helpful test}
+('origin helpful mean', 3.2734405596440994)
+('target helpful mean', 2.5)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.0)
+('50', 3.4375, 0.72727272727272729)
+('90', 3.8648648648648649, 0.64685314685314688)
+('[4. Compute helpfulness]', 'Elapsed: 44 sec')
+
+('[5. Matrix factorization]', 'Started')
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140924 1.54818 0.0491148 1.16202 0.906067
+Converged at iteration 14000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.014072 1.49454 0.0491211 1.17812 0.923111 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.014189 3.44885 0.0493914 1.16951 0.913238
+Converged at iteration 11000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0141891 3.41143 0.0494058 1.17275 0.916496 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137572 3.58211 0.0494076 1.17898 0.925527
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137118 3.41703 0.0494037 1.20453 0.955524
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.013696 3.2987 0.0494023 1.21777 0.969206 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137481 2.51466 0.0494094 1.1776 0.922431
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137031 2.46756 0.0494044 1.20153 0.949406
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136875 2.49215 0.0494026 1.21454 0.962428 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7560975609756095, 3.2734405596440994, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160497 1.48006 0.0491135 1.18407 0.92841
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159957 1.38415 0.0491139 1.21752 0.956786
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159805 1.33452 0.0491153 1.22682 0.964983 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0161092 3.22329 0.0493921 1.18714 0.929739
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160537 2.81108 0.0493917 1.21459 0.957283
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160403 2.7015 0.0493921 1.22215 0.965074 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0156793 3.47875 0.0494374 1.19629 0.94705
+Converged at iteration 14000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0156501 3.36609 0.0494502 1.21082 0.961841 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0156706 2.49304 0.0494406 1.19409 0.941897
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0156121 2.53377 0.0494324 1.22016 0.966774
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155869 2.6086 0.0494276 1.23036 0.973586
+Converged at iteration 31000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155854 2.6146 0.0494273 1.23117 0.974125 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7560975609756095, 3.2734405596440994, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140576 1.33037 0.0491168 1.10678 0.8666
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01402 1.2624 0.0491132 1.13526 0.897005
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140098 1.24775 0.0491132 1.14592 0.907383 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Converged at iteration 9000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0141687 3.16389 0.0494132 1.10184 0.862806 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137174 3.56149 0.0493999 1.10457 0.864752
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136789 3.3347 0.0493984 1.12939 0.890325
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136657 3.18034 0.0493977 1.14298 0.902844 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137074 2.5289 0.0494004 1.10027 0.860225
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136692 2.56241 0.0493987 1.12644 0.886704
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136594 2.57615 0.0493983 1.13642 0.895716 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7560975609756095, 3.2734405596440994, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159879 1.27194 0.0491135 1.1258 0.887376
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159403 1.24711 0.0491134 1.15197 0.912197
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159268 1.25118 0.0491135 1.1602 0.918995 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.016043 2.98069 0.0493916 1.12264 0.885025
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.016643 2.76159 0.0506691 1.14467 0.905548
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159825 2.68644 0.0493916 1.15305 0.91348 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0156099 3.42429 0.049421 1.12 0.880521
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155574 3.12383 0.0494171 1.14502 0.903691
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155397 2.95968 0.0494159 1.15526 0.912342 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155994 2.57819 0.0494219 1.11694 0.877044
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155474 2.60133 0.0494179 1.14332 0.900995
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155303 2.61063 0.0494165 1.15439 0.910531 
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7560975609756095, 3.2734405596440994, 'Fake', 2.5)
+
+
+('[5. Matrix factorization]', 'Elapsed: 3.2e+03 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_3%_1%_emb_32')
+('[1. preprocess]', 'Started')
+('get_enough_rating_review, current_num_data', 33911)
+('get_enough_rating_review, current_num_data', 30073)
+('get_enough_rating_review, current_num_data', 28933)
+('get_enough_rating_review, current_num_data', 28568)
+('get_enough_rating_review, current_num_data', 28462)
+('get_enough_rating_review, current_num_data', 28410)
+('get_enough_rating_review, current_num_data', 28386)
+('get_enough_rating_review, current_num_data', 28378)
+('get_enough_rating_review, current_num_data', 28374)
+('get_enough_rating_review, current_num_data', 28374)
+('[1. preprocess]', 'Elapsed: 5.3 sec')
+
+('[2. attack]', 'Started')
+num fake item is one!!!!!!!!!!!!!!
+('[Origin] Users x Items :', 1822, 2069, 'Reviews, Votes : ', 28374, 661040)
+('[Fake] Users x Items :', 18, 1, 'Reviews, Votes : ', 18, 324)
+('[Bandwagon] Filler size :', 62, 'Selected size : ', 20)
+('[2. attack]', 'Elapsed: 0.075 sec')
+
+('[3. User2Vec]', 'Started')
+('generate_reviewer_reviewer', 1000000.0, 1.265, 7.2243, 0.0, 91.5107)
+('generate_reviewer_follower', 768970.0, 0.05084723721341535, 0.0, 63.017542947059056, 36.93160981572753)
+('generate_reviewer_follower', 440519.0, 0.10555730853833774, 0.0, 83.31604312186307, 16.578399569598588)
+('generate_reviewer_follower', 440556.0, 0.10237064073579749, 0.0, 83.60730531419388, 16.29032404507032)
+fake-fake 0.899744265338 0.949760022999 0.965658283613 0.976641412854 0.987390227863
+fake-origin -0.21474228591 0.524259894369 0.757922538194 0.870188940527 0.93806205827
+real vote (origin-helper) -0.596180320808 0.654600533218 0.80506105306 0.896637056952 0.957202762738
+
+('generate_reviewer_reviewer', 1000000.0, 1.2902, 7.2752, 0.0, 91.4346)
+('generate_reviewer_follower', 768655.0, 0.05997489120606774, 0.0, 63.18140127885723, 36.75862382993671)
+('generate_reviewer_follower', 438623.0, 0.08093510828205543, 0.0, 83.65908764474274, 16.259977246975193)
+('generate_reviewer_follower', 439195.0, 0.08720500005692232, 0.0, 83.5961247281959, 16.316670271747174)
+fake-fake 0.948452471487 0.972298049037 0.978328123892 0.982839181136 0.988742992437
+fake-origin -0.16644837787 0.665804482382 0.792091962142 0.847375143867 0.919032955015
+real vote (origin-helper) -0.332967863496 0.592261497496 0.727003971582 0.825093160037 0.904670302382
+
+('generate_reviewer_reviewer', 1000000.0, 1.28, 7.257, 0.0, 91.46300000000001)
+('generate_reviewer_follower', 769605.0, 0.06262953073329826, 0.0, 63.07846232807739, 36.85890814118931)
+('generate_reviewer_follower', 440252.0, 0.10312275696646467, 0.0, 83.47560033798824, 16.421276905045293)
+('generate_reviewer_follower', 439250.0, 0.09721115537848606, 0.0, 83.50756972111554, 16.395219123505978)
+fake-fake 0.948885061825 0.964832373442 0.970580098401 0.977345967742 0.982187819985
+fake-origin -0.580494592019 0.607073908107 0.710804484371 0.819671474608 0.90162829238
+real vote (origin-helper) -0.385157582211 0.556314302159 0.684510661291 0.789805114721 0.87986314646
+
+('generate_reviewer_reviewer', 1000000.0, 1.2584, 7.247000000000001, 0.0, 91.4946)
+('generate_reviewer_follower', 768380.0, 0.05466045446263567, 0.0, 62.90780603347302, 37.03753351206434)
+('generate_reviewer_follower', 440155.0, 0.10496302438913566, 0.0, 83.3674501028047, 16.52758687280617)
+('generate_reviewer_follower', 440937.0, 0.08595332212991878, 0.0, 83.44003791924924, 16.474008758620844)
+fake-fake 0.956172039777 0.969324062487 0.973711252036 0.978934312611 0.982487153218
+fake-origin -0.256385808342 0.534154057464 0.701109480869 0.815117595451 0.902270900085
+real vote (origin-helper) -0.180848680596 0.555288361171 0.672184217407 0.779310402032 0.872520586506
+
+('generate_reviewer_reviewer', 1000000.0, 1.2725, 7.275099999999999, 0.0, 91.4524)
+('generate_reviewer_follower', 767365.0, 0.047565369804460716, 0.0, 62.98058941963733, 36.97184521055821)
+('generate_reviewer_follower', 438251.0, 0.0835137854790976, 0.0, 83.59798380380194, 16.31850241071897)
+('generate_reviewer_follower', 440313.0, 0.10378980407119481, 0.0, 83.54829405445672, 16.347916141472087)
+fake-fake 0.944184687932 0.969024233865 0.973996192054 0.978489783037 0.982960161597
+fake-origin -0.178823207455 0.473829930086 0.616382110439 0.807423681264 0.907407892189
+real vote (origin-helper) -0.156329419294 0.540900338289 0.654662900814 0.759624611378 0.864360359292
+
+('generate_reviewer_reviewer', 1000000.0, 1.2972, 7.2627999999999995, 0.0, 91.44)
+('generate_reviewer_follower', 767465.0, 0.048992462196973154, 0.0, 63.03232069214882, 36.9186868456542)
+('generate_reviewer_follower', 438605.0, 0.09074223960055175, 0.0, 83.63151354863716, 16.27774421176229)
+('generate_reviewer_follower', 439534.0, 0.0921430424040006, 0.0, 83.65769201017442, 16.250164947421588)
+fake-fake 0.950519084923 0.967496294451 0.972756018056 0.977144077831 0.983018890801
+fake-origin -0.27947945705 0.479752155571 0.660946943801 0.818118933492 0.915273564603
+real vote (origin-helper) -0.100413853611 0.559190588561 0.666238409692 0.760612192652 0.869484161361
+
+('generate_reviewer_reviewer', 1000000.0, 1.2793999999999999, 7.217, 0.0, 91.50359999999999)
+('generate_reviewer_follower', 767785.0, 0.06355946000507955, 0.0, 63.129391691684525, 36.807048848310394)
+('generate_reviewer_follower', 437917.0, 0.1148619487254434, 0.0, 83.51331416683983, 16.371823884434722)
+('generate_reviewer_follower', 439166.0, 0.100873018403064, 0.0, 83.69682534622443, 16.2023016353725)
+fake-fake 0.942368466481 0.964248384513 0.971692130867 0.976676384948 0.981055504364
+fake-origin -0.33369425047 0.433708675601 0.642660134677 0.809565753227 0.916338582922
+real vote (origin-helper) -0.167346590652 0.548231371623 0.660524827303 0.755009054853 0.870294417225
+
+('generate_reviewer_reviewer', 1000000.0, 1.2715, 7.243399999999999, 0.0, 91.4851)
+('generate_reviewer_follower', 767120.0, 0.05057878819480655, 0.0, 63.192590468244866, 36.75683074356033)
+('generate_reviewer_follower', 440508.0, 0.09284734896982574, 0.0, 83.52856247786646, 16.378590173163712)
+('generate_reviewer_follower', 439961.0, 0.12455649478021916, 0.0, 83.75174163164462, 16.123701873575158)
+fake-fake 0.950959958898 0.965998489448 0.971354339154 0.976369768642 0.981766248233
+fake-origin -0.0803324094149 0.423367635661 0.637626929817 0.787517901113 0.902000406535
+real vote (origin-helper) -0.0750523966375 0.544130943765 0.651942178368 0.743043485404 0.868138675608
+
+('generate_reviewer_reviewer', 1000000.0, 1.2685, 7.2208, 0.0, 91.5107)
+('generate_reviewer_follower', 768520.0, 0.05465049705928277, 0.0, 63.221907042106906, 36.72344246083381)
+('generate_reviewer_follower', 439139.0, 0.10224553045846531, 0.0, 83.49907432498594, 16.3986801445556)
+('generate_reviewer_follower', 440717.0, 0.09870279567159879, 0.0, 83.61578972447171, 16.285507479856687)
+fake-fake 0.948809144107 0.968310729878 0.97391076257 0.977798264013 0.982753371272
+fake-origin -0.198146927976 0.43915493213 0.675072394525 0.833492562965 0.915226997945
+real vote (origin-helper) -0.153244992742 0.535034286269 0.646685225403 0.747617071225 0.861035644302
+
+('generate_reviewer_reviewer', 1000000.0, 1.2716, 7.2082999999999995, 0.0, 91.5201)
+('generate_reviewer_follower', 769955.0, 0.05039255540908235, 0.0, 63.09446655973401, 36.85514088485691)
+('generate_reviewer_follower', 438506.0, 0.10855039611772702, 0.0, 83.52656520093225, 16.36488440295002)
+('generate_reviewer_follower', 439962.0, 0.09250798932635092, 0.0, 83.6406326000882, 16.26685941058546)
+fake-fake 0.946710101386 0.966680387578 0.972038370632 0.976512600719 0.982460414863
+fake-origin -0.491446375454 0.418449997449 0.623301600526 0.794701089662 0.895477820284
+real vote (origin-helper) -0.153125460481 0.531717379631 0.632465549528 0.732661557078 0.846727684308
+
+fake-fake 0.946710101386 0.966680387578 0.972038370632 0.976512600719 0.982460414863
+fake-origin -0.336552912961 0.430515537791 0.635187038456 0.812970366833 0.913956034318
+real vote (origin-helper) -0.153125460481 0.535888992604 0.637530983946 0.750382246549 0.862627915655
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768780.0, 0.0, 0.0, 63.012435287078226, 36.987564712921774)
+('generate_reviewer_follower', 437786.0, 0.0, 0.0, 83.5707400419383, 16.4292599580617)
+('generate_reviewer_follower', 438721.0, 0.0, 0.0, 83.66592891609929, 16.334071083900703)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe627bd8290>)
+real vote (origin-helper) -0.696639921478 0.617847877262 0.790427431212 0.896038024366 0.956715093223
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767475.0, 0.0, 0.0, 63.14238248802893, 36.85761751197107)
+('generate_reviewer_follower', 442105.0, 0.0, 0.0, 83.71404982979158, 16.285950170208434)
+('generate_reviewer_follower', 440222.0, 0.0, 0.0, 83.53535261754297, 16.464647382457034)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe5de2fa638>)
+real vote (origin-helper) -0.280893345948 0.584474879381 0.716501576419 0.815776639062 0.901483743573
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769865.0, 0.0, 0.0, 63.15626765731655, 36.84373234268345)
+('generate_reviewer_follower', 441016.0, 0.0, 0.0, 83.60762421318047, 16.392375786819528)
+('generate_reviewer_follower', 439470.0, 0.0, 0.0, 83.58386237968462, 16.41613762031538)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe624956200>)
+real vote (origin-helper) -0.235933593156 0.573189542581 0.688785156183 0.784770773425 0.890100870456
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767755.0, 0.0, 0.0, 63.078195518101474, 36.921804481898526)
+('generate_reviewer_follower', 438891.0, 0.0, 0.0, 83.58840805575872, 16.41159194424128)
+('generate_reviewer_follower', 441006.0, 0.0, 0.0, 83.60158365192311, 16.398416348076896)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe6299733f8>)
+real vote (origin-helper) -0.133522043122 0.560188180935 0.668255387019 0.770835557296 0.877346696544
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769615.0, 0.0, 0.0, 63.23759282238521, 36.76240717761478)
+('generate_reviewer_follower', 439736.0, 0.0, 0.0, 83.57173394946058, 16.428266050539413)
+('generate_reviewer_follower', 439865.0, 0.0, 0.0, 83.6652154638355, 16.334784536164506)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe628490908>)
+real vote (origin-helper) -0.208541389221 0.552724909927 0.663719873411 0.769987445274 0.877485664689
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769535.0, 0.0, 0.0, 62.97894182850683, 37.02105817149317)
+('generate_reviewer_follower', 438369.0, 0.0, 0.0, 83.78694661346947, 16.213053386530525)
+('generate_reviewer_follower', 438587.0, 0.0, 0.0, 83.72181574009262, 16.278184259907384)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe622c4ab00>)
+real vote (origin-helper) -0.202024737357 0.549526867346 0.660316957619 0.761947935805 0.858918881694
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 771730.0, 0.0, 0.0, 63.21252251435088, 36.78747748564913)
+('generate_reviewer_follower', 439643.0, 0.0, 0.0, 83.72497685622197, 16.275023143778018)
+('generate_reviewer_follower', 439069.0, 0.0, 0.0, 83.66794285180688, 16.33205714819311)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe627bdc4d0>)
+real vote (origin-helper) -0.0013759112589 0.557393573445 0.65860972923 0.756898613811 0.866608196222
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 768800.0, 0.0, 0.0, 63.09573361082206, 36.90426638917794)
+('generate_reviewer_follower', 441567.0, 0.0, 0.0, 83.55878043422629, 16.44121956577371)
+('generate_reviewer_follower', 439790.0, 0.0, 0.0, 83.65287978353305, 16.34712021646695)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62491e200>)
+real vote (origin-helper) -0.0460134015965 0.556343910203 0.649718708636 0.742391549836 0.859056197451
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 767975.0, 0.0, 0.0, 63.11429408509392, 36.88570591490608)
+('generate_reviewer_follower', 439825.0, 0.0, 0.0, 83.65122491900188, 16.348775080998124)
+('generate_reviewer_follower', 441148.0, 0.0, 0.0, 83.69368103221595, 16.306318967784055)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe61e027b90>)
+real vote (origin-helper) -0.059925607133 0.549139145876 0.653063289455 0.746922278512 0.864124467021
+
+('generate_reviewer_reviewer', 1000000.0, 0.0, 0.0, 0.0, 100.0)
+('generate_reviewer_follower', 769355.0, 0.0, 0.0, 62.99237673115792, 37.00762326884208)
+('generate_reviewer_follower', 439614.0, 0.0, 0.0, 83.66862747774184, 16.331372522258164)
+('generate_reviewer_follower', 440264.0, 0.0, 0.0, 83.57122090382134, 16.428779096178655)
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe624f62b90>)
+real vote (origin-helper) -0.181806818644 0.5384757819 0.644181555032 0.745824638623 0.861856398016
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fe62a962320>)
+real vote (origin-helper) -0.1886602209 0.542654431304 0.643399712751 0.744801755854 0.860296662125
+
+('[3. User2Vec]', 'Elapsed: 2.5e+03 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+Clean and Robust
+{Helpful test}
+('origin helpful mean', 3.2739602498456715)
+Attacked and Naive
+{Helpful test}
+('origin helpful mean', 3.2759092412677573)
+('target helpful mean', 4.375)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.75)
+('50', 3.4375, 1.2727272727272727)
+('90', 3.8672289156626514, 1.1313010156396035)
+Attacked and Robust
+{Helpful test}
+('origin helpful mean', 3.273591526548052)
+('target helpful mean', 2.5)
+('origin rating #', 28374, 'fake rating #', 18)
+('10', 2.5, 1.0)
+('50', 3.4375, 0.72727272727272729)
+('90', 3.8656716417910446, 0.64671814671814676)
+('[4. Compute helpfulness]', 'Elapsed: 44 sec')
+
+('[5. Matrix factorization]', 'Started')
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140924 1.54818 0.0491148 1.16202 0.906067
+Converged at iteration 14000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.014072 1.49454 0.0491211 1.17812 0.923111 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0174104 2.83877 0.0556127 1.16207 0.905777
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0173686 2.4994 0.0556129 1.18995 0.933842
+Converged at iteration 24000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0173611 2.40157 0.055613 1.19799 0.941078 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.035642 3.38112 0.0556374 1.17783 0.922096
+Converged at iteration 17000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0356052 3.20013 0.0556284 1.19684 0.945083 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.013734 2.22433 0.0556386 1.17437 0.920798
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0137143 1.96776 0.055675 1.20557 0.952177
+Converged at iteration 24000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136885 1.92275 0.0556346 1.21194 0.958511 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.273591526548052, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160497 1.48006 0.0491135 1.18407 0.92841
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159957 1.38415 0.0491139 1.21752 0.956786
+Converged at iteration 28000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159805 1.33452 0.0491153 1.22682 0.964983 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0200196 2.5874 0.0569345 1.18223 0.927251
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0192328 2.19409 0.0556208 1.21232 0.95362
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0192116 2.0597 0.0556124 1.22089 0.961876 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0375193 3.23516 0.0556682 1.19556 0.943615
+Converged at iteration 19000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0374667 2.96817 0.0556693 1.21845 0.964978 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 20, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.016053 2.05203 0.0564737 1.19742 0.944774
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155475 1.869 0.0556558 1.22385 0.970132
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155253 1.83288 0.0556511 1.2342 0.977154
+Converged at iteration 30000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0155253 1.83288 0.0556511 1.2342 0.977154 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.273591526548052, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140576 1.33037 0.0491168 1.10678 0.8666
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.01402 1.2624 0.0491132 1.13526 0.897005
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0140098 1.24775 0.0491132 1.14592 0.907383 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0173687 2.62835 0.0556129 1.10483 0.862878
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0173342 2.43087 0.055612 1.13127 0.88982
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0173252 2.34727 0.055612 1.14007 0.898636 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0355973 3.06156 0.05562 1.10058 0.861775
+Converged at iteration 17000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0355668 2.78846 0.0556186 1.11927 0.88138 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.005, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136924 2.20512 0.05562 1.09931 0.860518
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136551 2.09235 0.0556184 1.12341 0.883899
+Step 30000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136408 2.04482 0.0556178 1.13796 0.896755
+Converged at iteration 30000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0136408 2.04482 0.0556178 1.13796 0.896755 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.273591526548052, 'Fake', 2.5)
+
+
+('-----------------------', 'base', 'attack', False, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159879 1.27194 0.0491135 1.1258 0.887376
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159403 1.24711 0.0491134 1.15197 0.912198
+Converged at iteration 27000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159268 1.25118 0.0491135 1.1602 0.918995 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/base_U_clean.npy')
+('-----------------------', 'base', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0192266 2.48248 0.0556391 1.12158 0.880329
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0191655 2.24045 0.0556122 1.14657 0.904559
+Converged at iteration 26000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0191532 2.15485 0.0556122 1.15333 0.910783 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/base_U_attacked.npy')
+('-----------------------', 'naive', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0379345 2.81028 0.0565136 1.11927 0.881423
+Converged at iteration 18000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0373949 2.47038 0.0556345 1.13925 0.898301 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/naive_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.2759092412677573, 'Fake', 4.375)
+('-----------------------', 'robust', 'attack', True, 'rank', 30, 'lda', 0.01, '---------------------')
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 10000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.015543 2.12832 0.0556443 1.11479 0.875396
+Step 20000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0154845 2.03918 0.0556347 1.13949 0.896918
+Converged at iteration 29000
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.015467 2.02423 0.0556335 1.14935 0.905574 
+('U path: ', 'bandwagon_1%_3%_1%_emb_32/robust_U_attacked.npy')
+Helpfulness distribution
+('Honest', 2.7777777777777777, 3.4375, 3.7567567567567566, 3.273591526548052, 'Fake', 2.5)
+
+
+('[5. Matrix factorization]', 'Elapsed: 3.2e+03 sec')
+
+exit
+
+Script done on 2016년 10월 18일 (화) 오전 08시 20분 38초

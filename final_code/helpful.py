@@ -81,8 +81,8 @@ class helpful_measure():
         self.helpful_vote_tensor = dict()  # H(reviewer, item) = (cos_distance(reviewer,voter), helpfulness vote)
 
         # star rating! 0~5 -> 0~10
-        self.base_helpful_numerator = 15.0
-        self.base_helpful_denominator = 6.0
+        self.base_helpful_numerator = 1.5
+        self.base_helpful_denominator = 0.6
 
     def fill_review_dict(self):
         overall_review_matrix = np.load(self.review_origin_path)
@@ -183,7 +183,21 @@ class helpful_measure():
             self.compute_review_helpful(self.review_fake_path, self.helpful_fake_path)
         if self.helpful_camo_path:
             self.compute_review_helpful(self.review_camo_path, self.helpful_camo_path)
+    
+    def compare_helpful_on_target(self):
+        review_fake=np.load(self.review_fake_path)
+        target_item_list = np.unique(review_fake[:,1])
+
+        h=np.load(self.helpful_origin_path)
+        origin_helpful_on_target = [h[h[:,1]==target_item,2] for target_item in target_item_list]
         
+        if self.helpful_fake_path:
+            hf = np.load(self.helpful_fake_path)
+            hf = hf[:,2]
+
+
+
+
     def helpful_test(self):
         try:
             print("{Helpful test}")
