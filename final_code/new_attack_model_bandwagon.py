@@ -21,6 +21,7 @@ class attack_model_bandwagon():
 		self.review_fake_path = params.review_fake_path  #'./intermediate/fake_review_bandwagon.npy'
 		self.review_camo_path = params.review_camo_path  #'./intermediate/camo_review_bandwagon.npy'
 		self.vote_fake_path = params.vote_fake_path  #'./intermediate/fake_vote_bandwagon.npy'
+		self.vote_camo_path = params.vote_camo_path  #'./intermediate/camo_vote_bandwagon.npy'
 		
 		self.target_item_list_path = params.target_item_list_path
 		self.fake_user_id_list_path = params.fake_user_id_list_path
@@ -73,8 +74,11 @@ class attack_model_bandwagon():
 
 		# importatnt data
 		self.fake_review_matrix = []
-		self.fake_vote_matrix = []
 		self.camo_review_matrix = []
+		
+		self.fake_vote_matrix = []
+		self.camo_vote_matrix = []
+		
 		self.badly_rated_item_flag=params.badly_rated_item_flag
 		self.bad_item_threshold = params.bad_item_threshold
 
@@ -169,11 +173,27 @@ class attack_model_bandwagon():
 	##################
 
 	def generate_fake_votes(self):
-		fake_vote_coo = np.random.choice(self.num_fake_user*self.num_fake_review, self.num_fake_vote, replace=False)
-		for coo in fake_vote_coo:
-			fake_u = self.fake_user_id_list[int(coo/self.num_fake_review)]
-			fake_r = self.fake_review_id_list[coo%self.num_fake_review]
-			self.fake_vote_matrix.append([fake_u,fake_r, self.fake_helpful_value])
+		# fake_vote_coo = np.random.choice(self.num_fake_user*self.num_fake_review, self.num_fake_vote, replace=False)
+		# for coo in fake_vote_coo:
+		# 	fake_u = self.fake_user_id_list[int(coo/self.num_fake_review)]
+		# 	fake_r = self.fake_review_id_list[coo%self.num_fake_review]
+		# 	self.fake_vote_matrix.append([fake_u,fake_r, self.fake_helpful_value])
+		for fake_u in self.fake_user_id_list:
+			for fake_r in self.fake_review_id_list:
+				self.fake_vote_matrix.append([fake_u,fake_r, self.fake_helpful_value])
+
+
+
+
+	def generate_camo_votes(self):
+		camo_vote_size = 10*len(self.fake_review_id_list)
+		print '[generate_camo_votes] each user camo_vote_size', camo_vote_size
+		for fake_u in self.fake_user_id_list:
+			camo_r_list = np.random.choice(a=self.num_origin_review, size=camo_vote_size, replace=False)
+			for camo_r in camo_r_list:
+				self.camo_vote_matrix.append([fake_u,camo_r, int(np.random.choice(a=list(range(6)),size=1))])
+
+
 
 	def save_attack_review_matrix(self):
 		np.save(self.review_fake_path, np.array(self.fake_review_matrix))
@@ -181,6 +201,7 @@ class attack_model_bandwagon():
 
 	def save_attack_vote_matrix(self):
 		np.save(self.vote_fake_path, np.array(self.fake_vote_matrix))
+		np.save(self.vote_camo_path, np.array(self.camo_vote_matrix))
 
 	def save_fake_user_id_list(self):
 		fake_review_matrix_ = np.array(self.fake_review_matrix)
@@ -192,15 +213,13 @@ class attack_model_bandwagon():
 
 	def whole_process(self):
 		# review
-		if self.badly_rated_item_flag ==True:
-			self.generate_fake_reviews_bad_item()
-		else:
-			print("any other??")
+		self.generate_fake_reviews_bad_item()
 		self.generate_camo_reviews()
 		self.save_attack_review_matrix()
 
 		# vote
 		self.generate_fake_votes()
+		self.generate_camo_votes()
 		self.save_attack_vote_matrix()
 
 		# save the metadata of attack

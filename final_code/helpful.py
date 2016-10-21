@@ -48,6 +48,8 @@ class helpful_measure():
         
         self.vote_origin_path = params.vote_origin_path
         self.vote_fake_path = params.vote_fake_path
+        # 
+        self.vote_camo_path = params.vote_camo_path
         
         # output
         self.helpful_origin_path = ''
