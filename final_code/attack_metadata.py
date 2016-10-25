@@ -243,3 +243,6 @@ print 'np.mean(user degree)', np.mean(user_degree_list)
 
 
 
+
+def voter_distribution():
+	self.vote_origin_path = params.vote_origin_path

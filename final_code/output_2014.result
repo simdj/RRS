@@ -1,0 +1,690 @@
+
+this is attack model bandwagon new!!!!!!!!!!!!!!!!!!
+WMF validation!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_1%_0%_emb_16')
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 3.1e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 170
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 20 0
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 360 3060
+('[2. attack]', 'Elapsed: 0.17 sec')
+
+('[3. User2Vec]', 'Started')
+fake-fake 0.747044258537 0.977856074746 0.989024152935 0.992209482853 0.994854608629
+fake-origin -0.5301524071 -0.0411257563769 0.160937078114 0.33246591986 0.524735612896
+real original vote (any) -0.743261884376 0.154583257285 0.549407644263 0.748879285139 0.904694158165
+real original vote (maximum) -0.490292301631 0.570926204352 0.68781637707 0.785273604423 0.897670242354
+camo vote (maximum) -0.493699286846 0.136110383369 0.308834454433 0.450079566082 0.65003015779
+
+fake-fake 0.728816499109 0.966721181718 0.981328433151 0.988368611265 0.991990703388
+fake-origin -0.730628413581 -0.0385805002411 0.13613554923 0.310364252224 0.676168093879
+real original vote (any) -0.743267589911 0.161825516102 0.488739925738 0.703281398327 0.882319575603
+real original vote (maximum) -0.378229412 0.543304071565 0.666063206505 0.769186109271 0.887202742147
+camo vote (maximum) -0.444363174622 0.204459154953 0.452007469077 0.683182105369 0.847455205114
+
+fake-fake 0.710055513985 0.956209168108 0.974214922039 0.984255315159 0.990786524308
+fake-origin -0.648458374157 -0.0993964527867 0.0818364529173 0.297655449542 0.706089030803
+real original vote (any) -0.590357007155 0.145336949475 0.47602584548 0.685168072595 0.864666951383
+real original vote (maximum) -0.734761234527 0.518169944012 0.64474940048 0.752704463701 0.87615474505
+camo vote (maximum) -0.217971143613 0.229750337087 0.473335416156 0.741178318073 0.856512162982
+
+fake-fake 0.703298251697 0.949490711174 0.970194385814 0.981238623984 0.989632450196
+fake-origin -0.682271632564 -0.0708816586781 0.140919228876 0.331627348158 0.760468208778
+real original vote (any) -0.762875765446 0.141370102419 0.465070947189 0.671217832757 0.864892870229
+real original vote (maximum) -0.376499046903 0.51403044688 0.636544486292 0.748577045275 0.879832627913
+camo vote (maximum) -0.240184973916 0.197465254407 0.492112601889 0.771903260044 0.867326990664
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba986faa70>)
+real original vote (any) -0.758509023603 0.152319161487 0.539160015939 0.738490441904 0.894146050775
+real original vote (maximum) -0.59065056668 0.565674789535 0.691381779885 0.795339934378 0.907426508541
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba986facf8>)
+real original vote (any) -0.778453871005 0.179410277981 0.497793154294 0.712216547531 0.882724859474
+real original vote (maximum) -0.506934294713 0.538031159358 0.666032488374 0.765904855753 0.884050096038
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba986fafc8>)
+real original vote (any) -0.747344219448 0.149711802169 0.475411346604 0.690425359234 0.8729465558
+real original vote (maximum) -0.512393792549 0.513067279073 0.645960488777 0.752193285108 0.874054054191
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba98c80830>)
+real original vote (any) -0.856085164035 0.146556949224 0.474295434813 0.678751013484 0.864749647996
+real original vote (maximum) -0.467522891189 0.503601590707 0.638442007158 0.74840323334 0.872275329384
+camo vote (maximum) 
+('[3. User2Vec]', 'Elapsed: 7.8e+02 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+Helpfulness computing is already done
+Clean and Robust
+Helpfulness computing is already done
+Attacked and Naive
+Helpfulness computing is already done
+Attacked and Robust
+Helpfulness computing is already done
+('[4. Compute helpfulness]', 'Elapsed: 0.37 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 20 lda 0.005 ---------------------
+name: GeForce GTX 1080
+major: 6 minor: 1 memoryClockRate (GHz) 1.7335
+pciBusID 0000:01:00.0
+Total memory: 7.92GiB
+Free memory: 7.81GiB
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00195142 1.19163 0.0573885 1.21199 0.955426 
+('U path: ', 'bandwagon_1%_1%_0%_emb_16/base_U_clean.npy')
+----------------------- base attack True rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193543 2.99829 0.0569719 1.22208 0.967652 
+('U path: ', 'bandwagon_1%_1%_0%_emb_16/base_U_attacked.npy')
+----------------------- naive attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193009 1.33419 0.206815 1.22697 0.981328 
+('U path: ', 'bandwagon_1%_1%_0%_emb_16/naive_U_clean.npy')
+----------------------- naive attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 4.91935483871 [10, 25, 50, 75, 90] 4.91935483871 4.91935483871 4.91935483871 4.91935483871 4.91935483871 
+[Honest  all ] Mean 3.47736682675 [10, 25, 50, 75, 90] 2.5 2.98295454545 3.80208333333 3.9652014652 4.00442477876 
+[Honest target] Mean 3.28027232406 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.44339622642 3.92219781067 3.96192696193 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00191398 3.2253 0.20702 1.22024 0.9719 
+('U path: ', 'bandwagon_1%_1%_0%_emb_16/naive_U_attacked.npy')
+----------------------- robust attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193014 1.32945 0.206871 1.22698 0.981745 
+('U path: ', 'bandwagon_1%_1%_0%_emb_16/robust_U_clean.npy')
+----------------------- robust attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 2.5 [10, 25, 50, 75, 90] 2.5 2.5 2.5 2.5 2.5 
+[Honest  all ] Mean 3.47724592628 [10, 25, 50, 75, 90] 2.5 2.98295454545 3.80208333333 3.96487940538 4.00442477876 
+[Honest target] Mean 3.28027232406 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.44339622642 3.92219781067 3.96192696193 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00191391 3.06433 0.206747 1.222 0.976855 
+('U path: ', 'bandwagon_1%_1%_0%_emb_16/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.303005
+Naive	0.182246
+Robust	0.129429
+Target
+Base  	1.78705 	Mean at (before,after) 1.19163 2.97868
+Naive 	1.87358 	Mean at (before,after) 1.33419 3.20777
+Robust	1.71762 	Mean at (before,after) 1.32945 3.04707
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 2.5e+02 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_3%_0%_emb_16')
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 2.9e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 170
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 62 0
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 1116 3060
+('[2. attack]', 'Elapsed: 0.15 sec')
+
+('[3. User2Vec]', 'Started')
+fake-fake 0.969389379882 0.984576279541 0.989258462021 0.992027249942 0.994938403899
+fake-origin -0.515549541629 -0.0855507289981 0.0970993453574 0.284004326275 0.486990499463
+real original vote (any) -0.834214948382 0.176864293986 0.551779872591 0.749330693156 0.905059312455
+real original vote (maximum) -0.594585991176 0.566700102492 0.684677825832 0.784001887381 0.89196866548
+camo vote (maximum) -0.352807127683 0.0796083323954 0.266468833083 0.433047780747 0.750342069328
+
+fake-fake 0.953612153244 0.976229022939 0.983084554446 0.988296033455 0.992809620308
+fake-origin -0.77305763323 -0.08359498495 0.120251698797 0.271829583272 0.571970791919
+real original vote (any) -0.702864231042 0.155436530352 0.50419304093 0.712353547005 0.884797586607
+real original vote (maximum) -0.387615383111 0.5415832863 0.666547391348 0.772017093605 0.884651658005
+camo vote (maximum) -0.378289200669 0.134401189793 0.362090802812 0.649033241678 0.825450836488
+
+fake-fake 0.945943875392 0.970063814095 0.978691305263 0.985078544523 0.991158228557
+fake-origin -0.584931425406 -0.0693017569366 0.0951499801088 0.320533274291 0.792215310094
+real original vote (any) -0.726177255327 0.150260424971 0.472156206018 0.684876029882 0.868235149583
+real original vote (maximum) -0.479573180854 0.522194525541 0.651184954686 0.760391167882 0.882609166922
+camo vote (maximum) -0.363183915702 0.112621841903 0.348529091592 0.763032097787 0.856728722881
+
+fake-fake 0.939448547106 0.967977711467 0.97605306059 0.982447371144 0.989709584793
+fake-origin -0.518105935276 -0.0608763058824 0.0812714705403 0.260509487429 0.772978348267
+real original vote (any) -0.666310082548 0.149674612381 0.468325228416 0.685837425823 0.876564082258
+real original vote (maximum) -0.348715237847 0.520412062531 0.644142583295 0.752155978058 0.877519095936
+camo vote (maximum) -0.202941601803 0.132958608253 0.399139001465 0.790465549559 0.87070594772
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba981fc3f8>)
+real original vote (any) -0.681285196286 0.162908739359 0.535819790646 0.746316463514 0.903881782487
+real original vote (maximum) -0.30957381272 0.568124543335 0.693127723624 0.792159850652 0.899161550635
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba981fc680>)
+real original vote (any) -0.691809703137 0.164184410565 0.493246965035 0.708016020364 0.880924445871
+real original vote (maximum) -0.407289414829 0.535039048652 0.660773657403 0.763954507954 0.881911718031
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba981fc950>)
+real original vote (any) -0.774353098153 0.156352129724 0.478183004422 0.692809832855 0.866788536544
+real original vote (maximum) -0.410244441865 0.51653966263 0.653137920586 0.756667656073 0.882326313171
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba9880ab48>)
+real original vote (any) -0.714826614151 0.152449758403 0.47723835833 0.677440596407 0.852191496019
+real original vote (maximum) -0.455435284327 0.505250005785 0.638684927743 0.74774087294 0.871900493819
+camo vote (maximum) 
+('[3. User2Vec]', 'Elapsed: 7.9e+02 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+Helpfulness computing is already done
+Clean and Robust
+Helpfulness computing is already done
+Attacked and Naive
+Helpfulness computing is already done
+Attacked and Robust
+Helpfulness computing is already done
+('[4. Compute helpfulness]', 'Elapsed: 0.37 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00195142 1.19163 0.0573885 1.21199 0.955426 
+('U path: ', 'bandwagon_1%_3%_0%_emb_16/base_U_clean.npy')
+----------------------- base attack True rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0018849 2.16816 0.0562474 1.20966 0.955637 
+('U path: ', 'bandwagon_1%_3%_0%_emb_16/base_U_attacked.npy')
+----------------------- naive attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193009 1.33419 0.206815 1.22697 0.981328 
+('U path: ', 'bandwagon_1%_3%_0%_emb_16/naive_U_clean.npy')
+----------------------- naive attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 4.91477272727 [10, 25, 50, 75, 90] 4.91477272727 4.91477272727 4.91477272727 4.91477272727 4.91477272727 
+[Honest  all ] Mean 3.47181153255 [10, 25, 50, 75, 90] 2.5 2.98295454545 3.78676470588 3.96341463415 4.00423728814 
+[Honest target] Mean 3.28027232406 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.44339622642 3.92219781067 3.96192696193 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00186201 2.78304 0.206918 1.18646 0.94864 
+('U path: ', 'bandwagon_1%_3%_0%_emb_16/naive_U_attacked.npy')
+----------------------- robust attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00192974 1.32948 0.20718 1.2276 0.978087 
+('U path: ', 'bandwagon_1%_3%_0%_emb_16/robust_U_clean.npy')
+----------------------- robust attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 4.16971602796 [10, 25, 50, 75, 90] 4.0625 4.0625 4.06250001035 4.06305392521 4.42316105984 
+[Honest  all ] Mean 3.46979120397 [10, 25, 50, 75, 90] 2.5 2.98192771084 3.78623188406 3.96341463415 4.00423728814 
+[Honest target] Mean 3.27985470878 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.44339622642 3.92091183649 3.96022201681 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00186166 2.6787 0.206762 1.18802 0.949847 
+('U path: ', 'bandwagon_1%_3%_0%_emb_16/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.35315
+Naive	0.283692
+Robust	0.299149
+Target
+Base  	0.948698 	Mean at (before,after) 1.19163 2.14033
+Naive 	1.42698 	Mean at (before,after) 1.33419 2.76117
+Robust	1.32633 	Mean at (before,after) 1.32948 2.6558
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 2.5e+02 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_1%_1.1_emb_16')
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 2.9e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 170
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 20 1
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 378 3060
+('[2. attack]', 'Elapsed: 0.14 sec')
+
+('[3. User2Vec]', 'Started')
+fake-fake 0.963070981837 0.98683918574 0.990532126359 0.992834277691 0.995278719224
+fake-origin -0.619001360646 -0.0942435220289 0.103578662512 0.264423611753 0.44139586243
+real original vote (any) -0.712934126639 0.174763192308 0.558805632539 0.750596653759 0.898489671458
+real original vote (maximum) -0.407114385729 0.571181611926 0.684413008405 0.787529213214 0.896720307546
+camo vote (maximum) -0.342568590208 0.110234717902 0.289330075748 0.426352906472 0.75128070687
+
+fake-fake 0.952808695584 0.97929812819 0.98538999931 0.988779796545 0.993006000852
+fake-origin -0.684814457149 -0.0803681764158 0.139630559107 0.309856853665 0.649920289703
+real original vote (any) -0.660064769477 0.166328966338 0.509823729428 0.712447886246 0.887961320233
+real original vote (maximum) -0.390021165446 0.539568957013 0.662657764596 0.767172671197 0.886979674486
+camo vote (maximum) -0.226719273345 0.114357120232 0.322772460444 0.62822763639 0.819188318475
+
+fake-fake 0.944219807635 0.973728098299 0.981231321502 0.985727056329 0.990818130977
+fake-origin -0.612398619171 -0.0791030818502 0.105252747639 0.264970149999 0.695454691473
+real original vote (any) -0.666281165377 0.151551831983 0.476834076029 0.690356868304 0.876672034293
+real original vote (maximum) -0.454875700949 0.519927334438 0.65073486432 0.762150794494 0.883135663987
+camo vote (maximum) -0.310943257251 0.11406603769 0.424884094927 0.741114237635 0.845438196056
+
+fake-fake 0.937799133167 0.969779774429 0.97900137548 0.983052115726 0.989748514549
+fake-origin -0.644381825367 -0.0805027769163 0.119212449914 0.282375081793 0.781301740585
+real original vote (any) -0.772636212925 0.151787825277 0.472769482715 0.680687185983 0.863299553511
+real original vote (maximum) -0.471304655887 0.512085686069 0.640386918362 0.748032860363 0.872828349377
+camo vote (maximum) -0.303037919049 0.154195814494 0.419817509446 0.769977305133 0.860139567449
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba7044fc20>)
+real original vote (any) -0.714826614151 0.165202651231 0.542217837328 0.759701173705 0.904827638252
+real original vote (maximum) -0.52143867615 0.561056338558 0.684932247123 0.78334156976 0.896714031523
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba7044fef0>)
+real original vote (any) -0.785240914301 0.158018904704 0.493239563769 0.709048623088 0.878040975654
+real original vote (maximum) -0.342962662951 0.536622717245 0.657605299545 0.761556261942 0.884291233344
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba701e0200>)
+real original vote (any) -0.663250816784 0.143231567085 0.475708016666 0.689549912743 0.872367033588
+real original vote (maximum) -0.579718085079 0.515282691951 0.642491964121 0.750795872281 0.871217962337
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba8818f4d0>)
+real original vote (any) -0.680191694743 0.151155490464 0.462718089198 0.675828502498 0.862334133894
+real original vote (maximum) -0.469744981472 0.507002987738 0.640989066402 0.746758769191 0.869379834277
+camo vote (maximum) 
+('[3. User2Vec]', 'Elapsed: 7.9e+02 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+Helpfulness computing is already done
+Clean and Robust
+Helpfulness computing is already done
+Attacked and Naive
+Helpfulness computing is already done
+Attacked and Robust
+Helpfulness computing is already done
+('[4. Compute helpfulness]', 'Elapsed: 0.35 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00195142 1.19163 0.0573885 1.21199 0.955426 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_16/base_U_clean.npy')
+----------------------- base attack True rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193467 2.88165 0.0564699 1.22488 0.974648 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_16/base_U_attacked.npy')
+----------------------- naive attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193009 1.33419 0.206815 1.22697 0.981328 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_16/naive_U_clean.npy')
+----------------------- naive attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 4.91477272727 [10, 25, 50, 75, 90] 4.91477272727 4.91477272727 4.91477272727 4.91477272727 4.91477272727 
+[Honest  all ] Mean 3.47215161812 [10, 25, 50, 75, 90] 2.5 2.98295454545 3.79032258065 3.96341463415 4.00423728814 
+[Honest target] Mean 3.25018256478 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.43023255814 3.92219781067 3.96192696193 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00191295 3.07167 0.206349 1.22216 0.966479 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_16/naive_U_attacked.npy')
+----------------------- robust attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193014 1.32905 0.207536 1.22826 0.978933 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_16/robust_U_clean.npy')
+----------------------- robust attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 2.5 [10, 25, 50, 75, 90] 2.5 2.5 2.5 2.5 2.5 
+[Honest  all ] Mean 3.47030819778 [10, 25, 50, 75, 90] 2.5 2.98076923208 3.78676470588 3.96341463415 4.00412788856 
+[Honest target] Mean 3.24975280853 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.43023255814 3.92150771848 3.95967247306 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00191278 2.95832 0.206258 1.21187 0.963482 
+('U path: ', 'bandwagon_1%_1%_1.1_emb_16/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.265556
+Naive	0.258393
+Robust	0.265149
+Target
+Base  	1.66921 	Mean at (before,after) 1.19163 2.86085
+Naive 	1.71844 	Mean at (before,after) 1.33419 3.05262
+Robust	1.61089 	Mean at (before,after) 1.32905 2.93994
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 2.5e+02 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_3%_1.1_emb_16')
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 2.9e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 170
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 62 1
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 1134 3060
+('[2. attack]', 'Elapsed: 0.15 sec')
+
+('[3. User2Vec]', 'Started')
+fake-fake 0.838006693225 0.979886435804 0.988998012242 0.992685799267 0.995553863215
+fake-origin -0.628998371417 -0.0894637510623 0.101953344634 0.308785135353 0.473933795873
+real original vote (any) -0.708398294427 0.158542788755 0.549567849671 0.747132440643 0.901893399944
+real original vote (maximum) -0.369634636037 0.58026064594 0.692845776316 0.789899563728 0.896515510748
+camo vote (maximum) -0.394801441379 0.100300889583 0.268970917993 0.503468231558 0.767311062905
+
+fake-fake 0.834789244785 0.963862762208 0.981535090474 0.988909871751 0.993604519013
+fake-origin -0.666444534233 -0.0813486935236 0.127757005852 0.315375655275 0.670515175702
+real original vote (any) -0.744534873145 0.171916983201 0.503673044385 0.703193284705 0.887528314404
+real original vote (maximum) -0.590962705646 0.541489915065 0.662258378803 0.770212687346 0.887701505072
+camo vote (maximum) -0.514247311271 0.160139311546 0.417814905757 0.653995245382 0.86504640377
+
+fake-fake 0.83413311292 0.950652093537 0.976574498018 0.986408245218 0.991709568229
+fake-origin -0.63562025832 -0.0628337577152 0.131096980337 0.323051839157 0.644931039212
+real original vote (any) -0.673514335481 0.15362854618 0.493630815591 0.692118548878 0.871403243871
+real original vote (maximum) -0.743319718259 0.527504482595 0.65083068969 0.756977645196 0.879002903852
+camo vote (maximum) -0.511019296701 0.190489292422 0.466996894137 0.789081419671 0.894271438185
+
+fake-fake 0.830645882694 0.946507536014 0.973580723113 0.984900304217 0.990452823171
+fake-origin -0.805694268945 -0.0941228773919 0.0984878876547 0.302231463021 0.779778481296
+real original vote (any) -0.799594364476 0.145839404688 0.464974037593 0.674521147463 0.863021243327
+real original vote (maximum) -0.397308495056 0.51524413508 0.641044699511 0.750652238838 0.881148602055
+camo vote (maximum) -0.557529121965 0.18205282633 0.432010969246 0.781972696627 0.889989761175
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba65e016c8>)
+real original vote (any) -0.75064750795 0.164655590921 0.547554437232 0.746907261334 0.907124905722
+real original vote (maximum) -0.450673962466 0.569213855634 0.686179184803 0.787450575536 0.8974030369
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba65e01950>)
+real original vote (any) -0.702050130484 0.138978928766 0.490499764222 0.700557462761 0.886183719809
+real original vote (maximum) -0.564913061643 0.541713505349 0.661602164221 0.764144436323 0.883568386723
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba65e01c20>)
+real original vote (any) -0.761775164918 0.156829987968 0.491425424901 0.694877681944 0.862913215338
+real original vote (maximum) -0.404984863782 0.515862884662 0.651121340338 0.752855684798 0.874274180879
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba70a2b3f8>)
+real original vote (any) -0.694710656432 0.146667926225 0.472858843667 0.680400584946 0.869528246414
+real original vote (maximum) -0.361437912597 0.50256706239 0.636286384214 0.746460947444 0.869030860643
+camo vote (maximum) 
+('[3. User2Vec]', 'Elapsed: 7.9e+02 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+Clean and Robust
+Attacked and Naive
+Attacked and Robust
+('[4. Compute helpfulness]', 'Elapsed: 44 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00195142 1.19163 0.0573885 1.21199 0.955426 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_16/base_U_clean.npy')
+----------------------- base attack True rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00188808 2.40737 0.0588458 1.21481 0.962902 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_16/base_U_attacked.npy')
+----------------------- naive attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193009 1.33419 0.206815 1.22697 0.981328 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_16/naive_U_clean.npy')
+----------------------- naive attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 4.91477272727 [10, 25, 50, 75, 90] 4.91477272727 4.91477272727 4.91477272727 4.91477272727 4.91477272727 
+[Honest  all ] Mean 3.47259714144 [10, 25, 50, 75, 90] 2.5 2.98387096774 3.79032258065 3.96352953793 4.00442477876 
+[Honest target] Mean 3.28027232406 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.44339622642 3.92219781067 3.96192696193 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00198376 2.63627 0.206979 1.20068 0.958327 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_16/naive_U_attacked.npy')
+----------------------- robust attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00192973 1.32932 0.207197 1.22763 0.978137 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_16/robust_U_clean.npy')
+----------------------- robust attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 4.1720089575 [10, 25, 50, 75, 90] 4.0625 4.06250000002 4.06250040272 4.09656002861 4.45687224743 
+[Honest  all ] Mean 3.47027531952 [10, 25, 50, 75, 90] 2.5 2.98192771084 3.78676470588 3.96341463415 4.00423728814 
+[Honest target] Mean 3.27990170971 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.44339622642 3.92150749778 3.96002751317 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00198347 2.56718 0.207531 1.19934 0.95354 
+('U path: ', 'bandwagon_1%_3%_1.1_emb_16/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.365904
+Naive	0.301335
+Robust	0.311238
+Target
+Base  	1.19137 	Mean at (before,after) 1.19163 2.38301
+Naive 	1.27983 	Mean at (before,after) 1.33419 2.61402
+Robust	1.21497 	Mean at (before,after) 1.32932 2.54429
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 2.5e+02 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_1%_1%_emb_16')
+('[1. preprocess]', 'Started')
+('get_enough_rating_review, current_num_data', 33911)
+('get_enough_rating_review, current_num_data', 30073)
+('get_enough_rating_review, current_num_data', 28933)
+('get_enough_rating_review, current_num_data', 28568)
+('get_enough_rating_review, current_num_data', 28462)
+('get_enough_rating_review, current_num_data', 28410)
+('get_enough_rating_review, current_num_data', 28386)
+('get_enough_rating_review, current_num_data', 28378)
+('get_enough_rating_review, current_num_data', 28374)
+('get_enough_rating_review, current_num_data', 28374)
+('[1. preprocess]', 'Elapsed: 5.5 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 170
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 20 20
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 720 3060
+('[2. attack]', 'Elapsed: 0.14 sec')
+
+('[3. User2Vec]', 'Started')
+fake-fake 0.958862843019 0.981911543688 0.989257408012 0.992954947753 0.9959720525
+fake-origin -0.64649276831 -0.0977665107858 0.0692132904765 0.267055610955 0.50941006521
+real original vote (any) -0.742034614722 0.169240201275 0.554043094441 0.751971200493 0.897659080965
+real original vote (maximum) -0.660826843564 0.568633639721 0.687389196318 0.788342066769 0.897947764499
+camo vote (maximum) -0.405722753594 0.148903772945 0.261364682488 0.433508548454 0.697500249315
+
+fake-fake 0.929695345522 0.972674545441 0.983241474233 0.989561213983 0.994730015066
+fake-origin -0.62948489831 -0.0826943505652 0.122996014637 0.273860001217 0.609365973604
+real original vote (any) -0.721647286653 0.186507366921 0.514558112416 0.708574147681 0.884145064726
+real original vote (maximum) -0.330484350178 0.539604888029 0.66352597522 0.767277339144 0.882115850814
+camo vote (maximum) -0.261167145133 0.196245716486 0.40061206399 0.624118236829 0.847473681221
+
+fake-fake 0.916075613239 0.965199222046 0.977890446116 0.986779504986 0.99314124418
+fake-origin -0.687601960703 -0.0612834688007 0.148009267269 0.333482334615 0.716760690457
+real original vote (any) -0.675742469582 0.15782120797 0.485464713017 0.690742252498 0.865592105999
+real original vote (maximum) -0.411352411737 0.517776678778 0.644851600896 0.752271201173 0.876607628024
+camo vote (maximum) -0.386504035604 0.150106716689 0.404115230881 0.717691155447 0.866702627274
+
+fake-fake 0.909030507477 0.961859500293 0.974051811479 0.984276500516 0.992412456166
+fake-origin -0.777165895718 -0.0942861421196 0.0937891217151 0.289541176631 0.757081483105
+real original vote (any) -0.667268743251 0.151377320478 0.47783134912 0.682348104451 0.86829714659
+real original vote (maximum) -0.732730202247 0.51001783638 0.638930882692 0.752899720033 0.874344917599
+camo vote (maximum) -0.344200650641 0.163720893243 0.409916738953 0.748970886363 0.857140119455
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba42398a28>)
+real original vote (any) -0.752508310138 0.164945381036 0.548614347703 0.750512858619 0.899315339374
+real original vote (maximum) -0.358168649107 0.571301806039 0.692213548498 0.792325932435 0.896184696603
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba42398cb0>)
+real original vote (any) -0.785240914301 0.172997795969 0.500646412392 0.706828717109 0.874288501264
+real original vote (maximum) -0.516330942791 0.528125360814 0.660813228937 0.762798857472 0.880817021227
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba42398f80>)
+real original vote (any) -0.772628391356 0.172774165733 0.488003661544 0.689403775631 0.872715343233
+real original vote (maximum) -0.36941356764 0.527084278246 0.658056629923 0.754989037469 0.873584703972
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba48264050>)
+real original vote (any) -0.763022143112 0.168031421876 0.478712865478 0.681908989054 0.87274463835
+real original vote (maximum) -0.564430022623 0.504557743446 0.641358727197 0.75199325582 0.872134444003
+camo vote (maximum) 
+('[3. User2Vec]', 'Elapsed: 7.9e+02 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+Clean and Robust
+Attacked and Naive
+Attacked and Robust
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00195142 1.19163 0.0573885 1.21199 0.955426 
+('U path: ', 'bandwagon_1%_1%_1%_emb_16/base_U_clean.npy')
+----------------------- base attack True rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00191631 2.38588 0.0596075 1.21531 0.959696 
+('U path: ', 'bandwagon_1%_1%_1%_emb_16/base_U_attacked.npy')
+----------------------- naive attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193009 1.33419 0.206815 1.22697 0.981328 
+('U path: ', 'bandwagon_1%_1%_1%_emb_16/naive_U_clean.npy')
+----------------------- naive attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 4.91477272727 [10, 25, 50, 75, 90] 4.91477272727 4.91477272727 4.91477272727 4.91477272727 4.91477272727 
+[Honest  all ] Mean 3.47101882004 [10, 25, 50, 75, 90] 2.5 2.98192771084 3.79032258065 3.96341463415 4.00423728814 
+[Honest target] Mean 3.28649291122 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.5775862069 3.91552351624 3.96192696193 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00201139 2.91509 0.209166 1.21327 0.959928 
+('U path: ', 'bandwagon_1%_1%_1%_emb_16/naive_U_attacked.npy')
+----------------------- robust attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00192974 1.32916 0.2072 1.22766 0.978116 
+('U path: ', 'bandwagon_1%_1%_1%_emb_16/robust_U_clean.npy')
+----------------------- robust attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 2.50005543352 [10, 25, 50, 75, 90] 2.5 2.5 2.5 2.50000001082 2.50014973012 
+[Honest  all ] Mean 3.46908062899 [10, 25, 50, 75, 90] 2.5 2.98076923077 3.78676470588 3.96341463415 4.00423402689 
+[Honest target] Mean 3.28598165423 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.5775862069 3.91422529457 3.95966996821 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00188685 2.7673 0.209077 1.20453 0.957645 
+('U path: ', 'bandwagon_1%_1%_1%_emb_16/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.403483
+Naive	0.29667
+Robust	0.320214
+Target
+Base  	1.16966 	Mean at (before,after) 1.19163 2.36129
+Naive 	1.56141 	Mean at (before,after) 1.33419 2.89559
+Robust	1.419 	Mean at (before,after) 1.32916 2.74816
+('[6. Evaluation]', 'Elapsed: 0.04 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 2.5e+02 sec')
+
+#######################################################################################
+('Experiment Title', 'bandwagon_1%_3%_1%_emb_16')
+('[1. preprocess]', 'Started')
+('get_enough_rating_review, current_num_data', 33911)
+('get_enough_rating_review, current_num_data', 30073)
+('get_enough_rating_review, current_num_data', 28933)
+('get_enough_rating_review, current_num_data', 28568)
+('get_enough_rating_review, current_num_data', 28462)
+('get_enough_rating_review, current_num_data', 28410)
+('get_enough_rating_review, current_num_data', 28386)
+('get_enough_rating_review, current_num_data', 28378)
+('get_enough_rating_review, current_num_data', 28374)
+('get_enough_rating_review, current_num_data', 28374)
+('[1. preprocess]', 'Elapsed: 5.4 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 170
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 62 20
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 1476 3060
+('[2. attack]', 'Elapsed: 0.14 sec')
+
+('[3. User2Vec]', 'Started')
+fake-fake 0.97871882468 0.989208821058 0.992659209509 0.994297877057 0.996421959931
+fake-origin -0.691213209134 -0.122200930158 0.0915677550123 0.249888102654 0.461703679303
+real original vote (any) -0.741152650565 0.157119392416 0.557665828314 0.744812374383 0.903830743432
+real original vote (maximum) -0.337199282432 0.576813901272 0.692528016765 0.793773799945 0.900455206315
+camo vote (maximum) -0.338934553984 0.072987686078 0.264331633435 0.436694131478 0.691173250197
+
+fake-fake 0.963643339996 0.984331576512 0.989150976823 0.99193448229 0.994729697891
+fake-origin -0.724721403818 -0.117950469257 0.0780123552554 0.237173072849 0.632430873574
+real original vote (any) -0.758787085862 0.158520700145 0.49994817239 0.701550517674 0.880748169019
+real original vote (maximum) -0.591537359511 0.541069784208 0.665782383224 0.768080479431 0.882819312315
+camo vote (maximum) -0.309052656994 0.117686638975 0.349657716076 0.688748315764 0.850416653745
+
+fake-fake 0.950279880366 0.980236365647 0.986263292243 0.990196869253 0.993558200519
+fake-origin -0.617527031443 -0.0823566807722 0.105615026934 0.270607182755 0.698219615261
+real original vote (any) -0.664765665212 0.132954722321 0.470797025206 0.691793352856 0.87351586237
+real original vote (maximum) -0.726938765307 0.520167423733 0.650426931599 0.759678809725 0.880806067274
+camo vote (maximum) -0.309573533513 0.12450529374 0.438733936026 0.790517440821 0.885574029926
+
+fake-fake 0.943236691723 0.977893762427 0.984077025414 0.988833976262 0.992637616329
+fake-origin -0.588476801734 -0.0635801174827 0.10147682412 0.281953931047 0.792838027116
+real original vote (any) -0.697355867649 0.138608299836 0.463176050527 0.67767314109 0.861289023741
+real original vote (maximum) -0.724248870734 0.510509233347 0.639203273222 0.747921717609 0.870792512689
+camo vote (maximum) -0.287536980711 0.113011966467 0.396200972223 0.793949834516 0.886244766446
+
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba436ad050>)
+real original vote (any) -0.71863545776 0.183465491249 0.549392042495 0.746537637082 0.897958305053
+real original vote (maximum) -0.52174018081 0.571190408469 0.690467353178 0.789746866746 0.900312467132
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba436ad368>)
+real original vote (any) -0.74397571211 0.16717784543 0.497470989613 0.706500953421 0.879240416268
+real original vote (maximum) -0.563766093601 0.539531023582 0.665556406202 0.765913350313 0.883837686026
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba436ad5f0>)
+real original vote (any) -0.741939487281 0.155038008322 0.487332559543 0.691627181473 0.869912349326
+real original vote (maximum) -0.504472425196 0.52309668038 0.650364857933 0.755666009542 0.88381491343
+camo vote (maximum) 
+(<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7fba436dab48>)
+real original vote (any) -0.812502044738 0.170644943287 0.472113425761 0.68264178977 0.873631852466
+real original vote (maximum) -0.455355746566 0.506702117566 0.639773654737 0.752152920811 0.874612513792
+camo vote (maximum) 
+('[3. User2Vec]', 'Elapsed: 7.8e+02 sec')
+
+('[4. Compute helpfulness]', 'Started')
+Clean and Naive
+Clean and Robust
+Attacked and Naive
+Attacked and Robust
+('[4. Compute helpfulness]', 'Elapsed: 44 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00195142 1.19163 0.0573885 1.21199 0.955426 
+('U path: ', 'bandwagon_1%_3%_1%_emb_16/base_U_clean.npy')
+----------------------- base attack True rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0018689 1.86498 0.0602399 1.21139 0.956939 
+('U path: ', 'bandwagon_1%_3%_1%_emb_16/base_U_attacked.npy')
+----------------------- naive attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00193009 1.33419 0.206815 1.22697 0.981328 
+('U path: ', 'bandwagon_1%_3%_1%_emb_16/naive_U_clean.npy')
+----------------------- naive attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 4.91477272727 [10, 25, 50, 75, 90] 4.91477272727 4.91477272727 4.91477272727 4.91477272727 4.91477272727 
+[Honest  all ] Mean 3.47120902842 [10, 25, 50, 75, 90] 2.5 2.98192771084 3.79237288136 3.96341463415 4.00442477876 
+[Honest target] Mean 3.28000412076 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.44339622642 3.92219781067 3.98778482499 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00200058 2.41062 0.206526 1.19579 0.943863 
+('U path: ', 'bandwagon_1%_3%_1%_emb_16/naive_U_attacked.npy')
+----------------------- robust attack False rank 20 lda 0.005 ---------------------
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00192974 1.32906 0.207194 1.22767 0.978142 
+('U path: ', 'bandwagon_1%_3%_1%_emb_16/robust_U_clean.npy')
+----------------------- robust attack True rank 20 lda 0.005 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 2.5 [10, 25, 50, 75, 90] 2.5 2.5 2.5 2.5 2.5 
+[Honest  all ] Mean 3.46918459613 [10, 25, 50, 75, 90] 2.5 2.98076923077 3.78834355828 3.96341463415 4.00423728814 
+[Honest target] Mean 3.27920694204 [10, 25, 50, 75, 90] 2.28373015873 2.65151515152 3.44339622642 3.92107921067 3.98621185599 
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00183922 2.20092 0.206439 1.20282 0.951872 
+('U path: ', 'bandwagon_1%_3%_1%_emb_16/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.398019
+Naive	0.324074
+Robust	0.334951
+Target
+Base  	0.643955 	Mean at (before,after) 1.19163 1.83559
+Naive 	1.05228 	Mean at (before,after) 1.33419 2.38646
+Robust	0.847142 	Mean at (before,after) 1.32906 2.17621
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 2.6e+02 sec')
+
+exit
+
+Script done on 2016년 10월 25일 (화) 오전 01시 18분 50초

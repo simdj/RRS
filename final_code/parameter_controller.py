@@ -34,7 +34,7 @@ import os
 class parameter_controller():
 	def __init__(self
 		, attack_model='bandwagon', badly_rated_item_flag=True, camo_flag=True
-		, num_fake_user=0, filler_size=0, selected_size=0
+		, num_fake_user=0, filler_size=0, selected_size=0, camo_vote_size_multiple=1
 		, embedding_dim=32, word2vec_iter=5
 		, rank=50, lda=1, max_iter=5001
 		, user_threshold=5, item_threshold=5
@@ -44,7 +44,7 @@ class parameter_controller():
 		self.fake_flag = True 
 
 		self.badly_rated_item_flag = badly_rated_item_flag
-		self.bad_item_threshold = 10
+		self.bad_item_threshold = 18 # 1%
 		self.camo_flag = camo_flag
 
 		self.exp_title = exp_title
@@ -59,6 +59,7 @@ class parameter_controller():
 		self.num_fake_item = 1
 		self.filler_size = filler_size
 		self.selected_size = selected_size
+		self.camo_vote_size_multiple = camo_vote_size_multiple
 		# (default)
 		self.num_fake_review=1
 		self.num_fake_vote=1
@@ -72,6 +73,9 @@ class parameter_controller():
 
 		############################## 4. helpfulness ##############################
 		self.doubt_weight = doubt_weight
+		self.similarity_threshold = 0.8
+		self.base_helpful_numerator = 1.5
+		self.base_helpful_denominator = 0.6
 
 		# ############################# 5. matrix factorization ##############################
 		self.rank = rank

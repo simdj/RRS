@@ -289,8 +289,10 @@ class WMF_params():
 
 		ret = np.array(ret)
 		# helpful 0~5 scale is weak to impact RS -> helpfulness +1: 10 times effect
+		############ important parameter ############
 		if amplify_flag:
-			ret[:,-1]=np.power(10, ret[:,-1]-2.5)
+			important_parameter = 5.0
+			ret[:,-1]=np.power(10, ret[:,-1]-important_parameter) 
 		return ret
 
 	def set_input_output_path(self, params, algorithm_model, attack_flag):

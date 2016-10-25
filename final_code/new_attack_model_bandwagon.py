@@ -36,75 +36,51 @@ class attack_model_bandwagon():
 		self.num_origin_review = len(self.origin_review_matrix)
 		self.num_origin_vote = len(self.origin_vote_matrix)
 		
-		self.construct_avg_rating()
-		#######################################
-		# fake review stats
-		self.fake_user_start = self.num_origin_user
-		self.fake_item_start = self.num_origin_item
-		self.fake_review_id_start = self.num_origin_review
-
-		self.num_fake_user = int(self.num_origin_user*params.num_fake_user) if params.num_fake_user<=1 else int(params.num_fake_user)
-		self.fake_user_id_list = list(range(self.fake_user_start, self.fake_user_start+self.num_fake_user))
-
-		# self.num_fake_item = int(self.num_origin_item*params.num_fake_item) if params.num_fake_item<=1 else int(params.num_fake_item)
-		print("num fake item is one!!!!!!!!!!!!!!")
-		self.num_fake_item = params.num_fake_item
-		self.fake_item_id_list = list(range(self.fake_item_start, self.fake_item_start+self.num_fake_item))
 		
-		# #(fake reviews) cannot be larger than #(fake_user)*#(fake_item)
-		self.num_fake_review = int(self.num_fake_user*self.num_fake_item*params.num_fake_review) if params.num_fake_review<=1 else int(params.num_fake_review)
-		self.num_fake_review = min(self.num_fake_review, self.num_fake_user*self.num_fake_item)
-		self.fake_review_id_list = list(range(self.fake_review_id_start,self.fake_review_id_start+self.num_fake_review))
-
-		# #(fake votes) cannot be larger than #(fake users)*#(fake reviews)
-		self.num_fake_vote = int(self.num_fake_review*self.num_fake_user*params.num_fake_vote) if params.num_fake_vote<=1 else int(params.num_fake_vote)
-		self.num_fake_vote = min(self.num_fake_vote, self.num_fake_review*self.num_fake_user)
+		#######################################
+		# # reading parameter 
+		# attacker size param
+		self.num_fake_user = int(self.num_origin_user*params.num_fake_user) if params.num_fake_user<=1 else int(params.num_fake_user)
+		# camofoulage item size param
+		self.filler_size = int(self.num_origin_item*params.filler_size) if params.filler_size <=1 else int(params.filler_size)
+		self.selected_size = int(self.num_origin_item*params.selected_size) if params.selected_size <=1 else int(params.selected_size)
+		
+		# target item size param
+		# self.num_fake_item = int(self.num_origin_item*params.num_fake_item) if params.num_fake_item<=1 else int(params.num_fake_item)
+		self.num_fake_item = params.num_fake_item
+		print '#(fake item)', self.num_fake_item
 		
 		# fake_rating value is usually extream value
 		self.fake_rating_value = params.fake_rating_value
 		self.fake_helpful_value = params.fake_helpful_value
 
-		# camofoulage
-		self.filler_size = int(self.num_origin_item*params.filler_size) if params.filler_size <=1 else int(params.filler_size)
-		self.selected_size = int(self.num_origin_item*params.selected_size) if params.selected_size <=1 else int(params.selected_size)
-		# self.num_camo_item = int(self.num_origin_item*params.num_camo_item) if params.num_camo_item <=1 else params.num_camo_item
-		self.num_camo_item = self.filler_size+self.selected_size
-		self.camo_item_id_list = []
-		self.camo_review_id_start = self.fake_review_id_start+self.num_fake_review
-
-		# importatnt data
-		self.fake_review_matrix = []
-		self.camo_review_matrix = []
-		
-		self.fake_vote_matrix = []
-		self.camo_vote_matrix = []
-		
+		self.camo_vote_size_multiple = params.camo_vote_size_multiple
+		# attack metadata param
 		self.badly_rated_item_flag=params.badly_rated_item_flag
 		self.bad_item_threshold = params.bad_item_threshold
 
-		print('[Origin] Users x Items :', self.num_origin_user, self.num_origin_item, 'Reviews, Votes : ', self.num_origin_review, self.num_origin_vote)
-		print('[Fake] Users x Items :', self.num_fake_user, self.num_fake_item, 'Reviews, Votes : ',self.num_fake_review, self.num_fake_vote)
-		print('[Bandwagon] Filler size :', self.filler_size, 'Selected size : ', self.selected_size)
+		# injection stats
+		self.fake_user_start = None
+		self.fake_user_id_list = None
+		self.fake_item_id_list = None
 
-	def construct_avg_rating(self):
-		# self.avg_rating = list()
-		sum_rating_ist = np.zeros((self.num_origin_item,))
-		num_rating_list = np.zeros((self.num_origin_item,))
-		for row in self.origin_review_matrix:
-			item_id = int(row[1])
-			rating = float(row[2])
-			sum_rating_ist[item_id]+=rating
-			num_rating_list[item_id]+=1.0
-		self.avg_rating_list = sum_rating_ist/num_rating_list
+		self.fake_review_id_start = None
+		self.num_fake_review = None
+		self.fake_review_id_list = None # list(range(self.fake_review_id_start, self.fake_review_id_start+num_fake_review))
 
-	def get_popular_item(self, topk=10):
-		from collections import Counter
-		a = self.origin_review_matrix[:,1]
-		b = Counter(a)
-		# [(item_id, occurence)*]
-		# [(944, 212), (912, 156), (1436, 135), (2277, 126), (2577, 124), (2797, 115)]
-		return b.most_common(topk)
+		self.camo_review_id_start = None # self.fake_review_id_start+self.num_fake_review
+		
+		self.avg_rating_list = None
 
+		self.fake_review_writer = dict()
+
+		# output data
+		self.fake_review_matrix = None
+		self.camo_review_matrix = None
+		self.fake_vote_matrix = None
+		self.camo_vote_matrix = None
+
+	# for target item
 	def get_bad_items_info(self,topk=10, threshold=0, random_flag=False):
 		# many bad rating
 		item_score = dict()
@@ -122,34 +98,71 @@ class attack_model_bandwagon():
 			item_score_list.append([k, item_score[k][0]/float(item_score[k][1]), item_score[k][1]])
 
 		item_score_list = sorted(item_score_list, key=lambda x:x[1])
-		item_score_list = filter(lambda x: x[1]<3 and x[2]>=threshold, item_score_list)
-		# print 'item_score_list  2', item_score_list
+		# item_score_list = filter(lambda x: x[1]<3 and x[2]>=threshold, item_score_list)
+		item_score_list = filter(lambda x: x[1]<4 and x[2]>=threshold, item_score_list)
+		
+		# 3 cut-> 8 / 3.5 cut -> 51 / 4 cut -> 181
+		# print len(item_score_list), item_score_list
+		
 		if random_flag:
 			random_index_list = np.random.choice(a=len(item_score_list), size=topk, replace=False)
 			return [item_score_list[idx] for idx in random_index_list]
 		else:
 			return item_score_list[0:topk]
+	
+	# for average attack
+	def construct_avg_rating(self):
+		sum_rating_ist = np.zeros((self.num_origin_item,))
+		num_rating_list = np.zeros((self.num_origin_item,))
+		for row in self.origin_review_matrix:
+			item_id = int(row[1])
+			rating = float(row[2])
+			sum_rating_ist[item_id]+=rating
+			num_rating_list[item_id]+=1.0
+		self.avg_rating_list = sum_rating_ist/num_rating_list
+	
+	# for bandwagon attack
+	def get_popular_item(self, topk=10):
+		from collections import Counter
+		a = self.origin_review_matrix[:,1]
+		b = Counter(a)
+		# [(item_id, occurence)*]
+		# [(944, 212), (912, 156), (1436, 135), (2277, 126), (2577, 124), (2797, 115)]
+		return b.most_common(topk)
 
-	def generate_fake_reviews(self, target_item_id_list):
-		fake_review_coo = np.random.choice(self.num_fake_user*self.num_fake_item, self.num_fake_review, replace=False)
+	############
+	## REVIEW ##
+	############
+	def inject_attack_reviews(self):
+		self.fake_user_start = self.num_origin_user  # new users are injected 
+		self.fake_user_id_list = list(range(self.fake_user_start, self.fake_user_start+self.num_fake_user))
+		self.fake_review_id_start = self.num_origin_review # new reviews are injected
+		self.generate_fake_reviews()
+		
+		self.camo_review_id_start = self.fake_review_id_start+self.num_fake_review
+		self.generate_camo_reviews()
+	
+	# inject (fake user, target item, maximum item rating value)
+	def generate_fake_reviews(self):
+		self.fake_review_matrix = []
 
-		fake_review_id = self.fake_review_id_start
-		for coo in fake_review_coo:
-			fake_u = self.fake_user_id_list[int(coo/self.num_fake_item)]
-			fake_i = target_item_id_list[coo%self.num_fake_item]
-
-			self.fake_review_matrix.append([fake_u, fake_i, self.fake_rating_value, fake_review_id])
-			fake_review_id+=1
-
-	def generate_fake_reviews_bad_item(self):
 		# target items are badly rated items
 		bad_item_info_list = self.get_bad_items_info(self.num_fake_item, threshold=self.bad_item_threshold)
 		# print 'bad_item_info_list', bad_item_info_list
 		self.fake_item_id_list = [x[0] for x in bad_item_info_list]
-		# print ('target items', self.fake_item_id_list)
-		self.generate_fake_reviews(self.fake_item_id_list)
+
+		fake_review_id = self.fake_review_id_start
+		for fake_u in self.fake_user_id_list:
+			for fake_i in self.fake_item_id_list:
+				self.fake_review_matrix.append([fake_u, fake_i, self.fake_rating_value, fake_review_id])
+				self.fake_review_writer[fake_review_id]=fake_u
+				fake_review_id+=1
+		self.num_fake_review = len(self.fake_review_matrix)
 	
+	# inject (fake user, filler item, average item rating value), (fake user, popular item, maximum item rating value)
 	def generate_camo_reviews(self):
+		self.camo_review_matrix = []
+
 		camo_review_id = self.camo_review_id_start
 		# random attack
 		for u in self.fake_user_id_list:
@@ -161,32 +174,33 @@ class attack_model_bandwagon():
 
 		# popular attack (bandwagon attack)
 		popular_item_list = self.get_popular_item(self.selected_size)
-		self.camo_item_id_list = [x[0] for x in popular_item_list]
+		popular_item_list = [x[0] for x in popular_item_list]
 		# print('camo item list', popular_item_list)
 		for u in self.fake_user_id_list:
-			for i in self.camo_item_id_list:
+			for i in popular_item_list:
 				self.camo_review_matrix.append([u,i,5,camo_review_id])
 				camo_review_id+=1
 	
 	##################
 	###### VOTE ######
 	##################
+	def inject_attack_votes(self):
+		self.fake_review_id_list = list(range(self.fake_review_id_start, self.fake_review_id_start+self.num_fake_review))
+
+		self.generate_fake_votes()
+		self.generate_camo_votes()
 
 	def generate_fake_votes(self):
-		# fake_vote_coo = np.random.choice(self.num_fake_user*self.num_fake_review, self.num_fake_vote, replace=False)
-		# for coo in fake_vote_coo:
-		# 	fake_u = self.fake_user_id_list[int(coo/self.num_fake_review)]
-		# 	fake_r = self.fake_review_id_list[coo%self.num_fake_review]
-		# 	self.fake_vote_matrix.append([fake_u,fake_r, self.fake_helpful_value])
+		self.fake_vote_matrix = []
 		for fake_u in self.fake_user_id_list:
 			for fake_r in self.fake_review_id_list:
-				self.fake_vote_matrix.append([fake_u,fake_r, self.fake_helpful_value])
-
-
-
+				# can give helpfulness rating only to the reviews of other users
+				if fake_u != self.fake_review_writer[fake_r]:
+					self.fake_vote_matrix.append([fake_u,fake_r, self.fake_helpful_value])
 
 	def generate_camo_votes(self):
-		camo_vote_size = 10*len(self.fake_review_id_list)
+		self.camo_vote_matrix = []
+		camo_vote_size = int(self.camo_vote_size_multiple*(len(self.fake_review_id_list)-len(self.fake_item_id_list)))
 		print '[generate_camo_votes] each user camo_vote_size', camo_vote_size
 		for fake_u in self.fake_user_id_list:
 			camo_r_list = np.random.choice(a=self.num_origin_review, size=camo_vote_size, replace=False)
@@ -212,31 +226,32 @@ class attack_model_bandwagon():
 		np.save(self.target_item_list_path, np.unique(fake_review_matrix_[:,1]))
 
 	def whole_process(self):
+		self.construct_avg_rating()
+
 		# review
-		self.generate_fake_reviews_bad_item()
-		self.generate_camo_reviews()
+		self.inject_attack_reviews()
 		self.save_attack_review_matrix()
 
 		# vote
-		self.generate_fake_votes()
-		self.generate_camo_votes()
+		self.inject_attack_votes()
 		self.save_attack_vote_matrix()
 
 		# save the metadata of attack
 		self.save_fake_user_id_list()
 		self.save_target_item_list()
 
-if __name__=="__main__":
-	# am = attack_model_bandwagon(num_fake_user=100, num_fake_item=10, num_camo_item=0.01, badly_rated_item_flag=True)
-	# am.whole_process()
-	from parameter_controller import *
-	exp_title = 'bandwagon_1%_1%_1%_emb_32'
-	print('Experiment Title', exp_title)
-	params = parse_exp_title(exp_title)
-	am = attack_model_bandwagon(params=params)
-	am.whole_process()
+		print '[Origin stats] Users x Items:', self.num_origin_user, self.num_origin_item
+		print '[Attack stats] Sybil size:', self.num_fake_user, 'Target size, Filler size, Selected size:', len(self.fake_item_id_list), self.filler_size, self.selected_size
+		
+		print '[Origin] Reviews, Votes:', self.num_origin_review, self.num_origin_vote
+		print '[ Fake ] Reviews, Votes:',len(self.fake_review_matrix), len(self.fake_vote_matrix)
+		print '[ Camo ] Reviews, Votes:',len(self.camo_review_matrix), len(self.camo_vote_matrix)
 
-	# candi = am.get_bad_items_info(5, threshold=5)
-	# print candi
-	# print filter(lambda x: x[2]>=5, candi)
-	# print len(filter(lambda x: x[2]>=5, candi))
+if __name__=="__main__":
+	pass
+	# from parameter_controller import *
+	# exp_title = 'bandwagon_1%_1%_1%_emb_32'
+	# print('Experiment Title', exp_title)
+	# params = parse_exp_title(exp_title)
+	# am = attack_model_bandwagon(params=params)
+	# am.whole_process()

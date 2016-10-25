@@ -83,8 +83,9 @@ class helpful_measure():
         self.helpful_vote_tensor = dict()  # H(reviewer, item) = (cos_distance(reviewer,voter), helpfulness vote)
 
         # star rating! 0~5 -> 0~10
-        self.base_helpful_numerator = 1.5
-        self.base_helpful_denominator = 0.6
+        self.similarity_threshold = params.similarity_threshold
+        self.base_helpful_numerator = params.base_helpful_numerator
+        self.base_helpful_denominator = params.base_helpful_denominator
 
     def fill_review_dict(self):
         overall_review_matrix = np.load(self.review_origin_path)
@@ -109,6 +110,12 @@ class helpful_measure():
         if self.fake_flag:
             fake_vote_matrix = np.load(self.vote_fake_path)
             overall_vote_matrix = np.concatenate((overall_vote_matrix, fake_vote_matrix))
+            if self.camo_flag:
+                try:
+                    camo_vote_matirx = np.load(self.vote_camo_path)
+                    overall_vote_matrix = np.concatenate((overall_vote_matrix, camo_vote_matirx))
+                except:
+                    print 'no camo vote in helpful.py'
         
         for row in overall_vote_matrix:
             voter = int(row[0])
@@ -156,14 +163,14 @@ class helpful_measure():
                             # similar user agrees -> diminishing return
                             # sim>=0.9 -> positive value
                             # sim< 0.9 -> zero
-                            sim_with_threshold = max(0, (sim-0.9)*10)
+                            sim_with_threshold = max(0, (sim-self.similarity_threshold)*10)
                             numerator += rating * np.exp(-sim_with_threshold*self.doubt_weight)
                             denominator += np.exp(-sim_with_threshold*self.doubt_weight)
                         else:
                             # dissimilar user disagrees -> diminishing return
                             # sim<=-0.9 -> negative value
                             # sim> 0.9 -> zero
-                            sim_with_threshold = min(0, (sim+0.9)*10)
+                            sim_with_threshold = min(0, (sim+self.similarity_threshold)*10)
                             numerator += rating * np.exp( sim_with_threshold*self.doubt_weight)
                             denominator += np.exp( sim_with_threshold*self.doubt_weight)
                     else:
@@ -197,12 +204,9 @@ class helpful_measure():
             hf = np.load(self.helpful_fake_path)
             hf = hf[:,2]
 
-
-
-
     def helpful_test(self):
         try:
-            print("{Helpful test}")
+            # print("{Helpful test}")
             a=np.load(self.helpful_origin_path)
             print('origin helpful mean', np.mean(a[:, 2]))
             
