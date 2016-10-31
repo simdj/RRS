@@ -157,32 +157,31 @@ def whole_process(params):
 				# hm.helpful_test()
 	
 	with Timer("5. Matrix factorization"):
-		# lda_list = [0, 0.0001, 0.001, 0.01, 0.1, 1, 10]
-		# rank_list = [10,20,30,40,50,60,70,80,100]
-		# rank_list = [15,20,25,30]
-		# rank_list = [20,25,30]
-		# lda_list = [0.001, 0.01, 0.1]
-		# rank_list = [20,30]
-		# lda_list = [0.005, 0.01]
-		rank_list = [20,30]
-		lda_list = [0.005]
-		#####################
-		max_iter_list = [50001]
+		# # real
+		# rank_list = [20, 30, 40]
+		# lda_list = [0.001, 0.005]
+		# ####################
+		# max_iter_list = [25001]
 
-		algorithm_model_list = ['base','base','naive','naive','robust','robust']
-		attack_flag_list = [False, True, False, True, False, True]
-		# algorithm_model_list = ['naive','robust']
-		# algorithm_model_list=['base']
-		# attack_flag_list=[False]
-		# algorithm_model_list = ['base', 'base','naive','naive','robust','robust']
+		# algorithm_model_list = ['base','base','naive','naive', 'robust','robust']
 		# attack_flag_list = [False, True, False, True, False, True]
 
+		# helpfulness test varying embedding method
+		rank_list = [20]
+		lda_list = [0.001]
+		####################
+		max_iter_list = [25001]
+
+		algorithm_model_list = ['base','base','naive','naive', 'robust','robust']
+		attack_flag_list = [False, True, False, True, False, True]
+		
 		
 		for rank in rank_list:
 			for lda in lda_list:
 				for max_iter in max_iter_list:
 					important_value_list = []
 					for am, af in zip(algorithm_model_list, attack_flag_list):
+						# prepare parameters for matrix factorization
 						print'-----------------------',am,'attack',af, 'rank',rank, 'lda', lda, '---------------------'
 						wp = WMF_params(params=params, algorithm_model=am, attack_flag=af)
 						wp.rank = rank
@@ -208,46 +207,77 @@ def whole_process(params):
 						except:
 							pass
 
-						wmf_instance = WMF(params=wp)
-						wmf_instance.whole_process()
+					# 	# do matrix factorization
+					# 	wmf_instance = WMF(params=wp)
+					# 	wmf_instance.whole_process()
 
 
-					with Timer("6. Evaluation"):
-						evaluation(params)
-					print('')
-					print('')
+					# with Timer("6. Evaluation"):
+					# 	evaluation(params)
+	# 				print('')
+	# 				print('')
 
 if __name__ == "__main__":
-	# exp_title_list = ['bandwagon_0.25%_0.25%_0.25%_emb_32', 'bandwagon_0.5%_0.5%_0.5%_emb_32', 'bandwagon_1%_1%_1%_emb_32']
-	# exp_title_list = ['bandwagon_1%_1%_1%_emb_16', 'bandwagon_1%_0.5%_0.5%_emb_16']
-	# exp_title_list = ['bandwagon_1%_1%_1%_emb_16', 'bandwagon_5%_0.5%_0.5%_emb_16']
 	exp_title_list = []
-	# exp_title_list += ['bandwagon_1%_0.25%_0.25%_emb_32', 'bandwagon_1%_0.25%_0.5%_emb_32', 'bandwagon_1%_0.25%_1%_emb_32',]
-	# exp_title_list += ['bandwagon_1%_0.5%_0.25%_emb_32', 'bandwagon_1%_0.5%_0.5%_emb_32', 'bandwagon_1%_0.5%_1%_emb_32',]
-	
-	# exp_title_list += ['bandwagon_1%_1%_0%_emb_32', 'bandwagon_1%_3%_0%_emb_32']
-	# exp_title_list += ['bandwagon_1%_1%_1.1_emb_32', 'bandwagon_1%_3%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_1%_1%_1%_emb_32', 'bandwagon_1%_3%_1%_emb_32']
 
-	# num_fake_user, num_filler_item, num_selected_item
-	# num_fake_item is 1 
-	exp_title_list += ['bandwagon_1%_1%_0%_emb_32']
-	exp_title_list += ['bandwagon_1%_1%_1.1_emb_32']
-	exp_title_list += ['bandwagon_1%_1%_1%_emb_32']
+	# # 1026
+	# exp_title_list += ['bandwagon_0.5%_0.5%_0%_emb_32']
+	# exp_title_list += ['bandwagon_1%_0.5%_0%_emb_32']
+	# exp_title_list += ['bandwagon_3%_0.5%_0%_emb_32']
 
-	exp_title_list += ['bandwagon_3%_1%_0%_emb_32']
-	exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
-	exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
-
+	# # 1026
+	# exp_title_list += ['bandwagon_0.5%_1%_0%_emb_32']
+	# exp_title_list += ['bandwagon_1%_1%_0%_emb_32']
 	# exp_title_list += ['bandwagon_3%_1%_0%_emb_32']
-	# exp_title_list += ['bandwagon_3%_3%_0%_emb_32']
-	# exp_title_list += ['bandwagon_1%_3%_0%_emb_32']
-	# exp_title_list += ['bandwagon_1%_3%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_1%_3%_1%_emb_32']
-	for uu in [1,5,10]:
+
+
+	# # 1027
+	# exp_title_list += ['bandwagon_0.5%_2%_0%_emb_32']
+	# exp_title_list += ['bandwagon_1%_2%_0%_emb_32']
+	# exp_title_list += ['bandwagon_3%_2%_0%_emb_32']
+
+	# no experiment
+	# exp_title_list += ['bandwagon_0.5%_0.5%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_1%_0.5%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_3%_0.5%_1.1_emb_32']
+	
+	# # 1027
+	# exp_title_list += ['bandwagon_0.5%_1%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_1%_1%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
+
+	# # 1027
+	# exp_title_list += ['bandwagon_0.5%_2%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_1%_2%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_3%_2%_1.1_emb_32']
+
+
+	# # 1028
+	# exp_title_list += ['bandwagon_0.5%_0%_1%_emb_32']
+	# exp_title_list += ['bandwagon_1%_0%_1%_emb_32']
+	# exp_title_list += ['bandwagon_3%_0%_1%_emb_32']
+
+	# # 1028
+	# exp_title_list += ['bandwagon_0.5%_1%_1%_emb_32']
+	# exp_title_list += ['bandwagon_1%_1%_1%_emb_32']
+	# exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
+
+	# # 1028
+	# exp_title_list += ['bandwagon_0.5%_0%_2%_emb_32']
+	# exp_title_list += ['bandwagon_1%_0%_2%_emb_32']
+	# exp_title_list += ['bandwagon_3%_0%_2%_emb_32']
+
+
+	# 1029
+	exp_title_list += ['bandwagon_1%_1%_0%_emb_32']
+
+
+	# for uu in [1,5,10]:
+	for uu in [1]:
 		for exp_title in exp_title_list:
 			params = parse_exp_title(exp_title)
-			for camo_vote_size_multiple in [0,1,5]:
+			for camo_vote_size_multiple in [1,5,10]:
+			# for camo_vote_size_multiple in [0]:
 				print '#######################################################################################'
 				print 'Experiment Title', exp_title
 				print "FAKE NUM ITEM", uu

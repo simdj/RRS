@@ -139,13 +139,15 @@ class WMF():
 				
 				diff = abs(cost_ev - last_cost)
 
-				if i % 10000 == 0:
-					print("Step %s) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): %s %s %s %s %s" % (i, cost_ev, prediction_on_target_items_ev, rmse_tr_ev, rmse_test_ev, mae_test_ev))
+				# if i % 1000 == 0:
+				# 	print("Step %s) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): %s %s %s %s %s" % (i, cost_ev, prediction_on_target_items_ev, rmse_tr_ev, rmse_test_ev, mae_test_ev))
 				
 				# if diff < 0.00001:
-				if last_cost>0 and (diff/last_cost) <= 0.0001:
+				# if last_cost>0 and (diff/last_cost) <= 0.0001:
+				if last_cost>0 and (diff/last_cost) <= 0.0005:
 					print("Converged at iteration %s" % (i))
 					break
+				
 				# update the last cost 
 				last_cost = cost_ev
 
@@ -277,9 +279,10 @@ class WMF_params():
 	def merge_review_helpful(self, review, helpful, amplify_flag=True):
 		# review : user,item,rating,reveiw_id), 
 		# helpful : scalar -> np.ones() / vector([helpfulness values])
+		important_parameter = 2.5
 		ret = []
 		if type(helpful)==type(1):
-			helpful = np.ones((len(review),1))*(3.5)
+			helpful = np.ones((len(review),1))*(important_parameter)
 		assert (len(review) == len(helpful))
 		num_review = len(review)
 		for i in xrange(num_review):
@@ -291,7 +294,7 @@ class WMF_params():
 		# helpful 0~5 scale is weak to impact RS -> helpfulness +1: 10 times effect
 		############ important parameter ############
 		if amplify_flag:
-			important_parameter = 5.0
+			
 			ret[:,-1]=np.power(10, ret[:,-1]-important_parameter) 
 		return ret
 

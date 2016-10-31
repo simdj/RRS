@@ -26,10 +26,6 @@ from time import time
 def cosine_similarity(v1, v2):
     return np.dot(v1, v2) / (np.sqrt(np.dot(v1, v1)) * np.sqrt(np.dot(v2, v2)))
 
-
-def user_similarity_with_threshold(v1,v2):
-    # -1~1 -> -1.9~0.1 -> -19~1
-    return (cosine_similarity(v1,v2)-0.9)*10
 # clean? attacked?
 # naive? robust?
 class helpful_measure():
@@ -166,13 +162,16 @@ class helpful_measure():
                             sim_with_threshold = max(0, (sim-self.similarity_threshold)*10)
                             numerator += rating * np.exp(-sim_with_threshold*self.doubt_weight)
                             denominator += np.exp(-sim_with_threshold*self.doubt_weight)
+                        # else:
+                        #     # dissimilar user disagrees -> diminishing return
+                        #     # sim<=-0.9 -> negative value
+                        #     # sim> 0.9 -> zero
+                        #     sim_with_threshold = min(0, (sim+self.similarity_threshold)*10)
+                        #     numerator += rating * np.exp( sim_with_threshold*self.doubt_weight)
+                        #     denominator += np.exp( sim_with_threshold*self.doubt_weight)
                         else:
-                            # dissimilar user disagrees -> diminishing return
-                            # sim<=-0.9 -> negative value
-                            # sim> 0.9 -> zero
-                            sim_with_threshold = min(0, (sim+self.similarity_threshold)*10)
-                            numerator += rating * np.exp( sim_with_threshold*self.doubt_weight)
-                            denominator += np.exp( sim_with_threshold*self.doubt_weight)
+                            numerator += rating 
+                            denominator += 1.0
                     else:
                         numerator += vote_info[1]
                         denominator += 1
