@@ -157,23 +157,31 @@ def whole_process(params):
 				# hm.helpful_test()
 	
 	with Timer("5. Matrix factorization"):
-		# # real
-		# rank_list = [20, 30, 40]
-		# lda_list = [0.001, 0.005]
+		# real
+		rank_list = [20, 30, 40] 
+		# lda_list = [1e-5, 1e-4, 5e-4] 
+		lda_list = [1e-4] 
+		# rank 10 is not stable, rank 50 is stable but lda should be low (0.0005)
+		# rank 20, lda 0.0005 -> base:naive:robust=0.96:1.36:0.21 //good
+		# rank 30, lda 0.0005 -> base:naive:robust=0.93:1.02:0.18 //good
+		# rank 40, lda 0.0005 -> base:naive:robust=1.09:1.18:0.18 //good
+
+		# rank 20, lda 0.005 -> base:naive:robust=1.18:1.35:0.77
+		# rank 30, lda 0.005 -> base:naive:robust=0.95:1.03:0.64
+		# rank 40, lda 0.005 -> base:naive:robust=0.95:1.05:0.70
+		max_iter_list = [25001]
+
+		algorithm_model_list = ['base','base','naive','naive', 'robust','robust']
+		attack_flag_list = [False, True, False, True, False, True]
+
+		# # helpfulness test varying embedding method
+		# rank_list = [20]
+		# lda_list = [0.0005]
 		# ####################
 		# max_iter_list = [25001]
 
 		# algorithm_model_list = ['base','base','naive','naive', 'robust','robust']
 		# attack_flag_list = [False, True, False, True, False, True]
-
-		# helpfulness test varying embedding method
-		rank_list = [20]
-		lda_list = [0.001]
-		####################
-		max_iter_list = [25001]
-
-		algorithm_model_list = ['base','base','naive','naive', 'robust','robust']
-		attack_flag_list = [False, True, False, True, False, True]
 		
 		
 		for rank in rank_list:
@@ -207,15 +215,15 @@ def whole_process(params):
 						except:
 							pass
 
-					# 	# do matrix factorization
-					# 	wmf_instance = WMF(params=wp)
-					# 	wmf_instance.whole_process()
+						# do matrix factorization
+						wmf_instance = WMF(params=wp)
+						wmf_instance.whole_process()
 
 
-					# with Timer("6. Evaluation"):
-					# 	evaluation(params)
-	# 				print('')
-	# 				print('')
+					with Timer("6. Evaluation"):
+						evaluation(params)
+					print('')
+					print('')
 
 if __name__ == "__main__":
 	exp_title_list = []
@@ -269,15 +277,30 @@ if __name__ == "__main__":
 
 
 	# 1029
-	exp_title_list += ['bandwagon_1%_1%_0%_emb_32']
+	exp_title_list += ['bandwagon_1%_1%_0%_emb_32'] 
+	# exp_title_list += ['bandwagon_1%_1%_1.1_emb_32']
+	exp_title_list += ['bandwagon_1%_1%_1%_emb_32']
+
+	exp_title_list += ['bandwagon_1%_3%_0%_emb_32']
+	# exp_title_list += ['bandwagon_1%_3%_1.1_emb_32']
+	exp_title_list += ['bandwagon_1%_3%_1%_emb_32']
+
+	exp_title_list += ['bandwagon_3%_1%_0%_emb_32']
+	# exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
+	exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
+
+	exp_title_list += ['bandwagon_3%_3%_0%_emb_32']
+	# exp_title_list += ['bandwagon_3%_3%_1.1_emb_32']
+	exp_title_list += ['bandwagon_3%_3%_1%_emb_32']
 
 
 	# for uu in [1,5,10]:
 	for uu in [1]:
 		for exp_title in exp_title_list:
 			params = parse_exp_title(exp_title)
-			for camo_vote_size_multiple in [1,5,10]:
-			# for camo_vote_size_multiple in [0]:
+			# for camo_vote_size_multiple in [0, 1, 5, 10]:
+			for camo_vote_size_multiple in [1, 10]:
+			# for camo_vote_size_multiple in [1]:
 				print '#######################################################################################'
 				print 'Experiment Title', exp_title
 				print "FAKE NUM ITEM", uu

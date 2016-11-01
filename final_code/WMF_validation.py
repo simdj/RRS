@@ -279,7 +279,7 @@ class WMF_params():
 	def merge_review_helpful(self, review, helpful, amplify_flag=True):
 		# review : user,item,rating,reveiw_id), 
 		# helpful : scalar -> np.ones() / vector([helpfulness values])
-		important_parameter = 2.5
+		important_parameter = 0.5
 		ret = []
 		if type(helpful)==type(1):
 			helpful = np.ones((len(review),1))*(important_parameter)
@@ -295,7 +295,7 @@ class WMF_params():
 		############ important parameter ############
 		if amplify_flag:
 			
-			ret[:,-1]=np.power(10, ret[:,-1]-important_parameter) 
+			ret[:,-1]=np.power(10, 5*(ret[:,-1]-important_parameter))
 		return ret
 
 	def set_input_output_path(self, params, algorithm_model, attack_flag):

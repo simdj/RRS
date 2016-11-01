@@ -151,29 +151,15 @@ class helpful_measure():
                 for vote_info in vote_info_list:
                     # star rating! 0~5 -> 0~10
                     # cosine_similarity: {(-1)~(+1)}
+                    sim = vote_info[0]
+                    rating = vote_info[1]/5.0
                     if self.robust_flag:
                         # dissimilar (-1) ~ (+1) similar
-                        sim = vote_info[0]
-                        rating = vote_info[1]
-                        if rating >=3:
-                            # similar user agrees -> diminishing return
-                            # sim>=0.9 -> positive value
-                            # sim< 0.9 -> zero
-                            sim_with_threshold = max(0, (sim-self.similarity_threshold)*10)
-                            numerator += rating * np.exp(-sim_with_threshold*self.doubt_weight)
-                            denominator += np.exp(-sim_with_threshold*self.doubt_weight)
-                        # else:
-                        #     # dissimilar user disagrees -> diminishing return
-                        #     # sim<=-0.9 -> negative value
-                        #     # sim> 0.9 -> zero
-                        #     sim_with_threshold = min(0, (sim+self.similarity_threshold)*10)
-                        #     numerator += rating * np.exp( sim_with_threshold*self.doubt_weight)
-                        #     denominator += np.exp( sim_with_threshold*self.doubt_weight)
-                        else:
-                            numerator += rating 
-                            denominator += 1.0
+                        voting_weight = max(0, (sim-self.similarity_threshold))
+                        numerator += rating * np.exp(-voting_weight*self.doubt_weight)
+                        denominator += np.exp(-voting_weight*self.doubt_weight)
                     else:
-                        numerator += vote_info[1]
+                        numerator += rating
                         denominator += 1
             # update posterior
             helpful_matrix.append([reviewer, item_id, numerator / denominator])
