@@ -215,13 +215,13 @@ def whole_process(params):
 						except:
 							pass
 
-						# do matrix factorization
-						wmf_instance = WMF(params=wp)
-						wmf_instance.whole_process()
+					# 	# do matrix factorization
+					# 	wmf_instance = WMF(params=wp)
+					# 	wmf_instance.whole_process()
 
 
-					with Timer("6. Evaluation"):
-						evaluation(params)
+					# with Timer("6. Evaluation"):
+					# 	evaluation(params)
 					print('')
 					print('')
 
@@ -281,17 +281,17 @@ if __name__ == "__main__":
 	# exp_title_list += ['bandwagon_1%_1%_1.1_emb_32']
 	exp_title_list += ['bandwagon_1%_1%_1%_emb_32']
 
-	exp_title_list += ['bandwagon_1%_3%_0%_emb_32']
-	# exp_title_list += ['bandwagon_1%_3%_1.1_emb_32']
-	exp_title_list += ['bandwagon_1%_3%_1%_emb_32']
+	# exp_title_list += ['bandwagon_1%_3%_0%_emb_32']
+	# # exp_title_list += ['bandwagon_1%_3%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_1%_3%_1%_emb_32']
 
-	exp_title_list += ['bandwagon_3%_1%_0%_emb_32']
-	# exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
-	exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
+	# exp_title_list += ['bandwagon_3%_1%_0%_emb_32']
+	# # exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
 
-	exp_title_list += ['bandwagon_3%_3%_0%_emb_32']
-	# exp_title_list += ['bandwagon_3%_3%_1.1_emb_32']
-	exp_title_list += ['bandwagon_3%_3%_1%_emb_32']
+	# exp_title_list += ['bandwagon_3%_3%_0%_emb_32']
+	# # exp_title_list += ['bandwagon_3%_3%_1.1_emb_32']
+	# exp_title_list += ['bandwagon_3%_3%_1%_emb_32']
 
 
 	# for uu in [1,5,10]:
@@ -299,8 +299,8 @@ if __name__ == "__main__":
 		for exp_title in exp_title_list:
 			params = parse_exp_title(exp_title)
 			# for camo_vote_size_multiple in [0, 1, 5, 10]:
-			for camo_vote_size_multiple in [1, 10]:
-			# for camo_vote_size_multiple in [1]:
+			# for camo_vote_size_multiple in [1, 10]:
+			for camo_vote_size_multiple in [1]:
 				print '#######################################################################################'
 				print 'Experiment Title', exp_title
 				print "FAKE NUM ITEM", uu

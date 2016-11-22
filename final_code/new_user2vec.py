@@ -65,7 +65,7 @@ class user2vec():
 		self.helpfulness_rating_data = None
 
 		self.positive_helpful_threshold = 5
-		self.maximum_item_rating_data = None # maximum_item_rating_data is subset of review matrix
+		self.positive_item_rating_data = None # positive_item_rating_data is subset of review matrix
 		self.positive_helpfulness_rating_data = None # positive_helpfulness_rating_data is subset of vote matrix
 		
 		# generate sentence
@@ -76,9 +76,16 @@ class user2vec():
 		self.user_embedding_model = None
 
 		## data structure needed in sampling
+		self.item_list = []
+		self.item_degree_list = []
+		self.item_prob_list = []
+		self.reviewer_set_of_item = dict()
+
 		self.review_list = []
 		self.review_degree_list = []
 		self.review_prob_list = []
+		self.follower_set_of_item = dict()
+
 
 	def load_overall_review_matrix(self):
 		overall_review_matrix = np.load(self.review_origin_path)
@@ -91,7 +98,7 @@ class user2vec():
 				print '3 len(overall_review_matrix)', len(overall_review_matrix)
 
 		self.item_rating_data = overall_review_matrix
-		self.maximum_item_rating_data = overall_review_matrix[overall_review_matrix[:,2]==5,:]
+		self.positive_item_rating_data = overall_review_matrix[overall_review_matrix[:,2]==5,:]
 
 	def load_overall_vote_matrix(self):
 		overall_vote_matrix = np.load(self.vote_origin_path)
@@ -139,6 +146,31 @@ class user2vec():
 	###################################################################################
 	############## sample reviews  and randomly choose one pair per review ############
 	###################################################################################
+	def prepare_item_sampling(self):
+		item_counter = Counter(self.positive_item_rating_data[:,1])
+		ici = item_counter.items()
+		ici = filter(lambda x: x[1]>=2, ici)
+
+		self.item_list = map(lambda x:int(x[0]), ici)
+		self.item_degree_list = map(lambda x: x[1], ici)
+		self.item_prob_list = np.array(self.item_degree_list)/(1.0*sum(self.item_degree_list))
+
+		self.reviewer_set_of_item = dict()
+		for row in self.positive_item_rating_data:
+			reviewer_id = int(row[0])
+			item_id = int(row[1])
+
+			if item_counter[item_id]<2:
+				continue
+
+			if item_id not in self.reviewer_set_of_item:
+				self.reviewer_set_of_item[item_id]=[]
+			self.reviewer_set_of_item[item_id].append(reviewer_id)
+
+	def get_sample_reviewer_reviewer_pair(self,sample_size):
+		sampled_item_list = np.random.choice(a=self.item_list, size=sample_size, p=self.item_prob_list)
+		return map(lambda item_id: map(int, np.random.choice(a=self.reviewer_set_of_item[item_id], size=2)), sampled_item_list)
+
 	def prepare_review_sampling(self):
 		review_helpfulness_counter = Counter(self.positive_helpfulness_rating_data[:,1])
 		vci = review_helpfulness_counter.items()
@@ -313,6 +345,7 @@ class user2vec():
 		self.fill_review_id_info()
 		self.fill_observed_user_list()
 		
+		self.prepare_item_sampling()
 		self.prepare_review_sampling()
 	
 		# Word2Vec init
@@ -322,14 +355,11 @@ class user2vec():
 		# iteration = int(100/self.word2vec_iter)
 		iteration = 50
 		for it in xrange(iteration):
-			if it%2==0:
-				train_corpus = self.get_sample_reviewer_follower_pair(10000)
-			else:
-				train_corpus = self.get_sample_follower_follower_pair(10000)
+			self.train_embedding_model(self.get_sample_reviewer_follower_pair(10000))
+			self.train_embedding_model(self.get_sample_follower_follower_pair(10000))
+			self.train_embedding_model(self.get_sample_reviewer_reviewer_pair(10000))
 			
-			self.train_embedding_model(train_corpus)
-			
-			if it%(iteration/5)==0 and it>0:
+			if it%(iteration/10)==0 and it>0:
 				print it
 				self.similarity_test(self.user_embedding_model)	
 		
