@@ -359,7 +359,7 @@ class user2vec():
 			self.train_embedding_model(self.get_sample_follower_follower_pair(10000))
 			self.train_embedding_model(self.get_sample_reviewer_reviewer_pair(10000))
 			
-			if it%(iteration/10)==0 and it>0:
+			if it%(iteration/5)==0 and it>0:
 				print it
 				self.similarity_test(self.user_embedding_model)	
 		

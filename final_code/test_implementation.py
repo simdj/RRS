@@ -107,7 +107,7 @@ def whole_process(params):
 			pp.whole_process()
 		else:
 			print("Preprocess is already done")
-	
+
 	with Timer("2. attack"):
 		if params.attack_model == 'bandwagon':
 			am = attack_model_bandwagon(params=params)
@@ -158,7 +158,7 @@ def whole_process(params):
 	
 	with Timer("5. Matrix factorization"):
 		# real
-		rank_list = [20, 30, 40] 
+		rank_list = [20, 30, 40, 50] 
 		# lda_list = [1e-5, 1e-4, 5e-4] 
 		lda_list = [1e-4] 
 		# rank 10 is not stable, rank 50 is stable but lda should be low (0.0005)
@@ -216,96 +216,44 @@ def whole_process(params):
 							pass
 
 					# 	# do matrix factorization
-					# 	wmf_instance = WMF(params=wp)
-					# 	wmf_instance.whole_process()
+						wmf_instance = WMF(params=wp)
+						wmf_instance.whole_process()
 
 
-					# with Timer("6. Evaluation"):
-					# 	evaluation(params)
+					with Timer("6. Evaluation"):
+						evaluation(params)
 					print('')
 					print('')
 
 if __name__ == "__main__":
 	exp_title_list = []
 
-	# # 1026
-	# exp_title_list += ['bandwagon_0.5%_0.5%_0%_emb_32']
-	# exp_title_list += ['bandwagon_1%_0.5%_0%_emb_32']
-	# exp_title_list += ['bandwagon_3%_0.5%_0%_emb_32']
-
-	# # 1026
-	# exp_title_list += ['bandwagon_0.5%_1%_0%_emb_32']
-	# exp_title_list += ['bandwagon_1%_1%_0%_emb_32']
-	# exp_title_list += ['bandwagon_3%_1%_0%_emb_32']
-
-
-	# # 1027
-	# exp_title_list += ['bandwagon_0.5%_2%_0%_emb_32']
-	# exp_title_list += ['bandwagon_1%_2%_0%_emb_32']
-	# exp_title_list += ['bandwagon_3%_2%_0%_emb_32']
-
-	# no experiment
-	# exp_title_list += ['bandwagon_0.5%_0.5%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_1%_0.5%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_3%_0.5%_1.1_emb_32']
-	
-	# # 1027
-	# exp_title_list += ['bandwagon_0.5%_1%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_1%_1%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
-
-	# # 1027
-	# exp_title_list += ['bandwagon_0.5%_2%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_1%_2%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_3%_2%_1.1_emb_32']
-
-
-	# # 1028
-	# exp_title_list += ['bandwagon_0.5%_0%_1%_emb_32']
-	# exp_title_list += ['bandwagon_1%_0%_1%_emb_32']
-	# exp_title_list += ['bandwagon_3%_0%_1%_emb_32']
-
-	# # 1028
-	# exp_title_list += ['bandwagon_0.5%_1%_1%_emb_32']
-	# exp_title_list += ['bandwagon_1%_1%_1%_emb_32']
-	# exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
-
-	# # 1028
-	# exp_title_list += ['bandwagon_0.5%_0%_2%_emb_32']
-	# exp_title_list += ['bandwagon_1%_0%_2%_emb_32']
-	# exp_title_list += ['bandwagon_3%_0%_2%_emb_32']
-
-
-	# 1029
+	# 1127
 	exp_title_list += ['bandwagon_1%_1%_0%_emb_32'] 
+	exp_title_list += ['bandwagon_1%_0%_1%_emb_32'] 
 	# exp_title_list += ['bandwagon_1%_1%_1.1_emb_32']
+	exp_title_list += ['bandwagon_1%_0.5%_0.5%_emb_32']
 	exp_title_list += ['bandwagon_1%_1%_1%_emb_32']
 
-	# exp_title_list += ['bandwagon_1%_3%_0%_emb_32']
-	# # exp_title_list += ['bandwagon_1%_3%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_1%_3%_1%_emb_32']
+	exp_title_list += ['bandwagon_3%_1%_0%_emb_32'] 
+	exp_title_list += ['bandwagon_3%_0%_1%_emb_32'] 
+	# exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
+	exp_title_list += ['bandwagon_3%_0.5%_0.5%_emb_32']
+	exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
 
-	# exp_title_list += ['bandwagon_3%_1%_0%_emb_32']
-	# # exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
-
-	# exp_title_list += ['bandwagon_3%_3%_0%_emb_32']
-	# # exp_title_list += ['bandwagon_3%_3%_1.1_emb_32']
-	# exp_title_list += ['bandwagon_3%_3%_1%_emb_32']
-
-
+	
 	# for uu in [1,5,10]:
-	for uu in [1]:
+	for num_target_item in [1]:
 		for exp_title in exp_title_list:
 			params = parse_exp_title(exp_title)
 			# for camo_vote_size_multiple in [0, 1, 5, 10]:
-			# for camo_vote_size_multiple in [1, 10]:
-			for camo_vote_size_multiple in [1]:
+			# for camo_vote_size_multiple in [0,1]:
+			for camo_vote_size_multiple in [0]:
 				print '#######################################################################################'
 				print 'Experiment Title', exp_title
-				print "FAKE NUM ITEM", uu
+				print "FAKE NUM ITEM", num_target_item
 				print "camo_vote_size_multiple", camo_vote_size_multiple
-				params.num_fake_item = uu
+				params.num_fake_item = num_target_item
 				params.camo_vote_size_multiple = camo_vote_size_multiple
 				whole_process(params)
 				# evaluation(params)

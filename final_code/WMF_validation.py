@@ -139,8 +139,8 @@ class WMF():
 				
 				diff = abs(cost_ev - last_cost)
 
-				# if i % 1000 == 0:
-				# 	print("Step %s) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): %s %s %s %s %s" % (i, cost_ev, prediction_on_target_items_ev, rmse_tr_ev, rmse_test_ev, mae_test_ev))
+				if i % 1000 == 0:
+					print("Step %s) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): %s %s %s %s %s" % (i, cost_ev, prediction_on_target_items_ev, rmse_tr_ev, rmse_test_ev, mae_test_ev))
 				
 				# if diff < 0.00001:
 				# if last_cost>0 and (diff/last_cost) <= 0.0001:

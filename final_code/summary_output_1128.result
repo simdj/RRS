@@ -1,0 +1,937 @@
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0776035
+Naive	0.173333
+Robust	0.158193
+Target
+Base  	1.17302 	Mean at (before,after) 1.80039 2.97341
+Naive 	1.73238 	Mean at (before,after) 1.57937 3.31175
+Robust	0.226685 	Mean at (before,after) 1.52453 1.75121
+('[6. Evaluation]', 'Elapsed: 0.046 sec')
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0520602
+Naive	0.110323
+Robust	0.0944399
+Target
+Base  	1.15236 	Mean at (before,after) 1.61669 2.76905
+Naive 	1.63394 	Mean at (before,after) 1.60864 3.24258
+Robust	0.105634 	Mean at (before,after) 1.63351 1.73915
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0641824
+Naive	0.0686533
+Robust	0.0652852
+Target
+Base  	1.14496 	Mean at (before,after) 1.68527 2.83023
+Naive 	1.66882 	Mean at (before,after) 1.7248 3.39362
+Robust	0.143588 	Mean at (before,after) 1.7134 1.85699
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0307646
+Naive	0.054379
+Robust	0.0507771
+Target
+Base  	1.27638 	Mean at (before,after) 1.757 3.03337
+Naive 	1.71474 	Mean at (before,after) 1.70059 3.41532
+Robust	0.154852 	Mean at (before,after) 1.7075 1.86236
+('[6. Evaluation]', 'Elapsed: 0.045 sec')
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0693192
+Naive	0.128054
+Robust	0.149768
+Target
+Base  	1.21837 	Mean at (before,after) 1.80039 3.01876
+Naive 	1.78196 	Mean at (before,after) 1.57937 3.36133
+Robust	0.237304 	Mean at (before,after) 1.54229 1.77959
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0477164
+Naive	0.106357
+Robust	0.100007
+Target
+Base  	1.20546 	Mean at (before,after) 1.61669 2.82215
+Naive 	1.59432 	Mean at (before,after) 1.60864 3.20296
+Robust	0.143047 	Mean at (before,after) 1.63257 1.77561
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0583308
+Naive	0.0694998
+Robust	0.0780587
+Target
+Base  	1.13822 	Mean at (before,after) 1.68527 2.82349
+Naive 	1.66153 	Mean at (before,after) 1.7248 3.38633
+Robust	0.17746 	Mean at (before,after) 1.70464 1.8821
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0271207
+Naive	0.0605746
+Robust	0.0545715
+Target
+Base  	1.27812 	Mean at (before,after) 1.757 3.03511
+Naive 	1.70364 	Mean at (before,after) 1.70059 3.40422
+Robust	0.193185 	Mean at (before,after) 1.69045 1.88363
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.202886
+Naive	0.223984
+Robust	0.21539
+Target
+Base  	1.46207 	Mean at (before,after) 1.80039 3.26247
+Naive 	1.49026 	Mean at (before,after) 1.57937 3.06962
+Robust	0.597389 	Mean at (before,after) 1.52956 2.12695
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.110352
+Naive	0.155843
+Robust	0.151846
+Target
+Base  	1.72337 	Mean at (before,after) 1.61669 3.34005
+Naive 	1.29708 	Mean at (before,after) 1.60864 2.90571
+Robust	0.235103 	Mean at (before,after) 1.63643 1.87153
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.111984
+Naive	0.111386
+Robust	0.0983677
+Target
+Base  	1.50102 	Mean at (before,after) 1.68527 3.18629
+Naive 	1.41757 	Mean at (before,after) 1.7248 3.14238
+Robust	0.391625 	Mean at (before,after) 1.69998 2.0916
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.072611
+Naive	0.0976526
+Robust	0.0817716
+Target
+Base  	1.63133 	Mean at (before,after) 1.757 3.38832
+Naive 	1.46178 	Mean at (before,after) 1.70059 3.16237
+Robust	0.363384 	Mean at (before,after) 1.68993 2.05331
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.202886
+Naive	0.24716
+Robust	0.213158
+Target
+Base  	1.46207 	Mean at (before,after) 1.80039 3.26247
+Naive 	1.50184 	Mean at (before,after) 1.57937 3.08121
+Robust	0.572479 	Mean at (before,after) 1.53516 2.10764
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.110352
+Naive	0.16077
+Robust	0.139854
+Target
+Base  	1.72337 	Mean at (before,after) 1.61669 3.34005
+Naive 	1.31166 	Mean at (before,after) 1.60864 2.9203
+Robust	0.256509 	Mean at (before,after) 1.62054 1.87705
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.111984
+Naive	0.120381
+Robust	0.103153
+Target
+Base  	1.50102 	Mean at (before,after) 1.68527 3.18629
+Naive 	1.43891 	Mean at (before,after) 1.7248 3.16371
+Robust	0.433549 	Mean at (before,after) 1.70558 2.13913
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.072611
+Naive	0.0968512
+Robust	0.07848
+Target
+Base  	1.63133 	Mean at (before,after) 1.757 3.38832
+Naive 	1.47884 	Mean at (before,after) 1.70059 3.17943
+Robust	0.404653 	Mean at (before,after) 1.69559 2.10024
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.139734
+Naive	0.247037
+Robust	0.20774
+Target
+Base  	1.32021 	Mean at (before,after) 1.80039 3.1206
+Naive 	1.67228 	Mean at (before,after) 1.57937 3.25165
+Robust	0.505941 	Mean at (before,after) 1.51185 2.01779
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.086561
+Naive	0.15706
+Robust	0.115959
+Target
+Base  	1.49375 	Mean at (before,after) 1.61669 3.11044
+Naive 	1.48513 	Mean at (before,after) 1.60864 3.09377
+Robust	0.243087 	Mean at (before,after) 1.63673 1.87982
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0774832
+Naive	0.122274
+Robust	0.110716
+Target
+Base  	1.37952 	Mean at (before,after) 1.68527 3.06479
+Naive 	1.53107 	Mean at (before,after) 1.7248 3.25588
+Robust	0.269668 	Mean at (before,after) 1.71675 1.98642
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.145316
+Naive	0.0834374
+Robust	0.0649963
+Target
+Base  	1.38078 	Mean at (before,after) 1.757 3.13778
+Naive 	1.62771 	Mean at (before,after) 1.70059 3.32829
+Robust	0.292848 	Mean at (before,after) 1.70707 1.99992
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+
+
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.13027
+Naive	0.257937
+Robust	0.224938
+Target
+Base  	1.3661 	Mean at (before,after) 1.80039 3.16649
+Naive 	1.66558 	Mean at (before,after) 1.57937 3.24495
+Robust	0.576622 	Mean at (before,after) 1.55382 2.13044
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.101001
+Naive	0.167831
+Robust	0.135062
+Target
+Base  	1.45296 	Mean at (before,after) 1.61669 3.06965
+Naive 	1.46791 	Mean at (before,after) 1.60864 3.07655
+Robust	0.266368 	Mean at (before,after) 1.62059 1.88696
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0879086
+Naive	0.119809
+Robust	0.0965256
+Target
+Base  	1.38743 	Mean at (before,after) 1.68527 3.0727
+Naive 	1.5637 	Mean at (before,after) 1.7248 3.2885
+Robust	0.32972 	Mean at (before,after) 1.70653 2.03625
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.185748
+Naive	0.0983437
+Robust	0.0750596
+Target
+Base  	1.36537 	Mean at (before,after) 1.757 3.12237
+Naive 	1.60186 	Mean at (before,after) 1.70059 3.30245
+Robust	0.337821 	Mean at (before,after) 1.68794 2.02576
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.228049
+Naive	0.25698
+Robust	0.232521
+Target
+Base  	1.36832 	Mean at (before,after) 1.80039 3.16871
+Naive 	1.65084 	Mean at (before,after) 1.57937 3.23021
+Robust	0.713267 	Mean at (before,after) 1.51154 2.22481
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.130846
+Naive	0.178737
+Robust	0.151498
+Target
+Base  	1.57419 	Mean at (before,after) 1.61669 3.19088
+Naive 	1.49557 	Mean at (before,after) 1.60864 3.10421
+Robust	0.318803 	Mean at (before,after) 1.63434 1.95314
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.121831
+Naive	0.125736
+Robust	0.101019
+Target
+Base  	1.31201 	Mean at (before,after) 1.68527 2.99728
+Naive 	1.57353 	Mean at (before,after) 1.7248 3.29833
+Robust	0.431998 	Mean at (before,after) 1.70654 2.13854
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.105163
+Naive	0.109458
+Robust	0.087903
+Target
+Base  	1.49261 	Mean at (before,after) 1.757 3.24961
+Naive 	1.59673 	Mean at (before,after) 1.70059 3.29732
+Robust	0.432706 	Mean at (before,after) 1.70274 2.13545
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+
+
+
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.236835
+Naive	0.253913
+Robust	0.219795
+Target
+Base  	1.27167 	Mean at (before,after) 1.80039 3.07206
+Naive 	1.51742 	Mean at (before,after) 1.57937 3.09678
+Robust	0.570972 	Mean at (before,after) 1.56042 2.13139
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.13357
+Naive	0.154934
+Robust	0.129992
+Target
+Base  	1.51256 	Mean at (before,after) 1.61669 3.12925
+Naive 	1.41105 	Mean at (before,after) 1.60864 3.01969
+Robust	0.298447 	Mean at (before,after) 1.64939 1.94784
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.108969
+Naive	0.121651
+Robust	0.0994585
+Target
+Base  	1.21508 	Mean at (before,after) 1.68527 2.90035
+Naive 	1.50642 	Mean at (before,after) 1.7248 3.23123
+Robust	0.434605 	Mean at (before,after) 1.69751 2.13211
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0879458
+Naive	0.0969885
+Robust	0.0727016
+Target
+Base  	1.46203 	Mean at (before,after) 1.757 3.21903
+Naive 	1.52801 	Mean at (before,after) 1.70059 3.2286
+Robust	0.456189 	Mean at (before,after) 1.70384 2.16002
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+
+
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.154352
+Naive	0.246085
+Robust	0.156402
+Target
+Base  	1.68734 	Mean at (before,after) 1.80039 3.48773
+Naive 	2.56337 	Mean at (before,after) 1.57937 4.14274
+Robust	0.398048 	Mean at (before,after) 1.56374 1.96178
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0966582
+Naive	0.187193
+Robust	0.0914976
+Target
+Base  	1.738 	Mean at (before,after) 1.61669 3.35469
+Naive 	2.50646 	Mean at (before,after) 1.60864 4.1151
+Robust	0.2868 	Mean at (before,after) 1.6413 1.9281
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0898776
+Naive	0.136063
+Robust	0.0674431
+Target
+Base  	1.74807 	Mean at (before,after) 1.68527 3.43334
+Naive 	2.48817 	Mean at (before,after) 1.7248 4.21298
+Robust	0.360639 	Mean at (before,after) 1.70794 2.06858
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0594773
+Naive	0.117714
+Robust	0.0533911
+Target
+Base  	1.78607 	Mean at (before,after) 1.757 3.54307
+Naive 	2.49875 	Mean at (before,after) 1.70059 4.19934
+Robust	0.340693 	Mean at (before,after) 1.70521 2.0459
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.131128
+Naive	0.298804
+Robust	0.242144
+Target
+Base  	1.71946 	Mean at (before,after) 1.80039 3.51985
+Naive 	2.66896 	Mean at (before,after) 1.57937 4.24833
+Robust	0.625263 	Mean at (before,after) 1.57443 2.19969
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0969598
+Naive	0.209673
+Robust	0.130959
+Target
+Base  	1.85504 	Mean at (before,after) 1.61669 3.47173
+Naive 	2.63913 	Mean at (before,after) 1.60864 4.24777
+Robust	0.387733 	Mean at (before,after) 1.60793 1.99566
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.070174
+Naive	0.178728
+Robust	0.0989924
+Target
+Base  	1.74138 	Mean at (before,after) 1.68527 3.42665
+Naive 	2.58644 	Mean at (before,after) 1.7248 4.31125
+Robust	0.414382 	Mean at (before,after) 1.69523 2.10961
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0550452
+Naive	0.150637
+Robust	0.0855684
+Target
+Base  	1.87418 	Mean at (before,after) 1.757 3.63117
+Naive 	2.60197 	Mean at (before,after) 1.70059 4.30256
+Robust	0.387872 	Mean at (before,after) 1.70647 2.09434
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.316295
+Naive	0.326695
+Robust	0.284932
+Target
+Base  	1.83284 	Mean at (before,after) 1.80039 3.63323
+Naive 	1.94288 	Mean at (before,after) 1.57937 3.52225
+Robust	0.950864 	Mean at (before,after) 1.54151 2.49238
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.172442
+Naive	0.221096
+Robust	0.190724
+Target
+Base  	1.99723 	Mean at (before,after) 1.61669 3.61392
+Naive 	1.93614 	Mean at (before,after) 1.60864 3.54478
+Robust	0.64685 	Mean at (before,after) 1.61247 2.25932
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.150441
+Naive	0.177842
+Robust	0.133303
+Target
+Base  	1.96362 	Mean at (before,after) 1.68527 3.64889
+Naive 	1.96148 	Mean at (before,after) 1.7248 3.68629
+Robust	0.726932 	Mean at (before,after) 1.71688 2.44381
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.118789
+Naive	0.155798
+Robust	0.107272
+Target
+Base  	1.96333 	Mean at (before,after) 1.757 3.72033
+Naive 	1.99531 	Mean at (before,after) 1.70059 3.6959
+Robust	0.743214 	Mean at (before,after) 1.71179 2.45501
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+
+
+
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.316295
+Naive	0.335727
+Robust	0.287715
+Target
+Base  	1.83284 	Mean at (before,after) 1.80039 3.63323
+Naive 	2.00111 	Mean at (before,after) 1.57937 3.58047
+Robust	0.860513 	Mean at (before,after) 1.52529 2.3858
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.172442
+Naive	0.226775
+Robust	0.184697
+Target
+Base  	1.99723 	Mean at (before,after) 1.61669 3.61392
+Naive 	1.94607 	Mean at (before,after) 1.60864 3.55471
+Robust	0.630802 	Mean at (before,after) 1.61682 2.24762
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.150441
+Naive	0.182747
+Robust	0.135356
+Target
+Base  	1.96362 	Mean at (before,after) 1.68527 3.64889
+Naive 	1.95562 	Mean at (before,after) 1.7248 3.68042
+Robust	0.713515 	Mean at (before,after) 1.70734 2.42085
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.118789
+Naive	0.156559
+Robust	0.111356
+Target
+Base  	1.96333 	Mean at (before,after) 1.757 3.72033
+Naive 	2.00078 	Mean at (before,after) 1.70059 3.70137
+Robust	0.779773 	Mean at (before,after) 1.6969 2.47667
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.251934
+Naive	0.291176
+Robust	0.233499
+Target
+Base  	1.76974 	Mean at (before,after) 1.80039 3.57013
+Naive 	2.41043 	Mean at (before,after) 1.57937 3.9898
+Robust	1.01272 	Mean at (before,after) 1.50713 2.51985
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.149266
+Naive	0.217007
+Robust	0.149194
+Target
+Base  	1.91905 	Mean at (before,after) 1.61669 3.53574
+Naive 	2.39911 	Mean at (before,after) 1.60864 4.00775
+Robust	0.580182 	Mean at (before,after) 1.63441 2.21459
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.129037
+Naive	0.174665
+Robust	0.103268
+Target
+Base  	1.82954 	Mean at (before,after) 1.68527 3.5148
+Naive 	2.35868 	Mean at (before,after) 1.7248 4.08349
+Robust	0.599502 	Mean at (before,after) 1.71483 2.31433
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0947877
+Naive	0.14871
+Robust	0.153235
+Target
+Base  	1.85106 	Mean at (before,after) 1.757 3.60806
+Naive 	2.41997 	Mean at (before,after) 1.70059 4.12056
+Robust	0.644749 	Mean at (before,after) 1.69823 2.34298
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.257087
+Naive	0.313052
+Robust	0.24371
+Target
+Base  	1.76542 	Mean at (before,after) 1.80039 3.56582
+Naive 	2.41437 	Mean at (before,after) 1.57937 3.99373
+Robust	0.862008 	Mean at (before,after) 1.54114 2.40315
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.161999
+Naive	0.223784
+Robust	0.168343
+Target
+Base  	1.88089 	Mean at (before,after) 1.61669 3.49758
+Naive 	2.46206 	Mean at (before,after) 1.60864 4.0707
+Robust	0.601407 	Mean at (before,after) 1.62793 2.22934
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.129954
+Naive	0.183283
+Robust	0.122495
+Target
+Base  	1.82086 	Mean at (before,after) 1.68527 3.50613
+Naive 	2.3861 	Mean at (before,after) 1.7248 4.11091
+Robust	0.582102 	Mean at (before,after) 1.72401 2.30611
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0931564
+Naive	0.154919
+Robust	0.114556
+Target
+Base  	1.82135 	Mean at (before,after) 1.757 3.57835
+Naive 	2.41041 	Mean at (before,after) 1.70059 4.111
+Robust	0.616216 	Mean at (before,after) 1.69682 2.31303
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.37662
+Naive	0.378699
+Robust	0.304394
+Target
+Base  	1.71897 	Mean at (before,after) 1.80039 3.51936
+Naive 	2.40394 	Mean at (before,after) 1.57937 3.98331
+Robust	1.09495 	Mean at (before,after) 1.56694 2.66189
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.214341
+Naive	0.270543
+Robust	0.185082
+Target
+Base  	2.02565 	Mean at (before,after) 1.61669 3.64234
+Naive 	2.4291 	Mean at (before,after) 1.60864 4.03774
+Robust	0.677588 	Mean at (before,after) 1.62822 2.30581
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.174893
+Naive	0.216537
+Robust	0.133158
+Target
+Base  	1.96561 	Mean at (before,after) 1.68527 3.65088
+Naive 	2.42649 	Mean at (before,after) 1.7248 4.15129
+Robust	0.727413 	Mean at (before,after) 1.72236 2.44978
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.149313
+Naive	0.187477
+Robust	0.114136
+Target
+Base  	1.92148 	Mean at (before,after) 1.757 3.67847
+Naive 	2.40861 	Mean at (before,after) 1.70059 4.1092
+Robust	0.851532 	Mean at (before,after) 1.70028 2.55182
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.350321
+Naive	0.393506
+Robust	0.323343
+Target
+Base  	1.97215 	Mean at (before,after) 1.80039 3.77254
+Naive 	2.34347 	Mean at (before,after) 1.57937 3.92284
+Robust	1.08319 	Mean at (before,after) 1.49784 2.58103
+('[6. Evaluation]', 'Elapsed: 0.041 sec')
+
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.229676
+Naive	0.297423
+Robust	0.201445
+Target
+Base  	2.03337 	Mean at (before,after) 1.61669 3.65006
+Naive 	2.2855 	Mean at (before,after) 1.60864 3.89414
+Robust	0.692264 	Mean at (before,after) 1.62232 2.31459
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.168154
+Naive	0.216256
+Robust	0.142694
+Target
+Base  	1.87607 	Mean at (before,after) 1.68527 3.56134
+Naive 	2.3331 	Mean at (before,after) 1.7248 4.0579
+Robust	0.713345 	Mean at (before,after) 1.71374 2.42708
+('[6. Evaluation]', 'Elapsed: 0.042 sec')
+
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.163884
+Naive	0.191441
+Robust	0.130023
+Target
+Base  	1.86019 	Mean at (before,after) 1.757 3.61718
+Naive 	2.34517 	Mean at (before,after) 1.70059 4.04576
+Robust	0.862499 	Mean at (before,after) 1.69311 2.55561
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======================
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500714463842 [10, 25, 50, 75, 90] 0.500044307903 0.500061351551 0.500235092516 0.50071331613 0.502526166151 
+[Honest  all ] Mean 0.690156560608 [10, 25, 50, 75, 90] 0.5 0.59375 0.75 0.78892573953 0.797959660504 
+[Honest target] Mean 0.742544845023 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793270624119 0.803572465131 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.506335370986 [10, 25, 50, 75, 90] 0.500029429525 0.500099532625 0.500312814587 0.500799217491 0.517558154684 
+[Honest  all ] Mean 0.690132690459 [10, 25, 50, 75, 90] 0.5 0.59375 0.75 0.788890163445 0.797959183673 
+[Honest target] Mean 0.742757284208 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793226168014 0.803675711516 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500000859832 [10, 25, 50, 75, 90] 0.500000509564 0.500000625262 0.500000700133 0.500000946845 0.500001271379 
+[Honest  all ] Mean 0.690136971465 [10, 25, 50, 75, 90] 0.5 0.593344231677 0.75 0.788929729611 0.798 
+[Honest target] Mean 0.742646851502 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793284694727 0.803591040857 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500000838227 [10, 25, 50, 75, 90] 0.500000420163 0.500000532072 0.500000650424 0.500000941095 0.50000147241 
+[Honest  all ] Mean 0.690101538739 [10, 25, 50, 75, 90] 0.5 0.59375 0.75 0.788888888889 0.797959449032 
+[Honest target] Mean 0.741553219293 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.770096982759 0.793265000778 0.803602415487 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500007598094 [10, 25, 50, 75, 90] 0.500001746737 0.500002140156 0.500005010749 0.500009709422 0.50002056731 
+[Honest  all ] Mean 0.690122017246 [10, 25, 50, 75, 90] 0.5 0.59375 0.75 0.788934901257 0.797997306138 
+[Honest target] Mean 0.742263579301 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793222389622 0.803409509516 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500011185861 [10, 25, 50, 75, 90] 0.500001334775 0.500002607623 0.500003966834 0.500010613579 0.500027654786 
+[Honest  all ] Mean 0.689882140166 [10, 25, 50, 75, 90] 0.5 0.592858199959 0.75 0.788888888889 0.797962683743 
+[Honest target] Mean 0.742965350663 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793132613566 0.803739717615 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500002999206 [10, 25, 50, 75, 90] 0.500001109774 0.500001988938 0.500002544299 0.500003416923 0.500005177946 
+[Honest  all ] Mean 0.690072346744 [10, 25, 50, 75, 90] 0.5 0.59375 0.750000104258 0.788908745735 0.798 
+[Honest target] Mean 0.743145357356 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793284673927 0.803726679391 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500020107991 [10, 25, 50, 75, 90] 0.500003748558 0.500004911597 0.500007532353 0.500014411745 0.500045644174 
+[Honest  all ] Mean 0.689835055361 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.75 0.788888888889 0.797959183673 
+[Honest target] Mean 0.74221128283 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793161872622 0.803643869676 
+
+
+
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500164941841 [10, 25, 50, 75, 90] 0.500023908802 0.500036198774 0.500083116991 0.500216833884 0.500446617831 
+[Honest  all ] Mean 0.690053965493 [10, 25, 50, 75, 90] 0.5 0.59375 0.75 0.788943796867 0.797961571998 
+[Honest target] Mean 0.742545130059 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793152672173 0.803714576293 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.501719588083 [10, 25, 50, 75, 90] 0.50006129641 0.500111312531 0.500396700483 0.500942209677 0.505073793007 
+[Honest  all ] Mean 0.689012131188 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.75 0.788636363636 0.797872340426 
+[Honest target] Mean 0.739892890848 [10, 25, 50, 75, 90] 0.60599378882 0.734027777778 0.767676389606 0.791229408003 0.803602453412 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500004386445 [10, 25, 50, 75, 90] 0.500001911961 0.500002573532 0.500003727019 0.500006110113 0.500007874715 
+[Honest  all ] Mean 0.690176914203 [10, 25, 50, 75, 90] 0.5 0.59375 0.750055790177 0.788889488949 0.797995110458 
+[Honest target] Mean 0.742806876284 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793176845793 0.803697453387 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500009010465 [10, 25, 50, 75, 90] 0.500003405017 0.500005100733 0.500007944615 0.500010805693 0.500015739367 
+[Honest  all ] Mean 0.689106693732 [10, 25, 50, 75, 90] 0.5 0.592857142857 0.75 0.788471045265 0.797826086957 
+[Honest target] Mean 0.741463457622 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.7790625 0.793233774192 0.80342782115 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500022816692 [10, 25, 50, 75, 90] 0.500006574898 0.500009567883 0.500014359596 0.500025370007 0.500049368655 
+[Honest  all ] Mean 0.690072016944 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.750001452318 0.788905117271 0.797944798066 
+[Honest target] Mean 0.743075772668 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793260217994 0.803773842279 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500052944549 [10, 25, 50, 75, 90] 0.500011892675 0.50001587413 0.500025865206 0.50006191127 0.50011852297 
+[Honest  all ] Mean 0.689177134959 [10, 25, 50, 75, 90] 0.5 0.593024382365 0.75 0.788641355093 0.797916666667 
+[Honest target] Mean 0.742717510467 [10, 25, 50, 75, 90] 0.60599378882 0.735937538954 0.783293269231 0.793259405013 0.803547250266 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500031443198 [10, 25, 50, 75, 90] 0.500007642533 0.500012935588 0.500019838016 0.500038681426 0.500065358405 
+[Honest  all ] Mean 0.689976025832 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.75 0.788924826501 0.797959183673 
+[Honest target] Mean 0.742637720705 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793260579258 0.803707161821 
+
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500072014296 [10, 25, 50, 75, 90] 0.500011875634 0.500023912702 0.500037108235 0.50006789827 0.500152804118 
+[Honest  all ] Mean 0.689131066332 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.75 0.788636363636 0.797826086957 
+[Honest target] Mean 0.741606295056 [10, 25, 50, 75, 90] 0.60599378882 0.725305015004 0.783293269231 0.793114432514 0.803452453413 

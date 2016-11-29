@@ -74,8 +74,11 @@ class parameter_controller():
 		############################## 4. helpfulness ##############################
 		self.doubt_weight = doubt_weight
 		self.similarity_threshold = 0.8
-		self.base_helpful_numerator = 15/5.0 # 15
-		self.base_helpful_denominator = 6 # 6
+		# rating scale 0~1
+		self.prior = 2.5/5.0
+		self.prior_belief = 1
+		self.base_helpful_numerator = self.prior*self.prior_belief
+		self.base_helpful_denominator = self.prior_belief
 
 		# ############################# 5. matrix factorization ##############################
 		self.rank = rank
