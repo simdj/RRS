@@ -101,7 +101,10 @@ class WMF():
 			rmse_test = tf.sqrt(tf.reduce_mean(tf.square(diff_op_test)))
 			# MAE of test data
 			mae_test = tf.reduce_mean(tf.abs(diff_op_test))
-		
+
+			# absolute_error_of_test_data = diff_op_test
+			# diff_op_test need to be saved to compute effect size
+
 
 		with tf.name_scope("train") as scope:
 			if decay_lr:
@@ -158,9 +161,12 @@ class WMF():
 		final_mae_test = mae_test.eval(session=sess)
 		final_U = W.eval(session=sess)
 		final_V = H.eval(session=sess)
+		# for testing
+		abs_error = diff_op_test.eval(session=sess)
 		sess.close()
 		# ==============Session finished==============
 		# ============================================
+		print 'testing', 'np.var(abs_error,ddof=1)',np.var(abs_error,ddof=1), 'len(abs_error)',len(abs_error)
 
 		print("Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): %s %s %s %s %s " % (final_cost, final_prediction_on_target_items, final_rmse_tr, final_rmse_test, final_mae_test))
 

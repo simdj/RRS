@@ -180,7 +180,7 @@ Converged at iteration 2000
 Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0119282 2.73424 0.0497186 1.1074 0.845611 
 ('U path: ', 'bandwagon_1%_1%_0%_emb_32/naive_U_attacked.npy')
 ----------------------- robust attack False rank 30 lda 0.0001 ---------------------
-I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForc`e GTX 1080, pci bus id: 0000:01:00.0)
 Converged at iteration 2000
 Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0118905 1.64548 0.0494769 1.10931 0.848333 
 ('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_clean.npy')

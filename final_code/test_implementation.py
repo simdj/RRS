@@ -158,7 +158,8 @@ def whole_process(params):
 	
 	with Timer("5. Matrix factorization"):
 		# real
-		rank_list = [20, 30, 40, 50] 
+		# rank_list = [20, 30, 40, 50] 
+		rank_list = [30]
 		# lda_list = [1e-5, 1e-4, 5e-4] 
 		lda_list = [1e-4] 
 		# rank 10 is not stable, rank 50 is stable but lda should be low (0.0005)
@@ -228,20 +229,36 @@ def whole_process(params):
 if __name__ == "__main__":
 	exp_title_list = []
 
-	# 1127
-	exp_title_list += ['bandwagon_1%_1%_0%_emb_32'] 
-	exp_title_list += ['bandwagon_1%_0%_1%_emb_32'] 
+	exp_title_list += ['bandwagon_0.5%_1%_0%_emb_32'] 
+	exp_title_list += ['bandwagon_0.5%_0.75%_0.25%_emb_32']
+	exp_title_list += ['bandwagon_0.5%_0.5%_0.5%_emb_32']
+	exp_title_list += ['bandwagon_0.5%_0.25%_0.75%_emb_32']
+	exp_title_list += ['bandwagon_0.5%_0%_1%_emb_32'] 
+	exp_title_list += ['bandwagon_0.5%_1%_1%_emb_32'] 
+
 	# exp_title_list += ['bandwagon_1%_1%_1.1_emb_32']
+	exp_title_list += ['bandwagon_1%_1%_0%_emb_32'] 
+	exp_title_list += ['bandwagon_1%_0.75%_0.25%_emb_32']
 	exp_title_list += ['bandwagon_1%_0.5%_0.5%_emb_32']
-	exp_title_list += ['bandwagon_1%_1%_1%_emb_32']
+	exp_title_list += ['bandwagon_1%_0.25%_0.75%_emb_32']
+	exp_title_list += ['bandwagon_1%_0%_1%_emb_32'] 
+	exp_title_list += ['bandwagon_1%_1%_1%_emb_32'] 
+	# exp_title_list += ['bandwagon_1%_1%_1%_emb_32']
+
+	exp_title_list += ['bandwagon_2%_1%_0%_emb_32'] 
+	exp_title_list += ['bandwagon_2%_0.75%_0.25%_emb_32']
+	exp_title_list += ['bandwagon_2%_0.5%_0.5%_emb_32']
+	exp_title_list += ['bandwagon_2%_0.25%_0.75%_emb_32']
+	exp_title_list += ['bandwagon_2%_0%_1%_emb_32'] 
+	exp_title_list += ['bandwagon_2%_1%_1%_emb_32'] 
 
 	exp_title_list += ['bandwagon_3%_1%_0%_emb_32'] 
-	exp_title_list += ['bandwagon_3%_0%_1%_emb_32'] 
-	# exp_title_list += ['bandwagon_3%_1%_1.1_emb_32']
+	exp_title_list += ['bandwagon_3%_0.75%_0.25%_emb_32']
 	exp_title_list += ['bandwagon_3%_0.5%_0.5%_emb_32']
-	exp_title_list += ['bandwagon_3%_1%_1%_emb_32']
+	exp_title_list += ['bandwagon_3%_0.25%_0.75%_emb_32']
+	exp_title_list += ['bandwagon_3%_0%_1%_emb_32'] 
+	exp_title_list += ['bandwagon_3%_1%_1%_emb_32'] 
 
-	
 	# for uu in [1,5,10]:
 	for num_target_item in [1]:
 		for exp_title in exp_title_list:

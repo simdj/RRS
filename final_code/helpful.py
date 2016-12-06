@@ -78,10 +78,12 @@ class helpful_measure():
         self.review_writer = dict()  # dict(review_id) = review_writer_id
         self.helpful_vote_tensor = dict()  # H(reviewer, item) = (cos_distance(reviewer,voter), helpfulness vote)
 
-        # star rating! 0~5 -> 0~10
+        # star rating! 0~5 
         self.similarity_threshold = params.similarity_threshold
         self.base_helpful_numerator = params.base_helpful_numerator
         self.base_helpful_denominator = params.base_helpful_denominator
+
+        self.overall_vote_mean = 0
 
     def fill_review_dict(self):
         overall_review_matrix = np.load(self.review_origin_path)
@@ -112,7 +114,8 @@ class helpful_measure():
                     overall_vote_matrix = np.concatenate((overall_vote_matrix, camo_vote_matirx))
                 except:
                     print 'no camo vote in helpful.py'
-        
+        self.overall_vote_mean = np.mean(overall_vote_matrix[:,2])
+        print 'self.overall_vote_mean', self.overall_vote_mean
         for row in overall_vote_matrix:
             voter = int(row[0])
             review_id = int(row[1])
@@ -142,14 +145,16 @@ class helpful_measure():
             reviewer = int(row[0])
             item_id = int(row[1])
             user_item_key = str(reviewer)+','+str(item_id)
-
-            numerator = self.base_helpful_numerator
-            denominator = self.base_helpful_denominator
+            if self.robust_flag:
+                numerator = self.base_helpful_numerator
+                denominator = self.base_helpful_denominator
+            else:
+                numerator = 0.0
+                denominator = 0.0
             # gather evidence
             if user_item_key in self.helpful_vote_tensor:
                 vote_info_list = self.helpful_vote_tensor[user_item_key]
                 for vote_info in vote_info_list:
-                    # star rating! 0~5 -> 0~10
                     # cosine_similarity: {(-1)~(+1)}
                     sim = vote_info[0]
                     rating = vote_info[1]/5.0
@@ -160,9 +165,12 @@ class helpful_measure():
                         denominator += np.exp(-voting_weight*self.doubt_weight)
                     else:
                         numerator += rating
-                        denominator += 1
+                        denominator += 1.0
             # update posterior
-            helpful_matrix.append([reviewer, item_id, numerator / denominator])
+            if denominator==0:
+                helpful_matrix.append([reviewer, item_id, self.overall_vote_mean/5.0])
+            else:
+                helpful_matrix.append([reviewer, item_id, numerator / denominator])
 
         np.save(which_helpful_path, np.array(helpful_matrix))
         # np.savetxt(which_helpful_csv_path, np.array(helpful_matrix))
