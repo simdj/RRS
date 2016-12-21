@@ -1,0 +1,110 @@
+Comment of Prof.yoo
+==========================================================================
+Experiment Title bandwagon_1%_1%_0%_emb_32
+
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 20 0
+
+Pair(origin,origin) (any, observed) -0.513069779165 -0.0598849984157 0.144855468466 0.536883843801 0.731119152237
+Pair(origin,origin) (max, observed) -0.54510653126 -0.0432027915356 0.145749503134 0.476012888414 0.676142231231
+Pair(fake,fake) 0.410826954238 0.59849349323 0.665398405403 0.717048777724 0.817076542156
+Not good seriously: min(Pair(fake,fake))<0.8
+
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0706148
+Naive	0.0826169
+Robust	0.11359
+Target
+Base  	1.12241 	Mean at (before,after) 1.61669 2.7391
+Naive 	1.78692 	Mean at (before,after) 1.66757 3.45449
+Robust	1.58203 	Mean at (before,after) 1.63519 3.21722
+('[6. Evaluation]', 'Elapsed: 0.045 sec')
+
+
+==========================================================================
+Experiment Title bandwagon_1%_0.75%_0.25%_emb_32
+
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 15 5
+
+Pair(origin,origin) (any, observed) -0.551472209563 -0.0491764845202 0.147648292808 0.546326566985 0.743778274991
+Pair(origin,origin) (max, observed) -0.573106666922 -0.0412021369008 0.139833267118 0.493790810144 0.697864556715
+Pair(fake,fake) 0.74442013859 0.829491521505 0.862524361518 0.888379871583 0.920619820122
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45eeff49e0>)
+
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0842812
+Naive	0.132171
+Robust	0.122825
+Target
+Base  	1.29369 	Mean at (before,after) 1.61669 2.91037
+Naive 	1.84525 	Mean at (before,after) 1.66757 3.51282
+Robust	1.01569 	Mean at (before,after) 1.65154 2.66723
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+
+#######################################################################################
+Experiment Title bandwagon_1%_0.5%_0.5%_emb_32
+
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 10 10
+
+Pair(origin,origin) (any, observed) -0.523015513764 -0.054895636578 0.153174926895 0.541043062842 0.740108907524
+Pair(origin,origin) (max, observed) -0.604632179947 -0.0495805290005 0.147077628446 0.480736561518 0.690962217584
+Pair(fake,fake) 0.834173992044 0.900273604121 0.928392590073 0.943611405524 0.960634716546
+Not good: min(Pair(fake,fake))<0.9
+
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0816767
+Naive	0.160914
+Robust	0.117763
+Target
+Base  	1.44113 	Mean at (before,after) 1.61669 3.05781
+Naive 	1.88072 	Mean at (before,after) 1.66757 3.54829
+Robust	0.206229 	Mean at (before,after) 1.65356 1.85979
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+#######################################################################################
+Experiment Title bandwagon_1%_0.25%_0.75%_emb_32
+
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 5 15
+
+Pair(origin,origin) (any, observed) -0.611225122376 -0.0423458130863 0.148797319016 0.547194934888 0.744007578347
+Pair(origin,origin) (max, observed) -0.530895745004 -0.0394599619676 0.15614033067 0.500734796478 0.69948182013
+Pair(fake,fake) 0.889956859885 0.928612990971 0.940240562813 0.949821868958 0.962361732164
+Not good: min(Pair(fake,fake))<0.9
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c2a75638>)
+
+Overall
+Base	0.104265
+Naive	0.166985
+Robust	0.141861
+Target
+Base  	1.51291 	Mean at (before,after) 1.61669 3.1296
+Naive 	1.83333 	Mean at (before,after) 1.66757 3.5009
+Robust	0.235977 	Mean at (before,after) 1.63735 1.87332
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+#######################################################################################
+Experiment Title bandwagon_1%_0%_1%_emb_32
+
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 0 20
+
+Pair(origin,origin) (any, observed) -0.588430719158 -0.0537154682787 0.143028371799 0.543961242059 0.743518731087
+Pair(origin,origin) (max, observed) -0.538527164555 -0.0394172185981 0.160789930162 0.506727138179 0.694829961946
+Pair(fake,fake) 0.911961099214 0.951888378084 0.960413425553 0.967058603683 0.972935532341
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f458a499d40>)
+
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.110352
+Naive	0.167654
+Robust	0.149314
+Target
+Base  	1.72337 	Mean at (before,after) 1.61669 3.34005
+Naive 	1.79765 	Mean at (before,after) 1.66757 3.46522
+Robust	0.263488 	Mean at (before,after) 1.63931 1.9028
+('[6. Evaluation]', 'Elapsed: 0.044 sec')

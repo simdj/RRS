@@ -1,0 +1,900 @@
+Script started on 2016년 12월 19일 (월) 오후 05시 00분 18초
+]0;djsim@djsim-desktop: ~/RRS/final_codedjsim@djsim-desktop:~/RRS/final_code$ python test_implementation.py ; exit;[11Psource activate tensorflow
+(tensorflow) ]0;djsim@djsim-desktop: ~/RRS/final_codedjsim@djsim-desktop:~/RRS/final_code$ source activate tensorflowpython test_implementation.py ; exit;
+this is attack model bandwagon new!!!!!!!!!!!!!!!!!!
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:108] successfully opened CUDA library libcurand.so locally
+WMF validation!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#######################################################################################
+Experiment Title bandwagon_1%_1%_0%_emb_32
+FAKE NUM ITEM 1
+camo_vote_size_multiple 0
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 3.8e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 0
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 20 0
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 360 0
+('[2. attack]', 'Elapsed: 0.11 sec')
+
+('[3. User2Vec]', 'Started')
+1 len(overall_review_matrix) 28374
+2 len(overall_review_matrix) 28392
+3 len(overall_review_matrix) 28752
+1 len(overall_vote_matrix) 661040
+2 len(overall_vote_matrix) 661346
+no camo vote in new_user2vec.py
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.540949780556 -0.0577788564161 0.127315420258 0.769482545252 0.921603517966
+Pair(origin,origin) (max, observed) -0.543440852557 -0.0497799914546 0.145415986991 0.761026286082 0.919438971008
+Pair(fake,fake) 0.266423853078 0.68451893199 0.791351128426 0.881980340213 0.931936342432
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c56e9ab8>)
+
+20
+Pair(origin,origin) (any, observed) -0.571917521965 -0.0608888335818 0.143401095398 0.739837225188 0.877737100074
+Pair(origin,origin) (max, observed) -0.563520333971 -0.0474254022478 0.132949643204 0.68873935397 0.850116085771
+Pair(fake,fake) 0.536248743338 0.769437316313 0.827465238269 0.873539552701 0.924674829752
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c5693098>)
+
+30
+Pair(origin,origin) (any, observed) -0.574475465492 -0.0525831724611 0.148797004799 0.6554589493 0.820806783317
+Pair(origin,origin) (max, observed) -0.499120404885 -0.0511928554025 0.15225862053 0.600625481981 0.775908724874
+Pair(fake,fake) 0.486211510942 0.703066636139 0.760793082485 0.807672781702 0.873290558545
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c56aee18>)
+
+40
+Pair(origin,origin) (any, observed) -0.554660967426 -0.0578406607544 0.135456806234 0.591198901051 0.773210644357
+Pair(origin,origin) (max, observed) -0.562031413141 -0.0396766078884 0.151829348433 0.540009774965 0.720580768432
+Pair(fake,fake) 0.49089857438 0.636163622964 0.708690921684 0.747591615549 0.846937503134
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c5628518>)
+
+Pair(origin,origin) (any, observed) -0.513069779165 -0.0598849984157 0.144855468466 0.536883843801 0.731119152237
+Pair(origin,origin) (max, observed) -0.54510653126 -0.0432027915356 0.145749503134 0.476012888414 0.676142231231
+Pair(fake,fake) 0.410826954238 0.59849349323 0.665398405403 0.717048777724 0.817076542156
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c5693050>)
+
+1 len(overall_review_matrix) 28374
+1 len(overall_vote_matrix) 661040
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.54833979072 -0.0504648325586 0.144113284777 0.810181177233 0.928870923516
+Pair(origin,origin) (max, observed) -0.594085557144 -0.0402803220811 0.135788068124 0.773856128587 0.923388025458
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c4ff6cf8>)
+
+20
+Pair(origin,origin) (any, observed) -0.629737953593 -0.0502963572504 0.152786777937 0.741245941536 0.879758771814
+Pair(origin,origin) (max, observed) -0.519216204677 -0.0436478582871 0.132616968651 0.695443827099 0.858201075139
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c4ebbef0>)
+
+30
+Pair(origin,origin) (any, observed) -0.536062667121 -0.0582396897701 0.142153150724 0.650710768275 0.825230281547
+Pair(origin,origin) (max, observed) -0.601858773562 -0.048660695741 0.133781672175 0.598518152481 0.787857533609
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c4f91518>)
+
+40
+Pair(origin,origin) (any, observed) -0.594441266678 -0.0492184434769 0.15236365659 0.597123846721 0.773523328931
+Pair(origin,origin) (max, observed) -0.555692785283 -0.0422302205223 0.139513529751 0.541982063306 0.734940652734
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c4f78f80>)
+
+Pair(origin,origin) (any, observed) -0.608138986417 -0.0519061015342 0.146566217126 0.538045222788 0.739168311735
+Pair(origin,origin) (max, observed) -0.607890423657 -0.0393810722114 0.136628096879 0.4927308484 0.687630008267
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c4be50e0>)
+
+('[3. User2Vec]', 'Elapsed: 40 sec')
+
+('[4. Compute helpfulness]', 'Started')
+self.overall_vote_mean 3.86051827423
+self.overall_vote_mean 3.86051827423
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:925] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 1080
+major: 6 minor: 1 memoryClockRate (GHz) 1.7335
+pciBusID 0000:01:00.0
+Total memory: 7.92GiB
+Free memory: 7.81GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125227 1.61851 0.0491132 1.08053 0.82542
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.16208 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_clean.npy')
+----------------------- base attack True rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123421 2.75946 0.0487538 1.07867 0.824295
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123966 2.76173 0.0488722 1.07609 0.822508
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0012334 2.76215 0.0487543 1.07262 0.82057
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123286 2.76122 0.0487545 1.06942 0.81906
+Converged at iteration 4000
+testing np.var(abs_error,ddof=1) 1.14299 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123286 2.76122 0.0487545 1.06942 0.81906 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/base_U_attacked.npy')
+----------------------- naive attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0163186 1.67235 0.0722685 1.09479 0.832207
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162567 1.67107 0.0582023 1.09599 0.83338
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0185617 1.66774 0.0565262 1.09492 0.834027
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162343 1.66895 0.0526956 1.09387 0.833158
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.19367 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/naive_U_clean.npy')
+----------------------- naive attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 1.0 [10, 25, 50, 75, 90] 1.0 1.0 1.0 1.0 1.0 
+[Honest  all ] Mean 0.707772781236 [10, 25, 50, 75, 90] 0.5 0.62 0.776 0.8 0.807407407407 
+[Honest target] Mean 0.752601402364 [10, 25, 50, 75, 90] 0.613846153846 0.742721164614 0.79625 0.800427350427 0.812090322581 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160808 3.49291 0.0715977 1.09155 0.831178
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160039 3.49099 0.0575199 1.09299 0.832459
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0165673 3.48287 0.0545433 1.09218 0.832812
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159973 3.47979 0.052233 1.09115 0.832297
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159965 3.46961 0.0509992 1.08993 0.831994
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.18796 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159965 3.46961 0.0509992 1.08993 0.831994 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/naive_U_attacked.npy')
+----------------------- robust attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152299 1.63557 0.0568245 1.11166 0.846903
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152262 1.63519 0.0534155 1.11023 0.846256
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.23304 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152262 1.63519 0.0534155 1.11023 0.846256 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_clean.npy')
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.97027569378 [10, 25, 50, 75, 90] 0.966417462672 0.968942398756 0.972152018432 0.972222222222 0.972222222222 
+[Honest  all ] Mean 0.690298444674 [10, 25, 50, 75, 90] 0.5 0.593392444686 0.750006195195 0.789130434783 0.798181818182 
+[Honest target] Mean 0.742941889732 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793209312917 0.803704624014 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148656 3.23897 0.0572331 1.10756 0.842934
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148505 3.23761 0.0533002 1.1062 0.84248
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148492 3.23466 0.0518201 1.10477 0.841988
+Converged at iteration 3000
+testing np.var(abs_error,ddof=1) 1.22079 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148492 3.23466 0.0518201 1.10477 0.841988 
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0706148
+Naive	0.0826169
+Robust	0.11359
+Target
+Base  	1.12241 	Mean at (before,after) 1.61669 2.7391
+Naive 	1.78692 	Mean at (before,after) 1.66757 3.45449
+Robust	1.58203 	Mean at (before,after) 1.63519 3.21722
+('[6. Evaluation]', 'Elapsed: 0.045 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 1.7e+02 sec')
+
+#######################################################################################
+Experiment Title bandwagon_1%_0.75%_0.25%_emb_32
+FAKE NUM ITEM 1
+camo_vote_size_multiple 0
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 4.4e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 0
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 15 5
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 360 0
+('[2. attack]', 'Elapsed: 0.084 sec')
+
+('[3. User2Vec]', 'Started')
+1 len(overall_review_matrix) 28374
+2 len(overall_review_matrix) 28392
+3 len(overall_review_matrix) 28752
+1 len(overall_vote_matrix) 661040
+2 len(overall_vote_matrix) 661346
+no camo vote in new_user2vec.py
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.558110132232 -0.055456929206 0.138335871097 0.778160793688 0.930393326682
+Pair(origin,origin) (max, observed) -0.565974662852 -0.0383058453849 0.154002031277 0.742639542883 0.917509292328
+Pair(fake,fake) 0.621414439648 0.858211080695 0.902139576605 0.933337861504 0.962176280013
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c28bf440>)
+
+20
+Pair(origin,origin) (any, observed) -0.515031953931 -0.0564273391333 0.139867253439 0.739502911728 0.891221331912
+Pair(origin,origin) (max, observed) -0.515998172703 -0.044787399793 0.1380540555 0.697509427005 0.866081642526
+Pair(fake,fake) 0.842806437979 0.902983209229 0.923840941668 0.940997084597 0.953679548278
+Not good: min(Pair(fake,fake))<0.9
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c2a5def0>)
+
+30
+Pair(origin,origin) (any, observed) -0.555530863022 -0.0480281793811 0.156617807558 0.645531588542 0.829082893544
+Pair(origin,origin) (max, observed) -0.497026790981 -0.0403465381958 0.155351634466 0.610739096185 0.79080799943
+Pair(fake,fake) 0.762725095008 0.872739053843 0.901847060315 0.923862170526 0.941507440966
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c2a07e18>)
+
+40
+Pair(origin,origin) (any, observed) -0.685001910534 -0.047757661716 0.158685052605 0.586142631915 0.771738026584
+Pair(origin,origin) (max, observed) -0.545869429301 -0.0504710396038 0.137917091806 0.535055235408 0.725707897694
+Pair(fake,fake) 0.755304298316 0.844124736884 0.877273590571 0.90252201179 0.930812865157
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c28bf638>)
+
+Pair(origin,origin) (any, observed) -0.551472209563 -0.0491764845202 0.147648292808 0.546326566985 0.743778274991
+Pair(origin,origin) (max, observed) -0.573106666922 -0.0412021369008 0.139833267118 0.493790810144 0.697864556715
+Pair(fake,fake) 0.74442013859 0.829491521505 0.862524361518 0.888379871583 0.920619820122
+Not good seriously: min(Pair(fake,fake))<0.8
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45eeff49e0>)
+
+1 len(overall_review_matrix) 28374
+1 len(overall_vote_matrix) 661040
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.584400223501 -0.0497129989974 0.131998512446 0.803418028437 0.934359656314
+Pair(origin,origin) (max, observed) -0.55461896993 -0.0358861777903 0.142625464123 0.767307533514 0.928240258851
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45a236ccf8>)
+
+20
+Pair(origin,origin) (any, observed) -0.610545053306 -0.0560211128542 0.138099596196 0.740495246997 0.879665551729
+Pair(origin,origin) (max, observed) -0.570409718321 -0.0457098386413 0.126877552718 0.690652112812 0.853749454946
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c3648290>)
+
+30
+Pair(origin,origin) (any, observed) -0.658582484375 -0.0410944135871 0.151808301808 0.66393793481 0.830404645545
+Pair(origin,origin) (max, observed) -0.517916747049 -0.0443824376348 0.128054056286 0.599022445373 0.792199758388
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f459b02d638>)
+
+40
+Pair(origin,origin) (any, observed) -0.601229760426 -0.0528443446047 0.150743376716 0.596749700694 0.780878659676
+Pair(origin,origin) (max, observed) -0.534822560213 -0.0417626459851 0.143334768833 0.551122038639 0.743013279833
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c142d4d0>)
+
+Pair(origin,origin) (any, observed) -0.574713475876 -0.0440114743543 0.15972278386 0.566110767596 0.750761465714
+Pair(origin,origin) (max, observed) -0.574713475876 -0.0345076193638 0.147573112681 0.503246036795 0.699904809763
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c34a2dd0>)
+
+('[3. User2Vec]', 'Elapsed: 40 sec')
+
+('[4. Compute helpfulness]', 'Started')
+self.overall_vote_mean 3.86051827423
+self.overall_vote_mean 3.86051827423
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125227 1.61851 0.0491132 1.08053 0.82542
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.16208 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527 
+('U path: ', 'bandwagon_1%_0.75%_0.25%_emb_32/base_U_clean.npy')
+----------------------- base attack True rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0012342 2.93177 0.0487536 1.08108 0.824425
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123387 2.93081 0.0487539 1.07831 0.822665
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.16317 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123387 2.93081 0.0487539 1.07831 0.822665 
+('U path: ', 'bandwagon_1%_0.75%_0.25%_emb_32/base_U_attacked.npy')
+----------------------- naive attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0163186 1.67235 0.0722685 1.09479 0.832207
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162567 1.67107 0.0582023 1.09599 0.83338
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0185617 1.66774 0.0565262 1.09492 0.834027
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162343 1.66895 0.0526956 1.09387 0.833158
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.19367 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785 
+('U path: ', 'bandwagon_1%_0.75%_0.25%_emb_32/naive_U_clean.npy')
+----------------------- naive attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 1.0 [10, 25, 50, 75, 90] 1.0 1.0 1.0 1.0 1.0 
+[Honest  all ] Mean 0.707772781236 [10, 25, 50, 75, 90] 0.5 0.62 0.776 0.8 0.807407407407 
+[Honest target] Mean 0.752601402364 [10, 25, 50, 75, 90] 0.613846153846 0.742721164614 0.79625 0.800427350427 0.812090322581 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160834 3.53331 0.070673 1.09003 0.82799
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160035 3.53017 0.0567447 1.09062 0.828528
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160098 3.52738 0.0533953 1.08986 0.828505
+Converged at iteration 3000
+testing np.var(abs_error,ddof=1) 1.18817 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160098 3.52738 0.0533953 1.08986 0.828505 
+('U path: ', 'bandwagon_1%_0.75%_0.25%_emb_32/naive_U_attacked.npy')
+----------------------- robust attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150507 1.65617 0.056717 1.11232 0.846527
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150382 1.65586 0.0533257 1.11073 0.845746
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0174061 1.65779 0.0543189 1.10989 0.844961
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150364 1.65327 0.0507506 1.10775 0.844652
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150359 1.65154 0.0499249 1.10615 0.844111
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.22351 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150359 1.65154 0.0499249 1.10615 0.844111 
+('U path: ', 'bandwagon_1%_0.75%_0.25%_emb_32/robust_U_clean.npy')
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.78631723529 [10, 25, 50, 75, 90] 0.648478073913 0.699042152268 0.798171676856 0.897720625032 0.922738076116 
+[Honest  all ] Mean 0.69022201625 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.750002149585 0.789042488329 0.79814815503 
+[Honest target] Mean 0.742289675277 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793214357232 0.803711327576 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148363 2.69334 0.0564067 1.10878 0.841828
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148229 2.69101 0.0529364 1.10774 0.841601
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148215 2.69005 0.0515487 1.10636 0.841272
+Converged at iteration 3000
+testing np.var(abs_error,ddof=1) 1.22444 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148215 2.69005 0.0515487 1.10636 0.841272 
+('U path: ', 'bandwagon_1%_0.75%_0.25%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0842812
+Naive	0.132171
+Robust	0.122825
+Target
+Base  	1.29369 	Mean at (before,after) 1.61669 2.91037
+Naive 	1.84525 	Mean at (before,after) 1.66757 3.51282
+Robust	1.01569 	Mean at (before,after) 1.65154 2.66723
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 1.7e+02 sec')
+
+#######################################################################################
+Experiment Title bandwagon_1%_0.5%_0.5%_emb_32
+FAKE NUM ITEM 1
+camo_vote_size_multiple 0
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 3.1e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 0
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 10 10
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 360 0
+('[2. attack]', 'Elapsed: 0.084 sec')
+
+('[3. User2Vec]', 'Started')
+1 len(overall_review_matrix) 28374
+2 len(overall_review_matrix) 28392
+3 len(overall_review_matrix) 28752
+1 len(overall_vote_matrix) 661040
+2 len(overall_vote_matrix) 661346
+no camo vote in new_user2vec.py
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.584728116647 -0.059533853102 0.133613388502 0.792375458803 0.923708562844
+Pair(origin,origin) (max, observed) -0.585249784961 -0.0433983032591 0.136482462717 0.765634080716 0.918038174456
+Pair(fake,fake) 0.825048951493 0.909041114443 0.932695211982 0.955945759101 0.974237694138
+Not good: min(Pair(fake,fake))<0.9
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f459ada8290>)
+
+20
+Pair(origin,origin) (any, observed) -0.532322611023 -0.0597647023176 0.140329036884 0.738798456447 0.884304868955
+Pair(origin,origin) (max, observed) -0.506041195947 -0.0378221228368 0.15094850024 0.702941155136 0.861751231025
+Pair(fake,fake) 0.915240178493 0.942191025478 0.951307407851 0.961015343501 0.972873758074
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f4589feecb0>)
+
+30
+Pair(origin,origin) (any, observed) -0.517581350099 -0.0586977621952 0.138098150932 0.653695122372 0.828362020899
+Pair(origin,origin) (max, observed) -0.502875159147 -0.0389769825936 0.152042575703 0.605281096919 0.789262803782
+Pair(fake,fake) 0.879722805707 0.926955487188 0.93852460972 0.950452897464 0.962480782843
+Not good: min(Pair(fake,fake))<0.9
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f459acd4758>)
+
+40
+Pair(origin,origin) (any, observed) -0.523689613062 -0.0579402446576 0.145687067061 0.594775307025 0.779089416315
+Pair(origin,origin) (max, observed) -0.587384071608 -0.0512454066546 0.13961875583 0.543940343351 0.733350147307
+Pair(fake,fake) 0.855016336379 0.915219549913 0.931647491034 0.942731629319 0.956090407586
+Not good: min(Pair(fake,fake))<0.9
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f458a30b710>)
+
+Pair(origin,origin) (any, observed) -0.523015513764 -0.054895636578 0.153174926895 0.541043062842 0.740108907524
+Pair(origin,origin) (max, observed) -0.604632179947 -0.0495805290005 0.147077628446 0.480736561518 0.690962217584
+Pair(fake,fake) 0.834173992044 0.900273604121 0.928392590073 0.943611405524 0.960634716546
+Not good: min(Pair(fake,fake))<0.9
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c4c6def0>)
+
+1 len(overall_review_matrix) 28374
+1 len(overall_vote_matrix) 661040
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.640198957383 -0.051508974435 0.144643518753 0.775089052242 0.924130094881
+Pair(origin,origin) (max, observed) -0.694767842717 -0.0359443686682 0.143739020131 0.761777388089 0.916471881552
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c2df9878>)
+
+20
+Pair(origin,origin) (any, observed) -0.570183230865 -0.060931358758 0.139688982693 0.733170816689 0.878910408452
+Pair(origin,origin) (max, observed) -0.699935231051 -0.0341710034055 0.144176671478 0.689793834042 0.857401833221
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c2cb9d40>)
+
+30
+Pair(origin,origin) (any, observed) -0.594613166346 -0.0470843072666 0.146949683695 0.660292182783 0.822573024752
+Pair(origin,origin) (max, observed) -0.552980380972 -0.0387433337623 0.141921730707 0.620064220785 0.788912128973
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c2f4c128>)
+
+40
+Pair(origin,origin) (any, observed) -0.55924697158 -0.0407598728111 0.156450431548 0.595455191257 0.784021659044
+Pair(origin,origin) (max, observed) -0.612576334891 -0.0372720764454 0.148104618416 0.547227775572 0.732521912878
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c2d66758>)
+
+Pair(origin,origin) (any, observed) -0.576934425841 -0.0420934416783 0.170631030523 0.566786320647 0.748568493317
+Pair(origin,origin) (max, observed) -0.615684418565 -0.0416720868443 0.1516469201 0.513939818227 0.706041538226
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f458a207680>)
+
+('[3. User2Vec]', 'Elapsed: 40 sec')
+
+('[4. Compute helpfulness]', 'Started')
+self.overall_vote_mean 3.86051827423
+self.overall_vote_mean 3.86051827423
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125227 1.61851 0.0491132 1.08053 0.82542
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.16208 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527 
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/base_U_clean.npy')
+----------------------- base attack True rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123419 3.07956 0.0487536 1.08276 0.825606
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123432 3.07681 0.0487633 1.07999 0.823731
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.16679 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123432 3.07681 0.0487633 1.07999 0.823731 
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/base_U_attacked.npy')
+----------------------- naive attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0163186 1.67235 0.0722685 1.09479 0.832207
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162567 1.67107 0.0582023 1.09599 0.83338
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0185617 1.66774 0.0565262 1.09492 0.834027
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162343 1.66895 0.0526956 1.09387 0.833158
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.19367 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785 
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/naive_U_clean.npy')
+----------------------- naive attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 1.0 [10, 25, 50, 75, 90] 1.0 1.0 1.0 1.0 1.0 
+[Honest  all ] Mean 0.707772781236 [10, 25, 50, 75, 90] 0.5 0.62 0.776 0.8 0.807407407407 
+[Honest target] Mean 0.752601402364 [10, 25, 50, 75, 90] 0.613846153846 0.742721164614 0.79625 0.800427350427 0.812090322581 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160903 3.5853 0.0732438 1.09702 0.834166
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160087 3.58043 0.0578946 1.09804 0.835085
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0163459 3.57898 0.0542491 1.0976 0.835073
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159973 3.57129 0.0520122 1.0964 0.834966
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159965 3.56249 0.0508128 1.09535 0.834847
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.19982 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0159965 3.56249 0.0508128 1.09535 0.834847 
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/naive_U_attacked.npy')
+----------------------- robust attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0151764 1.65387 0.0568662 1.11187 0.847247
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0151768 1.65356 0.0534609 1.11058 0.846631
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.23383 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0151768 1.65356 0.0534609 1.11058 0.846631 
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_clean.npy')
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.50682286455 [10, 25, 50, 75, 90] 0.500071899158 0.500388899552 0.501936375448 0.508670998389 0.523256663583 
+[Honest  all ] Mean 0.690355057411 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.75000322808 0.789130434783 0.798153399065 
+[Honest target] Mean 0.742979516769 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793213487746 0.803711369688 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148455 1.88919 0.0560472 1.10915 0.845132
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148327 1.88998 0.0527243 1.10798 0.844731
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148316 1.89051 0.0514358 1.10656 0.844272
+Converged at iteration 3000
+testing np.var(abs_error,ddof=1) 1.22488 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148316 1.89051 0.0514358 1.10656 0.844272 
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.0816767
+Naive	0.160914
+Robust	0.117763
+Target
+Base  	1.44113 	Mean at (before,after) 1.61669 3.05781
+Naive 	1.88072 	Mean at (before,after) 1.66757 3.54829
+Robust	0.206229 	Mean at (before,after) 1.65356 1.85979
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 1.6e+02 sec')
+
+#######################################################################################
+Experiment Title bandwagon_1%_0.25%_0.75%_emb_32
+FAKE NUM ITEM 1
+camo_vote_size_multiple 0
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 3.1e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 0
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 5 15
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 360 0
+('[2. attack]', 'Elapsed: 0.083 sec')
+
+('[3. User2Vec]', 'Started')
+1 len(overall_review_matrix) 28374
+2 len(overall_review_matrix) 28392
+3 len(overall_review_matrix) 28752
+1 len(overall_vote_matrix) 661040
+2 len(overall_vote_matrix) 661346
+no camo vote in new_user2vec.py
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.539261132198 -0.0500881268898 0.129171994678 0.779302360751 0.919828966828
+Pair(origin,origin) (max, observed) -0.598649088451 -0.0354348477499 0.142748483163 0.75643730281 0.916480062018
+Pair(fake,fake) 0.917969087229 0.947730253162 0.965138710731 0.974303318531 0.983802124963
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c29eea70>)
+
+20
+Pair(origin,origin) (any, observed) -0.512590092563 -0.0415572783407 0.151929365453 0.742461737573 0.87857224943
+Pair(origin,origin) (max, observed) -0.563536481123 -0.0546549471168 0.141024564665 0.691877765502 0.856545189737
+Pair(fake,fake) 0.924850559743 0.953233888763 0.962750846245 0.970940926612 0.981714799078
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c29eecb0>)
+
+30
+Pair(origin,origin) (any, observed) -0.665625373598 -0.0515089333456 0.132855209266 0.656340232136 0.824336890683
+Pair(origin,origin) (max, observed) -0.665625373598 -0.0443617518824 0.148812701864 0.618716843602 0.791060764494
+Pair(fake,fake) 0.903864931775 0.947698369786 0.960304999281 0.967515803934 0.975445441112
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c29ee758>)
+
+40
+Pair(origin,origin) (any, observed) -0.475519691754 -0.0499192278521 0.148103085608 0.597786386053 0.779566564807
+Pair(origin,origin) (max, observed) -0.563049372963 -0.0393433937744 0.152293252864 0.534591928673 0.739499473529
+Pair(fake,fake) 0.899162538908 0.93374875916 0.948186708754 0.955696722619 0.964187338505
+Not good: min(Pair(fake,fake))<0.9
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f459aaf9c68>)
+
+Pair(origin,origin) (any, observed) -0.611225122376 -0.0423458130863 0.148797319016 0.547194934888 0.744007578347
+Pair(origin,origin) (max, observed) -0.530895745004 -0.0394599619676 0.15614033067 0.500734796478 0.69948182013
+Pair(fake,fake) 0.889956859885 0.928612990971 0.940240562813 0.949821868958 0.962361732164
+Not good: min(Pair(fake,fake))<0.9
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c2a75638>)
+
+1 len(overall_review_matrix) 28374
+1 len(overall_vote_matrix) 661040
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.753818132821 -0.0478866196193 0.147468067103 0.804057271078 0.934468899913
+Pair(origin,origin) (max, observed) -0.608044576797 -0.037507283226 0.122465129379 0.765310579131 0.926464554622
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c51eed88>)
+
+20
+Pair(origin,origin) (any, observed) -0.587506772505 -0.050208590596 0.141045720893 0.750136027516 0.881713742768
+Pair(origin,origin) (max, observed) -0.54623294446 -0.0398877388259 0.141979923961 0.698870112524 0.855221055829
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c51eef80>)
+
+30
+Pair(origin,origin) (any, observed) -0.648584252221 -0.050232582479 0.14569168053 0.672472444925 0.828589832355
+Pair(origin,origin) (max, observed) -0.546651586524 -0.0433240881609 0.139684378252 0.61297451838 0.787835062586
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c35a66c8>)
+
+40
+Pair(origin,origin) (any, observed) -0.640008097093 -0.0466063060249 0.163197390445 0.602708790123 0.778119233002
+Pair(origin,origin) (max, observed) -0.55854985735 -0.0427351783939 0.143019869499 0.539378260835 0.731985126454
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c35a6758>)
+
+Pair(origin,origin) (any, observed) -0.574132803882 -0.0516631965911 0.153404800944 0.553448437177 0.734952354028
+Pair(origin,origin) (max, observed) -0.622887176777 -0.0413931030913 0.136526484821 0.49784226214 0.689188078781
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c53f7050>)
+
+('[3. User2Vec]', 'Elapsed: 40 sec')
+
+('[4. Compute helpfulness]', 'Started')
+self.overall_vote_mean 3.86051827423
+self.overall_vote_mean 3.86051827423
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+('[4. Compute helpfulness]', 'Elapsed: 43 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125227 1.61851 0.0491132 1.08053 0.82542
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.16208 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527 
+('U path: ', 'bandwagon_1%_0.25%_0.75%_emb_32/base_U_clean.npy')
+----------------------- base attack True rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125354 3.1519 0.0491478 1.08413 0.826769
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0012532 3.14789 0.0491479 1.08126 0.824859
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.16952 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0012532 3.14789 0.0491479 1.08126 0.824859 
+('U path: ', 'bandwagon_1%_0.25%_0.75%_emb_32/base_U_attacked.npy')
+----------------------- naive attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0163186 1.67235 0.0722685 1.09479 0.832207
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162567 1.67107 0.0582023 1.09599 0.83338
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0185617 1.66774 0.0565262 1.09492 0.834027
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162343 1.66895 0.0526956 1.09387 0.833158
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.19367 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785 
+('U path: ', 'bandwagon_1%_0.25%_0.75%_emb_32/naive_U_clean.npy')
+----------------------- naive attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 1.0 [10, 25, 50, 75, 90] 1.0 1.0 1.0 1.0 1.0 
+[Honest  all ] Mean 0.707772781236 [10, 25, 50, 75, 90] 0.5 0.62 0.776 0.8 0.807407407407 
+[Honest target] Mean 0.752601402364 [10, 25, 50, 75, 90] 0.613846153846 0.742721164614 0.79625 0.800427350427 0.812090322581 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0165316 3.52284 0.0730773 1.09656 0.83203
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0164484 3.51878 0.0584946 1.09714 0.832704
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0164425 3.51557 0.0545777 1.09648 0.832699
+Converged at iteration 3000
+testing np.var(abs_error,ddof=1) 1.20267 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0164425 3.51557 0.0545777 1.09648 0.832699 
+('U path: ', 'bandwagon_1%_0.25%_0.75%_emb_32/naive_U_attacked.npy')
+----------------------- robust attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152424 1.64238 0.0572179 1.1099 0.846465
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152288 1.64211 0.0534662 1.10833 0.845667
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152612 1.64132 0.051993 1.10692 0.844884
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152267 1.63924 0.0508033 1.10523 0.844281
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152263 1.63735 0.0499762 1.10358 0.843757
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.21779 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0152263 1.63735 0.0499762 1.10358 0.843757 
+('U path: ', 'bandwagon_1%_0.25%_0.75%_emb_32/robust_U_clean.npy')
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500050959143 [10, 25, 50, 75, 90] 0.500011789848 0.500017392824 0.500028819638 0.500060278465 0.500075564759 
+[Honest  all ] Mean 0.690305731543 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.750016345666 0.789130434783 0.798181818182 
+[Honest target] Mean 0.742533053566 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793208174686 0.803715654127 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150365 1.90304 0.0567159 1.09822 0.836638
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150241 1.90358 0.0531639 1.09726 0.836519
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150228 1.90391 0.0517628 1.09611 0.836283
+Converged at iteration 3000
+testing np.var(abs_error,ddof=1) 1.20187 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150228 1.90391 0.0517628 1.09611 0.836283 
+('U path: ', 'bandwagon_1%_0.25%_0.75%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.104265
+Naive	0.166985
+Robust	0.141861
+Target
+Base  	1.51291 	Mean at (before,after) 1.61669 3.1296
+Naive 	1.83333 	Mean at (before,after) 1.66757 3.5009
+Robust	0.235977 	Mean at (before,after) 1.63735 1.87332
+('[6. Evaluation]', 'Elapsed: 0.043 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 1.7e+02 sec')
+
+#######################################################################################
+Experiment Title bandwagon_1%_0%_1%_emb_32
+FAKE NUM ITEM 1
+camo_vote_size_multiple 0
+('[1. preprocess]', 'Started')
+Preprocess is already done
+('[1. preprocess]', 'Elapsed: 3.1e-05 sec')
+
+('[2. attack]', 'Started')
+#(fake item) 1
+[generate_camo_votes] each user camo_vote_size 0
+[Origin stats] Users x Items: 1822 2069
+[Attack stats] Sybil size: 18 Target size, Filler size, Selected size: 1 0 20
+[Origin] Reviews, Votes: 28374 661040
+[ Fake ] Reviews, Votes: 18 306
+[ Camo ] Reviews, Votes: 360 0
+('[2. attack]', 'Elapsed: 0.083 sec')
+
+('[3. User2Vec]', 'Started')
+1 len(overall_review_matrix) 28374
+2 len(overall_review_matrix) 28392
+3 len(overall_review_matrix) 28752
+1 len(overall_vote_matrix) 661040
+2 len(overall_vote_matrix) 661346
+no camo vote in new_user2vec.py
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.608510514702 -0.0535136293779 0.134828332392 0.759570377848 0.924667047998
+Pair(origin,origin) (max, observed) -0.510672112187 -0.0466142363273 0.136560136675 0.742388062867 0.919303270141
+Pair(fake,fake) 0.916042055278 0.964684367357 0.974991318806 0.98097702061 0.989406234529
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45899a3c68>)
+
+20
+Pair(origin,origin) (any, observed) -0.515929350818 -0.055002389649 0.133125524281 0.734230755777 0.882227447964
+Pair(origin,origin) (max, observed) -0.527543155382 -0.0378918422309 0.143637959895 0.700904570569 0.856729199427
+Pair(fake,fake) 0.928847011425 0.962437053052 0.97069228288 0.977163359953 0.982459534493
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45899a3f80>)
+
+30
+Pair(origin,origin) (any, observed) -0.546076420035 -0.049862744496 0.151498336839 0.651982956918 0.822790098999
+Pair(origin,origin) (max, observed) -0.582855342592 -0.0436264323072 0.143754702744 0.602555134094 0.78812152252
+Pair(fake,fake) 0.944872416711 0.965038496442 0.969634470702 0.974729362613 0.981250439399
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c33009e0>)
+
+40
+Pair(origin,origin) (any, observed) -0.585625497394 -0.0462254228395 0.151379020448 0.603661739974 0.781959321104
+Pair(origin,origin) (max, observed) -0.537313339962 -0.0416715167036 0.149183538046 0.544930438418 0.744034215622
+Pair(fake,fake) 0.942168959256 0.954869892711 0.960723203929 0.966459489773 0.975176897384
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f45c3300878>)
+
+Pair(origin,origin) (any, observed) -0.588430719158 -0.0537154682787 0.143028371799 0.543961242059 0.743518731087
+Pair(origin,origin) (max, observed) -0.538527164555 -0.0394172185981 0.160789930162 0.506727138179 0.694829961946
+Pair(fake,fake) 0.911961099214 0.951888378084 0.960413425553 0.967058603683 0.972935532341
+(<type 'exceptions.IndexError'>, IndexError('too many indices for array',), <traceback object at 0x7f458a499d40>)
+
+1 len(overall_review_matrix) 28374
+1 len(overall_vote_matrix) 661040
+Comment of Prof.yoo
+10
+Pair(origin,origin) (any, observed) -0.698347475772 -0.046767007516 0.132190766523 0.762040756552 0.914730717776
+Pair(origin,origin) (max, observed) -0.57665652287 -0.0329096833913 0.137702947826 0.716019082109 0.897114444999
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f458a301fc8>)
+
+20
+Pair(origin,origin) (any, observed) -0.554899920101 -0.0530826911296 0.153310886735 0.740706260096 0.874953609222
+Pair(origin,origin) (max, observed) -0.611257249609 -0.0479159373007 0.128531983636 0.680427421059 0.842584262916
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f458a593cf8>)
+
+30
+Pair(origin,origin) (any, observed) -0.537598170569 -0.0495056032185 0.145135408139 0.649204834896 0.825881843555
+Pair(origin,origin) (max, observed) -0.561920095328 -0.0324884808589 0.139222015343 0.599491596715 0.781613593636
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f458a0486c8>)
+
+40
+Pair(origin,origin) (any, observed) -0.556225490003 -0.0462124641427 0.14519782937 0.594078078023 0.780253423307
+Pair(origin,origin) (max, observed) -0.571090766742 -0.0385743890862 0.14244747994 0.531267571122 0.729444865689
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f45c27eb638>)
+
+Pair(origin,origin) (any, observed) -0.545542800516 -0.0537710315478 0.144037155164 0.547858759531 0.739312931718
+Pair(origin,origin) (max, observed) -0.580234300547 -0.0411291856121 0.149200416196 0.489813213147 0.684146008768
+Pair(fake,fake) (<type 'exceptions.KeyError'>, KeyError('1822',), <traceback object at 0x7f459ad2c710>)
+
+('[3. User2Vec]', 'Elapsed: 40 sec')
+
+('[4. Compute helpfulness]', 'Started')
+self.overall_vote_mean 3.86051827423
+self.overall_vote_mean 3.86051827423
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+no camo vote in helpful.py
+self.overall_vote_mean 3.86104550417
+('[4. Compute helpfulness]', 'Elapsed: 44 sec')
+
+('[5. Matrix factorization]', 'Started')
+----------------------- base attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125227 1.61851 0.0491132 1.08053 0.82542
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.16208 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00125192 1.61669 0.0491132 1.07781 0.823527 
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/base_U_clean.npy')
+----------------------- base attack True rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123431 3.36032 0.0487536 1.0851 0.827011
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123402 3.35629 0.0487549 1.08234 0.825078
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.17185 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.00123402 3.35629 0.0487549 1.08234 0.825078 
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/base_U_attacked.npy')
+----------------------- naive attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0163186 1.67235 0.0722685 1.09479 0.832207
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162567 1.67107 0.0582023 1.09599 0.83338
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0185617 1.66774 0.0565262 1.09492 0.834027
+Step 4000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162343 1.66895 0.0526956 1.09387 0.833158
+Step 5000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785
+Converged at iteration 5000
+testing np.var(abs_error,ddof=1) 1.19367 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0162332 1.66757 0.0513539 1.09246 0.832785 
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/naive_U_clean.npy')
+----------------------- naive attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 1.0 [10, 25, 50, 75, 90] 1.0 1.0 1.0 1.0 1.0 
+[Honest  all ] Mean 0.707772781236 [10, 25, 50, 75, 90] 0.5 0.62 0.776 0.8 0.807407407407 
+[Honest target] Mean 0.752601402364 [10, 25, 50, 75, 90] 0.613846153846 0.742721164614 0.79625 0.800427350427 0.812090322581 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160894 3.48796 0.0723493 1.10008 0.836659
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160051 3.4837 0.0582959 1.10115 0.83763
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160004 3.48023 0.0546277 1.10029 0.837706
+Converged at iteration 3000
+testing np.var(abs_error,ddof=1) 1.21104 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0160004 3.48023 0.0546277 1.10029 0.837706 
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/naive_U_attacked.npy')
+----------------------- robust attack False rank 30 lda 0.0001 ---------------------
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150682 1.64045 0.057314 1.11112 0.845068
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150521 1.64031 0.0535061 1.10977 0.844541
+Step 3000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150506 1.63931 0.0520443 1.10841 0.84393
+Converged at iteration 3000
+testing np.var(abs_error,ddof=1) 1.22896 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0150506 1.63931 0.0520443 1.10841 0.84393 
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_clean.npy')
+----------------------- robust attack True rank 30 lda 0.0001 ---------------------
+Helpfulness distribution
+[ Fake target] Mean 0.500002625127 [10, 25, 50, 75, 90] 0.500000872511 0.500001108446 0.500001636358 0.500001975083 0.500005495848 
+[Honest  all ] Mean 0.690290876462 [10, 25, 50, 75, 90] 0.5 0.593333333333 0.75 0.789130434783 0.798181818182 
+[Honest target] Mean 0.742877129277 [10, 25, 50, 75, 90] 0.60599378882 0.7359375 0.783293269231 0.793308980756 0.803731120911 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:839] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)
+Step 1000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148831 1.93268 0.0560499 1.10603 0.843389
+Step 2000) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148775 1.93309 0.0526704 1.10467 0.842824
+Converged at iteration 2000
+testing np.var(abs_error,ddof=1) 1.22072 len(abs_error) 2838
+Final) Cost / Target prediction / RMSE(train) / RMSE(test) / MAE(test): 0.0148775 1.93309 0.0526704 1.10467 0.842824 
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+('[6. Evaluation]', 'Started')
+Overall
+Base	0.110352
+Naive	0.167654
+Robust	0.149314
+Target
+Base  	1.72337 	Mean at (before,after) 1.61669 3.34005
+Naive 	1.79765 	Mean at (before,after) 1.66757 3.46522
+Robust	0.263488 	Mean at (before,after) 1.63931 1.9028
+('[6. Evaluation]', 'Elapsed: 0.044 sec')
+
+
+
+('[5. Matrix factorization]', 'Elapsed: 1.5e+02 sec')
+
+exit
+
+Script done on 2016년 12월 19일 (월) 오후 05시 21분 07초

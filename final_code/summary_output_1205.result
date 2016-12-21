@@ -1,0 +1,100 @@
+
+('U path: ', 'bandwagon_0.5%_1%_0%_emb_32/robust_U_attacked.npy')
+Base  	0.542428 	Mean at (before,after) 1.61669 2.15912
+Naive 	1.27546 	Mean at (before,after) 1.66757 2.94303
+Robust	0.0255966 	Mean at (before,after) 1.64168 1.66727
+('U path: ', 'bandwagon_0.5%_0.75%_0.25%_emb_32/robust_U_attacked.npy')
+Base  	0.745033 	Mean at (before,after) 1.61669 2.36172
+Naive 	1.36627 	Mean at (before,after) 1.66757 3.03384
+Robust	0.127847 	Mean at (before,after) 1.6147 1.74254
+('U path: ', 'bandwagon_0.5%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+Base  	1.01349 	Mean at (before,after) 1.61669 2.63018
+Naive 	1.37174 	Mean at (before,after) 1.66757 3.03931
+Robust	0.154111 	Mean at (before,after) 1.61506 1.76917
+('U path: ', 'bandwagon_0.5%_0.25%_0.75%_emb_32/robust_U_attacked.npy')
+Base  	1.05162 	Mean at (before,after) 1.61669 2.66831
+Naive 	1.43616 	Mean at (before,after) 1.66757 3.10373
+Robust	0.15751 	Mean at (before,after) 1.63138 1.78889
+('U path: ', 'bandwagon_0.5%_0%_1%_emb_32/robust_U_attacked.npy')
+Base  	1.32152 	Mean at (before,after) 1.61669 2.93821
+Naive 	1.44943 	Mean at (before,after) 1.66757 3.117
+Robust	0.211016 	Mean at (before,after) 1.61154 1.82255
+('U path: ', 'bandwagon_0.5%_1%_1%_emb_32/robust_U_attacked.npy')
+Base  	1.21543 	Mean at (before,after) 1.61669 2.83212
+Naive 	1.53127 	Mean at (before,after) 1.66757 3.19884
+Robust	0.203316 	Mean at (before,after) 1.61896 1.82228
+
+('U path: ', 'bandwagon_1%_1%_0%_emb_32/robust_U_attacked.npy')
+Base  	1.01465 	Mean at (before,after) 1.61669 2.63134
+Naive 	1.7805 	Mean at (before,after) 1.66757 3.44807
+Robust	0.0926864 	Mean at (before,after) 1.62142 1.71411
+('U path: ', 'bandwagon_1%_0.75%_0.25%_emb_32/robust_U_attacked.npy')
+Base  	1.23884 	Mean at (before,after) 1.61669 2.85553
+Naive 	1.80843 	Mean at (before,after) 1.66757 3.476
+Robust	0.195805 	Mean at (before,after) 1.62895 1.82476
+('U path: ', 'bandwagon_1%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+Base  	1.48154 	Mean at (before,after) 1.61669 3.09823
+Naive 	1.90081 	Mean at (before,after) 1.66757 3.56839
+Robust	0.239489 	Mean at (before,after) 1.62429 1.86378
+('U path: ', 'bandwagon_1%_0.25%_0.75%_emb_32/robust_U_attacked.npy')
+Base  	1.4727 	Mean at (before,after) 1.61669 3.08938
+Naive 	1.84996 	Mean at (before,after) 1.66757 3.51753
+Robust	0.250377 	Mean at (before,after) 1.65109 1.90147
+('U path: ', 'bandwagon_1%_0%_1%_emb_32/robust_U_attacked.npy')
+Base  	1.72337 	Mean at (before,after) 1.61669 3.34005
+Naive 	1.79765 	Mean at (before,after) 1.66757 3.46522
+Robust	0.246163 	Mean at (before,after) 1.62373 1.86989
+('U path: ', 'bandwagon_1%_1%_1%_emb_32/robust_U_attacked.npy')
+Base  	1.48104 	Mean at (before,after) 1.61669 3.09772
+Naive 	1.86043 	Mean at (before,after) 1.66757 3.528
+Robust	0.303254 	Mean at (before,after) 1.65237 1.95562
+
+('U path: ', 'bandwagon_2%_1%_0%_emb_32/robust_U_attacked.npy')
+Base  	1.5178 	Mean at (before,after) 1.61669 3.13449
+Naive 	2.28872 	Mean at (before,after) 1.66757 3.95629
+Robust	0.172815 	Mean at (before,after) 1.61711 1.78992
+('U path: ', 'bandwagon_2%_0.75%_0.25%_emb_32/robust_U_attacked.npy')
+Base  	1.784 	Mean at (before,after) 1.61669 3.40069
+Naive 	2.35751 	Mean at (before,after) 1.66757 4.02508
+Robust	0.385876 	Mean at (before,after) 1.62335 2.00922
+('U path: ', 'bandwagon_2%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+Base  	1.91454 	Mean at (before,after) 1.61669 3.53122
+Naive 	2.30772 	Mean at (before,after) 1.66757 3.9753
+Robust	0.387328 	Mean at (before,after) 1.63836 2.02568
+('U path: ', 'bandwagon_2%_0.25%_0.75%_emb_32/robust_U_attacked.npy')
+Base  	1.94651 	Mean at (before,after) 1.61669 3.5632
+Naive 	2.3481 	Mean at (before,after) 1.66757 4.01567
+Robust	0.465477 	Mean at (before,after) 1.6048 2.07028
+('U path: ', 'bandwagon_2%_0%_1%_emb_32/robust_U_attacked.npy')
+Base  	2.08557 	Mean at (before,after) 1.61669 3.70226
+Naive 	2.1092 	Mean at (before,after) 1.66757 3.77677
+Robust	0.469354 	Mean at (before,after) 1.62845 2.0978
+('U path: ', 'bandwagon_2%_1%_1%_emb_32/robust_U_attacked.npy')
+Base  	1.95255 	Mean at (before,after) 1.61669 3.56924
+Naive 	2.3341 	Mean at (before,after) 1.66757 4.00168
+Robust	0.654271 	Mean at (before,after) 1.58177 2.23604
+
+('U path: ', 'bandwagon_3%_1%_0%_emb_32/robust_U_attacked.npy')
+Base  	1.79902 	Mean at (before,after) 1.61669 3.41571
+Naive 	2.5618 	Mean at (before,after) 1.66757 4.22937
+Robust	0.307992 	Mean at (before,after) 1.61766 1.92565
+('U path: ', 'bandwagon_3%_0.75%_0.25%_emb_32/robust_U_attacked.npy')
+Base  	1.81739 	Mean at (before,after) 1.61669 3.43408
+Naive 	2.57282 	Mean at (before,after) 1.66757 4.24039
+Robust	0.49617 	Mean at (before,after) 1.59872 2.09489
+('U path: ', 'bandwagon_3%_0.5%_0.5%_emb_32/robust_U_attacked.npy')
+Base  	1.89458 	Mean at (before,after) 1.61669 3.51127
+Naive 	2.49592 	Mean at (before,after) 1.66757 4.16349
+Robust	0.580003 	Mean at (before,after) 1.64288 2.22288
+('U path: ', 'bandwagon_3%_0.25%_0.75%_emb_32/robust_U_attacked.npy')
+Base  	2.00838 	Mean at (before,after) 1.61669 3.62507
+Naive 	2.44913 	Mean at (before,after) 1.66757 4.1167
+Robust	0.557614 	Mean at (before,after) 1.63004 2.18765
+('U path: ', 'bandwagon_3%_0%_1%_emb_32/robust_U_attacked.npy')
+Base  	1.99723 	Mean at (before,after) 1.61669 3.61392
+Naive 	2.24161 	Mean at (before,after) 1.66757 3.90918
+Robust	0.659305 	Mean at (before,after) 1.59837 2.25768
+('U path: ', 'bandwagon_3%_1%_1%_emb_32/robust_U_attacked.npy')
+Base  	2.04188 	Mean at (before,after) 1.61669 3.65856
+Naive 	2.72737 	Mean at (before,after) 1.66757 4.39494
+Robust	0.659785 	Mean at (before,after) 1.63097 2.29076

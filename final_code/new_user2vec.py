@@ -354,9 +354,11 @@ class user2vec():
 		# Train on sample
 		# iteration = int(100/self.word2vec_iter)
 		iteration = 50
+
+		print "Comment of Prof.yoo"
 		for it in xrange(iteration):
-			self.train_embedding_model(self.get_sample_reviewer_follower_pair(10000))
-			self.train_embedding_model(self.get_sample_follower_follower_pair(10000))
+			# self.train_embedding_model(self.get_sample_reviewer_follower_pair(10000))
+			# self.train_embedding_model(self.get_sample_follower_follower_pair(10000))
 			self.train_embedding_model(self.get_sample_reviewer_reviewer_pair(10000))
 			
 			if it%(iteration/5)==0 and it>0:
