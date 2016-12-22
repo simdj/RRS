@@ -1,6 +1,6 @@
 \contentsline {content}{ Contents }{}{Doc-Start}
-\contentsline {content}{ List of Tables }{ii}{Doc-Start}
-\contentsline {content}{ List of Figures }{iii}{Doc-Start}
+\contentsline {content}{ List of Tables }{i}{Doc-Start}
+\contentsline {content}{ List of Figures }{ii}{Doc-Start}
 \contentsline {chapter}{\numberline {Chapter 1.}Introduction }{1}{chapter.1}
 \contentsline {chapter}{\numberline {Chapter 2.}Background }{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}Notation}{3}{section.2.1}
@@ -8,22 +8,20 @@
 \contentsline {section}{\numberline {2.3}Shilling Attack}{4}{section.2.3}
 \contentsline {section}{\numberline {2.4}Weighted Matrix Factorization for Robust Collaborative Filtering}{5}{section.2.4}
 \contentsline {chapter}{\numberline {Chapter 3.}Related Work }{6}{chapter.3}
-\contentsline {section}{\numberline {3.1}Robust Recommendation}{6}{section.3.1}
-\contentsline {section}{\numberline {3.2}Review Helpfulness}{6}{section.3.2}
-\contentsline {chapter}{\numberline {Chapter 4.}Problem Definition }{8}{chapter.4}
-\contentsline {section}{\numberline {4.1}Motivation}{8}{section.4.1}
-\contentsline {section}{\numberline {4.2}Attack Model}{8}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Fake Item Rating Injection}{8}{subsection.4.2.1}
+\contentsline {chapter}{\numberline {Chapter 4.}Problem Definition }{7}{chapter.4}
+\contentsline {section}{\numberline {4.1}Motivation}{7}{section.4.1}
+\contentsline {section}{\numberline {4.2}Attack Model}{7}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Fake Item Rating Injection}{7}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Fake Helpfulness Rating Injection}{8}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Problem Definition}{9}{section.4.3}
-\contentsline {chapter}{\numberline {Chapter 5.}Proposed Method }{10}{chapter.5}
-\contentsline {section}{\numberline {5.1}User2Vec}{10}{section.5.1}
-\contentsline {section}{\numberline {5.2}Robust Review Quality Measure}{11}{section.5.2}
-\contentsline {chapter}{\numberline {Chapter 6.}Experiment }{14}{chapter.6}
-\contentsline {section}{\numberline {6.1}Experimental Setting}{14}{section.6.1}
-\contentsline {section}{\numberline {6.2}Metrics}{14}{section.6.2}
-\contentsline {section}{\numberline {6.3}Results and Analysis}{15}{section.6.3}
-\contentsline {chapter}{\numberline {Chapter 7.}Conclusion }{18}{chapter.7}
-\contentsline {chapter}{Bibliography }{19}{chapter.7}
-\contentsline {chapter}{Acknowledgments in Korean}{21}{chapter.7}
-\contentsline {chapter}{Curriculum Vitae in Korean}{22}{chapter.7}
+\contentsline {section}{\numberline {4.3}Problem Definition}{8}{section.4.3}
+\contentsline {chapter}{\numberline {Chapter 5.}Proposed Method }{9}{chapter.5}
+\contentsline {section}{\numberline {5.1}User2Vec}{9}{section.5.1}
+\contentsline {section}{\numberline {5.2}Robust Review Quality Measure}{10}{section.5.2}
+\contentsline {chapter}{\numberline {Chapter 6.}Experiment }{13}{chapter.6}
+\contentsline {section}{\numberline {6.1}Experimental Setting}{13}{section.6.1}
+\contentsline {section}{\numberline {6.2}Metrics}{13}{section.6.2}
+\contentsline {section}{\numberline {6.3}Results and Analysis}{14}{section.6.3}
+\contentsline {chapter}{\numberline {Chapter 7.}Conclusion }{17}{chapter.7}
+\contentsline {chapter}{Bibliography }{18}{chapter.7}
+\contentsline {chapter}{Acknowledgments in Korean}{20}{chapter.7}
+\contentsline {chapter}{Curriculum Vitae in Korean}{21}{chapter.7}

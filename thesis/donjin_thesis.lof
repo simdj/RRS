@@ -4,11 +4,11 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Matrix factorization example}}{4}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Matrix factorization in the presence of shilling attack }}{4}{figure.2.2}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Weighted matrix factorization with well assigned weight matrix }}{7}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Weighted matrix factorization with badly assigned weight matrix }}{7}{figure.3.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Weighted matrix factorization with well assigned weight matrix}}{5}{figure.2.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Weighted matrix factorization with badly assigned weight matrix }}{7}{figure.4.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Visualization of the User2Vec result }}{15}{figure.6.1}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Visualization of the User2Vec result }}{14}{figure.6.1}
 \addvspace {10\p@ }

@@ -3,9 +3,9 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: donjin_thesis.aux
 I found no \bibdata command---while reading file donjin_thesis.aux
 I found no \bibstyle command---while reading file donjin_thesis.aux
-You've used 15 entries,
+You've used 18 entries,
             0 wiz_defined-function locations,
-            111 strings with 765 characters,
+            114 strings with 815 characters,
 and the built_in function-call counts, 0 in all, are:
 = -- 0
 > -- 0

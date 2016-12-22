@@ -17,9 +17,9 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \@writefile{toc}{\contentsline {content}{ Contents }{}{Doc-Start}}
-\@writefile{toc}{\contentsline {content}{ List of Tables }{ii}{Doc-Start}}
-\@writefile{toc}{\contentsline {content}{ List of Figures }{iii}{Doc-Start}}
-\newlabel{paperlastromanpagelabel}{{}{iii}{\listfigurename }{Doc-Start}{}}
+\@writefile{toc}{\contentsline {content}{ List of Tables }{i}{Doc-Start}}
+\@writefile{toc}{\contentsline {content}{ List of Figures }{ii}{Doc-Start}}
+\newlabel{paperlastromanpagelabel}{{}{ii}{\listfigurename }{Doc-Start}{}}
 \citation{yelp_study}
 \citation{DualRole}
 \citation{RQMF}
@@ -43,31 +43,39 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces  Matrix factorization in the presence of shilling attack }}{4}{figure.2.2}}
 \newlabel{mf_attacked}{{2.2}{4}{Matrix factorization in the presence of shilling attack}{figure.2.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Shilling Attack}{4}{section.2.3}}
+\citation{ImplicitCF}
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Weighted Matrix Factorization for Robust Collaborative Filtering}{5}{section.2.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Weighted matrix factorization with well assigned weight matrix}}{5}{figure.2.3}}
+\newlabel{wmf_good}{{2.3}{5}{Weighted matrix factorization with well assigned weight matrix}{figure.2.3}{}}
 \citation{RMF}
 \citation{LiesAndPropaganda}
 \citation{UnsupervisedShilling}
 \citation{AttackResistant}
+\citation{text_duplicate}
+\citation{text_crowd}
+\citation{text_opinion_summarization}
+\citation{naive_helpfulness}
+\citation{text_duplicate}
+\citation{text_crowd}
+\citation{naive_helpfulness}
 \citation{RQMF}
 \citation{naive_helpfulness}
-\citation{ImplicitCF}
+\citation{RQMF}
 \@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 3.}Related Work }{6}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Robust Recommendation}{6}{section.3.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Review Helpfulness}{6}{section.3.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces  Weighted matrix factorization with well assigned weight matrix }}{7}{figure.3.1}}
-\newlabel{wmf_good}{{3.1}{7}{Weighted matrix factorization with well assigned weight matrix}{figure.3.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces  Weighted matrix factorization with badly assigned weight matrix }}{7}{figure.3.2}}
-\newlabel{wmf_bad}{{3.2}{7}{Weighted matrix factorization with badly assigned weight matrix}{figure.3.2}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 4.}Problem Definition }{8}{chapter.4}}
+\newlabel{eq:naive_quality}{{3.1}{6}{Related Work}{equation.3.0.1}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 4.}Problem Definition }{7}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Motivation}{8}{section.4.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Attack Model}{8}{section.4.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Fake Item Rating Injection}{8}{subsection.4.2.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Motivation}{7}{section.4.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces  Weighted matrix factorization with badly assigned weight matrix }}{7}{figure.4.1}}
+\newlabel{wmf_bad}{{4.1}{7}{Weighted matrix factorization with badly assigned weight matrix}{figure.4.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Attack Model}{7}{section.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Fake Item Rating Injection}{7}{subsection.4.2.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Fake Helpfulness Rating Injection}{8}{subsection.4.2.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Problem Definition}{9}{section.4.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Problem Definition}{8}{section.4.3}}
+\newlabel{eq:quality_measure}{{4.3}{8}{Problem Definition}{equation.4.3.3}{}}
 \citation{Word2Vec}
 \citation{DeepWalk}
 \citation{Node2Vec}
@@ -76,57 +84,58 @@
 \citation{Node2Vec}
 \citation{LiesAndPropaganda}
 \citation{UnsupervisedShilling}
-\@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 5.}Proposed Method }{10}{chapter.5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 5.}Proposed Method }{9}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}User2Vec}{10}{section.5.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Robust Review Quality Measure}{11}{section.5.2}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces User2Vec algorithm}}{13}{algorithm.1}}
-\newlabel{alg:userembedding}{{1}{13}{User2Vec}{algorithm.1}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Robust recommendation system}}{13}{algorithm.2}}
-\newlabel{alg:RRS}{{2}{13}{Robust Review Quality Measure}{algorithm.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}User2Vec}{9}{section.5.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Robust Review Quality Measure}{10}{section.5.2}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces User2Vec algorithm}}{12}{algorithm.1}}
+\newlabel{alg:userembedding}{{1}{12}{User2Vec}{algorithm.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Robust recommendation system}}{12}{algorithm.2}}
+\newlabel{alg:RRS}{{2}{12}{Robust Review Quality Measure}{algorithm.2}{}}
 \citation{ETAF}
-\@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 6.}Experiment }{14}{chapter.6}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 6.}Experiment }{13}{chapter.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Experimental Setting}{14}{section.6.1}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Statistics of CiaoDVD dataset}}{14}{table.6.1}}
-\newlabel{tableCiaoDVD}{{6.1}{14}{Statistics of CiaoDVD dataset}{table.6.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Metrics}{14}{section.6.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Experimental Setting}{13}{section.6.1}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Statistics of CiaoDVD dataset}}{13}{table.6.1}}
+\newlabel{tableCiaoDVD}{{6.1}{13}{Statistics of CiaoDVD dataset}{table.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Metrics}{13}{section.6.2}}
 \citation{TSNE}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Results and Analysis}{15}{section.6.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces  Visualization of the User2Vec result }}{15}{figure.6.1}}
-\newlabel{user2vec_result}{{6.1}{15}{Visualization of the User2Vec result}{figure.6.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Results and Analysis}{14}{section.6.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces  Visualization of the User2Vec result }}{14}{figure.6.1}}
+\newlabel{user2vec_result}{{6.1}{14}{Visualization of the User2Vec result}{figure.6.1}{}}
 \citation{EffectSize}
-\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Review helpfulness results. The range of helpfulness is from 0 to 5}}{16}{table.6.2}}
-\newlabel{resultHelpfulness}{{6.2}{16}{Review helpfulness results. The range of helpfulness is from 0 to 5}{table.6.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces Prediction shift on the target items}}{16}{table.6.3}}
-\newlabel{resultPredictionShift}{{6.3}{16}{Prediction shift on the target items}{table.6.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces MAE on test set}}{17}{table.6.4}}
-\newlabel{resultMAE}{{6.4}{17}{MAE on test set}{table.6.4}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 7.}Conclusion }{18}{chapter.7}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Review helpfulness results. The range of helpfulness is from 0 to 5}}{15}{table.6.2}}
+\newlabel{resultHelpfulness}{{6.2}{15}{Review helpfulness results. The range of helpfulness is from 0 to 5}{table.6.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces Prediction shift on the target items}}{15}{table.6.3}}
+\newlabel{resultPredictionShift}{{6.3}{15}{Prediction shift on the target items}{table.6.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces MAE on test set}}{16}{table.6.4}}
+\newlabel{resultMAE}{{6.4}{16}{MAE on test set}{table.6.4}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {Chapter 7.}Conclusion }{17}{chapter.7}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{yelp_study}{1}
 \bibcite{MF_CF}{2}
 \bibcite{RMF}{3}
 \bibcite{AttackResistant}{4}
-\bibcite{naive_helpfulness}{5}
-\bibcite{text_feature_1}{6}
-\bibcite{text_feature_2}{7}
-\bibcite{RQMF}{8}
-\bibcite{DualRole}{9}
-\bibcite{LiesAndPropaganda}{10}
-\bibcite{UnsupervisedShilling}{11}
-\bibcite{DeepWalk}{12}
-\bibcite{Word2Vec}{13}
-\bibcite{NegativeSampling}{14}
-\bibcite{Node2Vec}{15}
-\bibcite{ETAF}{16}
-\bibcite{ImplicitCF}{17}
-\@writefile{toc}{\contentsline {chapter}{Bibliography }{19}{chapter.7}}
-\bibcite{EffectSize}{18}
-\bibcite{TNSE}{19}
-\@writefile{toc}{\contentsline {chapter}{Acknowledgments in Korean}{21}{chapter.7}}
-\@writefile{toc}{\contentsline {chapter}{Curriculum Vitae in Korean}{22}{chapter.7}}
-\newlabel{paperlastpagelabel}{{7}{22}{Curriculum Vitae in Korean}{chapter.7}{}}
+\bibcite{text_duplicate}{5}
+\bibcite{text_opinion_summarization}{6}
+\bibcite{text_crowd}{7}
+\bibcite{naive_helpfulness}{8}
+\bibcite{RQMF}{9}
+\bibcite{DualRole}{10}
+\bibcite{LiesAndPropaganda}{11}
+\bibcite{UnsupervisedShilling}{12}
+\bibcite{DeepWalk}{13}
+\bibcite{Word2Vec}{14}
+\bibcite{NegativeSampling}{15}
+\bibcite{Node2Vec}{16}
+\bibcite{ETAF}{17}
+\@writefile{toc}{\contentsline {chapter}{Bibliography }{18}{chapter.7}}
+\bibcite{ImplicitCF}{18}
+\bibcite{EffectSize}{19}
+\bibcite{TNSE}{20}
+\@writefile{toc}{\contentsline {chapter}{Acknowledgments in Korean}{20}{chapter.7}}
+\@writefile{toc}{\contentsline {chapter}{Curriculum Vitae in Korean}{21}{chapter.7}}
+\newlabel{paperlastpagelabel}{{7}{21}{Curriculum Vitae in Korean}{chapter.7}{}}

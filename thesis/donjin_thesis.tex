@@ -446,85 +446,101 @@ Compared with figure \ref{mf_base}, figure \ref{mf_attacked} contains high predi
 \section{Weighted Matrix Factorization for Robust Collaborative Filtering}
 The reason MF is vulnerable to shilling attack is that MF do not consider the presence of fake item ratings.
 Therefore, various attempts have been proposed to eliminate or mitigate the impact of fake item ratings on MF.
-The cost functions used in these attempts are expressed in the form of weighted matrix factorization(WMF).
+The cost functions used in these attempts are expressed in the form of weighted matrix factorization(WMF) \cite{ImplicitCF}.
 \begin{equation}
 Cost(\bm{U},\bm{V} | \bm{W}, \bm{R})=\sum_{\bm{R}_{u,i} \neq ?} \bm{W}_{u,i}(  \bm{R}_{u,i} - (\bm{UV})_{u,i} )^2 + \lambda(||\bm{U}||_F^2+||\bm{V}||_F^2)
 \end{equation}
 $\bm{W} \in \mathbb{R}^{n \times m}$ is a weight matrix where $\bm{W}_{u,i}$ is the weight for the item rating $\bm{R}_{u,i}$.
-The cost function above allows item ratings whose weight is small to have significant prediction error.
+In this cost function, prediction error term changes from sum of squared errors to weighted sum of squared errors, which allows item ratings whose weight is small to have significant prediction error.
 This property helps WMF based on weight matrix where fake item ratings have a small weight to yield desirable predictions robust to fake item ratings.
+
+Figure \ref{wmf_good} shows an example of WMF where the weights of genuine reviews are larger than those of fake reviews.
+With well-assigned weight matrix, latent features of users and items are optimized to better describe genuine review more, so shillers fail to manipulate prediction of genuine users for the bad movie.
+\begin{figure}[h]
+    \centerline{\includegraphics[width=12.5cm]{figure/wmf_good}}
+    \caption{Weighted matrix factorization with well assigned weight matrix} \label{wmf_good}
+\end{figure}
+
 However, if the weights of fake item rating is large, then WMF would yield more manipulated predictions.
-Therefore, the key to WMF is how to build a good weight matrix $\bm{W}$, in other words how to capture fake item ratings and decrease their weights.
+Therefore, the key to WMF for robust CF is how to build a good weight matrix $\bm{W}$, in other words, how to capture fake item ratings and decrease their weights.
+
+
+%They use the following cost function proposed by \cite{ImplicitCF} to treat the helpfulness of a review as the weight of the review.
+%\begin{equation}
+%Cost(\bm{U},\bm{V} | \bm{W} \bm{R})=\sum_{\bm{R}_{i,j} \neq ?} \bm{W}_{i,j}(  \bm{R}_{i,j} - (\bm{UV})_{i,j} )^2 + \lambda(||\bm{U}||_F^2+||\bm{V}||_F^2)
+%\end{equation}
+%In this cost function, prediction error term changes from sum of squared errors to weighted sum of squared errors.
+%In other words, this cost function measures the error of a weighted matrix factorization.
+%Therefore, the weighted sum of errors allows unhelpful reviews to have a significant error but penalizes error of helpful reviews heavily.
 
 \chapter{Related Work}
-Our paper is related to the following topics: robust recommendation and review helpfulness. We discuss the two topic in the following subsections.
+This section describes various approaches to build a weight matrix.
+The common goal of following approaches is to detect suspicious item ratings and assign them low weight.
 
-\section{Robust Recommendation}
+%Our paper is related to the following topics: robust recommendation and review helpfulness.
+%We discuss the two topic in the following subsections.
+
+%\section{Robust Recommendation}
 % robust statistical model
-Bhaskar et al. \cite{RMF} propose Robust Matrix Factorization (RMF) using M-estimators to bound the effect of outliers and noisy data. \cite{LiesAndPropaganda,UnsupervisedShilling,AttackResistant} apply PCA-based variable selection to detect suspicious users in unsupervised setting.
+Early research for robust CF focused on detecting manipulated ratings by only examining a given rating matrix.
+For example, Bhaskar et al. \cite{RMF} proposed Robust Matrix Factorization (RMF) using M-estimators to bound the effect of outliers and noisy data.
+\cite{LiesAndPropaganda,UnsupervisedShilling,AttackResistant} apply PCA-based variable selection to detect suspicious users in unsupervised setting.
 
-
-%Social Network
-%[Exploring the design space of social network-based Sybil defenses의 ref 2~11]
-There are studies  leveraging social networks to defend against Shilling attacks.
-%Exploring the design space of social network-based Sybil defenses]
-Corresponding to [], these studies try to label users in the recommendation system either ‘untrustworthy’ or ‘trustworthy’, or bound the advantage an attacker can gain by injecting fake users. The common assumption of these studies is that a fake user cannot establish an arbitrary number of links to genuine users.
+Recently, many researchers have started to incorporate various types of additional information into the recommendation algorithm in order to improve the accuracy of the recommendation algorithm.
+In response to this trend, defense mechanisms against attacks using additional information have also been proposed.
+Three popular additional information used in the recommendation algorithm are review text and review helpfulness rating information.
 
 % Fake review detection - (supervised) textual feature, meta-feature
 %[Detecting Product Review Spammers using Rating Behaviors CIKM 10]
 %리뷰에 담긴 feature를 분석해서 좋은 글인지 아닌지 구분하거나 글자 길이 리뷰어의 평판 정도 등을 feature로 하여 review 의 genuinity를 classification하여 attack으로 분류된 리뷰는 제외하고 CF를 돌리는 방법을 택했다.
-Many researchers take supervised approaches to detect fake reviews based on the textual or meta features in review.
-However, supervised learning based fake review detections have several drawbacks.
-In general, High class imbalance in the number of genuine data and attack label data degrades the performance of supervised learning.
-Furthermore, Review text-based approach is not proper to be adopted in general due to its domain-specific property.
+Text-based approaches \cite{text_duplicate, text_crowd,text_opinion_summarization,naive_helpfulness} exploit review textual features and meta features to detect fake reviews.
+\cite{text_duplicate} detects spam reviews by finding duplicate and near-duplicate reviews and using learned logistic regression with manually labeled data.
+Ott et al. \cite{text_crowd} collected training data through crowd-sourcing and accurately classified the deceptiveness of reviews based on n-grams.
+However, text-based approaches have several drawbacks.
+They require labeled data to train an accurate classifier, and the labeled data depends on the item domain.
 
-\section{Review Helpfulness}
-Many E-commerce sites encourage users to rate the helpfulness of reviews and place helpful reviews in a position where many users access to improve the overall user experience.
-Users can examine the helpfulness of reviews with statistics such as “90 (out of 100) people found this review helpful” or “40 members have rated this review on average (somewhat helpful)”.
-%[++ DualRole, ETAF]
+%
+%%Social Network
+%%[Exploring the design space of social network-based Sybil defenses의 ref 2~11]
+%There are studies leveraging social/trust networks to defend against shilling attacks [].
+%%Exploring the design space of social network-based Sybil defenses]
+%These studies try to label users in the recommendation system either ‘untrustworthy’ or ‘trustworthy’
+%%or bound the advantage an attacker can gain by injecting fake users.
+%The common assumption of these studies is that a fake user cannot establish an arbitrary number of links to genuine users.
 
-Motivated by this, some researchers \cite{RQMF} propose a collaborative filtering method incorporating the helpfulness of reviews as the weight of reviews in the training phase.
-Under the assumption that spam reviews receive bad helpfulness ratings, they lower the weight of unhelpful reviews prediction, thereby reducing the contribution of unhelpful reviews to missing rating prediction.
-Kim et al. \cite{naive_helpfulness} propose the measure below to quantify helpfulness for an item review by aggregating helpfulness ratings for the item review.
-\begin{equation}
-Helpfulness(review (u,i))=\frac{1} {N_{\bm{H}_{v,u,i}}} \sum_{\bm{H}_{v,u,i} \neq ?} \bm{H}_{v,u,i}
+%\section{Review Helpfulness}
+Many review sites encourage users to rate the helpfulness of reviews.
+%helpfulness rating can be used to rank reviews and detect fake reviews, which leads to
+%and place helpful reviews in a position where many users access to improve the overall user experience.
+With helpfulness ratings by other users, users can examine the helpfulness of reviews with statistics such as “90 (out of 100) people found this review helpful” or “40 members have rated this review on average (somewhat helpful)”.
+Motivated by this, some researchers \cite{naive_helpfulness,RQMF} exploit review helpfulness rating information to measure the quality of reviews.
+Kim et al. \cite{naive_helpfulness} proposed the measure below to quantify the quality of a review by aggregating helpfulness ratings for the review.
+\begin{equation} \label{eq:naive_quality}
+Quality(review(u,i))=\frac{1} {N} \sum_{\bm{H}_{v,u,i} \neq ?} \bm{H}_{v,u,i}
 \end{equation}
-where $N_{\bm{H}_{v,u,i}}$ is the number of helpfulness ratings for item rating $\bm{R}_{u,i}$.
-
-They use the following cost function proposed by \cite{ImplicitCF} to treat the helpfulness of a review as the weight of the review.
-\begin{equation}
-Cost(\bm{U},\bm{V} | \bm{W} \bm{R})=\sum_{\bm{R}_{i,j} \neq ?} \bm{W}_{i,j}(  \bm{R}_{i,j} - (\bm{UV})_{i,j} )^2 + \lambda(||\bm{U}||_F^2+||\bm{V}||_F^2)
-\end{equation}
-In this cost function, prediction error term changes from sum of squared errors to weighted sum of squared errors.
-In other words, this cost function measures the error of a weighted matrix factorization.
-Therefore, the weighted sum of errors allows unhelpful reviews to have a significant error but penalizes error of helpful reviews heavily.
+where $N$ is the number of helpfulness ratings for item rating $\bm{R}_{u,i}$.
+Under the assumption that spam reviews would receive bad helpfulness ratings, \cite{RQMF} builds the weight matrix used in the WMF with the above review quality measure.
 They demonstrate considering review helpfulness could improve the overall performance of recommendation in the presence of spam review.
-Figure \ref{wmf_good} shows an example where the weights of genuine reviews are bigger than that of fake reviews.
-With well-assigned weight matrix, latent features of users and items be able to explain genuine review, and hence shillers fail to manipulate prediction of genuine users for the bad movie.
 
-\begin{figure}[t]
-    \centerline{\includegraphics[width=12.5cm]{figure/wmf_good}}
-    \caption{  Weighted matrix factorization with well assigned weight matrix  } \label{wmf_good}
-\end{figure}
+\chapter{Problem Definition}
+\section{Motivation}
+The review quality measure~\ref{eq:naive_quality} relies on the naive assumption which all helpfulness ratings are genuine.
+However, this assumption is easily violated if attackers inject fake helpfulness ratings to promote the quality of their fake reviews.
+From an adversarial perspective, the cost of fake helpfulness rating injection would be not much more expensive than the cost of fake item rating injection.
+Therefore, when constructing weight matrix based on review helpfulness ratings, attempts to review quality manipulation must be thoroughly considered
 
-\begin{figure}[t]
+Figure \ref{wmf_bad} shows the case an attacker successes to manipulate the helpfulness of fake reviews.
+The fake ratings for the bad movie have a larger weight than other normal users' ratings as shown in Figure \ref{wmf_bad}.
+Due to the manipulated weight matrix, collaborative filtering outputs prediction matrix weighted toward fake reviews.
+\begin{figure}[h]
     \centerline{\includegraphics[width=12.5cm]{figure/wmf_bad}}
     \caption{  Weighted matrix factorization with badly assigned weight matrix  } \label{wmf_bad}
 \end{figure}
 
-The review helpfulness measure relies on the naive assumption which trusts all helpfulness rating.
-However, this assumption is easily violated if an attacker injects fake helpfulness ratings to promote the helpfulness of their fake reviews.
-From an adversarial perspective, the cost of fake helpfulness rating injection is not much more expensive than the cost of fake item rating injection.
-Figure \ref{wmf_bad} shows the case an attacker successes to manipulate the helpfulness of fake reviews.
-The fake ratings for the bad movie have a larger weight than other normal users' ratings as shown in Figure \ref{wmf_bad}.
-Due to the manipulated weight matrix, collaborative filtering outputs prediction matrix weighted toward fake reviews.
-
-\chapter{Problem Definition}
-\section{Motivation}
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 \section{Attack Model}
 % // Target items are poorly rated by some genuine users.
+In this section, we define our attack model. 
 The objective of our attack model is to manipulate collaborative filtering, which considers review quality, to increase overall predicted ratings for the target items.
 This paper only focuses on push attack, because push attack is a more direct way to promote monetary benefit than nuke attack.
 We leave nuke attack for future work.
@@ -549,7 +565,7 @@ In summary, general form of fake item rating dataset $IR^f$ is defined as follow
 \begin{equation}
 {IR}^f = \bigcup_{u^f \in U^f} \{(u^f,i,ir_{max}) | i \in I^{target} \} \cup \{(u^f,i,ir_{avg} {(i)}) | i \in I^{filler} \} \cup \{(u^f,i,ir_{max}) | i \in I^{popular} \}
 \end{equation}
-$ir_{max}$  is the highest rating score on the item rating scale and $ir_{avg} {(i)}$ is the average item rating of item $i$.
+$ir_{max}$ is the highest rating on the item rating scale and $ir_{avg} {(i)}$ is the average item rating of item $i$.
 
 \subsection{Fake Helpfulness Rating Injection}
 Our attack model attempts to manipulate collaborative filtering that takes into account review quality by injecting fake helpfulness ratings for review quality manipulation.
@@ -562,21 +578,18 @@ Formally, fake helpfulness rating dataset $HR^f$ is defined as follows:
 \begin{equation}
 HR^f = \bigcup_{u^f \in U^f} \{(u^f,v, i, hr_{max}) | v \in U^f,i \in I^{target} \} \cup \{(u^f,v,i,hr_{random}) | v \in U^g, i \in I, \bm{R}_{v,i} \neq ? \}
 \end{equation}
-$hr_{max}$ is the highest helpfulness rating score on the helpfulness rating scale and $hr_{random}$ represent random score.
+$hr_{max}$ is the highest helpfulness rating on the helpfulness rating scale and $hr_{random}$ represents random rating.
 
 In the presence of fake helpfulness ratings, computing the quality of a review as an average of helpfulness ratings for the review misjudges fake reviews as high quality, which increases the negative impact of fake reviews on collaborative filtering considering review quality.
 
 \section{Problem Definition}
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-We construct the weight matrix which is used as review quality for collaborative filtering considering review quality.
-\begin{equation}
-\bm{W}_{i,j}=Quality\ of\ review\ r\ (by\ user\ i\ about\ item\ j)=Function(helpfulness\ ratings\ for\ review\ r\ under\ attack)
+With our attack model, we define our problem as follows: given reviews and helpfulness ratings in the presence of fake data injected by our attack model, estimate the true quality of reviews which is used to construct the weight matrix of WMF.
+We express our problem as follows.
+\begin{equation} \label{eq:quality_measure}
+Quality(review(u,i))=F(Helpfulness\ ratings\ of\ review(u,i)\ under\ attack)
 \end{equation}
-true quality estimator should produce consistent
-
-With our attack model, we define our problem as: given reviews and helpfulness ratings in the presence of fake data injected by our attack model, estimate the true quality of reviews.
-which is used to construct the weight matrix
-incorporated into the weighted matrix factorization based CF so that predictions for the missing ratings are insensitive to injected fake data.
+Then the problem can be divided into two sub-problems.
+One is to detect fake helpfulness ratings, and the other is to devise a robust estimator $F$ that produces consistent review quality regardless of the presence of fake helpfulness ratings.
 
 
 \chapter{Proposed Method}
@@ -672,7 +685,7 @@ Therefore, although there is a risk of judging false positives, we judge that th
 % \end{figure}
 
 
-\begin{algorithm}[h]
+\begin{algorithm}[t]
 \caption{User2Vec algorithm}
 \label{alg:userembedding}
 \begin{algorithmic}
@@ -1029,17 +1042,22 @@ Future research directions include developing robust measures against nuke attac
 
 \bibitem{AttackResistant} B. Mehta and W. Nejdl, “Attack resistant collaborative filtering,” Proc. 31st Annu. Int. ACM SIGIR Conf. Res. Dev. Inf. Retr. SIGIR 08, p. 75, 2008.
 
+
+
 %review text
+\bibitem{text_duplicate} Jindal, N., and Liu, B. 2008. Opinion spam and analysis. In WSDM, 219–230
+
+%review text
+\bibitem{text_opinion_summarization} Liu, Jingjing, et al. "Low-Quality Product Review Detection in Opinion Summarization." EMNLP-CoNLL. Vol. 7. 2007.
+%review text
+\bibitem{text_crowd} Ott, Myle, et al. "Finding deceptive opinion spam by any stretch of the imagination." Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies-Volume 1. Association for Computational Linguistics, 2011.
+
+%review text and review helpfulness
 \bibitem{naive_helpfulness} S. Kim, P. Pantel, T. Chklovski, and M. Pennacchiotti. Automatically assessing review helpfulness. EMNLP, 2006
 
-%review text
-\bibitem{text_feature_1} Liu, Jingjing, et al. "Low-Quality Product Review Detection in Opinion Summarization." EMNLP-CoNLL. Vol. 7. 2007.
-
-%review text
-\bibitem{text_feature_2} Ott, Myle, et al. "Finding deceptive opinion spam by any stretch of the imagination." Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies-Volume 1. Association for Computational Linguistics, 2011.
-
+% review helpfulness
 \bibitem{RQMF} S. Raghavan, S. Gunasekar, and J. Ghosh. Review quality aware collaborative filtering. In Proceedings of the sixth ACM conference on Recommender systems, pages 123–130. ACM, 2012.
-
+% review helpfulness
 \bibitem{DualRole} S. Wang, J. Tang, and H. Liu, “Toward Dual Roles of Users in Recommender Systems,” Cikm, pp. 1651–1660, 2015.
 
 \bibitem{LiesAndPropaganda} Mehta, Bhaskar, Thomas Hofmann, and Peter Fankhauser. "Lies and propaganda: detecting spam users in collaborative filtering." Proceedings of the 12th international conference on Intelligent user interfaces. ACM, 2007.
