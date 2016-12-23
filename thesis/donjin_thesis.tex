@@ -49,6 +49,7 @@
 \usepackage{amsmath}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{subfigure}
 
 \makeatletter
 \renewcommand{\Function}[2]{%
@@ -223,17 +224,17 @@
     \begin{summary}
     추천 시스템은 사용자들의 구매 결정에 주요한 영향을 주기 때문에 악의적인 조작의 표적이 되어왔다.
     대표적인 추천 방법은 상품에 대한 평가들이 정직하다는 가정하에 사용자의 평점을 분석하는 협업 필터링 방법이다.
-    하지만, 협업 필터링 방법은 거짓된 평점을 주입하는 실링 공격에 의해 조작될 위험이 있다.
+    하지만 협업 필터링 방법은 거짓된 평점을 주입하는 실링 공격에 의해 조작될 위험이 있다.
     이로 인해 실링 공격의 영향력을 낮추는 여러 방법이 제안되었다.
-    한편 많은 추천 시스템은 사용자들에게 다른 사용자의 리뷰 유용성을 평가하길 권장한다.
-    이러한 과정을 통해 거짓된 리뷰는 사용자들에 의해 분류될 수 있을 거라는 가정하에 연구자들은 리뷰의 유용성을 고려한 추천을 통해 실링 공격을 극복하고자 하였다.
-    하지만 이러한 추천 방법은 거짓된 리뷰의 유용성 평가 데이터가 주입된다면 오히려 조작의 정도가 심해질 위험이 있다.
-    본 논문에선 리뷰의 거짓 평점 데이터의 영향력을 낮추어 진실한 유용성을 추정함으로써 더욱 견고한 추천 방법을 제안한다.
+    최근에는, 많은 추천 시스템에서 사용자는 리뷰의 품질을 평가할 수 있다.
+    거짓된 리뷰는 사용자들에 의해 낮은 품질로 분류될 것이라는 가정하에 연구자들은 리뷰의 품질을 고려한 추천을 통해 실링 공격을 극복하고자 하였다.
+    하지만 이러한 추천 방법은 거짓된 리뷰 품질 평가 데이터가 주입된다면 오히려 조작의 정도가 심해질 위험이 있다.
+    본 논문에선 거짓된 리뷰 품질 평가 데이터가 주입되더라도 리뷰의 진실한 품질을 추정하는 견고한 추천 방법을 제안한다.
     실제 데이터를 토대로 한 실험 결과를 통해 제안하는 방법의 견고함을 보였다.
     \end{summary}
 
     \begin{Korkeyword}
-    견고한 추천 시스템, 협업 필터링, 추천 시스템 조작, 리뷰 유용성 측정
+    견고한 추천 시스템, 협업 필터링, 추천 시스템 조작, 리뷰 품질 측정
     \end{Korkeyword}
 
 
@@ -242,12 +243,12 @@
     Collaborative filtering, widely adopted in recommendation systems, exploits the observed ratings given to items by users to provide personalized recommendations under the assumption that all users honestly rate items.
     Unfortunately, however, shilling attacks which inject multiple fake reviews can easily manipulate recommendation systems with the naive assumption.
     There are several approaches to mitigate the effect of shilling attack.
-    Recently, some researchers have been interested in the fact that most recommendation systems encourage users to write reviews, as well as rate the usefulness of reviews written by other users based on their review content.
-    With the assumption that fake reviews are rated as not helpful by users, they suggest recommendation systems considering the helpfulness of reviews.
-    However, their recommendations are vulnerable to attacks that inject fake helpfulness ratings with intent to boost the helpfulness of fake reviews.
+    Recently, some researchers have been interested in the fact that most recommendation systems encourage users to write reviews, as well as rate the usefulness of reviews written by other users based on review content.
+    With the assumption that users will evaluate the quality of fake reviews as low, they proposed recommendation systems considering the quality of reviews.
+    However, it is vulnerable to attacks that inject fake helpfulness ratings to improve the quality of fake reviews.
     In this paper, we propose a robust recommendation system to overcome such attacks.
-    The proposed system estimates the true helpfulness of reviews, thereby preventing such attacks from manipulating recommendation results.
-    Experimental results on a real-world dataset indicate the robustness of our method.
+    The proposed system estimates the true quality of reviews even in the presence of injected fake helpfulness ratings, to prevent such attacks from manipulating recommendation results.
+    Experimental results on a real-world dataset demonstrate the robustness of our method.
 
 %     Nowadays, many customers refer to recommendation systems when buying items, and hence recommendation
 % systems have become an attractive target of manipulation. Collaborative ltering, widely adopted
@@ -273,11 +274,11 @@
 
     %In particular, we present a user similarity measure exploiting properties of attack and a robust helpfulness measure mitigating the effect of suspicious helpfulness ratings.
     %we map users into feature vectors which encode patterns associated with behavior
-    %restricts suspicious helpfulnes ratings
+    %restricts suspicious helpfullnes ratings
     \end{abstract}
 
     \begin{Engkeyword}
-    Robust recommendation system, Collaborative filtering, Shilling attack, Review helpfulness
+    Robust recommendation system, Collaborative filtering, Shilling attack, Review quality
     \end{Engkeyword}
 
 
@@ -307,24 +308,21 @@ Since recommender systems influence purchase decisions, their positive recommend
 According to \cite{yelp_study} , increasing overall rating of business by one star on Yelp[sub ref] can increase its revenue by 9\%.
 Unfortunately, however, the strong impact of recommender systems has attracted malicious attackers who try to bias recommendation result to increase overall rating of their target items.
 
-Matrix factorization(MF) model based collaborative filtering(CF), one of the most common approaches for the recommendation, infers users’ tastes and items’ attributes based on the observed ratings of users for items and recommends products whose attributes match a user’s taste.
+Matrix factorization(MF) model based collaborative filtering(CF) \cite{MF_CF}, one of the most common approaches for the recommendation, infers users’ tastes and items’ attributes based on the observed ratings of users for items and recommends products whose attributes match a user’s taste.
 MF naively assumes that all the observed ratings are conducted by honest users.
-However, this assumption is easily violated in practice due to the presence of attackers.
-Due to the open nature of recommendation systems, attackers can inject multiple fake users (Shillers) and fake ratings to increase overall rating of their target items on the recommendation system.
+However, this assumption is easily violated in practice because of the presence of attackers.
+Due to the open nature of recommendation systems, attackers can inject multiple fake users and fake ratings to increase overall rating of their target items on the recommendation system.
 %[shilling attack].
 Such injections with intent to bias recommendation are called, shilling attacks.
-%[shilling attack strategies study]
-%[ shilling attack detection]
-%[robust recommendation to prevent shilling attack]
-There are a number of studies about shilling attack strategies , shilling attack detection  and robust recommendation to prevent shilling attack .
+There are a number of studies about shilling attack strategies \cite{shilling_attack_1,shilling_attack_2,shilling_attack_3,shilling_attack_guide} and robust recommendation to prevent shilling attack \cite{RMF,LiesAndPropaganda,UnsupervisedShilling,AttackResistant,text_duplicate, text_crowd}.
 
 Recent studies \cite{DualRole,RQMF} focused on the following dual roles of users in recommender systems.
-In real-world recommender systems, users play as reviewers that write reviews about items in the form of a numeric rating score (such as a 1~5-star rating) accompanied by review text, and they also play as helpfulness raters that rate the helpfulness of reviews based on review content by giving numeric rating score.
+In real-world recommender systems, users play as reviewers that write reviews about items in the form of a numeric rating score (such as a 5-star rating) accompanied by review text, and they also play as helpfulness raters that rate the helpfulness of reviews based on review content by giving numeric rating score.
 Figure \ref{item_review_example} contains a review of \textit{Captain America: Civil War (DVD)} written by a user \textit{lmmyvasi29} with a 5-star rating.
 Figure \ref{helpfulness_rating_example} represents how other users rate the helpfulness of the review in Figure \ref{item_review_example}.
 
-Suhang et al. \cite{DualRole} treat helpfulness rating as users’ implicit feedback about items, and hence incorporates helpfulness rater role of users in recommendation systems to mitigate the data sparsity and cold-start problems.
-Sindhu et al. \cite{RQMF} suggest collaborative filtering taking into account review quality to improve the performance in the presence of spurious reviews.
+Suhang et al. \cite{DualRole} treated helpfulness rating as users’ implicit feedback about items, and hence incorporates helpfulness rater role of users in recommendation systems to mitigate the data sparsity and cold-start problems.
+Sindhu et al. \cite{RQMF} suggested collaborative filtering taking into account review quality to improve the performance in the presence of spurious reviews.
 With the assumption that spurious reviews would get negative helpfulness ratings, they measure the quality of a review by aggregating the helpfulness ratings about the review, and lower the impact of low-quality reviews on optimizing parameters of recommendation model.
 These studies show that incorporating review helpfulness rating information has potential benefits of improving the performance and robustness of recommendation systems.
 
@@ -333,24 +331,24 @@ However, these studies do not deal with fake review helpfulness ratings.
 After injecting fake reviews, malicious attackers can easily inject many fake helpfulness ratings to promote the quality of fake reviews.
 The quality measures that do not consider review quality manipulations do not lower the negative effect of fake reviews, but rather make it stronger.
 
-Therefore, in this paper, we propose a robust recommendation even in the presence of fake reviews and helpfulness rating via unbiased review helpfulness measure.
-% 우린 가짜 데이터가 있는 상황속에서도 리뷰의 진실된 퀄리티를 추정하는 것을 통한 견고한 추천 결과를 내는 추천 방법을 제안한다
+Therefore, in this paper, we propose a robust recommendation even in the presence of fake reviews and helpfulness rating via a new review quality measure which estimating the true quality of reviews.
 Our approach to a robust recommendation system consists of three stages.
 The first stage involves the task of mapping users to a representation vector space such that users who are similar in terms of behaviors related to shilling attacks are located in close proximity to one another in the space.
-In the second stage, the helpfulness of each review is measured by the weighted mean of the helpfulness ratings associated with each review.
+In the second stage, the quality of each review is measured by the Bayesian weighted mean of the helpfulness ratings associated with each review.
 A helpfulness rating is “down-weighted” if the similarity between the representation vectors of the helpfulness rater and the writer of the associated review is above the predetermined threshold.
-In the final stage, the helpfulness of each review measured in the previous stage is used to collaborative filtering.
+In the final stage, the quality of each review measured in the previous stage is used to collaborative filtering.
 We adopt the cost function suggested by Sindhu et al. \cite{RQMF}.
-We demonstrate the effectiveness of the proposed method by measuring the effect of various attacks on a real dataset.
+We demonstrate the effectiveness of the proposed method by measuring the effect of various attacks on a real-world dataset.
 Compared with other methods, proposed method mitigates the effect of manipulating review helpfulness.
 
 The rest of paper is organized as follows.
-Chapter 2 presents background of this paper.
-Related work are described in Chapter 3.
+Chapter 2 presents the background of this paper.
+Related work is described in Chapter 3.
 In Chapter 4, we formally define our attack model.
 Chapter 5 presents the proposed method.
 In Chapter 6 presents the experimental methodology used to evaluate the robustness of our approach and results of our experiment.
 Finally, we conclude in Chapter 7.
+
 
 
 %%
@@ -360,15 +358,30 @@ Finally, we conclude in Chapter 7.
 %% Note. 가급적 \includegraphics 명령을 사용하십시오.
 %% Recommen : Use \includegraphics to insert graph.
 %%
-\begin{figure}[h]
-    \centerline{\includegraphics[width=7.5cm]{figure/item_review_example}}
-    \caption{ An item review example    } \label{item_review_example}
+\begin{figure}
+    \subfigure[An item review example]
+    {
+        \includegraphics[width=9cm]{figure/item_review_example}
+        \label{item_review_example}
+    }
+    \subfigure[A helpfulness rating example]
+    {
+        \includegraphics[width=4cm]{figure/helpfulness_rating_example}
+        \label{helpfulness_rating_example}
+    }
+    \caption{Item review and helpfulness rating example from Ciao}
+    \label{real_world_example}
 \end{figure}
 
-\begin{figure}[h]
-    \centerline{\includegraphics[width=5.5cm]{figure/helpfulness_rating_example}}
-    \caption{ A helpfulness rating example    } \label{helpfulness_rating_example}
-\end{figure}
+%\begin{figure}[h]
+%    \centerline{\includegraphics[width=7.5cm]{figure/item_review_example}}
+%    \caption{ An item review example    } \label{item_review_example}
+%\end{figure}
+%
+%\begin{figure}[h]
+%    \centerline{\includegraphics[width=5.5cm]{figure/helpfulness_rating_example}}
+%    \caption{ A helpfulness rating example    } \label{helpfulness_rating_example}
+%\end{figure}
 
 \chapter{Background}
 \section{Notation}
@@ -419,13 +432,13 @@ After performing MF on the rating matrix $\bm{R}$, prediction matrix $\bm{UV}$ c
 
 \begin{figure}[t]
     \centerline{\includegraphics[width=12.5cm]{figure/mf_attacked}}
-    \caption{  Matrix factorization in the presence of shilling attack   } \label{mf_attacked}
+    \caption{Matrix factorization in the presence of shilling attack} \label{mf_attacked}
 \end{figure}
 
 
 \section{Shilling Attack}
 In the real world, there are malicious attackers who try to manipulate a CF-based recommendation system to gain monetary benefit.
-These attackers attempt to manipulate the recommendation system that operate through user rating data by injecting fraudulent user(shillers) and fake rating data, and such attempts are called 'Shilling attacks'.
+These attackers attempt to manipulate the recommendation system that operates through user rating data by injecting fraudulent user(shillers) and fake rating data, and such attempts are called 'Shilling attacks.'
 Shilling attacks are categorized into two categories: push attacks inject shillers which give high ratings to particular items to promote the recommendation score for the particular items, while nuke attacks inject shillers which give low ratings to particular items aiming at decreasing the popularity of the items.
 %The goal of Shilling attacks is to manipulate the recommendation results for the particular items for other normal users.
 However, injecting fake rating associated with target items only is not enough to manipulate a CF-based recommendation system, because CF predicts normal users' rating for target items in the way attackers wish if tastes of shillers are similar to those of normal users.
@@ -439,12 +452,12 @@ Bandwagon attack consists of fake users whose ratings for their target items and
 
 The figure \ref{mf_attacked} shows an example of shilling attack and its effect. We inject two shillers whose aims are boosting the prediction score of the bad movie.
 Shillers rate the bad movie with the highest possible rating value, i.e. 5, and rate other movies in a similar way to other genuine users.
-Matrix factoring misjudges the prediction scores of the bad movie, because it has to reduce the error of the fake ratings to optimize its cost function.
+Matrix factoring misjudges the prediction scores of the bad movie because it has to reduce the error of the fake ratings to optimize its cost function.
 Compared with figure \ref{mf_base}, figure \ref{mf_attacked} contains high predicted rating of genuine users for the bad movie.
 
 
 \section{Weighted Matrix Factorization for Robust Collaborative Filtering}
-The reason MF is vulnerable to shilling attack is that MF do not consider the presence of fake item ratings.
+The reason MF is vulnerable to shilling attack is that MF does not consider the presence of fake item ratings.
 Therefore, various attempts have been proposed to eliminate or mitigate the impact of fake item ratings on MF.
 The cost functions used in these attempts are expressed in the form of weighted matrix factorization(WMF) \cite{ImplicitCF}.
 \begin{equation}
@@ -455,13 +468,13 @@ In this cost function, prediction error term changes from sum of squared errors 
 This property helps WMF based on weight matrix where fake item ratings have a small weight to yield desirable predictions robust to fake item ratings.
 
 Figure \ref{wmf_good} shows an example of WMF where the weights of genuine reviews are larger than those of fake reviews.
-With well-assigned weight matrix, latent features of users and items are optimized to better describe genuine review more, so shillers fail to manipulate prediction of genuine users for the bad movie.
+With well-assigned weight matrix, latent features of users and items are optimized to describe genuine review better, so shillers fail to manipulate prediction of genuine users for the bad movie.
 \begin{figure}[h]
     \centerline{\includegraphics[width=12.5cm]{figure/wmf_good}}
     \caption{Weighted matrix factorization with well assigned weight matrix} \label{wmf_good}
 \end{figure}
 
-However, if the weights of fake item rating is large, then WMF would yield more manipulated predictions.
+However, if the weights of fake item ratings are large, then WMF would yield more manipulated predictions.
 Therefore, the key to WMF for robust CF is how to build a good weight matrix $\bm{W}$, in other words, how to capture fake item ratings and decrease their weights.
 
 
@@ -509,9 +522,9 @@ They require labeled data to train an accurate classifier, and the labeled data 
 %The common assumption of these studies is that a fake user cannot establish an arbitrary number of links to genuine users.
 
 %\section{Review Helpfulness}
-Many review sites encourage users to rate the helpfulness of reviews.
 %helpfulness rating can be used to rank reviews and detect fake reviews, which leads to
 %and place helpful reviews in a position where many users access to improve the overall user experience.
+Many review sites encourage users to rate the helpfulness of reviews.
 With helpfulness ratings by other users, users can examine the helpfulness of reviews with statistics such as “90 (out of 100) people found this review helpful” or “40 members have rated this review on average (somewhat helpful)”.
 Motivated by this, some researchers \cite{naive_helpfulness,RQMF} exploit review helpfulness rating information to measure the quality of reviews.
 Kim et al. \cite{naive_helpfulness} proposed the measure below to quantify the quality of a review by aggregating helpfulness ratings for the review.
@@ -540,7 +553,7 @@ Due to the manipulated weight matrix, collaborative filtering outputs prediction
 
 \section{Attack Model}
 % // Target items are poorly rated by some genuine users.
-In this section, we define our attack model. 
+In this section, we define our attack model.
 The objective of our attack model is to manipulate collaborative filtering, which considers review quality, to increase overall predicted ratings for the target items.
 This paper only focuses on push attack, because push attack is a more direct way to promote monetary benefit than nuke attack.
 We leave nuke attack for future work.
@@ -549,18 +562,18 @@ Our attack model involves in injecting fake item rating and helpfulness rating d
 \subsection{Fake Item Rating Injection}
 Our attack model injects fake item ratings (reviews) to bias predicted ratings of collaborative filtering for the target items
 Popular strategies for fake item rating injection are Random attack, Average attack and Bandwagon attack.
-However, Since Random attack is known to be ineffective, this paper focuses on Average attack and Bandwagon attack.
+However, Since Random attack is known to be ineffective, this paper focuses on Average attack, and Bandwagon attack.
 %[KDD 06]
 %Attackers usually realize shilling attacks by injecting an attack profile as shown in Fig. 1, which is first defined by Bhaumik et al. (2006), Mobasher et al. (2007a) to mislead the CF system. Such profiles can be defined as four set of items (Bhaumik et al. 2006; Mobasher et al. 2007a). [from Shilling attacks against recommender systems: a comprehensive survey]
-Similarity with [], from the view of each fake user, the item set $I$ is partitioned into 4 subsets, $I^{target},I^{popular},I^{filler}$  and $I^{none}$ where $I^{target}$ is a set of target items; $I^{popular}$ is a set of items that many authentic users like i.e. popular items; $I^{filler}$ is a set of randomly chosen items which are referred to filler items; and $I^{none}$ is the set of the remaining items, i.e. $I^{none}=I-I^{target}-I^{popular}-I^{filler}$.
+Similarity to \cite{shilling_attack_guide}, from the view of each fake user, the item set $I$ is partitioned into 4 subsets, $I^{target},I^{popular},I^{filler}$  and $I^{none}$ where $I^{target}$ is a set of target items; $I^{popular}$ is a set of items that many authentic users like i.e. popular items; $I^{filler}$ is a set of randomly chosen items which are referred to filler items; and $I^{none}$ is the set of the remaining items, i.e. $I^{none}=I-I^{target}-I^{popular}-I^{filler}$.
 
 Each fake user rates items of $I^{target},I^{popular}$ and $I^{filler}$ as follows.
 First, each fake user rates all target items with the highest possible rating score.
-Secondly, with the aim of being similar to other users, each fake user gives rating to each filler item of $I^{filler}$ and its rating score is the average of all ratings given to the filler item.
+Secondly, with the aim of being similar to other users, each fake user rates each filler item of $I^{filler}$ and its rating score is the average of all ratings given to the filler item.
 Finally, to increase the probability of being similar to a large number of other users, each fake user gives the highest possible rating score for all items of $I^{popular}$.
 Note that the size of each subset can vary.
 We assume a recommendation system manager could easily detect attacks associated with the too big size of $I_{target}$, $I_{filler}$, $I_{popular}$.
-Therefore, we limit the size of each subset to less than 1\% of the size of entire item set $I$.
+Therefore, we limit the size of each subset to less than 1\% of the size of an entire item set $I$.
 In summary, general form of fake item rating dataset $IR^f$ is defined as follows.
 \begin{equation}
 {IR}^f = \bigcup_{u^f \in U^f} \{(u^f,i,ir_{max}) | i \in I^{target} \} \cup \{(u^f,i,ir_{avg} {(i)}) | i \in I^{filler} \} \cup \{(u^f,i,ir_{max}) | i \in I^{popular} \}
@@ -594,7 +607,7 @@ One is to detect fake helpfulness ratings, and the other is to devise a robust e
 
 \chapter{Proposed Method}
 This section describes our method in detail.
-The following sections describe how to capture suspicious helpfulness ratings and how to estimate true quality of reviews.
+The following sections describe how to capture suspicious helpfulness ratings and how to estimate the true quality of reviews.
 % We define the quality measure of a review as a function F of the helpfulness ratings for the review.
 % \cite{RQMF} defines the function F as the average, which might lead to biased review quality.
 % Considering fake helpfulness ratings, we define the function F as the Bayesian weighted mean.
@@ -615,27 +628,26 @@ The following sections describe how to capture suspicious helpfulness ratings an
 \section{User2Vec}
 % feature learning !!!
 % Word2Vec takes a text corpus as its training data and learns a mapping of words to a vector space such that words that frequently appear together in sentences have similar vectors.
-Recently, various prediction tasks [REF] have improved performance by learning the desirable features themselves, instead of manually determining domain-specific features.
+Recently, various prediction tasks \cite{Word2Vec,NegativeSampling,DeepWalk,Node2Vec} have improved performance by learning the desirable features themselves, instead of manually determining domain-specific features.
 Skip-gram model \cite{Word2Vec} is a popular model proposed for natural language processing task by Mikolov et al.
 The goal of the Skip-gram model is to capture semantic relationships between words.
 With the hypothesis that words which frequently appear together in sentences have semantic relationships, the Skip-gram model takes large real-world text corpus as training data and learns feature representations for words.
-In specific, it map words to a feature space such that words frequently appear together in sentences have similar feature vectors.
+In specific, it maps words to a feature space such that words frequently appear together in sentences have similar feature vectors.
 The Skip-gram model is widely adopted for natural language processing task due to the efficiency and ability to capture useful relationships in the text data.
 % example ) feature learning for network
-Inspried by the success of the Skip-gram model, some researchers apply the Skip-gram model to learning a mapping of vertices of a network to vectors which encode social relation \cite{DeepWalk,Node2Vec}.
+Inspired by the success of the Skip-gram model, some researchers apply the Skip-gram model to learning a mapping of vertices of a network to vectors which encode social relation \cite{DeepWalk,Node2Vec}.
 With the assumption random walk traces contain social relation between vertices, they generate samples of random walk traces as sequences of vertices and feed them into the Skip-gram model.
 
 % analogy between
 In this paper, we propose User2Vec, an algorithm for learning feature representations for users in recommendation system to detect such suspicious relationships between users.
-\cite{Word2Vec} uses real-world sentences as sequence of semantically related words \cite{DeepWalk,Node2Vec} generates random walk traces as sequence of socially related vertices to obtain useful features for various prediction tasks.
-Similarty to such approaches, we generate sequences of attack-related users and feed them into the Skip-gram model to obtain feature representations of user which is useful to detect fake users.
+\cite{Word2Vec} uses real-world sentences as sequences of semantically related words \cite{DeepWalk,Node2Vec} generates random walk traces as sequences of socially related vertices to obtain useful features for various prediction tasks.
+Similar to such approaches, we generate sequences of attack-related users and feed them into the Skip-gram model to obtain feature representations of users which are useful to detect fake users.
 
 To generate sequences of attack-related users, we focus on behaviors of fake users.
-%[Lies and Propaganda (IUI 07), Unsupervised shilling (AAAI 07)]
 Several studies \cite{LiesAndPropaganda,UnsupervisedShilling} reported that fake users need to work together to maximize the effect of their attack.
 This strategy is referred to as group attack.
 In our attack model, fake users equally give the highest item rating to target items and the highest review helpfulness rating to their fake reviews ($(IR^{target},HR^{target})$).
-Taking this into consdieration, we regard following relationships between users as clues to the group attack
+Taking this into consideration, we regard following relationships between users as clues to the group attack
 
 \begin{enumerate}
 \item Both user X and Y give $ir_{max}$ for an item
@@ -652,7 +664,7 @@ If user $u_a$ always assigns the maximum helpfulness rating to all reviews writt
 Note that we only target the ratings with the highest score only since we focus on push attack.
 Of course, pairs of normal users could reveal clues to the group attack due to the coincidence of opinions about items or reviews.
 However, all fake users have to involve in many connections through the relationships associated with group attack as a necessity to maximize the degree of manipulation.
-With this in mind, we suspect the truthfulness of a helpfulness rating if the rater and the reviewer are frequently connected through the mentioned relationships
+With this in mind, we suspect the truthfulness of a helpfulness rating if the rater and the reviewer are frequently connected through the mentioned relationships.
 % Hence, we hypothesize that the users created from group attacks will frequently be connected through the following relationships.
 
 % In this paper, aimed at learning a mapping users to vector space such that fake users injected by group attack have similar vectors,
@@ -737,19 +749,19 @@ Therefore, although there is a risk of judging false positives, we judge that th
 
 
 \section{Robust Review Quality Measure}
-
 We assume that the true quality of a review can be estimated by the mean of authentic helpfulness ratings.
 However, in the presence of fake helpfulness ratings, we need to estimate the true quality of a review by the weighted mean of helpfulness ratings where the fake helpfulness ratings have very low weight.
-If the amount of helpfulness ratings is sufficiently high, then this estimation get high confidecne.
+If the number of helpfulness ratings is sufficiently high, then this estimation get high confidence.
 However, for reviews that have few helpfulness ratings and reviews having only fake helpfulness ratings, the weighted mean is not robust estimator for such reviews.
-Say a fake review which received only fake helpfulness ratings, then the weighted mean output is biased toward fake helpfulness ratings even if the weight of fake helpfulness ratings is almost zero.
-With all of these things in mind, we define the following review quality measure to estimate the true quaity of a review.
+Say a fake review which received only fake helpfulness ratings. 
+Then the weighted mean output is biased toward fake helpfulness ratings even if the weight of fake helpfulness ratings is almost zero.
+With all of these things in mind, we define the following review quality measure to estimate the true quality of a review.
 \begin{equation}
 Quality(u,i) = \frac{ w_{prior} Q_{default} + \sum_{v \in \{x|\bm{H}_{v,u,i} \neq ?\}} T(v,u) \times \bm{H}_{v,u,i} } {w_{prior}  + \sum_{v \in \{x|\bm{H}_{v,u,i} \neq ?\}} T(v,u) }
 \end{equation}
-We take Bayesian average approach [] that incorporates both a prior belief and a weighted mean of review helpfulness ratings associated with a review r.
+We take Bayesian approach that incorporates both a prior belief and a weighted mean of review helpfulness ratings associated with a review r.
 The prior quality $Q_{default}$ works as prior belief. $w_{prior}$ is the weight given to the prior belief ($Q_{default}$).
-In this work, we set $Q_{default}$ as the mean of helpfulness rating range (e.g. 2.5 in range from 0 to 5), and $w_{prior}$ as 1.
+In this work, we set $Q_{default}$ as the mean of helpfulness rating range (e.g. 2.5 in the range from 0 to 5), and $w_{prior}$ as 1.
 The weight of a review helpfulness rating in review quality estimation is determined by the following function $T: U \times U \rightarrow R$.
 \begin{equation}
 T(v,u)=
@@ -768,13 +780,7 @@ In this work, we set the $\theta$ as 0.8 and the $\mu$ as 100
 With the above mentioned robust measure, the quality of reviews with few helpfulness ratings will be close to the default quality $Q_{default}$,
 while reviews with many helpfulness ratings given by the users whose similarity to the reviewer is not that high will have a quality score close to its average helpfulness rating.
 Most importantly, reviews with many helpfulness ratings from the users similar to reviewer will have a helpfulness score close to the default quality $Q_{default}$.
-In other words, our measure prevent fake helpfulness ratings from manipulating the quality of their fake review.
-
-
-
-
-
-
+In other words, our measure prevents fake helpfulness ratings from manipulating the quality of their fake review.
 
 \begin{algorithm}[h]
 \caption{Robust recommendation system}
@@ -812,7 +818,7 @@ In other words, our measure prevent fake helpfulness ratings from manipulating t
 We use the publicly available dataset provided by \cite{ETAF}, namely CiaoDVD.
 The CiaoDVD dataset contains users’ review and helpfulness rating information from ciao.dvd.co.uk where users rate DVDs and others’ reviews.
 In the CiaoDVD dataset, users can rate items with a score from 1 to 5 as reviewer, and rate the helpfulness of reviews with a score from 0 to 5 as helpfulness rater.
-From the original dataset, we filter out reviewer who rated less than five items and item that received less than five ratings.
+From the original dataset, we filter out the reviewers who rated less than five items and item that received less than five ratings.
 The statistics of the resulting dataset are shown in Table \ref{tableCiaoDVD}.
 
 \begin{table}[h]
@@ -832,7 +838,7 @@ Helpfulness Rating & 661040 \\ \hline
 \end{table}
 
 We assume the original data is authentic.
-To this data, we inject fake users, item ratings(reviews) and helpfulness ratings as mentioned in the Chapter 4.
+To this data, we inject fake users, item ratings(reviews) and helpfulness ratings as mentioned in Chapter 4.
 Attack size, i.e. the number of injected fake users, ranges from 1\% to 3\% of total users.
 Filler size is the number of $I^{filler}$ and popular size is the number of $I^{filler}$.
 %Filler size + Selected size ~1\%.
@@ -843,34 +849,34 @@ For performance evaluation, we perform 10-fold cross validation.
 In each fold, the test set contains random 10\% original reviews, and the training set contains the remaining 90\% original reviews and all the fake reviews.
 % target item / popular item filter,
 We choose a set of target items $I^{target}$ as items which have been rated by at least 1\% users with below the median of the rating scale (3 in our rating scale [1,5]).
-$I^{popular}$ consists of items rated items by at least 1\% users with the $ir_{max}$
-Note that $I^{filler}$ is randomly selected for each fake user
+$I^{popular}$ consists of items rated items by at least 1\% users with the $ir_{max}$.
+Note that $I^{filler}$ is randomly selected for each fake user.
 
 
 \section{Metrics}
 %Average helpfulness of reviews
-\textbf{Average helpfulness of reviews} measures the average helpfulness of reviews belonging to each category.
-We compare the average helpfulness values of fake reviews and authentic reviews to find out the robustness of a helpfulness measure.
-A robust helpfulness measure would produce the small average helpfulness of fake reviews even in the presence of fake helpfulness ratings.
+\textbf{Average quality of reviews} measures the average quality of reviews belonging to each category.
+We compare the average quality values of fake reviews and authentic reviews to find out the robustness of a quality measure.
+A robust quality measure should produce the small average quality of fake reviews even in the presence of fake helpfulness ratings.
 
 \begin{equation}
-AverageHelpfulness(IR) = \frac{1}{N_{IR}} \sum_{ (u,i) \in IR } helpfulness(u,i)
+AverageHelpfulness(IR) = \frac{1}{|IR|} \sum_{ (u,i) \in IR } helpfulness(u,i)
 \end{equation}
 where $N_{IR}$ is the number of reviews in the set of review $IR$
 
 %Prediction shift on the target items
-\textbf{Prediction shift on the target items} measures the average of change in the prediction of genuine users for the attacked items before and after a shilling attack.
+\textbf{Prediction shift on the target items} measures the average of the change in the prediction of genuine users for the attacked items before and after a shilling attack.
 In other words, this metric measures the degree of success of an attack.
 The smaller the value of this metric, the more robust the recommendation method is.
 %//This metric is also sensitive to the strength of an attack, with stronger attacks causing larger prediction shift. [from attack resistant]
 \begin{equation}
 PredictionShift(U,V,U',V') = \frac{1}{|U^g||I^{target}|} \sum_{u \in U^g} \sum_{i \in I^{target}} (U'V')_{u,i}-(UV)_{u,i}
 \end{equation}
-where $(U'V')_{u,i}$ is the predicted rating value of user $u$ for item $i$ after an attack
+where $(U'V')_{u,i}$ is the predicted rating value of user $u$ for item $i$ after an attack.
 
 \textbf{Mean Average Error(MAE) on test set} is the overall prediction error on ratings in the test set which contains 10\% of all item ratings of original users in the dataset.
 MAE is commonly used to compare the predictive accuracy of recommendation algorithms.
-In this paper we use MAE to measure the accuracy loss that is sacrificed to improve robustness.
+In this paper, we use MAE to measure the accuracy loss that is sacrificed to improve robustness.
 
 \begin{equation}
 MAE(U,V) = \frac{1}{|test set|} \sum_{R_{u,i} \in test set} |R_{u,i}-(UV)_{u,i}|
@@ -879,15 +885,14 @@ MAE(U,V) = \frac{1}{|test set|} \sum_{R_{u,i} \in test set} |R_{u,i}-(UV)_{u,i}|
 
 
 \section{Results and Analysis}
-
-
+% User2Vec result
 We first visualize the results of User2Vec to show User2Vec's ability to capture fake users.
-We use learned users' feature vectors as the input to the visualization toolt-SNE \cite{TSNE}.
+We use learned users' feature vectors as the input to the visualization tool, t-SNE \cite{TSNE}.
 The users are mapped to the 2-D space.
-Diamond-shaped points represent fake user, while x-shaped green colored points represent normal users.
+Square-shaped points represent fake users, while x-shaped green colored points represent normal users.
 We observed that feature vectors of fake users are very close to each other.
 \begin{figure}[h]
-    \centerline{\includegraphics[width=10.5cm]{figure/user2vec_result}}
+    \centerline{\includegraphics[width=10.5cm]{figure/user2vec_result.pdf}}
     \caption{  Visualization of the User2Vec result } \label{user2vec_result}
 \end{figure}
 
@@ -900,17 +905,15 @@ We observed that feature vectors of fake users are very close to each other.
 % We first compare the average of helpfulness of fake and authentic reviews computed by each measure, varying attack size from 1\% to 3\% with fixed 0.5\% filler size, 0.5\% selected size and 32 dimensions of user feature vector.
 We compute the average of the helpfulness of fake reviews and authentic reviews.
 We inject fake review through attacks with 1\% attack size, 0.5\% filler size, and 0.5\% popular size.
-We set dimensions of feature vectors to 32, which is a parameter needed in our helpfulness measure.
+We set dimensions of feature vectors to 32, which is used in User2Vec.
 % result explanation
-As shown in table ~\ref{resultHelpfulness}, the naive helpfulness measure results in fake reviews have a higher helpfulness than authentic reviews, whereas our helpfulness measure yields the opposite.
-In specific, while the naive helpfulness measure computes the helpfulness of fake reviews at a value close to $hr_{max}$, our helpfulness measure computes the helpfulness of fake reviews at a value close to the default helpfulness $H_{default}$.
-%We observed a slight decrease in the helpfulness of authentic reviews when using our method.
-%The reason for this in
-% even in the presence of an attack with 3\% attack size.
-
-%As shown in table ~\ref{resultHelpfulness}, the results of the naive helpfulness measure indicate that fake reviews have a higher helpfulness than authentic reviews and increasing attack size promotes the helpfulness of fake reviews.
-%While the naive helpfulness measure computes the helpfulness of fake reviews at a value close to $hr_{max}$, our helpfulness measure computes the helpfulness of fake reviews at a value close to the default helpfulness $H_{default}$ even in the presence of an attack with 3\% attack size.
-%//Authentic reviews have similar helpfulness values as we expect
+As shown in table ~\ref{resultHelpfulness}, the naive quality measure results in fake reviews have a higher quality than authentic reviews, whereas our quality measure yields the opposite.
+In specific, while the naive quality measure computes the helpfulness of fake reviews at a value close to $hr_{max}$, our quality measure computes the quality of fake reviews at a value close to the default helpfulness $Q_{default}$.
+In other words, our quality measure can prevent fake helpfulness ratings from increasing the quality of fake reviews.
+We observed a slight decrease in the quality of authentic reviews when using our method.
+The reason for this is that the feature vector of an authentic user might be very similar to that of another authentic user by coincidence, which leads to false positive detection.
+However, since the probability that false positive detection happens is very low, authentic helpfulness ratings which are wrongly sacrificed have no significant impact on estimating review quality.
+Hence, our quality measure shows its ability to estimate the true quality of reviews.
 
 
 % Result (helpfulness)
@@ -940,14 +943,13 @@ In specific, while the naive helpfulness measure computes the helpfulness of fak
 \end{center}
 \end{table}
 
-
-
 % Prediction shift
-To compare the robustness, we compute the prediction shift on the target items of algorithms using different review helpfulness measures under attacks in variety of attack sizes, filler sizes, and popular sizes.
-From Table ~\ref{resultPredictionShift}, we observe that our helpfulness measure leads to the lowest prediction shift on the target items in all conditions.
-The reason for this is that fake item ratings have the least impact on prediction when applying our helpfulness measure rather than applying other methods.
-Since fake helpfulness ratings increase the influence of fake item ratings on prediction when applying the naive helpfulness measure than when ignoring helpfulness, the naive helpfulness measure causes larger prediction shift on the target items than basic MF in the presence of fake helpfulness ratings.
-Therefore we argue that our method resistant to review helpfulness manipulations adds robustness to WMF.
+To compare the robustness, we compute the prediction shift on the target items of algorithms using different review quality measures under attacks in the variety of attack sizes, filler sizes, and popular sizes.
+From Table ~\ref{resultPredictionShift}, we observe that the WMF using our quality measure leads to the lowest prediction shift on the target items in all conditions.
+The reason for this is that fake item ratings have the least impact on prediction when applying our quality measure rather than applying other methods.
+Since fake helpfulness ratings increase the influence of fake item ratings on prediction when applying the naive quality measure than when ignoring review quality, the naive quality measure causes larger prediction shift on the target items than MF in the presence of fake helpfulness ratings.
+Therefore we argue that our method is resistant to review quality manipulations.
+% adds robustness to WMF.
 
 
 %Naive review helpfulness measure를 이용한 collaborative filtering은 helpfulness를 고려하지 않은 즉, 모든 review의 중요도를 동일하게 본 baseline method보다 latent feature가 fake review의 error를 낮추는 방향으로 최적화된다. 그로 인해 공격의 영향력이 더 강화되어 더 큰 prediction shift를 보이게 된다.
@@ -973,17 +975,16 @@ Therefore we argue that our method resistant to review helpfulness manipulations
 \end{table}
 
 % MAE result (ver 1.0)
-We also investigated the predictive performance of relying on each review helpfulness measure.
-We compute MAE on the test set when the training set contains fake item ratings.
-% result
-According to ~\ref{resultMAE}, basic matrix factorization performs better than others.
-% discussion
-Since MAE gives equal importance to the errors of all the ratings in the test set, it is not ideal metric to measure the performance of weighted matrix factorizations which allow unimportant ratings to have significant errors.
+We also investigate the predictive performance of each method.
+We compute MAE on the test set.
+%when the training set contains fake item ratings.
+According to ~\ref{resultMAE}, MF performs better than WMFs.
+In fact, MAE is not ideal metric to measure the predictive performance of WMF, because MAE gives equal importance to the errors of all the ratings in the test set.
 % While weighted matrix factorization tends to be fitted more toward important ratings, MAE gives equal importance to all ratings of the test set.
-Even though MAE is not proper metric for weighted matrix factorization, the performances are not significantly different from basic matrix factorization.
-We compute Cohen's $d$ for the effect size based on means of predictive errors between basic MF and weighted MF using our helpfulness measure.
-The value of $d$ is near 0.02, which is a small value according to \cite{EffectSize}.
-Therefore, weighted matrix factorization using our helpfulness measure provides robustness at a not significant additional cost of predictive accuracy.
+Even though MAE is not proper metric for WMF, MAE results of WMF are not significantly different from those of MF.
+We compute Cohen's $d$ for the effect size based on means of predictive errors between MF and WMF using our quality measure.
+The value of Cohen's $d$ is near 0.02, which is a small value according to \cite{EffectSize}.
+Consequently, we conclude that WMF using our quality measure provides robustness at a not significant additional cost of predictive accuracy.
 
 
 %추천 시스템의 본연의 목적은 사용자의 예상 평점을 맞추는 것이기 때문에 예상 평점을 맞추는 퍼포먼스를 비교한다. 공격에 의해 아무리 바뀌지 않는 방법이더라도 예상 평점의 정확도가 너무 떨어지는 방법은 바람직하지 않다.
@@ -1014,13 +1015,11 @@ Therefore, weighted matrix factorization using our helpfulness measure provides 
 
 
 \chapter{Conclusion}
-This paper proposes a robust review helpfulness measure so that collaborative filtering using review helpfulness information successfully restricts the effect of shilling attacks. %fake reviews.
-%Specifically, given an item rating matrix and a review helpfulness rating tensor, we map users in recommendation system to feature vectors which encode behavior related with group attack.
+This paper proposes a robust review quality measure so that collaborative filtering using review quality successfully restricts the effect of shilling attacks.
 Specifically, given an item rating matrix and a review helpfulness rating tensor, we learn representations of users in recommendation system.
 These representations encode behaviors associated with shilling attack.
-% not sure "estimate A by B"
-Armed with user representations, we estimate the true helpfulness of reviews by the Bayesian weighted average of review helpfulness ratings.
-We penalize the weight of a helpfulness rating if the helpfulness rater and reviewer are suspected of having a relationship of self-rating.
+Armed with user representations, we estimate the true quality of reviews by the Bayesian weighted average of review helpfulness ratings.
+We penalize the weight of a helpfulness rating if the helpfulness rater and reviewer are suspected of having a suspicious relationship.
 Experimental results on a real-world dataset demonstrate the robustness of our method against review helpfulness manipulation.
 Future research directions include developing robust measures against nuke attacks and more elaborate attacks.
 
@@ -1036,13 +1035,26 @@ Future research directions include developing robust measures against nuke attac
 %\bibitem{EF2} I. Song and S. Lee, “Explicit formulae for product moments of multivariate Gaussian random variables,” \textit{Statistics, Probability Lett.,} vol. 100, pp. 27-34, May 2015.
 \bibitem{yelp_study} M. Luca. Reviews, Reputation, and Revenue: The Case of Yelp.com. Harvard Business School Working Papers,2011. http://www.hbs.edu/research/pdf/12-016.pdf
 
+\bibitem{shilling_attack_1} Lam, Shyong K., and John Riedl. "Shilling recommender systems for fun and profit." Proceedings of the 13th international conference on World Wide Web. ACM, 2004.
+
+\bibitem{shilling_attack_2} Burke, Robin, Bamshad Mobasher, and Runa Bhaumik. "Limited knowledge shilling attacks in collaborative filtering systems." Proceedings of 3rd International Workshop on Intelligent Techniques for Web Personalization (ITWP 2005), 19th International Joint Conference on Artificial Intelligence (IJCAI 2005). 2005.
+
+\bibitem{shilling_attack_3} Burke, Robin, et al. "Identifying attack models for secure recommendation." Beyond Personalization 2005 (2005).
+
+\bibitem{shilling_attack_guide} Mobasher, Bamshad, et al. "Analysis and detection of segment-focused attacks against collaborative recommendation." International Workshop on Knowledge Discovery on the Web. Springer Berlin Heidelberg, 2005.
+
 \bibitem{MF_CF} Koren, Yehuda, Robert Bell, and Chris Volinsky. "Matrix factorization techniques for recommender systems." Computer 42.8 (2009): 30-37.
 
+\bibitem{ImplicitCF} Hu, Yifan, Yehuda Koren, and Chris Volinsky. "Collaborative filtering for implicit feedback datasets." 2008 Eighth IEEE International Conference on Data Mining. Ieee, 2008.
+
+% robust
 \bibitem{RMF} B. Mehta, T. Hofmann, and W. Nejdl, “Robust Collaborative Filtering,” RecSys, p. 49, 2007.
-
+% robust
 \bibitem{AttackResistant} B. Mehta and W. Nejdl, “Attack resistant collaborative filtering,” Proc. 31st Annu. Int. ACM SIGIR Conf. Res. Dev. Inf. Retr. SIGIR 08, p. 75, 2008.
-
-
+% robust
+\bibitem{LiesAndPropaganda} Mehta, Bhaskar, Thomas Hofmann, and Peter Fankhauser. "Lies and propaganda: detecting spam users in collaborative filtering." Proceedings of the 12th international conference on Intelligent user interfaces. ACM, 2007.
+% robust
+\bibitem{UnsupervisedShilling} Mehta, Bhaskar. "Unsupervised shilling detection for collaborative filtering." AAAI. 2007.
 
 %review text
 \bibitem{text_duplicate} Jindal, N., and Liu, B. 2008. Opinion spam and analysis. In WSDM, 219–230
@@ -1060,22 +1072,17 @@ Future research directions include developing robust measures against nuke attac
 % review helpfulness
 \bibitem{DualRole} S. Wang, J. Tang, and H. Liu, “Toward Dual Roles of Users in Recommender Systems,” Cikm, pp. 1651–1660, 2015.
 
-\bibitem{LiesAndPropaganda} Mehta, Bhaskar, Thomas Hofmann, and Peter Fankhauser. "Lies and propaganda: detecting spam users in collaborative filtering." Proceedings of the 12th international conference on Intelligent user interfaces. ACM, 2007.
 
-
-\bibitem{UnsupervisedShilling} Mehta, Bhaskar. "Unsupervised shilling detection for collaborative filtering." AAAI. 2007.
-
-\bibitem{DeepWalk} B. Perozzi, R. Al-Rfou, and S. Skiena. DeepWalk: Online learning of social representations. In KDD, 2014.
-
+%embedding
 \bibitem{Word2Vec} T. Mikolov, K. Chen, G. Corrado, and J. Dean. Efficient estimation of word representations in vector space. In ICLR, 2013.
-
+%embedding
 \bibitem{NegativeSampling} T. Mikolov, I. Sutskever, K. Chen, G. S. Corrado, and J. Dean. Distributed representations of words and phrases and their compositionality. In NIPS, 2013.
-
+%embedding
+\bibitem{DeepWalk} B. Perozzi, R. Al-Rfou, and S. Skiena. DeepWalk: Online learning of social representations. In KDD, 2014.
+%embedding
 \bibitem{Node2Vec} Grover Aditya and  Leskovec Jure. ”node2vec: Scalable Feature Learning for Networks.” Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM, 2016.
-
+%dataset
 \bibitem{ETAF} Guo, Guibing, et al. "Etaf: An extended trust antecedents framework for trust prediction." Advances in Social Networks Analysis and Mining (ASONAM), 2014 IEEE/ACM International Conference on. IEEE, 2014.
-
-\bibitem{ImplicitCF} Hu, Yifan, Yehuda Koren, and Chris Volinsky. "Collaborative filtering for implicit feedback datasets." 2008 Eighth IEEE International Conference on Data Mining. Ieee, 2008.
 
 \bibitem{EffectSize}  Cohen, Jacob (1988). Statistical Power Analysis for the Behavioral Sciences. Routledge. ISBN 1-134-74270-3.
 

@@ -1,9 +1,10 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces An item review example }}{2}{figure.1.1}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces A helpfulness rating example }}{2}{figure.1.2}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Item review and helpfulness rating example from Ciao}}{2}{figure.1.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {An item review example}}}{2}{figure.1.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {A helpfulness rating example}}}{2}{figure.1.1}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Matrix factorization example}}{4}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Matrix factorization in the presence of shilling attack }}{4}{figure.2.2}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Matrix factorization in the presence of shilling attack}}{4}{figure.2.2}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Weighted matrix factorization with well assigned weight matrix}}{5}{figure.2.3}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
