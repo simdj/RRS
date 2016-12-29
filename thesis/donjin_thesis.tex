@@ -49,7 +49,8 @@
 \usepackage{amsmath}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{subfigure}
+% \usepackage{subfigure}
+\usepackage{subcaption}
 
 \makeatletter
 \renewcommand{\Function}[2]{%
@@ -305,20 +306,20 @@
 \chapter{Introduction}
 
 Since recommender systems influence purchase decisions, their positive recommendation can lead to significant monetary benefit for product sellers.
-According to \cite{yelp_study} , increasing overall rating of business by one star on Yelp[sub ref] can increase its revenue by 9\%.
-Unfortunately, however, the strong impact of recommender systems has attracted malicious attackers who try to bias recommendation result to increase overall rating of their target items.
+According to \cite{yelp_study}, increasing the overall rating of business by one star on Yelp\footnote{www.yelp.com} can increase its revenue by 9\%.
+Unfortunately, however, the strong impact of recommender systems has attracted malicious attackers who try to bias recommendation results to increase the overall rating of their target items.
 
 Matrix factorization(MF) model based collaborative filtering(CF) \cite{MF_CF}, one of the most common approaches for the recommendation, infers users’ tastes and items’ attributes based on the observed ratings of users for items and recommends products whose attributes match a user’s taste.
 MF naively assumes that all the observed ratings are conducted by honest users.
-However, this assumption is easily violated in practice because of the presence of attackers.
-Due to the open nature of recommendation systems, attackers can inject multiple fake users and fake ratings to increase overall rating of their target items on the recommendation system.
+In practice, however, this assumption is easily violated because of the presence of attackers.
+Due to the open nature of recommendation systems, attackers can inject multiple fake ratings to increase the overall rating of their target items on the recommendation system.
 %[shilling attack].
-Such injections with intent to bias recommendation are called, shilling attacks.
-There are a number of studies about shilling attack strategies \cite{shilling_attack_1,shilling_attack_2,shilling_attack_3,shilling_attack_guide} and robust recommendation to prevent shilling attack \cite{RMF,LiesAndPropaganda,UnsupervisedShilling,AttackResistant,text_duplicate, text_crowd}.
+Such injections with intent to bias recommendation results are called, shilling attacks.
+There are a number of studies about shilling attack strategies \cite{shilling_attack_1,shilling_attack_2,shilling_attack_3,shilling_attack_guide} and robust recommendation methods to prevent shilling attacks \cite{RMF,LiesAndPropaganda,UnsupervisedShilling,AttackResistant,text_duplicate, text_crowd}.
 
 Recent studies \cite{DualRole,RQMF} focused on the following dual roles of users in recommender systems.
-In real-world recommender systems, users play as reviewers that write reviews about items in the form of a numeric rating score (such as a 5-star rating) accompanied by review text, and they also play as helpfulness raters that rate the helpfulness of reviews based on review content by giving numeric rating score.
-Figure \ref{item_review_example} contains a review of \textit{Captain America: Civil War (DVD)} written by a user \textit{lmmyvasi29} with a 5-star rating.
+In real-world recommender systems, users play as reviewers that write reviews about items in the form of a numeric rating score (such as a 5-star rating) accompanied by review text, and they also play as helpfulness raters that rate the helpfulness of reviews based on review content by giving numeric rating score \cite{DualRole}.
+Figure \ref{item_review_example} contains a review of \textit{Captain America: Civil War (DVD)} written by user \textit{lmmyvasi29} with a 5-star rating.
 Figure \ref{helpfulness_rating_example} represents how other users rate the helpfulness of the review in Figure \ref{item_review_example}.
 
 Suhang et al. \cite{DualRole} treated helpfulness rating as users’ implicit feedback about items, and hence incorporates helpfulness rater role of users in recommendation systems to mitigate the data sparsity and cold-start problems.
@@ -331,13 +332,13 @@ However, these studies do not deal with fake review helpfulness ratings.
 After injecting fake reviews, malicious attackers can easily inject many fake helpfulness ratings to promote the quality of fake reviews.
 The quality measures that do not consider review quality manipulations do not lower the negative effect of fake reviews, but rather make it stronger.
 
-Therefore, in this paper, we propose a robust recommendation even in the presence of fake reviews and helpfulness rating via a new review quality measure which estimating the true quality of reviews.
+Therefore, in this paper, we propose a robust recommendation even in the presence of fake reviews and helpfulness rating via a new review quality measure which estimates the true quality of reviews.
 Our approach to a robust recommendation system consists of three stages.
-The first stage involves the task of mapping users to a representation vector space such that users who are similar in terms of behaviors related to shilling attacks are located in close proximity to one another in the space.
+The first stage involves the task of mapping users to a feature vector space such that users who are similar in terms of behaviors related to shilling attacks are located in close proximity to one another in the space.
 In the second stage, the quality of each review is measured by the Bayesian weighted mean of the helpfulness ratings associated with each review.
-A helpfulness rating is “down-weighted” if the similarity between the representation vectors of the helpfulness rater and the writer of the associated review is above the predetermined threshold.
+A helpfulness rating is “down-weighted” if the similarity between the feature vectors of the helpfulness rater and the writer of the associated review is above the predetermined threshold.
 In the final stage, the quality of each review measured in the previous stage is used to collaborative filtering.
-We adopt the cost function suggested by Sindhu et al. \cite{RQMF}.
+We adopt the cost function suggested by \cite{RQMF,ImplicitCF}.
 We demonstrate the effectiveness of the proposed method by measuring the effect of various attacks on a real-world dataset.
 Compared with other methods, proposed method mitigates the effect of manipulating review helpfulness.
 
@@ -358,20 +359,41 @@ Finally, we conclude in Chapter 7.
 %% Note. 가급적 \includegraphics 명령을 사용하십시오.
 %% Recommen : Use \includegraphics to insert graph.
 %%
+%\begin{figure}
+%    \centering
+%    \subfigure[An item review example]
+%    {
+%        \includegraphics[width=9cm]{figure/item_review_example}
+%        \label{item_review_example}
+%    }
+%    \subfigure[A helpfulness rating example]
+%    {
+%        \includegraphics[width=4cm]{figure/helpfulness_rating_example}
+%        \label{helpfulness_rating_example}
+%    }
+%    \caption{Item review and helpfulness rating example from Ciao}
+%    \label{real_world_example}
+%\end{figure}
+
+
 \begin{figure}
-    \subfigure[An item review example]
-    {
-        \includegraphics[width=9cm]{figure/item_review_example}
+    \centering
+    \begin{subfigure}[b]{0.66\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/item_review_example}
+        \caption{An item review example}
         \label{item_review_example}
-    }
-    \subfigure[A helpfulness rating example]
-    {
-        \includegraphics[width=4cm]{figure/helpfulness_rating_example}
-        \label{helpfulness_rating_example}
-    }
+    \end{subfigure}
+    \begin{subfigure}[b]{0.33\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figure/helpfulness_rating_example}
+        \caption{A helpfulness rating example}
+        \label{item_review_example}
+    \end{subfigure}
     \caption{Item review and helpfulness rating example from Ciao}
     \label{real_world_example}
 \end{figure}
+
 
 %\begin{figure}[h]
 %    \centerline{\includegraphics[width=7.5cm]{figure/item_review_example}}
@@ -425,15 +447,58 @@ The item set of the rating matrix consists of two romance movies, two horror mov
 The user set of the rating matrix consists of two romance movie lovers and two horror movie lovers.
 After performing MF on the rating matrix $\bm{R}$, prediction matrix $\bm{UV}$ captures the tastes of users and judges that users would not like the bad movie.
 
-\begin{figure}[t]
-    \centerline{\includegraphics[width=12.5cm]{figure/mf_base}}
-    \caption{Matrix factorization example} \label{mf_base}
-\end{figure}
+
+
 
 \begin{figure}[t]
-    \centerline{\includegraphics[width=12.5cm]{figure/mf_attacked}}
-    \caption{Matrix factorization in the presence of shilling attack} \label{mf_attacked}
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/mf_before_rating}
+        \caption{Rating matrix $\bm{R}$}
+        \label{mf_before_rating}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/mf_before_prediction}
+        \caption{Prediction matrix $\bm{UV}$}
+        \label{mf_before_prediction}
+    \end{subfigure}
+    \caption{Matrix factorization example}
+    \label{mf_base}
 \end{figure}
+
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/mf_after_rating}
+        \caption{Rating matrix $\bm{R}$}
+        \label{mf_after_rating}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/mf_after_prediction}
+        \caption{Prediction matrix $\bm{UV}$}
+        \label{mf_after_prediction}
+    \end{subfigure}
+    \caption{Matrix factorization in the presence of shilling attack}
+    \label{mf_attacked}
+\end{figure}
+
+
+
+
+%\begin{figure}[t]
+%    \centerline{\includegraphics[width=12.5cm]{figure/mf_base}}
+%    \caption{Matrix factorization example} \label{mf_base}
+%\end{figure}
+%
+%\begin{figure}[t]
+%    \centerline{\includegraphics[width=12.5cm]{figure/mf_attacked}}
+%    \caption{Matrix factorization in the presence of shilling attack} \label{mf_attacked}
+%\end{figure}
 
 
 \section{Shilling Attack}
@@ -469,10 +534,37 @@ This property helps WMF based on weight matrix where fake item ratings have a sm
 
 Figure \ref{wmf_good} shows an example of WMF where the weights of genuine reviews are larger than those of fake reviews.
 With well-assigned weight matrix, latent features of users and items are optimized to describe genuine review better, so shillers fail to manipulate prediction of genuine users for the bad movie.
+%\begin{figure}[h]
+%    \centerline{\includegraphics[width=12.5cm]{figure/wmf_good}}
+%    \caption{Weighted matrix factorization with well assigned weight matrix}
+%    \label{wmf_good}
+%\end{figure}
+
+
 \begin{figure}[h]
-    \centerline{\includegraphics[width=12.5cm]{figure/wmf_good}}
-    \caption{Weighted matrix factorization with well assigned weight matrix} \label{wmf_good}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/mf_after_rating}
+        \caption{Rating matrix $\bm{R}$}
+        %\label{mf_after_rating}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/wmf_good_weight}
+        \caption{Weight matrix $\bm{W}$}
+        \label{wmf_good_weight}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/wmf_good_prediction}
+        \caption{Prediction matrix $\bm{UV}$}
+        \label{wmf_good_prediction}
+    \end{subfigure}
+    \caption{Weighted matrix factorization with a well assigned weight matrix}
+    \label{wmf_good}
 \end{figure}
+
 
 However, if the weights of fake item ratings are large, then WMF would yield more manipulated predictions.
 Therefore, the key to WMF for robust CF is how to build a good weight matrix $\bm{W}$, in other words, how to capture fake item ratings and decrease their weights.
@@ -545,9 +637,35 @@ Therefore, when constructing weight matrix based on review helpfulness ratings, 
 Figure \ref{wmf_bad} shows the case an attacker successes to manipulate the helpfulness of fake reviews.
 The fake ratings for the bad movie have a larger weight than other normal users' ratings as shown in Figure \ref{wmf_bad}.
 Due to the manipulated weight matrix, collaborative filtering outputs prediction matrix weighted toward fake reviews.
+%\begin{figure}[h]
+%    \centerline{\includegraphics[width=12.5cm]{figure/wmf_bad}}
+%    \caption{  Weighted matrix factorization with badly assigned weight matrix  }
+%    \label{wmf_bad}
+%\end{figure}
+
+
 \begin{figure}[h]
-    \centerline{\includegraphics[width=12.5cm]{figure/wmf_bad}}
-    \caption{  Weighted matrix factorization with badly assigned weight matrix  } \label{wmf_bad}
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/mf_after_rating}
+        \caption{Rating matrix $\bm{R}$}
+        %\label{mf_after_rating}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/wmf_bad_weight}
+        \caption{Weight matrix $\bm{W}$}
+        \label{wmf_bad_weight}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figure/wmf_bad_prediction}
+        \caption{Prediction matrix $\bm{UV}$}
+        \label{wmf_bad_prediction}
+    \end{subfigure}
+    \caption{Weighted matrix factorization with a badly assigned weight matrix}
+    \label{wmf_bad}
 \end{figure}
 
 
@@ -753,7 +871,7 @@ We assume that the true quality of a review can be estimated by the mean of auth
 However, in the presence of fake helpfulness ratings, we need to estimate the true quality of a review by the weighted mean of helpfulness ratings where the fake helpfulness ratings have very low weight.
 If the number of helpfulness ratings is sufficiently high, then this estimation get high confidence.
 However, for reviews that have few helpfulness ratings and reviews having only fake helpfulness ratings, the weighted mean is not robust estimator for such reviews.
-Say a fake review which received only fake helpfulness ratings. 
+Say a fake review which received only fake helpfulness ratings.
 Then the weighted mean output is biased toward fake helpfulness ratings even if the weight of fake helpfulness ratings is almost zero.
 With all of these things in mind, we define the following review quality measure to estimate the true quality of a review.
 \begin{equation}
@@ -903,18 +1021,17 @@ We observed that feature vectors of fake users are very close to each other.
 
 
 % We first compare the average of helpfulness of fake and authentic reviews computed by each measure, varying attack size from 1\% to 3\% with fixed 0.5\% filler size, 0.5\% selected size and 32 dimensions of user feature vector.
-We compute the average of the helpfulness of fake reviews and authentic reviews.
+We compute the average of the quality of fake reviews and authentic reviews.
 We inject fake review through attacks with 1\% attack size, 0.5\% filler size, and 0.5\% popular size.
 We set dimensions of feature vectors to 32, which is used in User2Vec.
 % result explanation
 As shown in table ~\ref{resultHelpfulness}, the naive quality measure results in fake reviews have a higher quality than authentic reviews, whereas our quality measure yields the opposite.
-In specific, while the naive quality measure computes the helpfulness of fake reviews at a value close to $hr_{max}$, our quality measure computes the quality of fake reviews at a value close to the default helpfulness $Q_{default}$.
+In specific, while the naive quality measure computes the quality of fake reviews at a value close to $hr_{max}$, our quality measure computes the quality of fake reviews at a value close to the default quality $Q_{default}$.
 In other words, our quality measure can prevent fake helpfulness ratings from increasing the quality of fake reviews.
 We observed a slight decrease in the quality of authentic reviews when using our method.
 The reason for this is that the feature vector of an authentic user might be very similar to that of another authentic user by coincidence, which leads to false positive detection.
 However, since the probability that false positive detection happens is very low, authentic helpfulness ratings which are wrongly sacrificed have no significant impact on estimating review quality.
 Hence, our quality measure shows its ability to estimate the true quality of reviews.
-
 
 % Result (helpfulness)
 %----------------------- naive attack True rank 30 lda 0.0001 ---------------------
@@ -1000,15 +1117,15 @@ Consequently, we conclude that WMF using our quality measure provides robustness
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
 \textbf{Attack Size} & \textbf{Filler Size} & \textbf{Popular Size} & \textbf{Base} & \textbf{Naive} & \textbf{Ours}     \\ \hline
-\multirow{3}{*}{1\%} & 1\%                  & 0\%                   & 0.821944      & 0.831673       & \textbf{0.843252} \\ \cline{2-6}
-                     & 0.5\%               & 0.5\%                & 0.825909      & 0.836473       & \textbf{0.842159} \\ \cline{2-6}
-                     & 0\%                  & 1\%                   & 0.825078      & 0.837706       & \textbf{0.84074}  \\ \hline
-\multirow{3}{*}{2\%} & 1\%                  & 0\%                   & 0.820305      & 0.826343       & \textbf{0.840074} \\ \cline{2-6}
-                     & 0.5\%               & 0.5\%                & 0.826043      & 0.834851       & \textbf{0.836148} \\ \cline{2-6}
-                     & 0\%                  & 1\%                   & 0.822775      & 0.847235       & \textbf{0.843203} \\ \hline
-\multirow{3}{*}{3\%} & 1\%                  & 0\%                   & 0.816267      & 0.828714       & \textbf{0.840653} \\ \cline{2-6}
-                     & 0.5\%               & 0.5\%                & 0.825463      & 0.846773       & \textbf{0.841859} \\ \cline{2-6}
-                     & 0\%                  & 1\%                   & 0.829685      & 0.85275        & \textbf{0.841454} \\ \hline
+\multirow{3}{*}{1\%} & 1\%                  & 0\%                   & \textbf{0.821944}      & 0.831673       & 0.843252 \\ \cline{2-6}
+                     & 0.5\%               & 0.5\%                & \textbf{0.825909}      & 0.836473       & 0.842159 \\ \cline{2-6}
+                     & 0\%                  & 1\%                   & \textbf{0.825078}      & 0.837706       & 0.84074  \\ \hline
+\multirow{3}{*}{2\%} & 1\%                  & 0\%                   & \textbf{0.820305}      & 0.826343       & 0.840074 \\ \cline{2-6}
+                     & 0.5\%               & 0.5\%                & \textbf{0.826043}      & 0.834851       & 0.836148 \\ \cline{2-6}
+                     & 0\%                  & 1\%                   & \textbf{0.822775}      & 0.847235       & 0.843203 \\ \hline
+\multirow{3}{*}{3\%} & 1\%                  & 0\%                   & \textbf{0.816267}      & 0.828714       & 0.840653 \\ \cline{2-6}
+                     & 0.5\%               & 0.5\%                & \textbf{0.825463}      & 0.846773       & 0.841859 \\ \cline{2-6}
+                     & 0\%                  & 1\%                   & \textbf{0.829685}      & 0.85275        & 0.841454 \\ \hline
 \end{tabular}
 \end{center}
 \end{table}

@@ -175,14 +175,14 @@ print 'attacked and 1'
 do_mf(merge(attacked_data(),1))
 
 print 'attacked and normal:helpful=10:1'
-good_helpful = np.ones((len(attacked_data()),1))
-good_helpful[:len(normal_data())]*=100
-# print merge(attacked_data(),good_helpful)
+good_helpful = np.ones((len(attacked_data()),1))*0.1
+good_helpful[:len(normal_data())]*=9
+print merge(attacked_data(),good_helpful)
 do_mf(merge(attacked_data(),good_helpful))
 
 print 'attacked and normal:helpful=1:10'
-bad_helpful = np.ones((len(attacked_data()),1))*100
-bad_helpful[:len(normal_data())]/=100
+bad_helpful = np.ones((len(attacked_data()),1))*0.9
+bad_helpful[:len(normal_data())]/=9
 # print merge(attacked_data(),bad_helpful)
 do_mf(merge(attacked_data(),bad_helpful))
 

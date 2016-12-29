@@ -10,7 +10,7 @@ def draw(file_name):
 	print model
 	words = model.vocab.keys()
 
-	reviewer_list = filter(lambda x:int(x)<3000 ,words)
+	reviewer_list = filter(lambda x:int(x)<3000  ,words)
 	print 'reviewer list length', len(reviewer_list)
 	vectors = [model[reviewer] for reviewer in reviewer_list]
 	tsne = TSNE(n_components=2, random_state=0)
@@ -20,13 +20,22 @@ def draw(file_name):
 
 	first = True
 	alternate = True
+	shilling_user_x=[]
+	shilling_user_y=[]
+	normal_user_x=[]
+	normal_user_y=[]
 	for point, reviewer in zip(vectors2d , reviewer_list):
 		# plot points
 		if int(reviewer)>=1822 and int(reviewer)<=2000:
-
-			plt.scatter(point[0]+np.random.rand(), point[1]+np.random.rand(), c='r', marker="D")
+			# plt.scatter(point[0]+np.random.rand(), point[1]+np.random.rand(), c='r', marker="x")
+			shilling_user_x.append(point[0]+np.random.rand())
+			shilling_user_y.append(point[1]+ np.random.rand())
 		else:
-			plt.scatter(point[0], point[1], c='g',marker="x")
+			# plt.scatter(point[0], point[1], c='g',marker="o")
+			normal_user_x.append(point[0])
+			normal_user_y.append(point[1])
+	shilling_plt = plt.scatter(shilling_user_x,shilling_user_y,marker='x',s=80, facecolors='none', c='r')
+	normal_plt = plt.scatter(normal_user_x, normal_user_y, marker='s',facecolors='none', edgecolors='g')
 		# plot word annotations
 		# plt.annotate(
 		# 	'.',
@@ -39,10 +48,10 @@ def draw(file_name):
 		# )
 		# first = not first if alternate else first
 	plt.tight_layout()
-
-	red_patch = mpatches.Patch(color='red', label='Fake User')
-	green_patch = mpatches.Patch(color='green', label='Normal User')
-	plt.legend(handles=[green_patch,red_patch], loc='upper left')
+	plt.legend((shilling_plt,normal_plt), ('Shiller','Normal User'), scatterpoints=1, loc=2)
+	# red_patch = mpatches.Patch(color='red', hatch='x', label='Fake User')
+	# green_patch = mpatches.Patch(color='green', hatch='o', label='Normal User')
+	# plt.legend(handles=[green_patch,red_patch], loc='upper left')
 
 	plt.show()
 # X = np.array([[0, 0, 0], [0, 1, 1], [1, 0, 1], [1, 1, 1]])
