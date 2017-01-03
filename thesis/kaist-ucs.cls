@@ -57,8 +57,7 @@
 \ProcessOptions
 
 %% 10pt,a4paper,onecolumn,oneside 옵션으로 report 클래스 불러오기
-\LoadClass[10pt,a4paper,onecolumn,oneside]{report}
-
+\LoadClass[12pt,a4paper,onecolumn,oneside]{report}
 
 
 %%들여쓰기
@@ -146,7 +145,7 @@ urlcolor=darkcyan,          %cyan
 
 %% 줄간격 설정
 %\renewcommand{\baselinestretch}{1.3}
-\linespread{1.3}
+\linespread{1.5}
 
 %% 본문이 영어로 되어있는지 한글로 되어있는지 설정
 \newcommand{\@korean}{korean}
