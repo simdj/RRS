@@ -227,7 +227,7 @@
     대표적인 추천 방법은 상품에 대한 평가들이 정직하다는 가정하에 사용자의 평점을 분석하는 협업 필터링 방법이다.
     하지만 협업 필터링 방법은 거짓된 평점을 주입하는 실링 공격에 의해 조작될 위험이 있다.
     이로 인해 실링 공격의 영향력을 낮추는 여러 방법이 제안되었다.
-    최근에는, 많은 추천 시스템에서 사용자는 리뷰의 품질을 평가할 수 있다.
+    최근에는, 많은 추천 시스템에서 사용자가 리뷰의 품질을 평가하는 점을 이용한 방법이 제안되었다..
     거짓된 리뷰는 사용자들에 의해 낮은 품질로 분류될 것이라는 가정하에 연구자들은 리뷰의 품질을 고려한 추천을 통해 실링 공격을 극복하고자 하였다.
     하지만 이러한 추천 방법은 거짓된 리뷰 품질 평가 데이터가 주입된다면 오히려 조작의 정도가 심해질 위험이 있다.
     본 논문에선 거짓된 리뷰 품질 평가 데이터가 주입되더라도 리뷰의 진실한 품질을 추정하는 견고한 추천 방법을 제안한다.
@@ -242,16 +242,16 @@
 
     \begin{abstract}
     Recommendation systems influence decision making, and have become attractive targets of manipulation.
-    Collaborative filtering, widely adopted in recommendation systems, exploits the observed item ratings given by users to provide personalized recommendations under the assumption that all users honestly rate items.
+    Collaborative filtering, widely adopted in recommendation systems, exploits the observed reviews given by users to provide personalized recommendations under the assumption that all users honestly rate items.
     Unfortunately, shilling attacks which inject fake reviews can easily manipulate the systems with the naive assumption.
     Several approaches have been proposed to mitigate the effect of shilling attack.
-    Recently, some researchers have been interested in the fact that most recommendation systems encourage users to write reviews, as well as rate the helpfulness of reviews written by other users based on review content.
+    Recently, some researchers have been interested in the fact that most recommendation systems encourage users to write reviews, as well as rate the helpfulness of reviews written by other users.
     With the assumption that users will evaluate the helpfulness of fake reviews as low, they proposed recommendation systems considering the helpfulness as the quality of reviews.
     However, those systems are vulnerable to attacks that inject fake helpfulness ratings to improve the quality of fake reviews.
     We propose a robust recommendation system to overcome such review quality manipulation attacks.
-    The proposed approach estimates the true quality of reviews even in the presence of both injected fake reviews and helpfulness ratings to prevent such attacks from manipulating recommendation results.
+    The proposed approach estimates the true quality of reviews even in the presence of both injected fake reviews and helpfulness ratings. % to prevent such attacks from manipulating recommendation results.
     Experimental results on a real-world dataset demonstrate the robustness of our method.
-    The proposed approach yields up to 20 times more robust recommendation results than the approaches that do not consider attacks.
+    The proposed approach yields up to 20 times more robust recommendation results than the approaches that do not consider review quality manipulation.
 
 
 %     Nowadays, many customers refer to recommendation systems when buying items, and hence recommendation
@@ -427,7 +427,7 @@ Finally, we conclude in Chapter 7.
 Throughout this thesis, sets are denoted as italic capital letters and matrices/tensors are written as boldface capital letters.
 Let $U = \{u_1,u_2,…,u_n\}$ and $I = \{i_1,i_2,…,i_m\}$ be a set of users and items where $n$ and $m$ are the number of users and items, respectively.
 In recommendation systems, users can rate items in the form of a numeric rating score accompanied by review text.
-We use the term \textit{'item rating'} to represent a numeric rating score for an item.
+We use the term \textit{'item rating'} and \textit{'review'} to represent a numeric rating score for an item.
 %We use the term 'review' to represent both numeric rating and review text.
 %Unless otherwise mentioned, the term ‘review’ of a user for an item indicates numeric rating the user give to the item.
 We use the matrix $ \bm{R} \in \mathbb{R}^{n \times m} $ to denote the item rating matrix where an entry $ R_{u,i} $ indicates the item rating score of user $u$ for item $i$.
@@ -1126,24 +1126,30 @@ Consequently, we conclude that WMF using our quality measure provides robustness
 
 
 \chapter{Conclusion}
-% 추천 시스템은 사용자 경험이 훼손되지 않기 위해 다양한 조작 공격을 고려해야한다.
-Recommendation systems should consider various manipulation attacks in order to prevent user experience from being compromised.
-% 이전까지는 item rating을 조작하는 공격에 대한 방어법이 제안되어왔다. 
-Most studies of robust recommendation systems have only considered attacks that manipulate item ratings.
-% 하지만 이런 방법들은 item rating과 helpfulness rating 모두 조작하려는 공격에 대해 취약함을 보인다.
-% However, these methods are vulnerable to attacks that manipulate both item rating and helpfulness rating
-% 하지만 item rating과 helpfulness rating을 모두 조작하려는 공격은 이전에 제안된 방법을 무력화시킬수 있기 때문에, 이 학위 논문에선 이런 공격에 대해 견고한 추천 모델을 제안한다.
-However, since attacks attempting to manipulate both item ratings and helpfulness ratings can significantly manipulate recommendation systems, we propose a robust recommendation model against such attacks.
-% User2Vec와 Bayesian을 제안하여 fake item rating의 영향력을 낮추고 이를 통해 이전보다 더 견고한 추천 결과를 도출한다.
-We propose User2Vec and Bayesian to lower the negative effect of fake item ratings and thereby obtain more robust recommendation results.
-% 실제 데이터에서의 실험 결과를 통해 우리 방법이 이전 방법보다 최대 20배 견고하다는 것을 보인다.
-Experimental results on a real-world dataset show that our method is up to 20 times more robust than recommendation models that do not consider attacks.
-Future research directions include developing robust measures against nuke attacks and more elaborate attacks.
-% 거짓으로 주입된 사용자를 알아내기 위한 User2Vec,Bayesian Weighted Mean 방법을 제안하여 fake helpfulness ratings이 fake review의 quality를 높이지 못하도록 막음으로써, 리뷰의 진실된 퀄리티를 추정한다.
+추천 시스템은 사용자 경험이 손상되지 않게 하기 위해 가짜 리뷰를 고려해야한다.
+가짜 리뷰가 있는 상황속에서도 견고한 추천 결과를 얻기 위해 리뷰 품질을 고려하는 추천 모델들이 제안되어왔다.
+하지만 제안된 모델의 대부분은 리뷰 품질도 조작하려는 공격들을 고려하지 않는다.
+우린 이러한 공격의 심각성을 인지하여 리뷰 품질 조작으로부터 견고한 추천 모델을 제안한다.
+User2Vec와 Bayesian을 제안함으로써 가짜 리뷰의 영향력을 낮추고 이를 통해 이전보다 더 견고한 추천 결과를 도출한다.
+실제 데이터에서의 실험 결과를 통해 우리 모델이 리뷰 품질 조작을 고려하지 않은 모델보다 최대 20배 견고하다는 것을 보였다.
+Future work의 방향으론 nuke attack등에도 견고한 추천 모델을 고안하는 방향이 있다.
+
+
+Recommendation systems should tackle fake reviews to ensure that user experience is not compromised.
+Several recommenderdation models have been proposed that take into account the quality of reviews to yield robust recommendation results even in situations with fake reviews.
+However, most of the proposed models do not deal with attacks that attempt to manipulate review quality.
+We address the severity of these attacks and propose a robust recommendation model against review quality manipulation.
+We propose User2Vec and Bayesian Weighted Mean to reduce the negative effect of fake reviews and thereby obtain more robust recommendation results.
+Experimental results on a real-world dataset show that our model is up to 20 times more robust than the models which do not consider review quality manipulation.
+Future research directions include developing robust models against nuke attacks and more elaborate attacks.
 
 
 
-하지만 item rating과 helpfulness rating 모두 가짜로 주입하려는 공격은 이전에 제안된 방법을 무력화시킬수 있기 때문에, 우린 이런 공격에 대해 견고한 추천 모델을 제안한다.
+% % 이전까지는 item rating만을 조작하는 공격에 대한 방어법이 제안되어왔다. 
+% Most studies of robust recommendation systems have only considered attacks that manipulate item ratings.
+% % 하지만 item rating과 helpfulness rating을 모두 조작하려는 공격은 이전에 제안된 방법을 무력화시킬수 있다. 
+% % 이러한 형태의 공격은 review quality manipulation이라 하고 우린 이런 공격에 대해 견고한 추천 모델을 제안한다.
+% However, since attacks attempting to manipulate both item ratings and helpfulness ratings can significantly manipulate recommendation systems, we propose a robust recommendation model against such attacks.
 
 
 
@@ -1165,45 +1171,49 @@ Future research directions include developing robust measures against nuke attac
 %\bibitem{ML2} I. Song, T. An, and J. Oh, \textit{Near ML decoding method based on metric-first search and branch length threshold,} registration no. US 8018828 B2, Sep. 13, 2011, USA.
 %\bibitem{SOCA2} H.-K. Min, T. An, S. Lee, and I. Song, “Non-intrusive appliance load monitoring with feature extraction from higher order moments,” in \textit{Proc. 6th IEEE Int. Conf. Service Oriented Computing, Appl.,} Kauai, HI, USA, pp. 348-350, Dec. 2013.
 %\bibitem{EF2} I. Song and S. Lee, “Explicit formulae for product moments of multivariate Gaussian random variables,” \textit{Statistics, Probability Lett.,} vol. 100, pp. 27-34, May 2015.
-\bibitem{yelp_study} M. Luca. Reviews, Reputation, and Revenue: The Case of Yelp.com. Harvard Business School Working Papers,2011. http://www.hbs.edu/research/pdf/12-016.pdf
+\bibitem{yelp_study} M. Luca. Reviews, Reputation, and Revenue: The Case of Yelp.com. Harvard Business School Working Papers, 2011.
 
-\bibitem{shilling_attack_1} Lam, Shyong K., and John Riedl. "Shilling recommender systems for fun and profit." Proceedings of the 13th international conference on World Wide Web. ACM, 2004.
+\bibitem{shilling_attack_1} S. Lam and J. Riedl. Shilling recommender systems for fun and profit. In Proceedings of the Thirteenth International Conference on World Wide Web. ACM, 2004.
 
-\bibitem{shilling_attack_2} Burke, Robin, Bamshad Mobasher, and Runa Bhaumik. "Limited knowledge shilling attacks in collaborative filtering systems." Proceedings of 3rd International Workshop on Intelligent Techniques for Web Personalization (ITWP 2005), 19th International Joint Conference on Artificial Intelligence (IJCAI 2005). 2005.
+\bibitem{shilling_attack_2} R. Burke, B. Mobasher, R. Zabicki, and R. Bhaumik. Limited knowledge shilling attacks in collaborative filtering systems. In Proceedings of the Third IJCAI Workshop in Intelligent Techniques for Personalization, 2005.
 
-\bibitem{shilling_attack_3} Burke, Robin, et al. "Identifying attack models for secure recommendation." Beyond Personalization 2005 (2005).
+\bibitem{shilling_attack_3} R. Burke, B. Mobasher, R. Zabicki, and R. Bhaumik. Identifying attack models for secure recommendation. Beyond Personalization, 2005.
 
-\bibitem{shilling_attack_guide} Mobasher, Bamshad, et al. "Analysis and detection of segment-focused attacks against collaborative recommendation." International Workshop on Knowledge Discovery on the Web. Springer Berlin Heidelberg, 2005.
+\bibitem{shilling_attack_guide} R. Burke, B. Mobasher, C. Williams, and R. Bhaumik. Analysis and detection of segment-focused attacks against collaborative recommendation. 2006.
 
-\bibitem{MF_CF} Koren, Yehuda, Robert Bell, and Chris Volinsky. "Matrix factorization techniques for recommender systems." Computer 42.8 (2009): 30-37.
+\bibitem{MF_CF} Y. Koren, R. Bell, and C. Volinsky. Matrix factorization techniques for recommender systems. Computer Journal, 42, 2009.
 
-\bibitem{ImplicitCF} Hu, Yifan, Yehuda Koren, and Chris Volinsky. "Collaborative filtering for implicit feedback datasets." 2008 Eighth IEEE International Conference on Data Mining. Ieee, 2008.
+\bibitem{ImplicitCF} Y. Hu, Y. Koren, and C. Volinsky. Collaborative filtering for implicit feedback datasets. In Proceedings of the Eighth IEEE International Conference on Data Mining, 2008.
 
 % robust
-\bibitem{RMF} B. Mehta, T. Hofmann, and W. Nejdl, “Robust Collaborative Filtering,” RecSys, p. 49, 2007.
+\bibitem{RMF} B. Mehta, T. Hofmann, and W. Nejdl. Robust Collaborative Filtering. In Proceedings of the 1st ACM Conference on Recommender Systems, 2007.
 % robust
-\bibitem{AttackResistant} B. Mehta and W. Nejdl, “Attack resistant collaborative filtering,” Proc. 31st Annu. Int. ACM SIGIR Conf. Res. Dev. Inf. Retr. SIGIR 08, p. 75, 2008.
+\bibitem{AttackResistant} B. Mehta and W. Nejdl. Attack resistant collaborative filtering. In Proceedings of the Thirty-First Annual International ACM SIGIR Conference on Research and Development in Information Retrieval, 2008.
+
 % robust
-\bibitem{LiesAndPropaganda} Mehta, Bhaskar, Thomas Hofmann, and Peter Fankhauser. "Lies and propaganda: detecting spam users in collaborative filtering." Proceedings of the 12th international conference on Intelligent user interfaces. ACM, 2007.
+\bibitem{LiesAndPropaganda} B. Mehta, T. Hofmann, and P. Fankhauser. Lies and propaganda: detecting spam users in collaborative filtering. Proceedings of the 12th international conference on Intelligent user interfaces, 2007.
+
 % robust
-\bibitem{UnsupervisedShilling} Mehta, Bhaskar. "Unsupervised shilling detection for collaborative filtering." AAAI. 2007.
+\bibitem{UnsupervisedShilling} B. Mehta. Unsupervised shilling detection for collaborative filtering. In Proceedings of the Twenty-Second Conference on Artificial Intelligence. AAAI, 2007.
 
 %review text
-\bibitem{text_duplicate} Jindal, N., and Liu, B. 2008. Opinion spam and analysis. In WSDM, 219–230
+\bibitem{text_duplicate} N. Jindal and B. Liu. Opinion spam and analysis. In WSDM, 2008.
 
 %review text
-\bibitem{text_opinion_summarization} Liu, Jingjing, et al. "Low-Quality Product Review Detection in Opinion Summarization." EMNLP-CoNLL. Vol. 7. 2007.
+\bibitem{text_opinion_summarization} J. Liu, Y. Cao, C.-Y. Lin, Y. Huang, and M. Zhou. Low-quality product review detection in opinion summarization. In EMNLP-CoNLL, 2007.
+
+
 %review text
-\bibitem{text_crowd} Ott, Myle, et al. "Finding deceptive opinion spam by any stretch of the imagination." Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies-Volume 1. Association for Computational Linguistics, 2011.
+\bibitem{text_crowd} M. Ott, Y. Choi, C. Cardie, and J. T. Hancock. Finding Deceptive Opinion Spam by Any Stretch of the Imagination. In ACL, 2011.
 
 %review text and review helpfulness
-\bibitem{naive_helpfulness} S. Kim, P. Pantel, T. Chklovski, and M. Pennacchiotti. Automatically assessing review helpfulness. EMNLP, 2006
+\bibitem{naive_helpfulness} S. Kim, P. Pantel, T. Chklovski, and M. Pennacchiotti. Automatically assessing review helpfulness. EMNLP, 2006.
 
 % review helpfulness
-\bibitem{RQMF} S. Raghavan, S. Gunasekar, and J. Ghosh. Review quality aware collaborative filtering. In Proceedings of the sixth ACM conference on Recommender systems, pages 123–130. ACM, 2012.
-% review helpfulness
-\bibitem{DualRole} S. Wang, J. Tang, and H. Liu, “Toward Dual Roles of Users in Recommender Systems,” Cikm, pp. 1651–1660, 2015.
+\bibitem{RQMF} S. Raghavan, S. Gunasekar, and J. Ghosh. Review quality aware collaborative filtering. In Proceedings of the sixth ACM conference on Recommender systems, 2012.
 
+% review helpfulness
+\bibitem{DualRole} S. Wang, J. Tang, and H. Liu, Toward Dual Roles of Users in Recommender Systems, In CIKM, 2015.
 
 %embedding
 \bibitem{Word2Vec} T. Mikolov, K. Chen, G. Corrado, and J. Dean. Efficient estimation of word representations in vector space. In ICLR, 2013.
@@ -1212,13 +1222,13 @@ Future research directions include developing robust measures against nuke attac
 %embedding
 \bibitem{DeepWalk} B. Perozzi, R. Al-Rfou, and S. Skiena. DeepWalk: Online learning of social representations. In KDD, 2014.
 %embedding
-\bibitem{Node2Vec} Grover Aditya and  Leskovec Jure. ”node2vec: Scalable Feature Learning for Networks.” Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM, 2016.
+\bibitem{Node2Vec} A. Grover and J. Leskovec. node2vec: Scalable Feature Learning for Networks. In KDD, 2016.
 %dataset
-\bibitem{ETAF} Guo, Guibing, et al. "Etaf: An extended trust antecedents framework for trust prediction." Advances in Social Networks Analysis and Mining (ASONAM), 2014 IEEE/ACM International Conference on. IEEE, 2014.
+\bibitem{ETAF} G. Guo, J. Zhang, D. Thalmann, and N. Yorke-Smith. Etaf: An extended trust antecedents framework for trust prediction. In ASONAM, 2014.
 
-\bibitem{EffectSize}  Cohen, Jacob (1988). Statistical Power Analysis for the Behavioral Sciences. Routledge. ISBN 1-134-74270-3.
+\bibitem{EffectSize}  J. Cohen. Statistical Power Analysis for the Behavioral Sciences. 1988.
 
-\bibitem{TSNE} L. Van der Maaten and G. Hinton. Visualizing data using t-sne. Journal of Machine Learning Research, 9(2579-2605):85, 2008
+\bibitem{TSNE} L. Van der Maaten and G. Hinton. Visualizing data using t-sne. Journal of Machine Learning Research, 2008.
 
 \end{thebibliography}
 
@@ -1240,7 +1250,7 @@ Future research directions include developing robust measures against nuke attac
     먼저 석사 과정 동안 지도해주시고 저의 여러 고민을 성심성의껏 상담해주신 이윤준 교수님께 깊은 감사의 말씀을 드립니다.
     교수님의 제자로서 부끄럽지 않은 사람이 되도록 항상 노력하겠습니다.
     아울러 귀한 시간을 내시어 논문을 심사해주시고 조언을 아끼지 않아 주신 김명호 교수님, 유신 교수님께도 깊은 감사 드립니다. 
-    
+
     즐겁게 생활한 데이터베이스 연구실 사람들에게도 감사의 뜻을 전합니다.
     연구실 학생들을 친자식처럼 대해주시고 저희가 잘 모르는 업무를 열심히 도와주신 박경희 선생님,
     랩장으로서 책임감있게 연구실 사람들을 신경써주시고 웃음이 많은 후영누나,
@@ -1282,7 +1292,7 @@ Future research directions include developing robust measures against nuke attac
     \begin{personaldata}
         \name       {심 동 진}
         \dateofbirth{1992}{8}{4}
-        \birthplace {경기도 평택시}
+        \birthplace {경기도 송탄시}
         \email      {djsim@kaist.ac.kr}
     \end{personaldata}
 

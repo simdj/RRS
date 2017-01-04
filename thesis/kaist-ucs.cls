@@ -1125,7 +1125,7 @@ urlcolor=darkcyan,          %cyan
 			\makebox[.5\textwidth][r]{\hrulefill}\\
 			\fontsize{14pt}{14pt}\selectfont \@advisorSigned \\          % 제출승인서에 서명한 교수이름
 			\fontsize{14pt}{14pt}\selectfont \@advisorinfo  % 제출승인서에 서명한 교수님 정보 
-			\vspace*{20mm}
+			\vspace*{12mm}
 			\\
 			\fontsize{12pt}{12pt}\selectfont The study was conducted in accordance with Code of Research Ethics\footnotemark[1].
 		\end{center}

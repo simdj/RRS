@@ -23,5 +23,5 @@
 \contentsline {section}{\numberline {6.3}Results and Analysis}{21}{section.6.3}
 \contentsline {chapter}{\numberline {Chapter 7.}Conclusion }{25}{chapter.7}
 \contentsline {chapter}{Bibliography }{26}{chapter.7}
-\contentsline {chapter}{Acknowledgments in Korean}{29}{chapter.7}
-\contentsline {chapter}{Curriculum Vitae in Korean}{30}{chapter.7}
+\contentsline {chapter}{Acknowledgments in Korean}{28}{chapter.7}
+\contentsline {chapter}{Curriculum Vitae in Korean}{29}{chapter.7}
