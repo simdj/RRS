@@ -48,7 +48,7 @@ def draw(file_name):
 		# )
 		# first = not first if alternate else first
 	plt.tight_layout()
-	plt.legend((shilling_plt,normal_plt), ('Shiller','Normal User'), scatterpoints=1, loc=2)
+	plt.legend((shilling_plt,normal_plt), ('Shiller','Genuine User'), scatterpoints=1, loc=2)
 	# red_patch = mpatches.Patch(color='red', hatch='x', label='Fake User')
 	# green_patch = mpatches.Patch(color='green', hatch='o', label='Normal User')
 	# plt.legend(handles=[green_patch,red_patch], loc='upper left')
