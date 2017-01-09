@@ -469,7 +469,7 @@ The push attack generates shillers with high ratings on an item to promote its r
 On the other hand, the nuke attack injects shillers with low ratings on an item to decrease its popularity.
 However, fake item rating injection only for target items is not enough to manipulate a CF-based recommendation system, because CF predicts missing item ratings of genuine users in the way attackers wish if tastes of genuine users are similar to those of shillers.
 % Collaborative filtering recommends genuine users to the direction shilling attacks wish if it recognizes that genuine users are similar to shillers.
-Therefore, shillers have to mimic rating behaviors of genuine users to fully exploit the principle of collaborative filtering. 
+Therefore, shillers have to mimic rating behaviors of genuine users to fully exploit the principle of collaborative filtering.
 There are various attack models on how to mimic rating behavior of genuine users: Random attack, Average attack, Bandwagon attack \cite{shilling_attack_1,shilling_attack_2,shilling_attack_3,shilling_attack_guide}.
 %[Burke et al. 2006].
 In the context of push attack, Random attack injects shillers who give the highest rating to their target items and rate the randomly chosen items around the overall mean.
@@ -615,10 +615,10 @@ Popular strategies for fake item rating injection are Random attack, Average att
 Since Random attack is known to be ineffective, we focus on Average attack and Bandwagon attack.
 %[KDD 06]
 %Attackers usually realize shilling attacks by injecting an attack profile as shown in Fig. 1, which is first defined by Bhaumik et al. (2006), Mobasher et al. (2007a) to mislead the CF system. Such profiles can be defined as four set of items (Bhaumik et al. 2006; Mobasher et al. 2007a). [from Shilling attacks against recommender systems: a comprehensive survey]
-Similar to \cite{shilling_attack_guide}, from the view of each shiller, the item set $I$ is partitioned into 4 subsets, $I^{target},I^{popular},I^{filler}$ and $I^{none}$ 
-where $I^{target}$ is a set of target items; 
-$I^{popular}$ is a set of popular items that many genuine users like; 
-$I^{filler}$ is a set of randomly chosen items, called filler items; 
+Similar to \cite{shilling_attack_guide}, from the view of each shiller, the item set $I$ is partitioned into 4 subsets, $I^{target},I^{popular},I^{filler}$ and $I^{none}$
+where $I^{target}$ is a set of target items;
+$I^{popular}$ is a set of popular items that many genuine users like;
+$I^{filler}$ is a set of randomly chosen items, called filler items;
 $I^{none}$ is the set of the remaining items, i.e. $I^{none}=I-I^{target}-I^{popular}-I^{filler}$.
 % Each shiller rates items of $I^{target},I^{popular}$ and $I^{filler}$ as follows.
 % First, each shiller rates all target items with the highest possible rating score.
@@ -902,7 +902,7 @@ Note that $I^{filler}$ is randomly selected for each shiller.
 
 % comparison algorithm
 \section{Comparison of Recommendation Models}
-We compare the proposed model with two basic recommendation models. 
+We compare the proposed model with two basic recommendation models.
 Recommendation models used in the experiments are defined as:
 \begin{itemize}
 \item \textbf{MF}: Matrix factorization on item rating matrix without considering review quality. In other words, it does not use helpfulness rating dataset.
@@ -938,7 +938,7 @@ MAE(U,V) = \frac{1}{|test\ set|} \sum_{R_{u,i} \in test\ set} |R_{u,i}-(UV)_{u,i
 
 
 \section{Results and Analysis}
-To answer the first question, we visualize the results of User2Vec and compare the review quality results of each measure. 
+To answer the first question, we visualize the results of User2Vec and compare the review quality results of each measure.
 In this experiment, we inject fake review through attacks with 1\% attack size, 0.5\% filler size, and 0.5\% popular size.
 We set the dimensions of User2Vec's feature vectors to 32.
 % 1-1) User2Vec result
@@ -949,7 +949,7 @@ X-shaped red points represent shillers, while green square points represent genu
 We observed that feature vectors of shillers are very close to each other, which shows User2Vec's ability to capture shillers.
 \begin{figure}[h]
     \centerline{\includegraphics[width=10.5cm]{figure/user2vec_result.pdf}}
-    \caption{Visualization of the User2Vec result} 
+    \caption{Visualization of the User2Vec result}
     \label{user2vec_result}
 \end{figure}
 
@@ -979,11 +979,11 @@ Hence, our quality measure shows its ability to estimate the true quality of rev
 
 % 2) Prediction shift
 % To compare the robustness of the recommendation models, we compute the prediction shift on the target items under attacks in the variety of attack sizes, filler sizes, and popular sizes.
-To answer the second question, we compute the prediction shift on the target items under attacks in the variety of attack sizes, filler sizes, and popular sizes. 
+To answer the second question, we compute the prediction shift on the target items under attacks in the variety of attack sizes, filler sizes, and popular sizes.
 From Table ~\ref{resultPredictionShift}, we observe that our model leads to the lowest prediction shift on the target items in all conditions.
 For the attack with 1\% attack size, 1\% filler size, and 0\% popular size, our model is almost 20 times more robust than Naive WMF.
 The reason for this is that fake item ratings have the least impact on prediction when applying our quality measure.
-We observe that the naive quality measure causes larger prediction shift on the target items than MF in the presence of fake helpfulness ratings because fake helpfulness ratings increase the influence of fake item ratings on prediction when applying the naive quality measure than when ignoring review quality. 
+We observe that the naive quality measure causes larger prediction shift on the target items than MF in the presence of fake helpfulness ratings because fake helpfulness ratings increase the influence of fake item ratings on prediction when applying the naive quality measure than when ignoring review quality.
 Therefore we argue that our method is resistant to review quality manipulations.
 \begin{table}[h]
 \caption{Prediction shift on the target items.}
@@ -1149,6 +1149,7 @@ Future research includes developing robust models against nuke attacks and more 
 %% It is optional.
 
 \acknowledgment[4]
+
 이 논문을 작성하기까지 도움을 주신 모든 분들께 감사드립니다.
 먼저 석사 과정 동안 지도해주시고 저의 여러 고민을 성심성의껏 상담해주신 이윤준 교수님께 깊은 감사의 말씀을 드립니다.
 교수님의 제자로서 부끄럽지 않은 사람이 되도록 항상 노력하겠습니다.
